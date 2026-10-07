@@ -1,6 +1,20 @@
 ---
 import Article from '../../layouts/Article.astro';
 ---
-<Article title="About Ohmetry" description="Who builds Ohmetry and why." h1="About Ohmetry">
-<p>Ohmetry is a set of electrical, solar and protection calculators. Each one shows its formula, cites the standard it follows, and includes a worked example you can check by hand.</p><p>Built by an electrical protection engineer with MV/HV experience under IEC and Saudi practice. TODO: add name, photo and LinkedIn before applying for AdSense.</p>
+<Article title="About Ohmetry" description="Who builds Ohmetry, the standards it follows, and how results are checked." h1="About Ohmetry">
+<p>Ohmetry is a set of free electrical, solar and protection calculators. Each one shows its formula, names the standard it follows, and includes a worked example you can check by hand.</p>
+
+<h2>Who builds it</h2>
+<p>Ohmetry is built by Amin, an electrical protection engineer with medium- and high-voltage experience under IEC and Saudi practice. Day to day, the work is the kind these calculators cover: cable sizing, voltage drop, short-circuit levels, and relay settings and grading. I built Ohmetry because the quick checks I kept doing by hand or in scattered spreadsheets deserved one place where the formula, the assumptions and the standard clause are all visible.</p>
+
+<h2>Standards</h2>
+<p>The NEC-based calculators follow the current NEC edition (2023). The code tables behind them were entered from the 2020 edition and checked value by value against a licensed copy of the NEC 2020; where 2023 changed a table number or a rating, the page says so. Protection calculators use IEC 60255-151 for relay curves and IEC 60909 for short-circuit levels. The <a href="/methodology/">methodology</a> page lists the formulas and conventions.</p>
+
+<h2>How results are checked</h2>
+<p>Every formula has automated test cases with hand-calculated expected values, and the tests run before each release. If you find a wrong value or formula, please tell me: corrections are published on the <a href="/corrections/">corrections log</a>.</p>
+
+<h2>What Ohmetry is not</h2>
+<p>These are estimating and checking tools. They do not replace a design by a qualified engineer, and local codes and the authority having jurisdiction take precedence. See the <a href="/disclaimer/">disclaimer</a>.</p>
+
+<p>Questions or corrections: <a href="/contact/">contact</a>.</p>
 </Article>
