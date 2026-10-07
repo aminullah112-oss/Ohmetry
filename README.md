@@ -36,6 +36,17 @@ The wire size and conduit fill calculators use NEC table values from `src/data/n
 3. Fix any differences in `src/data/nec-tables.ts`, update `edition`, set `verifiedBy`, and set `verified: true`.
 4. `npm test` and push. The warning disappears and the pages enter the sitemap.
 
+## Trust and metadata
+
+- **Updated dates.** Each page shows when its source file last changed in git. CI checks out full history (`fetch-depth: 0`) so this works in the deployed build.
+- **Reviewed lines.** `src/data/reviews.ts` is empty on purpose. Add a page only when a qualified person has actually reviewed it; the page then shows "Reviewed <date> by <name>".
+- **Corrections log.** Add entries to `src/data/corrections.ts` whenever a published value or formula was wrong. They appear on `/corrections/` and as a notice on the page concerned.
+- **Social images.** `npm run build && npm run og` renders `public/og/<page>.png` (needs a Chromium: set `CHROMIUM_PATH` or run `npx playwright-core install chromium`). Re-run it after adding or renaming a page, then commit the images.
+
+## Content planning
+
+`docs/keyword-research.csv` and `docs/CONTENT-CALENDAR.md` hold the candidate pages and the weekly process. Run Google Keyword Planner on the query list first and fill in the volume columns before choosing pages.
+
 ## Before launch
 
 - Domain is not bought. `site` in `astro.config.mjs` and `public/robots.txt` assume `ohmetry.com`.

@@ -6,30 +6,32 @@ const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
 ---
 <Base
   title={`${site.toolkitName}: Excel Workbook | Ohmetry`}
-  description="A twelve-sheet Excel workbook with a multi-circuit schedule, relay settings and plot, and seven calculators, each with a self-checking worked example."
+  description="A fourteen-sheet Excel workbook with an IEC and NEC circuit schedule, load schedule, three-relay grading with plot, fault level with cable impedance, and a self-checking worked example on every sheet."
   breadcrumbs={crumbs}
   noindex={!toolkitReady}
 >
-  <PageHeader title={site.toolkitName} lead="The calculators here give you one answer at a time. The toolkit checks a whole project: a circuit schedule, relay settings with a coordination plot and seven calculators, in a workbook you keep." eyebrow="Workbook" crumbs={crumbs} />
+  <PageHeader title={site.toolkitName} lead="The calculators here give you one answer at a time. The toolkit checks a whole project: circuit and load schedules, relay grading with a coordination plot, fault levels and more, in a workbook you keep." eyebrow="Workbook" crumbs={crumbs} />
   <article class="article prose">
     <h2>What is inside</h2>
-    <p>One workbook, twelve sheets, no macros. Every result is a formula you can read.</p>
+    <p>One workbook, fourteen sheets, no macros. Every result is a formula you can read.</p>
     <ul>
-      <li><strong>Circuit Schedule.</strong> Up to 30 circuits in one table. For each one it works out the load current, picks the next standard protective device, compares it with the cable rating you enter, and calculates voltage drop. Each row ends in PASS or CHECK, with a summary of how many circuits need attention.</li>
-      <li><strong>Relay Settings.</strong> Operating time of two IDMT overcurrent relays on the four IEC 60255-151 curves, a grading-margin check at maximum fault, and a log-log coordination plot.</li>
+      <li><strong>Circuit Schedule.</strong> Up to 30 circuits in one table, each checked to the IEC method or the NEC method. For each one it works out the load current, applies the 125 % rule for NEC continuous loads, picks the next standard protective device, compares it with the cable rating you enter, and calculates voltage drop. Each row ends in PASS or CHECK.</li>
+      <li><strong>Load Schedule.</strong> Connected load, demand load with your own demand factors, a growth allowance, the supply current and the minimum main device.</li>
+      <li><strong>Relay Settings.</strong> Operating time of three IDMT overcurrent relays on the four IEC 60255-151 curves, a grading-margin check between each pair, and a log-log coordination plot.</li>
+      <li><strong>Fault with Cable.</strong> Maximum and minimum fault level and peak current at the end of a cable, adding the source, transformer and cable impedances, with a breaker check.</li>
       <li><strong>Seven calculator sheets.</strong> Power &amp; Current, Cable by Drop, Transformer &amp; Faults, Power Factor, CT &amp; Earthing, Generator, and Solar &amp; Battery.</li>
-      <li><strong>Self-Test.</strong> Each calculator holds a worked example whose expected result was calculated separately. The sheet shows 44 checks and whether they pass.</li>
-      <li><strong>Lists.</strong> Device ratings, conductor resistivity, curve constants and cable sizes, all editable to match your standard.</li>
+      <li><strong>Self-Test.</strong> Each calculator holds a worked example whose expected result was calculated separately. The sheet shows 71 checks and whether they pass.</li>
+      <li><strong>Lists.</strong> IEC and NEC device ratings, conductor resistivity, curve constants and cable sizes, all editable to match your standard.</li>
     </ul>
 
     <h2>What it does not contain</h2>
-    <p>Cable current ratings, derating factors and code tables. You enter the tabulated rating and factors from the standard you work to, whether that is IEC 60364-5-52 or the NEC, and the workbook checks your design against them. That keeps the workbook usable under either system, and it means the numbers that decide a cable's size come from the code you hold, not from a copy inside a spreadsheet.</p>
+    <p>Cable current ratings, derating factors, demand factors and code tables. You enter the tabulated rating and factors from the standard you work to, whether that is IEC 60364-5-52 or the NEC, and the workbook checks your design against them. That keeps the workbook usable under either system, and it means the numbers that decide a cable's size come from the code you hold, not from a copy inside a spreadsheet.</p>
 
     <h2>Who it is for</h2>
     <p>Electrical, solar and protection engineers who check designs in a spreadsheet and want to see the formula behind every number. It is written by a protection engineer with MV/HV experience under IEC and Saudi practice. The formulas are the ones explained in the guides on this site.</p>
 
     <h2>Free calculators and the workbook</h2>
-    <p>The calculators on this site stay free. Use them for a quick answer. The workbook is for checking a whole project at once, working offline and adapting the method. It was built and checked in LibreOffice and is designed to open in Excel. Start with the guides on <a href="/voltage-drop-formula/">voltage drop</a> and the <a href="/relay-setting-checklist/">relay setting checklist</a> to see how the calculations are explained.</p>
+    <p>The calculators on this site stay free. Use them for a quick answer. The workbook is for checking a whole project at once, working offline and adapting the method. It was built and checked in LibreOffice, its formula types were checked in Google Sheets, and it is designed to open in Excel. Start with the guides on <a href="/voltage-drop-formula/">voltage drop</a> and the <a href="/relay-setting-checklist/">relay setting checklist</a> to see how the calculations are explained.</p>
 
     {toolkitReady ? (
       <>

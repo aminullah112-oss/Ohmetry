@@ -16,7 +16,7 @@ export const NEC_TABLES = {
 };
 
 /** Pages that must stay hidden from search until the tables are verified. */
-export const TABLE_PAGES = ['/wire-size-calculator/', '/conduit-fill-calculator/'];
+export const TABLE_PAGES = ['/wire-size-calculator/', '/conduit-fill-calculator/', '/motor-circuit-calculator/'];
 
 export interface WireSize { id: string; label: string; kcmil?: number; awg?: number }
 /** Table 310.16 size order, smallest to largest. 1/0 is awg 0, 4/0 is awg -3. */
@@ -90,8 +90,11 @@ export const THHN_AREA_IN2: Record<string, number> = {
 /** Chapter 9 Table 1 allowable fill by number of conductors. */
 export const FILL_PERCENT = { one: 53, two: 31, over: 40 };
 
+export interface ConduitRow { trade: string; total: number; p53: number; p31: number; p40: number }
+export type ConduitType = 'EMT' | 'RMC' | 'PVC40';
+
 /** Chapter 9 Table 4 (Article 358, EMT) internal area in square inches: total, and at 53 %, 31 %, 40 %. */
-export const EMT_TABLE_4: { trade: string; total: number; p53: number; p31: number; p40: number }[] = [
+export const EMT_TABLE_4: ConduitRow[] = [
   { trade: '1/2"', total: 0.304, p53: 0.161, p31: 0.094, p40: 0.122 },
   { trade: '3/4"', total: 0.533, p53: 0.283, p31: 0.165, p40: 0.213 },
   { trade: '1"', total: 0.864, p53: 0.458, p31: 0.268, p40: 0.346 },
@@ -103,3 +106,41 @@ export const EMT_TABLE_4: { trade: string; total: number; p53: number; p31: numb
   { trade: '3-1/2"', total: 11.545, p53: 6.119, p31: 3.579, p40: 4.618 },
   { trade: '4"', total: 14.753, p53: 7.819, p31: 4.573, p40: 5.901 },
 ];
+
+/** Fill columns derived from the total internal area, rounded to three decimals. The printed code table can differ in the last digit. */
+const r3 = (x: number) => Math.round(x * 1000) / 1000;
+const derive = (trade: string, total: number): ConduitRow => ({ trade, total, p53: r3(total * 0.53), p31: r3(total * 0.31), p40: r3(total * 0.4) });
+const TRADES = ['1/2"', '3/4"', '1"', '1-1/4"', '1-1/2"', '2"', '2-1/2"', '3"', '3-1/2"', '4"'];
+
+/** Chapter 9 Table 4 totals (in2) for rigid metal conduit (Article 344). Entered from memory: verify. */
+const RMC_TOTALS = [0.314, 0.549, 0.887, 1.526, 2.071, 3.408, 4.866, 7.499, 10.01, 12.882];
+/** Chapter 9 Table 4 totals (in2) for rigid PVC Schedule 40 (Article 352). Entered from memory: verify. */
+const PVC40_TOTALS = [0.285, 0.508, 0.832, 1.453, 1.986, 3.291, 4.695, 7.268, 9.737, 12.554];
+
+export const CONDUITS: Record<ConduitType, { label: string; short: string; article: string; rows: ConduitRow[] }> = {
+  EMT: { label: 'EMT, electrical metallic tubing (Article 358)', short: 'EMT', article: '358', rows: EMT_TABLE_4 },
+  RMC: { label: 'RMC, rigid metal conduit (Article 344)', short: 'RMC', article: '344', rows: TRADES.map((t, i) => derive(t, RMC_TOTALS[i])) },
+  PVC40: { label: 'PVC Schedule 40 (Article 352)', short: 'PVC-40', article: '352', rows: TRADES.map((t, i) => derive(t, PVC40_TOTALS[i])) },
+};
+
+/** Table 430.250: three-phase AC induction motor full-load current (A) by horsepower and voltage. Entered from memory: verify. */
+export const MOTOR_HP_3PH = [0.5, 0.75, 1, 1.5, 2, 3, 5, 7.5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 125, 150, 200];
+export const MOTOR_FLC_3PH: Record<string, number[]> = {
+  '208': [2.4, 3.5, 4.6, 6.6, 7.5, 10.6, 16.7, 24.2, 30.8, 46.2, 59.4, 74.8, 88, 114, 143, 169, 211, 273, 343, 396, 528],
+  '230': [2.2, 3.2, 4.2, 6.0, 6.8, 9.6, 15.2, 22, 28, 42, 54, 68, 80, 104, 130, 154, 192, 248, 312, 360, 480],
+  '460': [1.1, 1.6, 2.1, 3.0, 3.4, 4.8, 7.6, 11, 14, 21, 27, 34, 40, 52, 65, 77, 96, 124, 156, 180, 240],
+  '575': [0.9, 1.3, 1.7, 2.4, 2.7, 3.9, 6.1, 9, 11, 17, 22, 27, 32, 41, 52, 62, 77, 99, 125, 144, 192],
+};
+/** Table 430.248: single-phase motor full-load current (A). Entered from memory: verify. */
+export const MOTOR_HP_1PH = [1 / 6, 0.25, 1 / 3, 0.5, 0.75, 1, 1.5, 2, 3, 5, 7.5, 10];
+export const MOTOR_FLC_1PH: Record<string, number[]> = {
+  '115': [4.4, 5.8, 7.2, 9.8, 13.8, 16, 20, 24, 34, 56, 80, 100],
+  '230': [2.2, 2.9, 3.6, 4.9, 6.9, 8, 10, 12, 17, 28, 40, 50],
+};
+/** Table 430.52: maximum rating of the branch-circuit short-circuit and ground-fault device, percent of full-load current. */
+export const MOTOR_DEVICE_MAX: Record<string, { label: string; percent: number }> = {
+  inverse: { label: 'Inverse-time circuit breaker', percent: 250 },
+  dual: { label: 'Dual-element (time-delay) fuse', percent: 175 },
+  fuse: { label: 'Non-time-delay fuse', percent: 300 },
+  instantaneous: { label: 'Instantaneous-trip breaker', percent: 800 },
+};

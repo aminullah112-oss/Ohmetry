@@ -23,6 +23,7 @@ export const calculators: Calc[] = [
   { slug: 'awg-to-mm2-converter', name: 'AWG to mm²', blurb: 'Wire gauge to area and diameter, and back.', hub: 'electrical' },
   { slug: 'wire-size-calculator', name: 'Wire size', blurb: 'Conductor size from load, derating and voltage drop.', hub: 'electrical', tag: NEC_TAG },
   { slug: 'conduit-fill-calculator', name: 'Conduit fill', blurb: 'Smallest EMT for a mix of conductors.', hub: 'electrical', tag: NEC_TAG },
+  { slug: 'motor-circuit-calculator', name: 'Motor circuit', blurb: 'Table full-load current, conductor, overload and device maximum.', hub: 'electrical', tag: NEC_TAG },
   { slug: 'generator-size-calculator', name: 'Generator size', blurb: 'kW and kVA from a load list, with motor starting.', hub: 'electrical' },
 
   { slug: 'solar-panel-calculator', name: 'Solar panel size', blurb: 'How many panels for your daily energy use.', hub: 'solar-ev' },

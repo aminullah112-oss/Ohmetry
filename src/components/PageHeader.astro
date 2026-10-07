@@ -1,6 +1,6 @@
 ---
-interface Props { title: string; lead?: string; eyebrow?: string; crumbs?: { name: string; href: string }[]; chips?: { label: string; href?: string }[] }
-const { title, lead, eyebrow, crumbs = [], chips = [] } = Astro.props;
+interface Props { title: string; lead?: string; eyebrow?: string; crumbs?: { name: string; href: string }[]; chips?: { label: string; href?: string }[]; updated?: string | null; reviewed?: { date: string; by: string } }
+const { title, lead, eyebrow, crumbs = [], chips = [], updated = null, reviewed } = Astro.props;
 ---
 <header class="page-head">
   <div class="wrap">
@@ -13,6 +13,9 @@ const { title, lead, eyebrow, crumbs = [], chips = [] } = Astro.props;
     {eyebrow && <div class="eyebrow">{eyebrow}</div>}
     <h1>{title}</h1>
     {lead && <p class="lead">{lead}</p>}
+    {(updated || reviewed) && (
+      <p class="stamp">{updated && <span>Updated {updated}</span>}{reviewed && <span>Reviewed {reviewed.date} by {reviewed.by}</span>}</p>
+    )}
     {chips.length > 0 && <div class="chips">{chips.map((c) => c.href ? <a class="chip" href={c.href}>{c.label}</a> : <span class="chip">{c.label}</span>)}</div>}
   </div>
 </header>

@@ -1,0 +1,78 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Motor Full Load Current and Circuit Calculator (NEC 430) | Ohmetry"
+description: "Look up NEC motor full-load current by horsepower and voltage, then size the conductor, overload and short-circuit device for a motor branch circuit."
+h1: "Motor Circuit Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Motor circuit"
+needsTables: true
+---
+import MotorCircuit from '../../components/MotorCircuit.tsx';
+import Related from '../../components/Related.astro';
+
+<MotorCircuit client:load />
+
+A motor circuit has three separate sizing jobs, and each one uses a different current. The conductor and the short-circuit device are sized from the full-load current in a code table. The overload protection is sized from the nameplate. Mixing these up is the most common error, so this calculator keeps them apart.
+
+## The three steps
+
+<div class="formula">Conductor ampacity ≥ 1.25 × table full-load current<br/>Overload setting = 1.25 × nameplate current (1.15 × if the motor does not qualify)<br/>Short-circuit device ≤ table percentage × table full-load current</div>
+
+**Full-load current** comes from Table 430.250 for three-phase motors and Table 430.248 for single-phase motors, by horsepower and voltage. The code directs you to use these tabulated values for conductor and short-circuit protection sizing, not the figure on the nameplate. The tables list the voltages 208, 230, 460 and 575 V for three-phase and 115 and 230 V for single-phase, which this calculator offers.
+
+**Conductors** carry at least 125 % of the table current (430.22) for a single motor with continuous duty.
+
+**Overload protection** uses the nameplate current: 125 % for a motor with a service factor of 1.15 or more or a marked temperature rise of 40 °C or less, and 115 % for other motors (430.32). The maximum setting is 140 % and 130 % respectively. If the motor still trips at those, check the load before raising anything.
+
+**The short-circuit and ground-fault device** (430.52) has a maximum, which depends on its type: 250 % for an inverse-time circuit breaker, 175 % for a dual-element fuse, 300 % for a non-time-delay fuse and 800 % for an instantaneous-trip breaker. If the result is not a standard size, the next higher standard size is permitted.
+
+## Worked example
+
+A 10 hp, 460 V, three-phase motor with a nameplate current of 13 A:
+
+- **Table current:** 14 A.
+- **Conductors:** 1.25 × 14 = 17.5 A or more.
+- **Overload:** 1.25 × 13 = 16.25 A, with a maximum of 18.2 A.
+- **Inverse-time breaker:** 250 % × 14 = 35 A, which is a standard size.
+- **Dual-element fuse:** 175 % × 14 = 24.5 A, so 25 A.
+- **Non-time-delay fuse:** 300 % × 14 = 42 A, so 45 A.
+
+A 5 hp, 230 V motor has a table current of 15.2 A, so the conductor needs 19 A and the breaker maximum of 38 A rounds up to a 40 A standard size.
+
+## What this does not cover
+
+- **Several motors on one circuit**, or a motor with other loads, which follow 430.24 and 430.53.
+- **Variable-speed drives and soft starters**, which have their own requirements and manufacturer instructions.
+- **Higher device ratings** that the code allows when the first choice cannot carry the motor's starting current.
+- **Disconnecting means, controllers and the conductors from the controller to the motor**, each with its own rule.
+- **Voltage drop**, which matters for starting. Use the <a href="/voltage-drop-calculator/">voltage drop calculator</a>.
+- **Conductor size itself.** The calculator gives the ampacity needed. Use the <a href="/wire-size-calculator/">wire size calculator</a> to choose the conductor, with derating.
+
+## Common mistakes
+
+- **Sizing the conductor from the nameplate.** Use the table value.
+- **Setting the overload from the table.** Use the nameplate.
+- **Reading 250 % as a target.** It is a ceiling. A smaller device that still starts the motor is better.
+- **Using a table voltage the motor is not on.** A 480 V supply is usually served by the 460 V column.
+
+## Questions
+
+### What is the full-load current of a 5 hp motor?
+It depends on voltage and phase: 7.6 A at 460 V three-phase, 15.2 A at 230 V three-phase and 28 A at 230 V single-phase.
+
+### Why does the code use a table and not the nameplate?
+Motors with the same horsepower can have different nameplate currents. The table gives a consistent basis for sizing circuits, while the overload device protects the actual motor.
+
+### What size breaker for a 3 hp motor?
+At 230 V three-phase the table current is 9.6 A, so the inverse-time breaker maximum is 250 %, or 24 A, which is not a standard size. The next higher standard size is 25 A.
+
+### Does a motor need a separate overload device?
+Generally yes. The short-circuit device protects the circuit and the overload device protects the motor.
+
+<Related items={[
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+  { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
+]} />

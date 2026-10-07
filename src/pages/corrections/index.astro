@@ -1,0 +1,18 @@
+---
+import Article from '../../layouts/Article.astro';
+import { corrections } from '../../data/corrections';
+const sorted = [...corrections].sort((a, b) => b.date.localeCompare(a.date));
+---
+<Article title="Corrections log" description="Errors found in published Ohmetry pages and how they were fixed." h1="Corrections log">
+  <p>When a published page, formula or table value turns out to be wrong, it is fixed and recorded here, with the date and what changed. A wrong number on an engineering site matters, so the record is public.</p>
+  {sorted.length === 0 ? (
+    <p><strong>No corrections have been published yet.</strong></p>
+  ) : (
+    <table>
+      <thead><tr><th>Date</th><th>Page</th><th>What was wrong</th><th>Fix</th></tr></thead>
+      <tbody>{sorted.map((c) => <tr><td>{c.date}</td><td>{c.page ? <a href={`/${c.page}/`}>{c.page}</a> : 'Site-wide'}</td><td>{c.wrong}</td><td>{c.fixed}</td></tr>)}</tbody>
+    </table>
+  )}
+  <h2>Report an error</h2>
+  <p>Found something wrong? Use the details on the <a href="/contact/">Contact</a> page. Include the page, the inputs you used and the result you expected.</p>
+</Article>

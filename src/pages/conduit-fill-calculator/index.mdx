@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "Conduit Fill Calculator (NEC Chapter 9, EMT) | Ohmetry"
-description: "Find the smallest EMT conduit for a set of THHN conductors using NEC Chapter 9 fill limits of 53, 31 and 40 percent. Mixed sizes supported."
+title: "Conduit Fill Calculator (NEC Chapter 9: EMT, RMC, PVC) | Ohmetry"
+description: "Find the smallest EMT, rigid metal or PVC Schedule 40 conduit for a set of THHN conductors using NEC Chapter 9 fill limits of 53, 31 and 40 percent. Mixed sizes."
 h1: "Conduit Fill Calculator"
 hub: Electrical
 hubHref: /electrical/
@@ -13,13 +13,13 @@ import Related from '../../components/Related.astro';
 
 <ConduitFill client:load />
 
-A raceway can't be packed full. The NEC limits how much of the inside of a conduit the conductors may occupy, so that heat can escape and the wires can be pulled in without damage. This calculator adds up the conductor areas and finds the smallest EMT trade size that stays within the limit. It handles any mix of sizes.
+A raceway can't be packed full. The NEC limits how much of the inside of a conduit the conductors may occupy, so that heat can escape and the wires can be pulled in without damage. This calculator adds up the conductor areas and finds the smallest trade size that stays within the limit for the raceway you choose: EMT, rigid metal conduit (RMC) or rigid PVC Schedule 40. It handles any mix of conductor sizes.
 
 ## How it works
 
 <div class="formula">Total area = Σ (conductor area × quantity)<br/>Allowed area = conduit internal area × fill limit<br/>Fill limit: 1 conductor 53 %, 2 conductors 31 %, over 2 conductors 40 %</div>
 
-The conductor areas come from Chapter 9, Table 5. The fill limits come from Table 1, and the conduit areas come from Table 4, which lists them for each raceway type. Every conductor counts, including the equipment grounding and bonding conductors, which Chapter 9 requires you to include in the calculation.
+The conductor areas come from Chapter 9, Table 5. The fill limits come from Table 1, and the conduit areas come from Table 4, which lists them separately for each raceway type under its own article. Every conductor counts, including the equipment grounding and bonding conductors, which Chapter 9 requires you to include in the calculation.
 
 ## Worked examples
 
@@ -40,7 +40,8 @@ A single conductor can fill more of the tube because it can't jam against others
 ## What the calculator assumes
 
 - **THHN, THWN and THWN-2 dimensions.** Other insulation types, such as XHHW, have different areas. Use Table 5 for your conductor type.
-- **EMT only.** Rigid metal conduit, PVC and the other raceways have different internal areas in Table 4, so the same conductors can need a different trade size.
+- **Three raceway types.** EMT, RMC and PVC Schedule 40 are included. PVC Schedule 80, flexible conduit, liquidtight and other raceways have different internal areas and are not. The same conductors can need a different trade size in each, because PVC has thicker walls than EMT and so less room inside.
+- **Table values for RMC and PVC are derived.** The total internal areas are entered, and the 53, 31 and 40 percent columns are calculated from them and rounded to three decimals. The printed code table can differ in the last digit.
 - **Round, stranded conductors**, as in Table 5.
 - **Full-length raceway.** Short nipples of 24 inches or less are allowed a higher fill under a note to Chapter 9. The calculator doesn't apply it.
 
@@ -57,8 +58,8 @@ Fill is not the only limit on a conduit run. Conductors in a raceway also need t
 
 ## Questions
 
-### How many 12 AWG wires fit in ½ inch EMT?
-Nine THHN conductors. Ten is over the 40 % limit.
+### How many 12 AWG wires fit in ½ inch conduit?
+Nine THHN conductors in EMT or RMC, and eight in PVC Schedule 40. One more is over the 40 % limit.
 
 ### Is the grounding conductor included?
 Yes. Add it as one more conductor of its own size.
@@ -67,7 +68,7 @@ Yes. Add it as one more conductor of its own size.
 Over two conductors, the limit is 40 %, whatever the conduit type.
 
 ### Can I use this for PVC?
-Not yet. The calculator covers EMT, and PVC Schedule 40 has different internal areas.
+Yes, for Schedule 40. Choose it in the raceway list. Eight 12 AWG fit in ½ inch PVC-40, where nine fit in EMT or RMC.
 
 <Related items={[
   { href: '/wire-size-calculator/', label: 'Wire size calculator' },

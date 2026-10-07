@@ -78,6 +78,8 @@ img, svg { max-width: 100%; }
 .crumbs span[aria-hidden] { opacity: 0.5; }
 .page-head h1 { font: 800 clamp(1.9rem, 4.2vw, 3rem)/1.08 var(--font-display); font-stretch: 108%; letter-spacing: -0.015em; margin: 8px 0 12px; text-wrap: balance; max-width: 22ch; }
 .lead { color: var(--muted); font-size: 1.125rem; max-width: 62ch; margin: 0; }
+.stamp { display: flex; flex-wrap: wrap; gap: 4px 16px; font: 400 0.78rem var(--font-mono); color: var(--muted); margin: 14px 0 0; }
+.notice.correction { border-color: var(--line); background: var(--surface); }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
 .chip { font: 500 0.72rem/1 var(--font-mono); letter-spacing: 0.04em; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--muted); text-decoration: none; }
 a.chip:hover { border-color: var(--accent); color: var(--accent); }

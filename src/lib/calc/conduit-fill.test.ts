@@ -58,4 +58,25 @@ describe('conduitFill (EMT, THHN)', () => {
     expect(() => conduitFill({ conductors: [{ size: '99', count: 1 }] })).toThrow();
     expect(() => run('500', 40)).toThrow();
   });
+
+  it('throws for an unknown conduit type', () => expect(() => conduitFill({ conductors: [{ size: '12', count: 3 }] }, 'XYZ' as never)).toThrow());
+});
+
+// RMC and PVC-40 columns are derived from the totals, rounded to three decimals.
+describe('conduitFill other raceway types', () => {
+  const run2 = (size: string, count: number, t: 'RMC' | 'PVC40') => conduitFill({ conductors: [{ size, count }] }, t);
+  // RMC 1/2": 40 % of 0.314 = 0.126. Nine 12 AWG = 0.1197 fits; ten = 0.133 does not -> 3/4" (0.220)
+  it('RMC 1/2 inch holds nine 12 AWG, not ten', () => {
+    expect(run2('12', 9, 'RMC').trade).toBe('1/2"');
+    expect(run2('12', 10, 'RMC').trade).toBe('3/4"');
+  });
+  // PVC-40 1/2": 40 % of 0.285 = 0.114. Eight 12 AWG = 0.1064 fits; nine = 0.1197 does not
+  it('PVC-40 1/2 inch holds eight 12 AWG, not nine', () => {
+    expect(run2('12', 8, 'PVC40').trade).toBe('1/2"');
+    expect(run2('12', 9, 'PVC40').trade).toBe('3/4"');
+  });
+  it('the same conductors need a larger PVC-40 size than EMT or RMC at some counts', () => {
+    expect(run2('12', 9, 'PVC40').trade).not.toBe(conduitFill({ conductors: [{ size: '12', count: 9 }] }, 'EMT').trade);
+  });
+  it('reports the raceway label', () => expect(run2('12', 3, 'RMC').label).toContain('RMC'));
 });

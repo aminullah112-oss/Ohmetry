@@ -2,12 +2,19 @@
 import '../styles/global.css';
 import Logo from '../components/Logo.astro';
 import { hubs, guides, type HubId } from '../data/calculators';
+import fs from 'node:fs';
+import path from 'node:path';
+import { slugFromPath } from '../lib/updated';
 
 interface Props { title: string; description: string; breadcrumbs?: { name: string; href: string }[]; noindex?: boolean; activeHub?: HubId }
 const { title, description, breadcrumbs = [], noindex: noindexProp = false, activeHub } = Astro.props;
 // Preview deployments (e.g. GitHub Pages) must not compete with the real domain in search.
 const noindex = noindexProp || import.meta.env.PUBLIC_PREVIEW === 'true';
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const slug = slugFromPath(Astro.url.pathname, import.meta.env.BASE_URL);
+const ogName = slug && fs.existsSync(path.join(process.cwd(), 'public/og', `${slug.replace(/\//g, '-')}.png`)) ? slug.replace(/\//g, '-') : 'default';
+const ogImage = new URL(`${base}/og/${ogName}.png`, Astro.site).toString();
 const crumbs = [{ name: 'Home', href: '/' }, ...breadcrumbs];
 const ld = {
   '@context': 'https://schema.org',
@@ -24,6 +31,18 @@ const ld = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ohmetry" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0e171e" />
     {breadcrumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
@@ -57,7 +76,7 @@ const ld = {
           </div>
           <div>
             <h2>Site</h2>
-            <ul><li><a href="/about/">About</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/disclaimer/">Disclaimer</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/contact/">Contact</a></li></ul>
+            <ul><li><a href="/about/">About</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/corrections/">Corrections</a></li><li><a href="/disclaimer/">Disclaimer</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/contact/">Contact</a></li></ul>
           </div>
         </div>
         <p class="foot-note">Results are for estimating and checking. Verify against the current code and a qualified engineer before design or installation. Calculators run in your browser and send nothing to a server.</p>

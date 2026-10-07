@@ -1,0 +1,51 @@
+query,kind,target_page,status,monthly_volume,competition,notes
+ohms law calculator,calculator,/ohms-law-calculator/,live,,,
+amps to watts,calculator,/amps-to-watts-calculator/,live,,,
+kw to amps,calculator,/kw-to-amps-calculator/,live,,,
+kva to amps,calculator,/kva-to-amps-calculator/,live,,,
+three phase power calculator,calculator,/three-phase-power-calculator/,live,,,
+voltage drop calculator,calculator,/voltage-drop-calculator/,live,,,Head term: expect strong competition
+voltage drop formula,guide,/voltage-drop-formula/,live,,,
+breaker size calculator,calculator,/breaker-size-calculator/,live,,,
+awg to mm2,calculator,/awg-to-mm2-converter/,live,,,
+wire size calculator,calculator,/wire-size-calculator/,hidden until NEC tables verified,,,Head term: expect strong competition
+conduit fill calculator,calculator,/conduit-fill-calculator/,hidden until NEC tables verified,,,
+motor full load current,calculator,/motor-circuit-calculator/,hidden until NEC tables verified,,,
+generator size calculator,calculator,/generator-size-calculator/,live,,,
+solar panel calculator,calculator,/solar-panel-calculator/,live,,,
+battery bank calculator,calculator,/battery-bank-calculator/,live,,,
+off grid solar calculator,calculator,/off-grid-solar-calculator/,live,,,
+inverter size calculator,calculator,/inverter-size-calculator/,live,,,
+solar wire size calculator,calculator,/solar-wire-size-calculator/,live,,,
+ev charger wire size,calculator,/ev-charger-wire-size-calculator/,live,,,
+transformer full load current,calculator,/transformer-full-load-current-calculator/,live,,,
+short circuit current calculator,calculator,/short-circuit-current-calculator/,live,,,
+cable size calculator,calculator,/cable-size-calculator/,live,,,IEC method
+ct burden calculation,calculator,/ct-burden-calculator/,live,,,
+idmt relay calculator,calculator,/idmt-relay-calculator/,live,,,
+earth resistance calculator,calculator,/earth-resistance-calculator/,live,,,
+power factor correction calculator,calculator,/power-factor-correction-calculator/,live,,,
+relay setting checklist,guide,/relay-setting-checklist/,live,,,
+watts to amps,calculator,(new or fold into amps-to-watts),candidate,,,Check whether one page can serve both directions before making two
+amps to kw,calculator,(new or fold into kw-to-amps),candidate,,,Same-intent caution: avoid near-duplicate pages
+kva to kw,calculator,(new),candidate,,,
+kw to kva,calculator,"(new, pair with kva to kw)",candidate,,,One page can cover both directions
+kw to hp,calculator,(new),candidate,,,
+hp to amps,calculator,"(new, uses motor table)",candidate,,,Needs verified NEC motor table for the NEC answer
+volts to watts,calculator,(new),candidate,,,
+electricity cost calculator,calculator,(new),candidate,,,"Broad audience, weak fit with an engineering brand"
+box fill calculator,calculator,"(new, NEC 314.16)",candidate,,,Needs verified NEC table
+cable tray fill calculator,calculator,(new),candidate,,,Needs verified table data
+transformer size calculator,calculator,(new),candidate,,,
+motor starting voltage drop,calculator,(new),candidate,,,Fits the protection niche
+battery charge time calculator,calculator,(new),candidate,,,
+solar panel series parallel calculator,calculator,(new),candidate,,,String voltage and current limits
+wire ampacity chart,reference,"(new, needs verified NEC 310.16)",candidate,,,Very high volume; copyright care with code tables
+resistor color code calculator,calculator,"(new, electronics audience)",candidate,,,High volume; off-niche audience
+led resistor calculator,calculator,"(new, electronics audience)",candidate,,,High volume; off-niche audience
+how to size a breaker,guide,(new),candidate,,,"Links to breaker, wire size and motor pages"
+power factor explained,guide,(new),candidate,,,
+how to read a relay curve,guide,(new),candidate,,,"Protection niche, low competition expected"
+earthing system types TN TT IT,guide,(new),candidate,,,Protection niche
+single phase vs three phase,guide,(new),candidate,,,
+short circuit calculation by hand,guide,(new),candidate,,,Protection niche
