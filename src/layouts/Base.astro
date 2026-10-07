@@ -1,6 +1,8 @@
 ---
 interface Props { title: string; description: string; breadcrumbs?: { name: string; href: string }[]; noindex?: boolean }
-const { title, description, breadcrumbs = [], noindex = false } = Astro.props;
+const { title, description, breadcrumbs = [], noindex: noindexProp = false } = Astro.props;
+// Preview deployments (e.g. GitHub Pages) must not compete with the real domain in search.
+const noindex = noindexProp || import.meta.env.PUBLIC_PREVIEW === 'true';
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const crumbs = [{ name: 'Home', href: '/' }, ...breadcrumbs];
 const ld = {

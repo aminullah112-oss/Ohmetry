@@ -23,6 +23,10 @@ Code tables (NEC 310.16 etc.) go in as data files with the section cited. Do not
 
 Root directory `ohmetry`, build command `npm run build`, output `dist`. Sitemap is at `/sitemap-index.xml`.
 
+## Preview on GitHub Pages
+
+`.github/workflows/pages.yml` runs the tests, then builds with `BASE_PATH=/<repo>` and `PUBLIC_PREVIEW=true` (adds `noindex`) and deploys to `https://<owner>.github.io/<repo>/`. One-time setup: repo Settings > Pages > Source: **GitHub Actions**. Production on a real domain builds at the root with no environment variables.
+
 ## Before launch
 
 - Domain is not bought. `site` in `astro.config.mjs` and `public/robots.txt` assume `ohmetry.com`.
