@@ -1,6 +1,23 @@
 # NEC table values to verify
 
-Status: NOT VERIFIED. Edition: NEC 2020 section numbering (confirm against your adopted edition)
+Edition note: NEC 2020 section numbering (confirm against your adopted edition)
+
+## Verification status
+
+| Table | Status |
+|---|---|
+| Table 310.16 allowable ampacities (310.16) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
+| Table 310.15(B)(1) ambient temperature correction (310.15(B)(1)) | not verified |
+| Table 310.15(C)(1) adjustment for more than three conductors (310.15(C)(1)) | not verified |
+| Chapter 9 Table 5 conductor areas (THHN/THWN) (Ch9-T5) | not verified |
+| Chapter 9 Table 1 fill percentages (Ch9-T1) | not verified |
+| Chapter 9 Table 4 EMT areas (Ch9-T4-EMT) | not verified |
+| Chapter 9 Table 4 RMC areas (Ch9-T4-RMC) | not verified |
+| Chapter 9 Table 4 PVC Schedule 40 areas (Ch9-T4-PVC40) | not verified |
+| Table 430.250 three-phase motor full-load current (430.250) | not verified |
+| Table 430.248 single-phase motor full-load current (430.248) | not verified |
+| Table 430.52 maximum device ratings for motor circuits (430.52) | not verified |
+| Section 240.6(A) standard overcurrent device ratings (240.6(A)) | not verified |
 
 ## Table 310.16 allowable ampacity (60 / 75 / 90 C)
 

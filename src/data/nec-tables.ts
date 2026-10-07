@@ -1,22 +1,52 @@
 /**
  * NEC table data used by the wire size and conduit fill calculators.
  *
- * STATUS: these values were entered from knowledge of the published tables and have NOT yet been
- * compared against a licensed copy of the code. While `verified` is false, the pages that use them
- * show a warning, are marked noindex and are left out of the sitemap.
+ * STATUS: tracked per table in TABLE_STATUS below. Values were entered from knowledge of the published
+ * tables and are only trusted once a table is marked verified. Pages that use an unverified table show a
+ * warning, are marked noindex and are left out of the sitemap.
  *
- * To verify: run `npm run tables`, compare every value with your copy of the NEC, correct this file,
- * then set `verified: true`, `edition` and `verifiedBy`. The code text itself is not reproduced here;
+ * To verify: run `npm run tables`, compare each table with your copy of the NEC, correct this file,
+ * then set that table's `verified`, `by` and `date`. The code text itself is not reproduced here;
  * only numeric values with section references.
  */
 export const NEC_TABLES = {
-  verified: false,
   edition: 'NEC 2020 section numbering (confirm against your adopted edition)',
-  verifiedBy: '',
 };
 
-/** Pages that must stay hidden from search until the tables are verified. */
-export const TABLE_PAGES = ['/wire-size-calculator/', '/conduit-fill-calculator/', '/motor-circuit-calculator/'];
+export type TableId =
+  | '310.16' | '310.15(B)(1)' | '310.15(C)(1)'
+  | 'Ch9-T5' | 'Ch9-T1' | 'Ch9-T4-EMT' | 'Ch9-T4-RMC' | 'Ch9-T4-PVC40'
+  | '430.250' | '430.248' | '430.52' | '240.6(A)';
+
+/**
+ * Verification status, one entry per table. Set `verified: true` (with who and when) only after the values
+ * have been compared with a copy of the code. A page unlocks when every table it needs is verified.
+ */
+export const TABLE_STATUS: Record<TableId, { label: string; verified: boolean; by?: string; date?: string }> = {
+  '310.16': { label: 'Table 310.16 allowable ampacities', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
+  '310.15(B)(1)': { label: 'Table 310.15(B)(1) ambient temperature correction', verified: false },
+  '310.15(C)(1)': { label: 'Table 310.15(C)(1) adjustment for more than three conductors', verified: false },
+  'Ch9-T5': { label: 'Chapter 9 Table 5 conductor areas (THHN/THWN)', verified: false },
+  'Ch9-T1': { label: 'Chapter 9 Table 1 fill percentages', verified: false },
+  'Ch9-T4-EMT': { label: 'Chapter 9 Table 4 EMT areas', verified: false },
+  'Ch9-T4-RMC': { label: 'Chapter 9 Table 4 RMC areas', verified: false },
+  'Ch9-T4-PVC40': { label: 'Chapter 9 Table 4 PVC Schedule 40 areas', verified: false },
+  '430.250': { label: 'Table 430.250 three-phase motor full-load current', verified: false },
+  '430.248': { label: 'Table 430.248 single-phase motor full-load current', verified: false },
+  '430.52': { label: 'Table 430.52 maximum device ratings for motor circuits', verified: false },
+  '240.6(A)': { label: 'Section 240.6(A) standard overcurrent device ratings', verified: false },
+};
+
+/** Which tables each page depends on. A page is hidden from search until all of them are verified. */
+export const PAGE_REQUIRES: Record<string, TableId[]> = {
+  '/wire-size-calculator/': ['310.16', '310.15(B)(1)', '310.15(C)(1)'],
+  '/conduit-fill-calculator/': ['Ch9-T5', 'Ch9-T1', 'Ch9-T4-EMT', 'Ch9-T4-RMC', 'Ch9-T4-PVC40'],
+  '/motor-circuit-calculator/': ['430.250', '430.248', '430.52', '240.6(A)'],
+};
+
+export const TABLE_PAGES = Object.keys(PAGE_REQUIRES);
+export const pendingTables = (path: string): TableId[] => (PAGE_REQUIRES[path] ?? []).filter((t) => !TABLE_STATUS[t].verified);
+export const pageVerified = (path: string) => pendingTables(path).length === 0;
 
 export interface WireSize { id: string; label: string; kcmil?: number; awg?: number }
 /** Table 310.16 size order, smallest to largest. 1/0 is awg 0, 4/0 is awg -3. */

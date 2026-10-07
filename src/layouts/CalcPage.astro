@@ -3,7 +3,7 @@ import Base from './Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { hubs, guides, type HubId } from '../data/calculators';
 import TableNotice from '../components/TableNotice.astro';
-import { NEC_TABLES } from '../data/nec-tables';
+import { pendingTables } from '../data/nec-tables';
 import { lastUpdated, slugFromPath } from '../lib/updated';
 import { reviews } from '../data/reviews';
 import { corrections } from '../data/corrections';
@@ -18,10 +18,10 @@ const reviewed = reviews[slug];
 const pageCorrections = corrections.filter((c) => c.page === slug);
 const chips = [{ label: frontmatter.hub, href: frontmatter.hubHref }, { label: 'Free, no sign-up' }, { label: isGuide ? 'Worked examples' : 'Formula and worked example' }];
 ---
-<Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs} activeHub={hubId} noindex={Boolean(frontmatter.needsTables) && !NEC_TABLES.verified}>
+<Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs} activeHub={hubId} noindex={Boolean(frontmatter.needsTables) && pendingTables(`/${slug}/`).length > 0}>
   <PageHeader title={frontmatter.h1} lead={frontmatter.description} eyebrow={isGuide ? 'Guide' : 'Calculator'} crumbs={crumbs} chips={chips} updated={updated} reviewed={reviewed} />
   <article class="article prose">
-    {frontmatter.needsTables && <TableNotice />}
+    {frontmatter.needsTables && <TableNotice path={`/${slug}/`} />}
     {pageCorrections.length > 0 && (
       <div class="notice correction" role="note"><strong>Corrected.</strong> {pageCorrections.map((c) => <span>{c.date}: {c.fixed} </span>)}<a href="/corrections/">Corrections log</a></div>
     )}

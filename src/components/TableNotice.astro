@@ -1,9 +1,12 @@
 ---
-import { NEC_TABLES } from '../data/nec-tables';
+import { pendingTables, TABLE_STATUS } from '../data/nec-tables';
+const { path } = Astro.props as { path: string };
+const pending = pendingTables(path);
 ---
-{!NEC_TABLES.verified && (
+{pending.length > 0 && (
   <div class="notice" role="note">
-    <strong>Draft table data.</strong> The NEC values in this calculator have not yet been checked against a published copy of the code.
+    <strong>Draft table data.</strong> Some NEC values in this calculator have not yet been checked against a published copy of the code.
     Do not use the results for design until this notice is removed. The page is hidden from search engines until then.
+    <br /><span class="meta">Still to verify: {pending.map((t) => TABLE_STATUS[t].label).join('; ')}.</span>
   </div>
 )}
