@@ -24,3 +24,8 @@ SSL/TLS mode: Full (strict). Turn on Always Use HTTPS.
 1. Open https://ohmetry.com/ and check a calculator, the sitemap (`/sitemap-index.xml`) and `robots.txt`.
 2. Google Search Console: add the `ohmetry.com` domain property (DNS verification is one click when DNS is on Cloudflare), submit `sitemap-index.xml`.
 3. Retire the GitHub Pages preview (delete `.github/workflows/pages.yml` and disable Pages in repo settings) so there is one copy of the site.
+
+## If Cloudflare shows the Workers flow ("Create application")
+`wrangler.jsonc` in the repo root already points static assets at `dist`, so the defaults work:
+build command `git fetch --unshallow || true; npm test && npm run build`, deploy command `npx wrangler deploy`, variable `NODE_VERSION` = `22`.
+Custom domains are added under the Worker's Settings > Domains & Routes.

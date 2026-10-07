@@ -1,10 +1,10 @@
 ---
 import Base from './Base.astro';
 import PageHeader from '../components/PageHeader.astro';
-const { title, description, h1, lead, eyebrow = 'Ohmetry' } = Astro.props as { title: string; description: string; h1: string; lead?: string; eyebrow?: string };
+const { title, description, h1, lead, eyebrow = 'Ohmetry', noindex = false } = Astro.props as { title: string; description: string; h1: string; lead?: string; eyebrow?: string; noindex?: boolean };
 const crumbs = [{ name: h1, href: Astro.url.pathname }];
 ---
-<Base title={title} description={description} breadcrumbs={crumbs}>
+<Base title={title} description={description} breadcrumbs={crumbs} noindex={noindex}>
   <PageHeader title={h1} lead={lead ?? description} eyebrow={eyebrow} crumbs={crumbs} />
   <article class="article prose"><slot /></article>
 </Base>
