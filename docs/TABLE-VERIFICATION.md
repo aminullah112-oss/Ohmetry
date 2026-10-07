@@ -15,9 +15,9 @@ Verified against: NEC 2020 (site owner's copy). Values are believed unchanged in
 | Chapter 9 Table 4 EMT areas (Ch9-T4-EMT) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
 | Chapter 9 Table 4 RMC areas (Ch9-T4-RMC) | VERIFIED: Site owner, against their copy of the NEC 2020 (totals and the 53/31/40 % columns reported as matching), 2026-10-07 |
 | Chapter 9 Table 4 PVC Schedule 40 areas (Ch9-T4-PVC40) | VERIFIED: Site owner, against their copy of the NEC 2020 (totals and the 53/31/40 % columns reported as matching), 2026-10-07 |
-| Table 430.250 three-phase motor full-load current (430.250) | not verified. Evidence so far: Internal consistency only: the 460 V column is exactly half the 230 V column in all 21 rows, the 208 V column is 1.10 x 230 V within 0.4 A, and 575 V is about 0.4 x 230 V within 0.6 A. This catches typos but not an error in the 230 V base column. |
-| Table 430.248 single-phase motor full-load current (430.248) | not verified. Evidence so far: Internal consistency only: the 230 V column is half the 115 V column. A trade-press summary echoed the 1, 1.5 and 5 hp rows, which is weak evidence. |
-| Table 430.52 maximum device ratings for motor circuits (430.52) | not verified. Evidence so far: The four percentages (250, 175, 300, 800) were echoed by a trade-press summary. The code table splits some rows by motor type (for example energy-efficient Design B instantaneous-trip at a higher percentage and wound-rotor rows lower), which this calculator does not model. |
+| Table 430.250 three-phase motor full-load current (430.250) | VERIFIED: Site owner, against their copy of the NEC 2020 (reported as matching), 2026-10-07 |
+| Table 430.248 single-phase motor full-load current (430.248) | VERIFIED: Site owner, against their copy of the NEC 2020 (reported as matching), 2026-10-07 |
+| Table 430.52 maximum device ratings for motor circuits (430.52) | VERIFIED: Site owner, against their copy of the NEC 2020 (the four general-case percentages match; motor-type rows are not modelled), 2026-10-07 |
 | Section 240.6(A) standard overcurrent device ratings (240.6(A)) | not verified. Evidence so far: The 15 A and up list matches a published summary of the 2020 list. The 2023 edition adds a 10 A circuit breaker rating (trade-press summary), now included for breakers. Fuses also have 1, 3, 6 and 601 A (same summary). The site owner works to 2020, so their book will not show the 10 A rating. |
 
 ## Table 310.16 allowable ampacity (60 / 75 / 90 C)
