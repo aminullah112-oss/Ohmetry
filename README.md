@@ -49,7 +49,7 @@ The wire size and conduit fill calculators use NEC table values from `src/data/n
 
 ## Before launch
 
-- Domain is not bought. `site` in `astro.config.mjs` and `public/robots.txt` assume `ohmetry.com`.
+- Domain `ohmetry.com` is registered (Cloudflare). Production builds need no env vars; see `docs/DEPLOY-CLOUDFLARE.md`.
 - Trust pages contain `TODO` placeholders (author bio, contact email, privacy details).
 - Toolkit page: set `gumroadUrl` and `emailFormAction` in `src/data/site.ts`. Until both are set the page is `noindex`, has no form, and is excluded from the sitemap. Review the page copy against the real product.
 - Add a consent banner and name the email provider on the privacy page before enabling email capture.
