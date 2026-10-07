@@ -1,15 +1,22 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { hubs, calcsIn } from '../../data/calculators';
+const hub = hubs['solar-ev'];
+const crumbs = [{ name: hub.name, href: hub.href }];
 ---
-<Base title="Solar and EV Calculators | Ohmetry" description="Solar array, battery, inverter, DC cable and EV charger calculators with stated assumptions and worked examples." breadcrumbs={[{ name: 'Solar and EV', href: '/solar-ev/' }]}>
-  <h1>Solar and EV calculators</h1>
-  <p>Solar sizing depends on assumptions: peak sun hours, system losses and battery depth of discharge. Each calculator shows its assumptions as inputs you can change.</p>
-  <ul>
-    <li><a href="/solar-panel-calculator/">Solar panel system size calculator</a></li>
-    <li><a href="/battery-bank-calculator/">Battery bank size and runtime calculator</a></li>
-    <li><a href="/off-grid-solar-calculator/">Off-grid solar system calculator</a></li>
-    <li><a href="/inverter-size-calculator/">Inverter size calculator</a></li>
-    <li><a href="/solar-wire-size-calculator/">Solar DC cable size calculator</a></li>
-    <li><a href="/ev-charger-wire-size-calculator/">EV charger breaker and wire size calculator</a></li>
-  </ul>
+<Base title="Solar and EV Calculators | Ohmetry" description="Solar array, battery, inverter, DC cable and EV charger calculators with stated assumptions and worked examples." breadcrumbs={crumbs} activeHub="solar-ev">
+  <PageHeader title={`${hub.name} calculators`} lead={hub.blurb} eyebrow="Toolbox" crumbs={crumbs} />
+  <div class="wrap" style="padding-top:28px">
+    <div class="card-grid">
+      {calcsIn('solar-ev').map((c) => (
+        <a class="card calc-card" href={`/${c.slug}/`}>
+          {c.tag && <span class="tag">{c.tag}</span>}
+          <h3>{c.name}</h3>
+          <p>{c.blurb}</p>
+        </a>
+      ))}
+    </div>
+    
+  </div>
 </Base>

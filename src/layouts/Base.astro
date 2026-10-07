@@ -1,6 +1,10 @@
 ---
-interface Props { title: string; description: string; breadcrumbs?: { name: string; href: string }[]; noindex?: boolean }
-const { title, description, breadcrumbs = [], noindex: noindexProp = false } = Astro.props;
+import '../styles/global.css';
+import Logo from '../components/Logo.astro';
+import { hubs, guides, type HubId } from '../data/calculators';
+
+interface Props { title: string; description: string; breadcrumbs?: { name: string; href: string }[]; noindex?: boolean; activeHub?: HubId }
+const { title, description, breadcrumbs = [], noindex: noindexProp = false, activeHub } = Astro.props;
 // Preview deployments (e.g. GitHub Pages) must not compete with the real domain in search.
 const noindex = noindexProp || import.meta.env.PUBLIC_PREVIEW === 'true';
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
@@ -8,9 +12,7 @@ const crumbs = [{ name: 'Home', href: '/' }, ...breadcrumbs];
 const ld = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
-  itemListElement: crumbs.map((c, i) => ({
-    '@type': 'ListItem', position: i + 1, name: c.name, item: new URL(c.href, Astro.site).toString(),
-  })),
+  itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: new URL(c.href, Astro.site).toString() })),
 };
 ---
 <!doctype html>
@@ -23,56 +25,43 @@ const ld = {
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0e171e" />
     {breadcrumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
-    <style is:global>
-      :root { --ink:#14202b; --muted:#5a6b78; --line:#d9e1e7; --accent:#0b6bcb; --bg:#fff; --card:#f4f7fa; }
-      @media (prefers-color-scheme: dark) { :root { --ink:#e8eef3; --muted:#9fb0bd; --line:#2b3945; --accent:#5aa9ff; --bg:#0f161c; --card:#17212a; } }
-      * { box-sizing: border-box }
-      body { margin:0; font:17px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif; color:var(--ink); background:var(--bg) }
-      a { color:var(--accent) }
-      header,main,footer { max-width:820px; margin:0 auto; padding:0 16px }
-      header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px 16px; padding-top:16px; padding-bottom:16px }
-      header nav, header span { display:flex; flex-wrap:wrap; gap:4px 16px }
-      header .brand { font-weight:700; font-size:1.2rem; text-decoration:none; color:var(--ink) }
-      nav.crumbs { font-size:.9rem; color:var(--muted); margin-bottom:8px }
-      h1 { line-height:1.2; margin:.2em 0 .5em }
-      .calc { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin:16px 0 24px }
-      .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px }
-      label { display:flex; flex-direction:column; font-size:.9rem; color:var(--muted); gap:4px }
-      input,select { font:inherit; padding:10px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--ink) }
-      .result { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:8px; margin-top:16px }
-      .result div { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:8px 12px }
-      .result span { display:block; font-size:.8rem; color:var(--muted) }
-      .result strong { font-size:1.2rem }
-      label small { font-size:.75rem; color:var(--muted) }
-      .hint { color:var(--muted); min-height:1.6em }
-      .print { margin-top:12px; font:inherit; padding:8px 14px; border:1px solid var(--line); border-radius:6px; background:var(--bg); color:var(--ink); cursor:pointer }
-      footer { border-top:1px solid var(--line); margin-top:48px; padding-top:16px; padding-bottom:32px; font-size:.9rem; color:var(--muted) }
-      footer a { display:inline-block; margin:0 12px 4px 0 }
-      table { border-collapse:collapse; margin:12px 0 }
-      th,td { border:1px solid var(--line); padding:6px 12px; text-align:left }
-      .formula { background:var(--card); border-left:3px solid var(--accent); padding:8px 14px; font-family:ui-monospace,monospace }
-      .cta { border:1px solid var(--line); background:var(--card); border-radius:10px; padding:12px 16px; margin-top:32px }
-      .cta p { margin:.2em 0 }
-      .meta { font-size:.9rem; color:var(--muted) }
-      .checklist { padding-left:1.2em }
-      .checklist li { margin:.4em 0 }
-      @media print { header,footer,.print,nav.crumbs,.cta { display:none } }
-    </style>
   </head>
   <body>
-    <header><a class="brand" href="/">Ohmetry</a><span><a href="/electrical/">Electrical</a><a href="/solar-ev/">Solar and EV</a><a href="/protection/">Protection</a></span></header>
-    <main>
-      {breadcrumbs.length > 0 && (
-        <nav class="crumbs" aria-label="Breadcrumb">
-          <a href="/">Home</a>{breadcrumbs.map((c) => <> &gt; <a href={c.href}>{c.name}</a></>)}
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/"><Logo />Ohmetry</a>
+        <nav class="site-nav" aria-label="Main">
+          {(Object.keys(hubs) as HubId[]).map((id) => <a href={hubs[id].href} aria-current={activeHub === id ? 'page' : undefined}>{hubs[id].name}</a>)}
+          <a href="/toolkit/">Toolkit</a>
         </nav>
-      )}
-      <slot />
-    </main>
-    <footer>
-      <a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/disclaimer/">Disclaimer</a><a href="/privacy/">Privacy</a><a href="/toolkit/">Toolkit</a><a href="/contact/">Contact</a>
-      <p>Results are for estimating and checking. Verify against the current code and a qualified engineer before design or installation.</p>
+      </div>
+    </header>
+    <main id="main"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="foot-grid">
+          <div>
+            <a class="brand" href="/"><Logo />Ohmetry</a>
+            <p class="meta" style="margin-top:12px;max-width:34ch">Electrical, solar and protection calculators that show the formula, the reference and a worked example.</p>
+          </div>
+          <div>
+            <h2>Calculators</h2>
+            <ul>{(Object.keys(hubs) as HubId[]).map((id) => <li><a href={hubs[id].href}>{hubs[id].name}</a></li>)}</ul>
+          </div>
+          <div>
+            <h2>Guides</h2>
+            <ul>{guides.map((g) => <li><a href={`/${g.slug}/`}>{g.name}</a></li>)}<li><a href="/toolkit/">Toolkit</a></li></ul>
+          </div>
+          <div>
+            <h2>Site</h2>
+            <ul><li><a href="/about/">About</a></li><li><a href="/methodology/">Methodology</a></li><li><a href="/disclaimer/">Disclaimer</a></li><li><a href="/privacy/">Privacy</a></li><li><a href="/contact/">Contact</a></li></ul>
+          </div>
+        </div>
+        <p class="foot-note">Results are for estimating and checking. Verify against the current code and a qualified engineer before design or installation. Calculators run in your browser and send nothing to a server.</p>
+      </div>
     </footer>
   </body>
 </html>

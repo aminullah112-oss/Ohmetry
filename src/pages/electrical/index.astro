@@ -1,20 +1,22 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { hubs, calcsIn } from '../../data/calculators';
+const hub = hubs['electrical'];
+const crumbs = [{ name: hub.name, href: hub.href }];
 ---
-<Base title="Electrical Calculators | Ohmetry" description="Ohm's law, kW to amps and other electrical calculators with formulas and worked examples." breadcrumbs={[{ name: 'Electrical', href: '/electrical/' }]}>
-  <h1>Electrical calculators</h1>
-  <ul>
-    <li><a href="/ohms-law-calculator/">Ohm's law calculator</a></li>
-    <li><a href="/amps-to-watts-calculator/">Amps to watts calculator</a></li>
-    <li><a href="/voltage-drop-calculator/">Voltage drop calculator</a></li>
-    <li><a href="/kw-to-amps-calculator/">kW to amps calculator</a></li>
-    <li><a href="/kva-to-amps-calculator/">kVA to amps calculator</a></li>
-    <li><a href="/three-phase-power-calculator/">Three-phase power calculator</a></li>
-    <li><a href="/breaker-size-calculator/">Breaker size calculator (NEC 125% rule)</a></li>
-    <li><a href="/awg-to-mm2-converter/">AWG to mm² converter</a></li>
-  </ul>
-  <h2>Guides</h2>
-  <ul>
-    <li><a href="/voltage-drop-formula/">Voltage drop formula, with worked examples</a></li>
-  </ul>
+<Base title="Electrical Calculators | Ohmetry" description="Ohm's law, power, current, voltage drop, breaker size and wire gauge calculators with formulas and worked examples." breadcrumbs={crumbs} activeHub="electrical">
+  <PageHeader title={`${hub.name} calculators`} lead={hub.blurb} eyebrow="Toolbox" crumbs={crumbs} />
+  <div class="wrap" style="padding-top:28px">
+    <div class="card-grid">
+      {calcsIn('electrical').map((c) => (
+        <a class="card calc-card" href={`/${c.slug}/`}>
+          {c.tag && <span class="tag">{c.tag}</span>}
+          <h3>{c.name}</h3>
+          <p>{c.blurb}</p>
+        </a>
+      ))}
+    </div>
+    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/voltage-drop-formula/"><span class="tag">GUIDE</span><h3>Voltage drop formula</h3><p>DC, single-phase and three-phase, worked in mm² and AWG.</p></a></div>
+  </div>
 </Base>

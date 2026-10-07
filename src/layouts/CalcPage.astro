@@ -1,13 +1,24 @@
 ---
 import Base from './Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { hubs, guides, type HubId } from '../data/calculators';
+
 const { frontmatter } = Astro.props;
+const hubId = (Object.keys(hubs) as HubId[]).find((id) => hubs[id].href === frontmatter.hubHref);
 const crumbs = [{ name: frontmatter.hub, href: frontmatter.hubHref }, { name: frontmatter.crumb, href: Astro.url.pathname }];
+const isGuide = guides.some((g) => Astro.url.pathname.includes(`/${g.slug}/`));
+const chips = [{ label: frontmatter.hub, href: frontmatter.hubHref }, { label: 'Free, no sign-up' }, { label: isGuide ? 'Worked examples' : 'Formula and worked example' }];
 ---
-<Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs}>
-  <h1>{frontmatter.h1}</h1>
-  <slot />
-  <aside class="cta">
-    <p><strong>Want these calculations in a workbook?</strong></p>
-    <p>The <a href="/toolkit/">Electrical Engineer's Toolkit</a> is an Excel workbook from the author of this site.</p>
-  </aside>
+<Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs} activeHub={hubId}>
+  <PageHeader title={frontmatter.h1} lead={frontmatter.description} eyebrow={isGuide ? 'Guide' : 'Calculator'} crumbs={crumbs} chips={chips} />
+  <article class="article prose">
+    <slot />
+    <aside class="cta">
+      <div>
+        <p class="cta-title">Want these calculations in a workbook?</p>
+        <p class="cta-sub">The Electrical Engineer's Toolkit is an Excel workbook from the author of this site.</p>
+      </div>
+      <a class="btn" href="/toolkit/">See the toolkit</a>
+    </aside>
+  </article>
 </Base>

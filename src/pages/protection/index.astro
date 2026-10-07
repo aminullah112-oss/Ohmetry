@@ -1,20 +1,22 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { hubs, calcsIn } from '../../data/calculators';
+const hub = hubs['protection'];
+const crumbs = [{ name: hub.name, href: hub.href }];
 ---
-<Base title="Protection and MV Calculators | Ohmetry" description="Transformer, short-circuit, CT, IDMT relay, earthing and power factor calculators for MV/LV protection engineers." breadcrumbs={[{ name: 'Protection and MV', href: '/protection/' }]}>
-  <h1>Protection and MV calculators</h1>
-  <p>Tools for protection and power-system engineers. Each page states the formula, the standard it follows and the simplifications it makes, so you can judge whether it fits your study.</p>
-  <ul>
-    <li><a href="/transformer-full-load-current-calculator/">Transformer full-load current calculator</a></li>
-    <li><a href="/short-circuit-current-calculator/">Short-circuit current calculator</a></li>
-    <li><a href="/ct-burden-calculator/">CT burden calculator</a></li>
-    <li><a href="/idmt-relay-calculator/">IDMT overcurrent relay time calculator</a></li>
-    <li><a href="/earth-resistance-calculator/">Earth rod resistance calculator</a></li>
-    <li><a href="/power-factor-correction-calculator/">Power factor correction calculator</a></li>
-    <li><a href="/cable-size-calculator/">IEC cable size calculator with derating</a></li>
-  </ul>
-  <h2>Guides</h2>
-  <ul>
-    <li><a href="/relay-setting-checklist/">Overcurrent relay setting checklist</a></li>
-  </ul>
+<Base title="Protection and MV Calculators | Ohmetry" description="Transformer, short-circuit, CT, IDMT relay, earthing and power factor calculators for MV/LV protection engineers." breadcrumbs={crumbs} activeHub="protection">
+  <PageHeader title={`${hub.name} calculators`} lead={hub.blurb} eyebrow="Toolbox" crumbs={crumbs} />
+  <div class="wrap" style="padding-top:28px">
+    <div class="card-grid">
+      {calcsIn('protection').map((c) => (
+        <a class="card calc-card" href={`/${c.slug}/`}>
+          {c.tag && <span class="tag">{c.tag}</span>}
+          <h3>{c.name}</h3>
+          <p>{c.blurb}</p>
+        </a>
+      ))}
+    </div>
+    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/relay-setting-checklist/"><span class="tag">GUIDE</span><h3>Relay setting checklist</h3><p>Seven stages for a transformer-feeder overcurrent relay, with a worked example.</p></a></div>
+  </div>
 </Base>

@@ -36,5 +36,7 @@ export default defineConfig({
   site: process.env.SITE_URL || 'https://ohmetry.com',
   base,
   trailingSlash: 'always',
+  // Small site: inline the CSS so each page needs one fewer request.
+  build: { inlineStylesheets: 'always' },
   integrations: [react(), mdx(), sitemap({ filter: (page) => toolkitReady || !page.includes('/toolkit/') }), rebaseLinks],
 });

@@ -1,12 +1,108 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import OhmsLaw from '../components/OhmsLaw.tsx';
+import { hubs, calculators, guides, calcsIn, type HubId } from '../data/calculators';
+const hubIds = Object.keys(hubs) as HubId[];
 ---
-<Base title="Ohmetry: Electrical Calculators with Formulas and Worked Examples" description="Electrical, solar and protection calculators that show the formula, the code reference and a worked example.">
-  <h1>Electrical calculators that show their work</h1>
-  <p>Every result comes with the formula, the code reference and a worked example you can check by hand. No sign-up.</p>
-  <ul>
-    <li><a href="/electrical/">Electrical calculators</a> (8 calculators)</li>
-    <li><a href="/solar-ev/">Solar and EV calculators</a> (6 calculators)</li>
-    <li><a href="/protection/">Protection and MV calculators</a> (7 calculators)</li>
-  </ul>
+<Base title="Ohmetry: Electrical, Solar and Protection Calculators" description="Free electrical, solar and protection calculators that show the formula, the code reference and a worked example you can check by hand.">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">Electrical · Solar · Protection</div>
+        <h1>Calculators that <em>show their work.</em></h1>
+        <p class="lead">Every result comes with the formula, the reference it follows and a worked example you can check by hand. Free, no sign-up, and everything runs in your browser.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#all">Browse {calculators.length} calculators</a>
+          <a class="btn ghost" href="/methodology/">How the numbers are checked</a>
+        </div>
+        <ul class="stats">
+          <li><strong>{calculators.length}</strong>calculators</li>
+          <li><strong>115</strong>automated tests</li>
+          <li><strong>0</strong>sign-ups</li>
+        </ul>
+      </div>
+      <div class="hero-instrument">
+        <OhmsLaw client:load />
+        <p class="hero-caption">Live: fill in any two values and the other two follow.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head"><div><div class="eyebrow">Start here</div><h2>Three toolboxes</h2></div></div>
+      <div class="card-grid hubs">
+        {hubIds.map((id) => (
+          <a class="card" href={hubs[id].href}>
+            <span class="icon"><Icon name={hubs[id].icon} /></span>
+            <h3>{hubs[id].name}</h3>
+            <p>{hubs[id].blurb}</p>
+            <span class="count">{calcsIn(id).length} calculators →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="all">
+    <div class="wrap">
+      <div class="block-head">
+        <div><div class="eyebrow">All calculators</div><h2>Find the one you need</h2></div>
+        <label class="search"><span class="sr-only" style="position:absolute;left:-999px">Search calculators</span><Icon name="search" /><input id="q" type="search" placeholder={`Search ${calculators.length} calculators`} autocomplete="off" /></label>
+      </div>
+      {hubIds.map((id) => (
+        <div class="group" data-group>
+          <div class="group-title">{hubs[id].name}</div>
+          <div class="card-grid">
+            {calcsIn(id).map((c) => (
+              <a class="card calc-card" href={`/${c.slug}/`} data-text={`${c.name} ${c.blurb} ${c.tag ?? ''} ${hubs[id].name}`.toLowerCase()}>
+                {c.tag && <span class="tag">{c.tag}</span>}
+                <h3>{c.name}</h3>
+                <p>{c.blurb}</p>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
+      <p class="empty" id="empty">No calculator matches that search. Try a shorter word such as "cable" or "relay".</p>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head"><div><div class="eyebrow">Why trust the numbers</div><h2>Built to be checked</h2></div></div>
+      <div class="trust">
+        <div class="card"><h3>The formula is on the page</h3><p>No black box. Each calculator states its formula and the standard or method behind it.</p></div>
+        <div class="card"><h3>A worked example you can redo</h3><p>Enter the example's numbers into the calculator and compare with the hand calculation.</p></div>
+        <div class="card"><h3>Tested against hand calculations</h3><p>Every calculation has automated tests with expected values worked out independently. A failing test blocks the release.</p></div>
+        <div class="card"><h3>Simplifications are stated</h3><p>Where a method leaves something out, such as reactance or motor contribution, the page says so.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="wrap">
+      <div class="block-head"><div><div class="eyebrow">Guides</div><h2>Worked in full</h2></div></div>
+      <div class="card-grid">
+        {guides.map((g) => (
+          <a class="card calc-card" href={`/${g.slug}/`}><span class="tag">GUIDE</span><h3>{g.name}</h3><p>{g.blurb}</p></a>
+        ))}
+        <a class="card calc-card" href="/toolkit/"><span class="tag">WORKBOOK</span><h3>Electrical Engineer's Toolkit</h3><p>The calculations in a spreadsheet you can keep, check and adapt.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const q = document.getElementById('q') as HTMLInputElement | null;
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-text]')];
+    const groups = [...document.querySelectorAll<HTMLElement>('[data-group]')];
+    const empty = document.getElementById('empty');
+    q?.addEventListener('input', () => {
+      const t = q.value.trim().toLowerCase();
+      cards.forEach((c) => (c.hidden = t !== '' && !t.split(/\s+/).every((w) => c.dataset.text!.includes(w))));
+      groups.forEach((g) => (g.hidden = ![...g.querySelectorAll<HTMLElement>('[data-text]')].some((c) => !c.hidden)));
+      if (empty) empty.style.display = groups.every((g) => g.hidden) ? 'block' : 'none';
+    });
+  </script>
 </Base>

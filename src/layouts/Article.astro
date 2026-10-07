@@ -1,0 +1,10 @@
+---
+import Base from './Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+const { title, description, h1, lead, eyebrow = 'Ohmetry' } = Astro.props as { title: string; description: string; h1: string; lead?: string; eyebrow?: string };
+const crumbs = [{ name: h1, href: Astro.url.pathname }];
+---
+<Base title={title} description={description} breadcrumbs={crumbs}>
+  <PageHeader title={h1} lead={lead ?? description} eyebrow={eyebrow} crumbs={crumbs} />
+  <article class="article prose"><slot /></article>
+</Base>

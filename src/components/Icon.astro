@@ -1,0 +1,9 @@
+---
+const { name } = Astro.props as { name: 'bolt' | 'sun' | 'relay' | 'search' };
+---
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {name === 'bolt' && <path d="M13 2 4.5 13.5H11L10 22l9-12h-6.5L13 2z" />}
+  {name === 'sun' && <><circle cx="12" cy="12" r="4" /><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6" /></>}
+  {name === 'relay' && <><path d="M12 2.8 4.5 5.6v6.2c0 4.5 3.2 7.6 7.5 8.9 4.3-1.3 7.5-4.4 7.5-8.9V5.6L12 2.8z" /><path d="M8 12h2l1.4-2.8 2 5.6 1.4-2.8H16" /></>}
+  {name === 'search' && <><circle cx="11" cy="11" r="6.5" /><path d="m16 16 4.5 4.5" /></>}
+</svg>
