@@ -6,25 +6,30 @@ const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
 ---
 <Base
   title={`${site.toolkitName}: Excel Workbook | Ohmetry`}
-  description="An Excel workbook from the author of Ohmetry for engineers who want electrical calculations in a spreadsheet they can keep, check and adapt."
+  description="A twelve-sheet Excel workbook with a multi-circuit schedule, relay settings and plot, and seven calculators, each with a self-checking worked example."
   breadcrumbs={crumbs}
   noindex={!toolkitReady}
 >
-  <PageHeader title={site.toolkitName} lead="The calculators here give you one answer at a time. The toolkit is a workbook you keep: the same kind of calculations in a spreadsheet you can open offline, check cell by cell and adapt to your own projects." eyebrow="Workbook" crumbs={crumbs} />
+  <PageHeader title={site.toolkitName} lead="The calculators here give you one answer at a time. The toolkit checks a whole project: a circuit schedule, relay settings with a coordination plot and seven calculators, in a workbook you keep." eyebrow="Workbook" crumbs={crumbs} />
   <article class="article prose">
-    <h2>Who it is for</h2>
-    <p>Electrical, solar and protection engineers who check designs in Excel and want to see the formula behind every number. It is written by a protection engineer with MV/HV experience under IEC and Saudi practice, and the formulas are the ones explained in the guides on this site.</p>
-
-    <h2>Why a workbook</h2>
+    <h2>What is inside</h2>
+    <p>One workbook, twelve sheets, no macros. Every result is a formula you can read.</p>
     <ul>
-      <li><strong>You can read every formula.</strong> Nothing is hidden behind a button.</li>
-      <li><strong>It works offline</strong>, on a site visit or in a plant with no connection.</li>
-      <li><strong>You can change it.</strong> Add your company's factors, your cable tables and your standard sizes.</li>
-      <li><strong>You can print it</strong> and attach it to a submittal.</li>
+      <li><strong>Circuit Schedule.</strong> Up to 30 circuits in one table. For each one it works out the load current, picks the next standard protective device, compares it with the cable rating you enter, and calculates voltage drop. Each row ends in PASS or CHECK, with a summary of how many circuits need attention.</li>
+      <li><strong>Relay Settings.</strong> Operating time of two IDMT overcurrent relays on the four IEC 60255-151 curves, a grading-margin check at maximum fault, and a log-log coordination plot.</li>
+      <li><strong>Seven calculator sheets.</strong> Power &amp; Current, Cable by Drop, Transformer &amp; Faults, Power Factor, CT &amp; Earthing, Generator, and Solar &amp; Battery.</li>
+      <li><strong>Self-Test.</strong> Each calculator holds a worked example whose expected result was calculated separately. The sheet shows 44 checks and whether they pass.</li>
+      <li><strong>Lists.</strong> Device ratings, conductor resistivity, curve constants and cable sizes, all editable to match your standard.</li>
     </ul>
 
-    <h2>Using it with the site</h2>
-    <p>The free calculators stay free. If you only need a quick answer, use them. The workbook is for repeated checks, offline work and adapting the method. Start with the guides on <a href="/voltage-drop-formula/">voltage drop</a> and the <a href="/relay-setting-checklist/">relay setting checklist</a> to see how the calculations are explained.</p>
+    <h2>What it does not contain</h2>
+    <p>Cable current ratings, derating factors and code tables. You enter the tabulated rating and factors from the standard you work to, whether that is IEC 60364-5-52 or the NEC, and the workbook checks your design against them. That keeps the workbook usable under either system, and it means the numbers that decide a cable's size come from the code you hold, not from a copy inside a spreadsheet.</p>
+
+    <h2>Who it is for</h2>
+    <p>Electrical, solar and protection engineers who check designs in a spreadsheet and want to see the formula behind every number. It is written by a protection engineer with MV/HV experience under IEC and Saudi practice. The formulas are the ones explained in the guides on this site.</p>
+
+    <h2>Free calculators and the workbook</h2>
+    <p>The calculators on this site stay free. Use them for a quick answer. The workbook is for checking a whole project at once, working offline and adapting the method. It was built and checked in LibreOffice and is designed to open in Excel. Start with the guides on <a href="/voltage-drop-formula/">voltage drop</a> and the <a href="/relay-setting-checklist/">relay setting checklist</a> to see how the calculations are explained.</p>
 
     {toolkitReady ? (
       <>
