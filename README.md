@@ -33,3 +33,5 @@ Root directory `ohmetry`, build command `npm run build`, output `dist`. Sitemap 
 - Trust pages contain `TODO` placeholders (author bio, contact email, privacy details).
 - Toolkit page: set `gumroadUrl` and `emailFormAction` in `src/data/site.ts`. Until both are set the page is `noindex`, has no form, and is excluded from the sitemap. Review the page copy against the real product.
 - Add a consent banner and name the email provider on the privacy page before enabling email capture.
+
+Live preview: https://aminullah112-oss.github.io/Ohmetry/ (noindex, deployed by GitHub Actions)
