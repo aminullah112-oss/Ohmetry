@@ -24,8 +24,8 @@ export type TableId =
  */
 export const TABLE_STATUS: Record<TableId, { label: string; verified: boolean; by?: string; date?: string }> = {
   '310.16': { label: 'Table 310.16 allowable ampacities', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
-  '310.15(B)(1)': { label: 'Table 310.15(B)(1) ambient temperature correction', verified: false },
-  '310.15(C)(1)': { label: 'Table 310.15(C)(1) adjustment for more than three conductors', verified: false },
+  '310.15(B)(1)': { label: 'Table 310.15(B)(1) ambient temperature correction', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
+  '310.15(C)(1)': { label: 'Table 310.15(C)(1) adjustment for more than three conductors', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
   'Ch9-T5': { label: 'Chapter 9 Table 5 conductor areas (THHN/THWN)', verified: false },
   'Ch9-T1': { label: 'Chapter 9 Table 1 fill percentages', verified: false },
   'Ch9-T4-EMT': { label: 'Chapter 9 Table 4 EMT areas', verified: false },
