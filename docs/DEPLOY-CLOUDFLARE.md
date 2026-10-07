@@ -29,3 +29,10 @@ SSL/TLS mode: Full (strict). Turn on Always Use HTTPS.
 `wrangler.jsonc` in the repo root already points static assets at `dist`, so the defaults work:
 build command `git fetch --unshallow || true; npm test && npm run build`, deploy command `npx wrangler deploy`, variable `NODE_VERSION` = `22`.
 Custom domains are added under the Worker's Settings > Domains & Routes.
+
+## Deploy from GitHub Actions (what this repo uses)
+`.github/workflows/deploy.yml` runs the tests, builds the site and runs `wrangler deploy` on every push to `main`. `wrangler.jsonc` also attaches `ohmetry.com` and `www.ohmetry.com` as custom domains.
+Needs two repository secrets (Settings > Secrets and variables > Actions):
+- `CLOUDFLARE_API_TOKEN`: create at dash.cloudflare.com/profile/api-tokens > Create Token > template "Edit Cloudflare Workers". Under Zone Resources pick All zones (or `ohmetry.com`).
+- `CLOUDFLARE_ACCOUNT_ID`: shown on the Workers & Pages overview page, right-hand column.
+Until both exist the deploy step is skipped with a warning; tests and build still run.
