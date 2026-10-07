@@ -36,3 +36,5 @@ Needs two repository secrets (Settings > Secrets and variables > Actions):
 - `CLOUDFLARE_API_TOKEN`: create at dash.cloudflare.com/profile/api-tokens > Create Token > template "Edit Cloudflare Workers". Under Zone Resources pick All zones (or `ohmetry.com`).
 - `CLOUDFLARE_ACCOUNT_ID`: shown on the Workers & Pages overview page, right-hand column.
 Until both exist the deploy step is skipped with a warning; tests and build still run.
+
+Deploys run automatically on every push to main (see .github/workflows/deploy.yml).
