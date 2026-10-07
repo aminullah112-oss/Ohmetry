@@ -2,7 +2,7 @@
 import * as T from '../src/data/nec-tables.ts';
 const out = [];
 out.push(`# NEC table values to verify\n\nEdition note: ${T.NEC_TABLES.edition}\n\n## Verification status\n\n| Table | Status |\n|---|---|`);
-for (const [id, t] of Object.entries(T.TABLE_STATUS)) out.push(`| ${t.label} (${id}) | ${t.verified ? 'VERIFIED: ' + t.by + ', ' + t.date : 'not verified'} |`);
+for (const [id, t] of Object.entries(T.TABLE_STATUS)) out.push(`| ${t.label} (${id}) | ${t.verified ? 'VERIFIED: ' + t.by + ', ' + t.date : 'not verified' + (t.evidence ? '. Evidence so far: ' + t.evidence : '')} |`);
 out.push('');
 out.push('## Table 310.16 allowable ampacity (60 / 75 / 90 C)\n\n| Size | Copper | Aluminum |\n|---|---|---|');
 for (const s of T.SIZES) { const r = T.AMPACITY_310_16[s.id]; out.push(`| ${s.label} | ${r.cu.join(' / ')} | ${r.al ? r.al.join(' / ') : '-'} |`); }
