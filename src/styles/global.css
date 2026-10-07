@@ -121,6 +121,17 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 .print { margin-top: 14px; font: 500 0.82rem var(--font-body); padding: 8px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); cursor: pointer; }
 .print:hover { border-color: var(--accent); color: var(--accent); }
 
+/* ---------- repeating rows, notices ---------- */
+.rows { display: grid; gap: 12px; margin-bottom: 12px; }
+.row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) auto; gap: 12px; align-items: end; }
+.row.load { grid-template-columns: minmax(0, 2fr) repeat(3, minmax(0, 1fr)) auto; }
+.print:disabled { opacity: 0.4; cursor: not-allowed; }
+.row .print { margin-top: 0; min-height: 44px; }
+.more { margin-top: 14px; }
+.more summary { cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+.notice { margin: 0 0 16px; padding: 12px 16px; border: 1px solid #c9831b; background: color-mix(in srgb, #ffb84d 18%, var(--surface)); border-radius: 10px; font-size: 0.93rem; max-width: none; }
+@media (max-width: 640px) { .row, .row.load { grid-template-columns: 1fr 1fr; } .row label:first-child { grid-column: 1 / -1; } }
+
 /* ---------- cards ---------- */
 .card { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; text-decoration: none; color: var(--ink); transition: transform 0.15s, border-color 0.15s, box-shadow 0.15s; }
 a.card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: var(--shadow); }

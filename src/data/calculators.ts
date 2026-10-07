@@ -1,3 +1,6 @@
+import { NEC_TABLES } from './nec-tables';
+const NEC_TAG = NEC_TABLES.verified ? 'NEC' : 'NEC · DRAFT';
+
 /** One list drives the home page, the hub pages and the search box. Add new calculators here. */
 export type HubId = 'electrical' | 'solar-ev' | 'protection';
 
@@ -18,6 +21,9 @@ export const calculators: Calc[] = [
   { slug: 'voltage-drop-calculator', name: 'Voltage drop', blurb: 'Volts and percent lost in a cable, with optional reactance.', hub: 'electrical' },
   { slug: 'breaker-size-calculator', name: 'Breaker size', blurb: 'Minimum breaker for continuous loads using the 125 % rule.', hub: 'electrical', tag: 'NEC' },
   { slug: 'awg-to-mm2-converter', name: 'AWG to mm²', blurb: 'Wire gauge to area and diameter, and back.', hub: 'electrical' },
+  { slug: 'wire-size-calculator', name: 'Wire size', blurb: 'Conductor size from load, derating and voltage drop.', hub: 'electrical', tag: NEC_TAG },
+  { slug: 'conduit-fill-calculator', name: 'Conduit fill', blurb: 'Smallest EMT for a mix of conductors.', hub: 'electrical', tag: NEC_TAG },
+  { slug: 'generator-size-calculator', name: 'Generator size', blurb: 'kW and kVA from a load list, with motor starting.', hub: 'electrical' },
 
   { slug: 'solar-panel-calculator', name: 'Solar panel size', blurb: 'How many panels for your daily energy use.', hub: 'solar-ev' },
   { slug: 'battery-bank-calculator', name: 'Battery bank', blurb: 'Capacity in Ah and kWh, or runtime of a battery.', hub: 'solar-ev' },

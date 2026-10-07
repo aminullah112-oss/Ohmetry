@@ -10,4 +10,7 @@ export const site = {
   emailFormAction: '',
 };
 
+/** Shown on the home page. Update when the test count changes (`npm test`). */
+export const testCount = 139;
+
 export const toolkitReady = Boolean(site.gumroadUrl && site.emailFormAction);

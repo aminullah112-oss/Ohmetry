@@ -1,0 +1,78 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Generator Size Calculator (kW, kVA and Starting Load) | Ohmetry"
+description: "Size a standby generator from your load list, including motor starting surge, a loading margin, site derating and power factor. Formula and worked example."
+h1: "Generator Size Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Generator size"
+---
+import GeneratorSize from '../../components/GeneratorSize.tsx';
+import Related from '../../components/Related.astro';
+
+<GeneratorSize client:load />
+
+A generator has to do two jobs: carry everything that runs together, and ride through the surge when a motor starts. Size it for the first and it may stall on the second. This calculator checks both and tells you which one set the size.
+
+## Formulas
+
+<div class="formula">Running load = Σ (watts × quantity)<br/>Extra starting load = largest of watts × (start multiplier − 1)<br/>kW for running = running load × (1 + margin)<br/>kW for starting = (running load + extra starting load) / starting capability<br/>Required kW = larger of the two / site derating factor<br/>kVA = kW / generator power factor</div>
+
+Enter each load once, with its running watts, quantity and a start multiplier. Use 1 for loads that don't surge, such as lights and heaters. Induction motors often start at three to seven times their running power, and compressors and well pumps sit at the top of that range. The nameplate or the data sheet gives a better figure than a rule of thumb.
+
+## Worked example
+
+A house has 2,000 W of lighting and outlets, two refrigerators at 150 W each with a start multiplier of 3, and a 1,000 W well pump with a start multiplier of 3.
+
+- **Running load:** 2,000 + 300 + 1,000 = 3,300 W.
+- **Extra starting load:** the pump adds 1,000 × 2 = 2,000 W, and a refrigerator adds only 300 W, so 2,000 W.
+- **For running:** 3,300 × 1.25 = 4.125 kW.
+- **For starting:** 3,300 + 2,000 = 5.3 kW.
+- **Required:** 5.3 kW, so motor starting sets the size. At a power factor of 0.8 that is 6.6 kVA, or 27.6 A at 240 V single-phase.
+
+Choose the next standard size up from the result. With a site derating factor of 0.9, the example becomes 5.9 kW.
+
+## The four settings
+
+**Margin on running load.** Running a generator at its limit all day is hard on it. A margin of 0.25 keeps the continuous load at 80 % of the rating and leaves room for loads added later.
+
+**Starting capability.** The default of 1 means the generator's rated kW must cover the whole starting peak, which is the conservative reading. Some sets, especially those with an oversized alternator or a motor-starting option, can start more than their rated kW for a short time with some voltage dip. If the manufacturer states that capability, enter it here. Otherwise leave it at 1.
+
+**Site derating.** Engines produce less power at altitude and in heat. Manufacturers publish the derating for their sets, so enter the factor from the data sheet. It reduces the usable rating, so the calculator divides by it.
+
+**Power factor.** Generators are rated in kVA at a stated power factor, usually 0.8. A set rated 100 kVA at 0.8 delivers 80 kW. The calculator converts the required kW to kVA with the value you enter.
+
+## What the calculator assumes
+
+- **Motors start one at a time.** If several start together, the extra starting load is larger. Add them in one row, or use a staggered start with a controller.
+- **Linear loads.** Drives, rectifiers and other electronic loads can need a larger alternator because of harmonic heating.
+- **Rating class.** Standby, prime and continuous ratings differ, as defined in ISO 8528. A standby rating is for limited hours of use, so check the one you plan to rely on.
+
+## Code and practical points
+
+Standby systems in the US fall under NEC Articles 700, 701 and 702, depending on whether they serve emergency, legally required or optional loads. Article 702 covers optional standby systems and sets requirements for capacity and transfer equipment, so check the current text and your inspector. A transfer switch is also sized for the load it carries. Fuel supply, run time and the exhaust and ventilation requirements are separate design questions.
+
+## Common mistakes
+
+- **Adding up nameplate ratings of everything.** Not all loads run at once, so use the realistic running set.
+- **Forgetting the starting surge.**
+- **Using kVA and kW as the same number.**
+- **Ignoring altitude and heat.**
+
+## Questions
+
+### What size generator do I need to run a house?
+It depends on the loads you want to run together. Enter them, and the calculator shows both the running need and the starting need.
+
+### Why is the required kW higher than my running load?
+The margin and the starting surge both add to it. The calculator shows which one governs.
+
+### Is a 7 kW generator enough for a 5 kW load?
+Often, if the 5 kW does not include a large motor start. Check the starting peak too.
+
+<Related items={[
+  { href: '/kva-to-amps-calculator/', label: 'kVA to amps calculator' },
+  { href: '/inverter-size-calculator/', label: 'Inverter size calculator' },
+  { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
+  { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
+]} />

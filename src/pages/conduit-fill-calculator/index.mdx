@@ -1,0 +1,77 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Conduit Fill Calculator (NEC Chapter 9, EMT) | Ohmetry"
+description: "Find the smallest EMT conduit for a set of THHN conductors using NEC Chapter 9 fill limits of 53, 31 and 40 percent. Mixed sizes supported."
+h1: "Conduit Fill Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Conduit fill"
+needsTables: true
+---
+import ConduitFill from '../../components/ConduitFill.tsx';
+import Related from '../../components/Related.astro';
+
+<ConduitFill client:load />
+
+A raceway can't be packed full. The NEC limits how much of the inside of a conduit the conductors may occupy, so that heat can escape and the wires can be pulled in without damage. This calculator adds up the conductor areas and finds the smallest EMT trade size that stays within the limit. It handles any mix of sizes.
+
+## How it works
+
+<div class="formula">Total area = Σ (conductor area × quantity)<br/>Allowed area = conduit internal area × fill limit<br/>Fill limit: 1 conductor 53 %, 2 conductors 31 %, over 2 conductors 40 %</div>
+
+The conductor areas come from Chapter 9, Table 5. The fill limits come from Table 1, and the conduit areas come from Table 4, which lists them for each raceway type. Every conductor counts, including the equipment grounding and bonding conductors, which Chapter 9 requires you to include in the calculation.
+
+## Worked examples
+
+**Nine 12 AWG THHN conductors.** 9 × 0.0133 = 0.1197 in². The 40 % area of ½ inch EMT is 0.122 in², so it fits. Ten conductors come to 0.133 in², which is too much, and the answer moves up to ¾ inch.
+
+**More 12 AWG.** ¾ inch EMT (0.213 in² at 40 %) holds sixteen (0.2128 in²), and 1 inch EMT (0.346 in²) holds twenty-six (0.3458 in²). These are the same counts as the same-size tables in the code's Annex C, which you can use to check the calculator.
+
+**A mixed set.** Four 10 AWG, three 12 AWG and one 8 AWG: 0.0844 + 0.0399 + 0.0366 = 0.1609 in². That is more than the ½ inch limit of 0.122 in² and less than the ¾ inch limit of 0.213 in², so the answer is ¾ inch EMT.
+
+**Two conductors.** Two 4 AWG come to 0.1648 in². With two conductors the limit is 31 %, which is 0.165 in² for ¾ inch EMT, so it fits by a very small margin.
+
+**One conductor.** A single 4/0 AWG (0.3237 in²) is held to 53 %. ¾ inch EMT allows 0.283 in², which is too little, and 1 inch allows 0.458 in², so the answer is 1 inch.
+
+## Why the percentages differ
+
+A single conductor can fill more of the tube because it can't jam against others. Two conductors can wedge and are held to the lowest figure, 31 %, because their geometry makes them the most likely to bind during a pull. Three or more conductors are held to 40 %.
+
+## What the calculator assumes
+
+- **THHN, THWN and THWN-2 dimensions.** Other insulation types, such as XHHW, have different areas. Use Table 5 for your conductor type.
+- **EMT only.** Rigid metal conduit, PVC and the other raceways have different internal areas in Table 4, so the same conductors can need a different trade size.
+- **Round, stranded conductors**, as in Table 5.
+- **Full-length raceway.** Short nipples of 24 inches or less are allowed a higher fill under a note to Chapter 9. The calculator doesn't apply it.
+
+## What fill doesn't cover
+
+Fill is not the only limit on a conduit run. Conductors in a raceway also need the ampacity adjustment for more than three current-carrying conductors, which the <a href="/wire-size-calculator/">wire size calculator</a> applies. Long runs and many bends make a pull harder even when the fill passes, and the code limits the total bends between pull points. Pull-box and junction-box sizing follow their own rules.
+
+## Common mistakes
+
+- **Leaving out the ground wire.**
+- **Using Table 5 areas for a different insulation type.**
+- **Treating the 40 % as a target.** It is a ceiling, and many installers go a size up for easier pulls.
+- **Mixing up trade size and inside diameter.** Trade sizes are nominal.
+
+## Questions
+
+### How many 12 AWG wires fit in ½ inch EMT?
+Nine THHN conductors. Ten is over the 40 % limit.
+
+### Is the grounding conductor included?
+Yes. Add it as one more conductor of its own size.
+
+### What is the fill for three conductors?
+Over two conductors, the limit is 40 %, whatever the conduit type.
+
+### Can I use this for PVC?
+Not yet. The calculator covers EMT, and PVC Schedule 40 has different internal areas.
+
+<Related items={[
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+  { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
+  { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+]} />

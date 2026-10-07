@@ -1,0 +1,77 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Wire Size Calculator (NEC, Ampacity and Voltage Drop) | Ohmetry"
+description: "Find the conductor size for a load using NEC Table 310.16 with the 125% continuous rule, temperature and bundling derating, and an optional voltage-drop limit."
+h1: "Wire Size Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Wire size"
+needsTables: true
+---
+import WireSize from '../../components/WireSize.tsx';
+import Related from '../../components/Related.astro';
+
+<WireSize client:load />
+
+Choosing a conductor under the NEC is a handful of separate checks, and the one that asks for the largest cable decides the size. This calculator runs the checks for you and shows which one governed, so you can see why a result came out larger than you expected.
+
+## The checks
+
+<div class="formula">(a) 1.25 × I<sub>continuous</sub> + I<sub>noncontinuous</sub> ≤ ampacity in the termination column (60 or 75 °C)<br/>(b) ampacity in the insulation column × k<sub>ambient</sub> × k<sub>adjustment</sub> ≥ I<sub>continuous</sub> + I<sub>noncontinuous</sub><br/>(c) optional: voltage drop ≤ the limit you set</div>
+
+**Check (a)** applies the 125 % rule to continuous loads and reads the ampacity from the temperature column that matches the equipment terminals, under 110.14(C) and 210.19(A)(1). Terminals on circuits up to 100 A are commonly treated as 60 °C unless the equipment is marked for 75 °C, and above 100 A as 75 °C. Check the markings on your equipment.
+
+**Check (b)** lets a conductor with 90 °C insulation start from the 90 °C column, then reduces that value for ambient temperature (310.15(B)(1)) and for more than three current-carrying conductors in a raceway (310.15(C)(1)). The corrected ampacity must still carry the load itself. The 125 % factor is not applied here.
+
+**Check (c)** uses the resistance of the conductor at 75 °C, the length you enter and the supply voltage.
+
+## Worked examples
+
+**A 40 A continuous load, copper, 75 °C terminals, 90 °C insulation, 30 °C ambient, three conductors.**
+Check (a): 1.25 × 40 = 50 A. In the 75 °C column, 8 AWG carries 50 A. Check (b): 40 A at 90 °C is met by 10 AWG (40 A). The result is 8 AWG, set by the termination.
+
+**The same load on 60 °C terminals.** The 60 °C column gives 55 A for 6 AWG, so the result is 6 AWG. This is why the equipment markings matter.
+
+**The same load, ambient 41 to 45 °C, four to six conductors in the raceway.** The factors are 0.87 and 0.80, so k = 0.696. The 90 °C column must supply 40 / 0.696 = 57.5 A. 8 AWG (55 A × 0.696 = 38.3 A) is too small and 6 AWG (75 A × 0.696 = 52.2 A) works, so derating governs and the result is 6 AWG.
+
+**A long run.** 40 A at 240 V single-phase over 200 ft with a 3 % drop limit needs about 14.2 mm² of copper. 6 AWG is 13.3 mm², which is too small, and 4 AWG at 21.2 mm² is the next size, so voltage drop governs.
+
+## What the result means
+
+The result is the minimum conductor size under these checks. It is not a complete circuit design. The overcurrent device is chosen separately; the <a href="/breaker-size-calculator/">breaker size calculator</a> applies the 125 % rule to it. Small conductors have extra limits on the device rating in 240.4(D): 15 A for 14 AWG, 20 A for 12 AWG and 30 A for 10 AWG copper. The calculator doesn't apply these.
+
+## Not modelled
+
+- **Motor circuits**, which follow Article 430.
+- **Parallel conductors.** Sizes above 500 kcmil are outside the calculator.
+- **Conductor type details**, such as special rules for cables, flexible cords and some tray wiring.
+- **Equipment grounding conductor sizing**, which uses Table 250.122.
+- **Solid versus stranded resistance** in the voltage-drop check. The calculation uses the nominal area, so a stranded conductor's real drop is slightly higher.
+
+## Common mistakes
+
+- **Using the 90 °C column for the whole selection.** The termination limit still applies.
+- **Applying derating to the 125 % value.** Check (b) uses the plain load.
+- **Counting only the phase conductors.** Neutrals that carry current count toward the adjustment factor, subject to the code's rules.
+- **Ignoring length.** A conductor that passes (a) and (b) can still lose too much voltage.
+
+## Questions
+
+### What wire size for a 50 A circuit?
+For a noncontinuous 50 A load on 75 °C terminals, 8 AWG copper (50 A) works. For a 50 A continuous load, the 125 % rule needs 62.5 A and the result is 6 AWG on 75 °C terminals.
+
+### Can I use a smaller wire than the table size on a long run?
+No. A longer run needs the same or a larger conductor, never a smaller one.
+
+### Does aluminum use the same table?
+Yes, with lower ampacity values. Choose aluminum in the calculator. Check that the terminals are rated for it.
+
+### Which NEC edition do the section numbers follow?
+The numbering is from the 2020 code, and later editions renumber some of these sections. Check the section references against the edition your jurisdiction has adopted.
+
+<Related items={[
+  { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/conduit-fill-calculator/', label: 'Conduit fill calculator' },
+  { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
+]} />

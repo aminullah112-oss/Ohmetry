@@ -1,0 +1,9 @@
+---
+import { NEC_TABLES } from '../data/nec-tables';
+---
+{!NEC_TABLES.verified && (
+  <div class="notice" role="note">
+    <strong>Draft table data.</strong> The NEC values in this calculator have not yet been checked against a published copy of the code.
+    Do not use the results for design until this notice is removed. The page is hidden from search engines until then.
+  </div>
+)}

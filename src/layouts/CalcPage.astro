@@ -2,6 +2,8 @@
 import Base from './Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { hubs, guides, type HubId } from '../data/calculators';
+import TableNotice from '../components/TableNotice.astro';
+import { NEC_TABLES } from '../data/nec-tables';
 
 const { frontmatter } = Astro.props;
 const hubId = (Object.keys(hubs) as HubId[]).find((id) => hubs[id].href === frontmatter.hubHref);
@@ -9,9 +11,10 @@ const crumbs = [{ name: frontmatter.hub, href: frontmatter.hubHref }, { name: fr
 const isGuide = guides.some((g) => Astro.url.pathname.includes(`/${g.slug}/`));
 const chips = [{ label: frontmatter.hub, href: frontmatter.hubHref }, { label: 'Free, no sign-up' }, { label: isGuide ? 'Worked examples' : 'Formula and worked example' }];
 ---
-<Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs} activeHub={hubId}>
+<Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs} activeHub={hubId} noindex={Boolean(frontmatter.needsTables) && !NEC_TABLES.verified}>
   <PageHeader title={frontmatter.h1} lead={frontmatter.description} eyebrow={isGuide ? 'Guide' : 'Calculator'} crumbs={crumbs} chips={chips} />
   <article class="article prose">
+    {frontmatter.needsTables && <TableNotice />}
     <slot />
     <aside class="cta">
       <div>

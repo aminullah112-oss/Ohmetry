@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import OhmsLaw from '../components/OhmsLaw.tsx';
 import { hubs, calculators, guides, calcsIn, type HubId } from '../data/calculators';
+import { testCount } from '../data/site';
 const hubIds = Object.keys(hubs) as HubId[];
 ---
 <Base title="Ohmetry: Electrical, Solar and Protection Calculators" description="Free electrical, solar and protection calculators that show the formula, the code reference and a worked example you can check by hand.">
@@ -18,7 +19,7 @@ const hubIds = Object.keys(hubs) as HubId[];
         </div>
         <ul class="stats">
           <li><strong>{calculators.length}</strong>calculators</li>
-          <li><strong>115</strong>automated tests</li>
+          <li><strong>{testCount}</strong>automated tests</li>
           <li><strong>0</strong>sign-ups</li>
         </ul>
       </div>

@@ -6,6 +6,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { toolkitReady } from './src/data/site.ts';
+import { NEC_TABLES, TABLE_PAGES } from './src/data/nec-tables.ts';
 
 // Production defaults: served at the root of the real domain (not purchased yet).
 // For a preview hosted under a sub-path (GitHub Pages project site) set
@@ -38,5 +39,5 @@ export default defineConfig({
   trailingSlash: 'always',
   // Small site: inline the CSS so each page needs one fewer request.
   build: { inlineStylesheets: 'always' },
-  integrations: [react(), mdx(), sitemap({ filter: (page) => toolkitReady || !page.includes('/toolkit/') }), rebaseLinks],
+  integrations: [react(), mdx(), sitemap({ filter: (page) => (toolkitReady || !page.includes('/toolkit/')) && (NEC_TABLES.verified || !TABLE_PAGES.some((p) => page.includes(p))) }), rebaseLinks],
 });
