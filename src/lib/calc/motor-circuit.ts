@@ -10,7 +10,7 @@
  * carry the starting current, disconnect sizing, and high-efficiency or Design E exceptions.
  */
 import { MOTOR_HP_3PH, MOTOR_FLC_3PH, MOTOR_HP_1PH, MOTOR_FLC_1PH, MOTOR_DEVICE_MAX } from '../../data/nec-tables';
-import { STANDARD_RATINGS } from './breaker-size';
+import { STANDARD_RATINGS, FUSE_RATINGS } from './breaker-size';
 
 export type MotorPhase = 'single' | 'three';
 export type DeviceKind = 'inverse' | 'dual' | 'fuse' | 'instantaneous';
@@ -38,7 +38,8 @@ export function motorCircuit(m: MotorInput): MotorResult {
   const d = MOTOR_DEVICE_MAX[m.device];
   if (!d) throw new Error('Unknown device type');
   const deviceCalcA = (flc * d.percent) / 100;
-  const deviceMaxA = STANDARD_RATINGS.find((r) => r >= deviceCalcA - 1e-9);
+  const list = m.device === 'dual' || m.device === 'fuse' ? FUSE_RATINGS : STANDARD_RATINGS;
+  const deviceMaxA = list.find((r) => r >= deviceCalcA - 1e-9);
   if (deviceMaxA === undefined) throw new Error('Device rating is above the largest standard size');
   let overloadA: number | undefined, overloadMaxA: number | undefined;
   if (m.nameplateA !== undefined) {

@@ -66,4 +66,15 @@ describe('motorCircuit', () => {
     expect(() => motorFlc(10, 460, 'single')).toThrow();
     expect(() => motorCircuit({ ...base, device: 'inverse', nameplateA: 0 })).toThrow();
   });
+
+  // 1/6 hp, 230 V single-phase: 2.2 A. Dual-element fuse 175 % = 3.85 -> 6 A fuse. Inverse breaker 250 % = 5.5 -> 10 A (2023 list).
+  it('small motors use the small fuse ratings and the 10 A breaker rating', () => {
+    expect(motorCircuit({ hp: 1 / 6, volts: 230, phase: 'single', device: 'dual' }).deviceMaxA).toBe(6);
+    expect(motorCircuit({ hp: 1 / 6, volts: 230, phase: 'single', device: 'inverse' }).deviceMaxA).toBe(10);
+  });
+  // 1/6 hp, 115 V: 4.4 A. Inverse 250 % = 11 -> 15 A. Dual 175 % = 7.7 -> 10 A fuse.
+  it('rounds up past the 10 A rating', () => {
+    expect(motorCircuit({ hp: 1 / 6, volts: 115, phase: 'single', device: 'inverse' }).deviceMaxA).toBe(15);
+    expect(motorCircuit({ hp: 1 / 6, volts: 115, phase: 'single', device: 'dual' }).deviceMaxA).toBe(10);
+  });
 });

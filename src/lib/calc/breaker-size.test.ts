@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { breakerSize } from './breaker-size';
+import { breakerSize, FUSE_RATINGS, STANDARD_RATINGS } from './breaker-size';
 
 describe('breakerSize', () => {
   // 1.25 * 32 = 40 exactly -> 40 A (typical 32 A EV charger)
@@ -19,4 +19,18 @@ describe('breakerSize', () => {
     expect(() => breakerSize(0, 0)).toThrow();
     expect(() => breakerSize(5000)).toThrow();
   });
+  // 2023 NEC 240.6(A) adds a 10 A circuit breaker rating
+  it('an 8 A noncontinuous load can use the 10 A breaker rating', () => expect(breakerSize(0, 8).breaker).toBe(10));
+  // 1.25 * 8 = 10 A exactly
+  it('8 A continuous -> 10 A', () => expect(breakerSize(8).breaker).toBe(10));
+  it('11 A noncontinuous -> 15 A', () => expect(breakerSize(0, 11).breaker).toBe(15));
+});
+describe('fuse ratings', () => {
+  it('include the small fuse ratings and 601 A', () => {
+    for (const r of [1, 3, 6, 10, 601]) expect(FUSE_RATINGS).toContain(r);
+  });
+  it('are ascending with no duplicates', () => {
+    FUSE_RATINGS.forEach((r, i) => { if (i) expect(r).toBeGreaterThan(FUSE_RATINGS[i - 1]); });
+  });
+  it('601 A is a fuse rating only', () => expect(STANDARD_RATINGS).not.toContain(601));
 });

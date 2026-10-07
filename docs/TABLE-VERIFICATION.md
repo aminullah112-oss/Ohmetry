@@ -1,23 +1,24 @@
 # NEC table values to verify
 
-Edition note: NEC 2020 section numbering (confirm against your adopted edition)
+Site follows: NEC 2023
+Verified against: NEC 2020 (site owner's copy). Values are believed unchanged in 2023 except where noted; confirm with a 2023 copy.
 
 ## Verification status
 
 | Table | Status |
 |---|---|
-| Table 310.16 allowable ampacities (310.16) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
-| Table 310.15(B)(1) ambient temperature correction (310.15(B)(1)) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
-| Table 310.15(C)(1) adjustment for more than three conductors (310.15(C)(1)) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
-| Chapter 9 Table 5 conductor areas (THHN/THWN) (Ch9-T5) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
-| Chapter 9 Table 1 fill percentages (Ch9-T1) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
-| Chapter 9 Table 4 EMT areas (Ch9-T4-EMT) | VERIFIED: Site owner, row by row against their copy of the NEC, 2026-10-07 |
+| Table 310.16 allowable ampacities (310.16) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
+| Table 310.15(B)(1)(1) ambient temperature correction (2020 numbering: Table 310.15(B)(2)(a)) (310.15(B)(1)) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
+| Table 310.15(C)(1) adjustment for more than three conductors (2020 numbering: Table 310.15(B)(3)(a)) (310.15(C)(1)) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
+| Chapter 9 Table 5 conductor areas (THHN/THWN) (Ch9-T5) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
+| Chapter 9 Table 1 fill percentages (Ch9-T1) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
+| Chapter 9 Table 4 EMT areas (Ch9-T4-EMT) | VERIFIED: Site owner, row by row against their copy of the NEC 2020, 2026-10-07 |
 | Chapter 9 Table 4 RMC areas (Ch9-T4-RMC) | not verified. Evidence so far: All 10 totals equal pi/4 x internal diameter squared (src/lib/calc/conduit-geometry.test.ts; the verified EMT table passes the same test). The derived 53/31/40 % columns are not independently checked. A trade-press summary agrees on the 3/4 and 1 inch rows. |
 | Chapter 9 Table 4 PVC Schedule 40 areas (Ch9-T4-PVC40) | not verified. Evidence so far: All 10 totals equal pi/4 x internal diameter squared (same test as RMC and EMT). The derived 53/31/40 % columns are not independently checked. A trade-press summary agrees on the 1/2, 3/4 and 1 inch rows. |
 | Table 430.250 three-phase motor full-load current (430.250) | not verified. Evidence so far: Internal consistency only: the 460 V column is exactly half the 230 V column in all 21 rows, the 208 V column is 1.10 x 230 V within 0.4 A, and 575 V is about 0.4 x 230 V within 0.6 A. This catches typos but not an error in the 230 V base column. |
 | Table 430.248 single-phase motor full-load current (430.248) | not verified. Evidence so far: Internal consistency only: the 230 V column is half the 115 V column. A trade-press summary echoed the 1, 1.5 and 5 hp rows, which is weak evidence. |
 | Table 430.52 maximum device ratings for motor circuits (430.52) | not verified. Evidence so far: The four percentages (250, 175, 300, 800) were echoed by a trade-press summary. The code table splits some rows by motor type (for example energy-efficient Design B instantaneous-trip at a higher percentage and wound-rotor rows lower), which this calculator does not model. |
-| Section 240.6(A) standard overcurrent device ratings (240.6(A)) | not verified. Evidence so far: The list matches a published summary of the 2020 list (breakers from 15 A). The 2023 edition adds a 10 A circuit breaker rating (trade-press summary), which is not in this list. Confirm the edition. |
+| Section 240.6(A) standard overcurrent device ratings (240.6(A)) | not verified. Evidence so far: The 15 A and up list matches a published summary of the 2020 list. The 2023 edition adds a 10 A circuit breaker rating (trade-press summary), now included for breakers. Fuses also have 1, 3, 6 and 601 A (same summary). The site owner works to 2020, so their book will not show the 10 A rating. |
 
 ## Table 310.16 allowable ampacity (60 / 75 / 90 C)
 

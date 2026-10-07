@@ -10,7 +10,10 @@
  * only numeric values with section references.
  */
 export const NEC_TABLES = {
-  edition: 'NEC 2020 section numbering (confirm against your adopted edition)',
+  /** The site follows the latest edition of the NEC. */
+  edition: 'NEC 2023',
+  /** The edition of the copy the site owner used for row-by-row verification. */
+  verifiedAgainst: 'NEC 2020 (site owner\'s copy). Values are believed unchanged in 2023 except where noted; confirm with a 2023 copy.',
 };
 
 export type TableId =
@@ -23,18 +26,18 @@ export type TableId =
  * have been compared with a copy of the code. A page unlocks when every table it needs is verified.
  */
 export const TABLE_STATUS: Record<TableId, { label: string; verified: boolean; by?: string; date?: string; evidence?: string }> = {
-  '310.16': { label: 'Table 310.16 allowable ampacities', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
-  '310.15(B)(1)': { label: 'Table 310.15(B)(1) ambient temperature correction', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
-  '310.15(C)(1)': { label: 'Table 310.15(C)(1) adjustment for more than three conductors', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
-  'Ch9-T5': { label: 'Chapter 9 Table 5 conductor areas (THHN/THWN)', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
-  'Ch9-T1': { label: 'Chapter 9 Table 1 fill percentages', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
-  'Ch9-T4-EMT': { label: 'Chapter 9 Table 4 EMT areas', verified: true, by: 'Site owner, row by row against their copy of the NEC', date: '2026-10-07' },
+  '310.16': { label: 'Table 310.16 allowable ampacities', verified: true, by: 'Site owner, row by row against their copy of the NEC 2020', date: '2026-10-07' },
+  '310.15(B)(1)': { label: 'Table 310.15(B)(1)(1) ambient temperature correction (2020 numbering: Table 310.15(B)(2)(a))', verified: true, by: 'Site owner, row by row against their copy of the NEC 2020', date: '2026-10-07' },
+  '310.15(C)(1)': { label: 'Table 310.15(C)(1) adjustment for more than three conductors (2020 numbering: Table 310.15(B)(3)(a))', verified: true, by: 'Site owner, row by row against their copy of the NEC 2020', date: '2026-10-07' },
+  'Ch9-T5': { label: 'Chapter 9 Table 5 conductor areas (THHN/THWN)', verified: true, by: 'Site owner, row by row against their copy of the NEC 2020', date: '2026-10-07' },
+  'Ch9-T1': { label: 'Chapter 9 Table 1 fill percentages', verified: true, by: 'Site owner, row by row against their copy of the NEC 2020', date: '2026-10-07' },
+  'Ch9-T4-EMT': { label: 'Chapter 9 Table 4 EMT areas', verified: true, by: 'Site owner, row by row against their copy of the NEC 2020', date: '2026-10-07' },
   'Ch9-T4-RMC': { label: 'Chapter 9 Table 4 RMC areas', verified: false, evidence: 'All 10 totals equal pi/4 x internal diameter squared (src/lib/calc/conduit-geometry.test.ts; the verified EMT table passes the same test). The derived 53/31/40 % columns are not independently checked. A trade-press summary agrees on the 3/4 and 1 inch rows.' },
   'Ch9-T4-PVC40': { label: 'Chapter 9 Table 4 PVC Schedule 40 areas', verified: false, evidence: 'All 10 totals equal pi/4 x internal diameter squared (same test as RMC and EMT). The derived 53/31/40 % columns are not independently checked. A trade-press summary agrees on the 1/2, 3/4 and 1 inch rows.' },
   '430.250': { label: 'Table 430.250 three-phase motor full-load current', verified: false, evidence: 'Internal consistency only: the 460 V column is exactly half the 230 V column in all 21 rows, the 208 V column is 1.10 x 230 V within 0.4 A, and 575 V is about 0.4 x 230 V within 0.6 A. This catches typos but not an error in the 230 V base column.' },
   '430.248': { label: 'Table 430.248 single-phase motor full-load current', verified: false, evidence: 'Internal consistency only: the 230 V column is half the 115 V column. A trade-press summary echoed the 1, 1.5 and 5 hp rows, which is weak evidence.' },
   '430.52': { label: 'Table 430.52 maximum device ratings for motor circuits', verified: false, evidence: 'The four percentages (250, 175, 300, 800) were echoed by a trade-press summary. The code table splits some rows by motor type (for example energy-efficient Design B instantaneous-trip at a higher percentage and wound-rotor rows lower), which this calculator does not model.' },
-  '240.6(A)': { label: 'Section 240.6(A) standard overcurrent device ratings', verified: false, evidence: 'The list matches a published summary of the 2020 list (breakers from 15 A). The 2023 edition adds a 10 A circuit breaker rating (trade-press summary), which is not in this list. Confirm the edition.' },
+  '240.6(A)': { label: 'Section 240.6(A) standard overcurrent device ratings', verified: false, evidence: 'The 15 A and up list matches a published summary of the 2020 list. The 2023 edition adds a 10 A circuit breaker rating (trade-press summary), now included for breakers. Fuses also have 1, 3, 6 and 601 A (same summary). The site owner works to 2020, so their book will not show the 10 A rating.' },
 };
 
 /** Which tables each page depends on. A page is hidden from search until all of them are verified. */
@@ -83,7 +86,7 @@ export const AMPACITY_310_16: Record<string, { cu: [number, number, number]; al:
   '500': { cu: [320, 380, 430], al: [260, 310, 350] },
 };
 
-/** Section 310.15(B)(1) ambient temperature correction, base 30 C. Factors for [75 C, 90 C] insulation. null = not listed. */
+/** Table 310.15(B)(1)(1) (2020: 310.15(B)(2)(a)) ambient temperature correction, base 30 C. Factors for [75 C, 90 C] insulation. null = not listed. */
 export const AMBIENT_FACTORS: { range: string; f75: number | null; f90: number | null }[] = [
   { range: '21 to 25 C', f75: 1.05, f90: 1.04 },
   { range: '26 to 30 C', f75: 1.0, f90: 1.0 },
@@ -99,7 +102,7 @@ export const AMBIENT_FACTORS: { range: string; f75: number | null; f90: number |
   { range: '76 to 80 C', f75: null, f90: 0.41 },
 ];
 
-/** Section 310.15(C)(1) adjustment for more than three current-carrying conductors. */
+/** Table 310.15(C)(1) (2020: 310.15(B)(3)(a)) adjustment for more than three current-carrying conductors. */
 export const ADJUSTMENT_FACTORS: { range: string; factor: number }[] = [
   { range: '1 to 3', factor: 1.0 },
   { range: '4 to 6', factor: 0.8 },

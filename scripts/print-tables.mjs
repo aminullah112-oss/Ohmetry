@@ -1,7 +1,7 @@
 // Prints every NEC value used by the site as markdown, so it can be compared with a copy of the code.
 import * as T from '../src/data/nec-tables.ts';
 const out = [];
-out.push(`# NEC table values to verify\n\nEdition note: ${T.NEC_TABLES.edition}\n\n## Verification status\n\n| Table | Status |\n|---|---|`);
+out.push(`# NEC table values to verify\n\nSite follows: ${T.NEC_TABLES.edition}\nVerified against: ${T.NEC_TABLES.verifiedAgainst}\n\n## Verification status\n\n| Table | Status |\n|---|---|`);
 for (const [id, t] of Object.entries(T.TABLE_STATUS)) out.push(`| ${t.label} (${id}) | ${t.verified ? 'VERIFIED: ' + t.by + ', ' + t.date : 'not verified' + (t.evidence ? '. Evidence so far: ' + t.evidence : '')} |`);
 out.push('');
 out.push('## Table 310.16 allowable ampacity (60 / 75 / 90 C)\n\n| Size | Copper | Aluminum |\n|---|---|---|');

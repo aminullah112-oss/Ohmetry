@@ -32,7 +32,7 @@ Root directory `ohmetry`, build command `npm run build`, output `dist`. Sitemap 
 The wire size and conduit fill calculators use NEC table values from `src/data/nec-tables.ts`. They were entered without access to a licensed copy of the code, so `NEC_TABLES.verified` is `false`. While it is false, those two pages show a warning, are `noindex`, and are left out of the sitemap.
 
 1. `npm run tables` prints every value used (also saved as `docs/TABLE-VERIFICATION.md`).
-2. Compare each value with your copy of the NEC for the edition you adopt.
+2. Compare each value with your copy of the NEC. The site follows the latest edition (`NEC_TABLES.edition`); `verifiedAgainst` records the edition of the copy used for checking.
 3. Fix any differences in `src/data/nec-tables.ts`, update `edition`, set `verifiedBy`, and set `verified: true`.
 4. `npm test` and push. The warning disappears and the pages enter the sitemap.
 
