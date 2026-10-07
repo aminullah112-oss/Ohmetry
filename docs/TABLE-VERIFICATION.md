@@ -18,7 +18,7 @@ Verified against: NEC 2020 (site owner's copy). Values are believed unchanged in
 | Table 430.250 three-phase motor full-load current (430.250) | VERIFIED: Site owner, against their copy of the NEC 2020 (reported as matching), 2026-10-07 |
 | Table 430.248 single-phase motor full-load current (430.248) | VERIFIED: Site owner, against their copy of the NEC 2020 (reported as matching), 2026-10-07 |
 | Table 430.52 maximum device ratings for motor circuits (430.52) | VERIFIED: Site owner, against their copy of the NEC 2020 (the four general-case percentages match; motor-type rows are not modelled), 2026-10-07 |
-| Section 240.6(A) standard overcurrent device ratings (240.6(A)) | not verified. Evidence so far: The 15 A and up list matches a published summary of the 2020 list. The 2023 edition adds a 10 A circuit breaker rating (trade-press summary), now included for breakers. Fuses also have 1, 3, 6 and 601 A (same summary). The site owner works to 2020, so their book will not show the 10 A rating. |
+| Section 240.6(A) standard overcurrent device ratings (240.6(A)) | VERIFIED: Site owner, against their copy of the NEC 2020 (15 A and up, and the fuse additions). The 10 A circuit breaker rating is the 2023 addition and is not in a 2020 book., 2026-10-07 |
 
 ## Table 310.16 allowable ampacity (60 / 75 / 90 C)
 
