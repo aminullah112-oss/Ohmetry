@@ -23,9 +23,9 @@ Code tables (NEC 310.16 etc.) go in as data files with the section cited. Do not
 
 Root directory `ohmetry`, build command `npm run build`, output `dist`. Sitemap is at `/sitemap-index.xml`.
 
-## Preview on GitHub Pages
+## Deployment
 
-`.github/workflows/pages.yml` runs the tests, then builds with `BASE_PATH=/<repo>` and `PUBLIC_PREVIEW=true` (adds `noindex`) and deploys to `https://<owner>.github.io/<repo>/`. One-time setup: repo Settings > Pages > Source: **GitHub Actions**. Production on a real domain builds at the root with no environment variables.
+Live at https://ohmetry.com. `.github/workflows/deploy.yml` runs the tests, builds and deploys to Cloudflare on every push to `main` (see `docs/DEPLOY-CLOUDFLARE.md`). The `BASE_PATH` and `PUBLIC_PREVIEW` options in `astro.config.mjs` remain for building a sub-path preview locally.
 
 ## NEC table verification (blocks launch of two pages)
 
@@ -54,4 +54,4 @@ The wire size and conduit fill calculators use NEC table values from `src/data/n
 - Toolkit page: set `gumroadUrl` and `emailFormAction` in `src/data/site.ts`. Until both are set the page is `noindex`, has no form, and is excluded from the sitemap. Review the page copy against the real product.
 - Add a consent banner and name the email provider on the privacy page before enabling email capture.
 
-Live preview: https://aminullah112-oss.github.io/Ohmetry/ (noindex, deployed by GitHub Actions)
+Live site: https://ohmetry.com
