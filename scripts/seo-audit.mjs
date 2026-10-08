@@ -86,4 +86,15 @@ console.log(`Checked ${pages.length} pages (${indexable.size} indexable, ${noind
 for (const w of warn) console.log('warn: ' + w);
 for (const f of fail) console.log('FAIL: ' + f);
 console.log(`${fail.length} failure(s), ${warn.length} warning(s).`);
+// On GitHub Actions, also show the result as a readable summary on the run page.
+if (process.env.GITHUB_STEP_SUMMARY) {
+  const lines = [
+    '## SEO audit', '',
+    `**${fail.length ? 'FAILED' : 'Passed'}.** ${pages.length} pages checked (${indexable.size} indexable, ${noindexed.size} noindex). ${fail.length} failure(s), ${warn.length} warning(s).`, '',
+  ];
+  if (fail.length) lines.push('### Failures', '', ...fail.map((f) => `- ${f}`), '');
+  if (warn.length) lines.push('### Warnings', '', ...warn.map((w) => `- ${w}`), '');
+  lines.push('Checks: title, description, canonical, one h1, og:image, broken internal links, sitemap against noindex.');
+  fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, lines.join('\n') + '\n');
+}
 process.exit(fail.length ? 1 : 0);
