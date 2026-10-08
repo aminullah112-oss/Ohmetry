@@ -86,6 +86,11 @@ console.log(`Checked ${pages.length} pages (${indexable.size} indexable, ${noind
 for (const w of warn) console.log('warn: ' + w);
 for (const f of fail) console.log('FAIL: ' + f);
 console.log(`${fail.length} failure(s), ${warn.length} warning(s).`);
+// Machine-readable result for the progress dashboard (only when AUDIT_JSON names a file).
+if (process.env.AUDIT_JSON) {
+  fs.mkdirSync(path.dirname(process.env.AUDIT_JSON), { recursive: true });
+  fs.writeFileSync(process.env.AUDIT_JSON, JSON.stringify({ pages: pages.length, indexable: indexable.size, noindex: noindexed.size, failures: fail, warnings: warn }, null, 2));
+}
 // On GitHub Actions, also show the result as a readable summary on the run page.
 if (process.env.GITHUB_STEP_SUMMARY) {
   const lines = [

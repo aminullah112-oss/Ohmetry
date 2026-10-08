@@ -28,6 +28,7 @@ const query = async (dimensions, rowLimit) => {
 const fmt = (r) => `${r.clicks} | ${r.impressions} | ${(r.ctr * 100).toFixed(1)} % | ${r.position.toFixed(1)}`;
 const pages = await query(['page'], 50);
 const queries = await query(['query'], 50);
+const daily = await query(['date'], 100);
 const out = [
   '# Search Console report', '', `Site: ${SITE}. Period: ${day(30)} to ${day(2)}. Generated ${new Date().toISOString().slice(0, 10)}.`, '',
   '## Top pages', '', '| Page | Clicks | Impressions | CTR | Avg position |', '|---|---|---|---|---|',
@@ -40,5 +41,13 @@ const out = [
   '- Pages with no impressions after four weeks need checking in the URL Inspection tool.', '',
 ];
 fs.mkdirSync('docs/seo', { recursive: true });
+const sum = (rows, k) => rows.reduce((a, r) => a + r[k], 0);
+fs.writeFileSync('docs/seo/gsc-latest.json', JSON.stringify({
+  generated: new Date().toISOString().slice(0, 10), start: day(30), end: day(2),
+  totals: { clicks: sum(daily, 'clicks'), impressions: sum(daily, 'impressions') },
+  daily: daily.map((r) => ({ date: r.keys[0], clicks: r.clicks, impressions: r.impressions, position: +r.position.toFixed(1) })),
+  pages: pages.map((r) => ({ page: r.keys[0].replace('https://ohmetry.com', ''), clicks: r.clicks, impressions: r.impressions, ctr: +r.ctr.toFixed(4), position: +r.position.toFixed(1) })),
+  queries: queries.map((r) => ({ query: r.keys[0], clicks: r.clicks, impressions: r.impressions, ctr: +r.ctr.toFixed(4), position: +r.position.toFixed(1) })),
+}, null, 1));
 fs.writeFileSync('docs/seo/gsc-report.md', out.join('\n'));
 console.log(`Wrote docs/seo/gsc-report.md (${pages.length} pages, ${queries.length} queries).`);

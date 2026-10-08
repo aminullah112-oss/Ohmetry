@@ -5,3 +5,4 @@ dist/
 # The paid workbook must never be committed to this public repo
 *.xlsx
 toolkit-build/
+dashboard-dist/
