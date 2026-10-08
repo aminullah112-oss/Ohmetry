@@ -1,0 +1,94 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "NEC Voltage Drop: The 3% and 5% Recommendations | Ohmetry"
+description: "What the NEC says about voltage drop (3% on a branch circuit or feeder, 5% in total), why it is a recommendation, and how to size wire with worked examples in AWG."
+h1: "NEC Voltage Drop: What the 3 % and 5 % Mean"
+hub: Electrical
+hubHref: /electrical/
+crumb: "NEC voltage drop"
+---
+import Related from '../../components/Related.astro';
+
+Most voltage drop questions in US work come down to two numbers, 3 % and 5 %, and one question: are they required? Mostly they are not. This guide explains where the numbers come from, how they are applied, and how to size wire for them in AWG, with examples you can check by hand.
+
+## What the NEC says
+
+The NEC gives these figures in informational notes, not in the mandatory text. The note to 210.19(A) says branch-circuit conductors should be sized so that the voltage drop at the farthest outlet is no more than 3 %, and that the total drop on the feeder and the branch circuit together should not exceed 5 %. A matching note under 215.2(A) gives the same 3 % and 5 % for feeders. Informational notes explain and recommend, and the code does not enforce them. The numbers become enforceable when your project specification, a local amendment or the authority having jurisdiction adopts them, which many do. The note numbering changes between editions, so look up the current one in your copy.
+
+The reason for the recommendation is performance, not safety. Motors lose torque and run hot at low voltage, lamps dim, and electronics can drop out. Voltage drop does not trip a breaker, and a circuit that carries current safely can still be a bad installation.
+
+## Formulas
+
+<div class="formula">Single-phase or DC: V<sub>drop</sub> = 2 × K × I × L / CM<br/>Three-phase: V<sub>drop</sub> = √3 × K × I × L / CM<br/>Percent drop = V<sub>drop</sub> / V<sub>source</sub> × 100</div>
+
+K is the resistivity of the conductor in ohm-circular mils per foot. A common working value is 12.9 for copper and 21.2 for aluminium at 75 °C, which covers the small extra resistance of stranded wire. I is the load current in amps, L the one-way length in feet, and CM the conductor's circular mil area. Common values for copper wire are 4,110 CM for 14 AWG, 6,530 for 12 AWG, 10,380 for 10 AWG, 16,510 for 8 AWG, 26,240 for 6 AWG and 41,740 for 4 AWG. For larger conductors on AC, reactance adds to the drop, and the NEC conductor tables in Chapter 9 give resistance and reactance per 1,000 ft for a more exact figure.
+
+## Worked example 1: a 120 V branch circuit
+
+A 20 A load sits 100 ft from the panel on a 120 V circuit, with copper wire.
+
+- 12 AWG: 2 × 12.9 × 20 × 100 / 6,530 = 7.90 V, which is 6.6 % of 120 V. Too much.
+- 10 AWG: 51,600 / 10,380 = 4.97 V, or 4.1 %. Still above 3 %.
+- 8 AWG: 51,600 / 16,510 = 3.13 V, or 2.6 %. This meets 3 %.
+
+The breaker and the ampacity table allow 12 AWG on a 20 A circuit, and many electricians would stop there. The voltage drop target is what pushes the wire up two sizes. The breaker size and wire ampacity still have to be checked separately.
+
+## Worked example 2: a three-phase feeder
+
+A 50 A load at 208 V three-phase, 150 ft from the source.
+
+- 6 AWG: 1.732 × 12.9 × 50 × 150 / 26,240 = 6.39 V, which is 3.07 % of 208 V. Just over 3 %.
+- 4 AWG: 167,566 / 41,740 = 4.01 V, or 1.93 %. Meets 3 %.
+
+This is a typical case where the answer sits on the edge of the limit, so round up to the next size.
+
+## How far can a circuit run?
+
+The longest one-way run for a 3 % drop on a 120 V single-phase copper circuit at a given current:
+
+| Wire | 15 A | 20 A |
+|---|---|---|
+| 14 AWG | 38 ft | not used on 20 A |
+| 12 AWG | 61 ft | 46 ft |
+| 10 AWG | 97 ft | 72 ft |
+| 8 AWG | 154 ft | 115 ft |
+
+On a 240 V circuit carrying the same current, the allowed drop in volts is twice as large, so the lengths double. These lengths assume the circuit carries its full rated current, which many circuits do not. A circuit that loads at half its rating can run about twice as far.
+
+## How to apply the 3 % and 5 %
+
+- **Feeder plus branch circuit.** The 5 % total is split between the two. A feeder drop of 2 % leaves 3 % for the branch circuit. Calculate each part, then add them.
+- **Use the actual load current,** not the breaker rating, unless the circuit will run at its rating. For a motor, the running current gives the running drop, and the starting drop is a separate check.
+- **Voltage drop does not change the ampacity requirement.** Pick the conductor that meets both. Whichever is larger governs.
+- **Check your specification.** Some projects require 2 % or 1.5 % for sensitive loads, and some adopt the 3 % and 5 % as a requirement.
+
+The <a href="/voltage-drop-calculator/">voltage drop calculator</a> works with AWG or mm², includes temperature and reactance, and gives a slightly different answer from the rounded K values used here. The <a href="/wire-size-calculator/">wire size calculator</a> combines the drop check with the NEC ampacity.
+
+## Common mistakes
+
+- **Treating 3 % and 5 % as code requirements everywhere.** They are recommendations unless something adopts them. Check the project.
+- **Using the round-trip distance twice.** The formula already includes the 2 for out and back. Enter the one-way length.
+- **Forgetting that three-phase uses √3, and line-to-line voltage.** Use 208 V or 480 V, not 120 V or 277 V.
+- **Applying the 3 % to the breaker current.** Use the load current.
+- **Checking the branch circuit and forgetting the feeder.** The 5 % limit applies to the whole path.
+
+## Questions
+
+### Is voltage drop an NEC requirement?
+Not as a general rule. The 3 % and 5 % figures are in informational notes. They become requirements when a specification or local rule adopts them. A few other sections, for specific equipment, have their own limits.
+
+### What is an acceptable voltage drop?
+3 % on a feeder or branch circuit and 5 % overall is the commonly used target. Sensitive equipment, long motor starts and critical loads may call for less.
+
+### Does voltage drop affect breaker size?
+No. The breaker is chosen from the load and the conductor's ampacity. Voltage drop only changes how large the wire needs to be.
+
+### Do I use the load current or the breaker rating?
+The load current, unless you are designing for the circuit to carry its full rating.
+
+<Related items={[
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/voltage-drop-formula/', label: 'Voltage drop formula guide' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+  { href: '/how-to-size-a-circuit-breaker/', label: 'How to size a circuit breaker' },
+]} />
