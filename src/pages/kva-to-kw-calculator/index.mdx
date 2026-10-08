@@ -1,0 +1,71 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "kVA to kW Calculator (and kW to kVA) | Ohmetry"
+description: "Convert kVA to kW and kW to kVA using power factor, and see the reactive kvar. Formulas, worked examples and typical power factors."
+h1: "kVA to kW Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "kVA to kW"
+---
+import KvaToKw from '../../components/KvaToKw.tsx';
+import Related from '../../components/Related.astro';
+
+<KvaToKw client:load />
+
+kVA is apparent power, the total the supply must carry. kW is real power, the part that does useful work. The ratio between them is the power factor. Transformers, generators and UPS units are rated in kVA because their heating depends on current, and current does not care how much of it does useful work.
+
+## Formulas
+
+<div class="formula">kW = kVA × PF<br/>kVA = kW / PF<br/>kvar = √(kVA² − kW²)</div>
+
+PF is the power factor, between 0 and 1. The three quantities form a right triangle with kVA as the hypotenuse, which is why kVA is never smaller than kW. They are equal only at a power factor of 1.
+
+## Worked examples
+
+A 100 kVA load at a power factor of 0.8:
+
+kW = 100 × 0.8 = 80 kW, and kvar = √(100² − 80²) = 60 kvar.
+
+A 45 kW load at 0.9 power factor:
+
+kVA = 45 / 0.9 = 50 kVA, and kvar = √(50² − 45²) = 21.8 kvar.
+
+## Typical power factors
+
+- Resistive heaters and incandescent lamps: 1.0.
+- Induction motors at full load: 0.8 to 0.9, and much lower when lightly loaded.
+- LED drivers and modern switch-mode supplies: often 0.9 or better, but check the label.
+- Generators: commonly rated at 0.8 power factor, so a 100 kVA set delivers 80 kW.
+- Modern UPS units: many are rated at 0.9 or 1.0, so their kW can be close to the kVA figure.
+
+## What improving the power factor does
+
+Take the 80 kW load above at a power factor of 0.8. It draws 100 kVA. If capacitors raise the power factor to 0.95, the same 80 kW needs only 80 / 0.95 = 84.2 kVA, a drop of about 16 % in apparent power and current. The reactive power falls from 60 kvar to 26.3 kvar, so about 33.7 kvar of capacitors are needed. The <a href="/power-factor-correction-calculator/">power factor correction calculator</a> does this step.
+
+## Common mistakes
+
+- **Sizing a generator or transformer from kW alone.** Divide by the power factor first. 80 kW at 0.8 needs 100 kVA, not 80.
+- **Treating kVA and kW as equal.** They only match at unity power factor.
+- **Entering a power factor above 1.** It cannot exceed 1. The calculator rejects it.
+- **Using one power factor for a mixed load.** A site of motors and heaters has a combined power factor that is neither. Use the measured figure if you have it.
+
+## Questions
+
+### Is kVA bigger than kW?
+kVA is always greater than or equal to kW. They are equal at a power factor of 1.
+
+### How many kW is 100 kVA?
+At 0.8 power factor it is 80 kW, and at 0.9 it is 90 kW.
+
+### How do I convert kW to kVA at 0.85 power factor?
+Divide by 0.85. For example, 50 kW is 50 / 0.85 = 58.8 kVA.
+
+### Why are transformers rated in kVA and not kW?
+Their losses depend on the current they carry, not on the power factor of the load. A transformer rated in kVA can carry that current whatever the load does with it.
+
+<Related items={[
+  { href: '/kva-to-amps-calculator/', label: 'kVA to amps calculator' },
+  { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
+  { href: '/power-factor-correction-calculator/', label: 'Power factor correction calculator' },
+  { href: '/generator-size-calculator/', label: 'Generator size calculator' },
+]} />

@@ -8,9 +8,9 @@ voltage drop calculator,calculator,/voltage-drop-calculator/,live,,,Head term: e
 voltage drop formula,guide,/voltage-drop-formula/,live,,,
 breaker size calculator,calculator,/breaker-size-calculator/,live,,,
 awg to mm2,calculator,/awg-to-mm2-converter/,live,,,
-wire size calculator,calculator,/wire-size-calculator/,hidden until NEC tables verified,,,Head term: expect strong competition
-conduit fill calculator,calculator,/conduit-fill-calculator/,hidden until NEC tables verified,,,
-motor full load current,calculator,/motor-circuit-calculator/,hidden until NEC tables verified,,,
+wire size calculator,calculator,/wire-size-calculator/,live,,,Head term: expect strong competition
+conduit fill calculator,calculator,/conduit-fill-calculator/,live,,,
+motor full load current,calculator,/motor-circuit-calculator/,live,,,
 generator size calculator,calculator,/generator-size-calculator/,live,,,
 solar panel calculator,calculator,/solar-panel-calculator/,live,,,
 battery bank calculator,calculator,/battery-bank-calculator/,live,,,
@@ -26,11 +26,11 @@ idmt relay calculator,calculator,/idmt-relay-calculator/,live,,,
 earth resistance calculator,calculator,/earth-resistance-calculator/,live,,,
 power factor correction calculator,calculator,/power-factor-correction-calculator/,live,,,
 relay setting checklist,guide,/relay-setting-checklist/,live,,,
-watts to amps,calculator,(new or fold into amps-to-watts),candidate,,,Check whether one page can serve both directions before making two
+watts to amps,calculator,/watts-to-amps-calculator/,live,,,Check whether one page can serve both directions before making two
 amps to kw,calculator,(new or fold into kw-to-amps),candidate,,,Same-intent caution: avoid near-duplicate pages
-kva to kw,calculator,(new),candidate,,,
-kw to kva,calculator,"(new, pair with kva to kw)",candidate,,,One page can cover both directions
-kw to hp,calculator,(new),candidate,,,
+kva to kw,calculator,/kva-to-kw-calculator/,live,,,
+kw to kva,calculator,/kva-to-kw-calculator/,live,,,One page can cover both directions
+kw to hp,calculator,/kw-to-hp-calculator/,live,,,
 hp to amps,calculator,"(new, uses motor table)",candidate,,,Needs verified NEC motor table for the NEC answer
 volts to watts,calculator,(new),candidate,,,
 electricity cost calculator,calculator,(new),candidate,,,"Broad audience, weak fit with an engineering brand"

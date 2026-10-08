@@ -1,0 +1,75 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "kW to HP Calculator (and HP to kW) | Ohmetry"
+description: "Convert kW to horsepower and horsepower to kW, mechanical or metric, and find the electrical input power from motor efficiency."
+h1: "kW to HP Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "kW to HP"
+---
+import KwToHp from '../../components/KwToHp.tsx';
+import Related from '../../components/Related.astro';
+
+<KwToHp client:load />
+
+Motors are rated in kilowatts in most of the world and in horsepower in North America. Both measure the mechanical power at the shaft, so the conversion is a fixed ratio. What is not fixed is which horsepower you mean, and how much electrical power the motor draws to deliver it.
+
+## Formulas
+
+<div class="formula">hp = kW × 1000 / 745.7 (mechanical)<br/>kW = hp × 745.7 / 1000<br/>Input kW = shaft kW / efficiency</div>
+
+One mechanical (imperial) horsepower is 745.7 W, so 1 kW is 1.341 hp. Metric horsepower, written PS or CV, is 735.5 W, so 1 kW is 1.360 PS. The difference is about 1.4 %, which matters when you read a European nameplate.
+
+## Worked example
+
+A 7.5 kW motor is 7,500 / 745.7 = 10.06 hp, usually called a 10 hp motor.
+
+A 10 hp motor delivers 10 × 745.7 = 7,457 W at the shaft. If its efficiency is 90 %, the electrical input is 7.457 / 0.9 = 8.29 kW.
+
+## Common ratings
+
+| kW | Mechanical hp | Metric PS |
+|---|---|---|
+| 0.75 | 1.01 | 1.02 |
+| 1.5 | 2.01 | 2.04 |
+| 2.2 | 2.95 | 2.99 |
+| 5.5 | 7.38 | 7.48 |
+| 7.5 | 10.06 | 10.20 |
+| 11 | 14.75 | 14.96 |
+| 22 | 29.50 | 29.91 |
+| 37 | 49.62 | 50.31 |
+| 75 | 100.58 | 101.97 |
+
+In the other direction, 1 hp is 0.75 kW, 5 hp is 3.73 kW, 10 hp is 7.46 kW, 25 hp is 18.64 kW, 50 hp is 37.28 kW and 100 hp is 74.57 kW.
+
+## From horsepower to amps
+
+Horsepower rates the shaft, but the supply carries the electrical input, and a motor also has losses and a power factor. For sizing under the NEC, do not calculate the current from horsepower. Use the full-load current in Table 430.250, which the <a href="/motor-circuit-calculator/">motor circuit calculator</a> reads for you. A 10 hp three-phase motor on 460 V has a table full-load current of 14 A. For a measured or nameplate load, use the <a href="/kw-to-amps-calculator/">kW to amps calculator</a> with the input power and the power factor.
+
+## Common mistakes
+
+- **Using shaft power as the electrical input.** The motor draws more than it delivers. A 90 % efficient motor draws 11 % more than its shaft output.
+- **Mixing mechanical and metric horsepower.** A "10 hp" label in Europe is often 10 PS, which is 7.35 kW, not 7.46 kW.
+- **Using horsepower for the circuit.** The NEC sizes motor conductors and protection from table current, not from a calculated value.
+- **Forgetting that kW on an IEC nameplate is the shaft output.** The input is higher by the efficiency.
+
+## Questions
+
+### How many kW is 1 hp?
+0.7457 kW for mechanical horsepower, or 0.7355 kW for metric horsepower.
+
+### How many hp is 1 kW?
+1.341 mechanical hp, or 1.360 metric horsepower.
+
+### How many amps is a 10 hp motor?
+It depends on voltage and phase. On a three-phase 460 V supply the NEC table value is 14 A, and on 230 V it is 28 A.
+
+### Is a 7.5 kW motor a 10 hp motor?
+Yes, within about 0.6 %. 7.5 kW is 10.06 hp.
+
+<Related items={[
+  { href: '/motor-circuit-calculator/', label: 'Motor circuit calculator' },
+  { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
+  { href: '/generator-size-calculator/', label: 'Generator size calculator' },
+  { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
+]} />

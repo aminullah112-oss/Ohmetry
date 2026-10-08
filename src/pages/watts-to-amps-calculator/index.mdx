@@ -1,0 +1,79 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Watts to Amps Calculator (DC, AC, 3-Phase) | Ohmetry"
+description: "Convert watts to amps for DC, single-phase and three-phase AC, with power factor. Formulas, a voltage table and worked examples."
+h1: "Watts to Amps Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Watts to amps"
+---
+import WattsToAmps from '../../components/WattsToAmps.tsx';
+import Related from '../../components/Related.astro';
+
+<WattsToAmps client:load />
+
+Watts tell you how much power a load uses. Amps tell you how much current it draws, and that is the figure that sizes a breaker and a cable. The conversion depends on the voltage, and on AC it also depends on the power factor, so the same wattage draws very different currents on different supplies.
+
+## Formulas
+
+<div class="formula">DC: I = P / V<br/>AC single-phase: I = P / (V × PF)<br/>AC three-phase: I = P / (√3 × V<sub>LL</sub> × PF)</div>
+
+I is current in amps, P is real power in watts, V is voltage and PF is the power factor from 0 to 1. For three-phase, V<sub>LL</sub> is the line-to-line voltage and I is the current in each line, assuming a balanced load. If your power is in kilowatts, use the <a href="/kw-to-amps-calculator/">kW to amps calculator</a>, which is the same formula with the power entered in kW.
+
+## Worked examples
+
+A 1,500 W heater on a 120 V single-phase supply, power factor 1:
+
+I = 1,500 / 120 = 12.5 A. On 240 V the same heater draws 6.25 A.
+
+A 3,000 W single-phase motor load on 240 V at a power factor of 0.9:
+
+I = 3,000 / (240 × 0.9) = 13.89 A.
+
+A 10,000 W three-phase load on 400 V at 0.8 power factor:
+
+I = 10,000 / (1.732 × 400 × 0.8) = 18.04 A.
+
+## Current for common loads
+
+At a power factor of 1, in amps:
+
+| Power | 120 V | 208 V | 230 V | 240 V | 277 V |
+|---|---|---|---|---|---|
+| 1,000 W | 8.33 | 4.81 | 4.35 | 4.17 | 3.61 |
+| 1,500 W | 12.50 | 7.21 | 6.52 | 6.25 | 5.42 |
+| 2,000 W | 16.67 | 9.62 | 8.70 | 8.33 | 7.22 |
+
+On a 12 V DC system, 100 W draws 8.33 A. At 24 V it draws 4.17 A and at 48 V 2.08 A, which is why higher-voltage DC systems need thinner cable for the same power.
+
+## From amps to a breaker
+
+Once you have the current, the breaker and the cable follow. Under the NEC, a load that runs for three hours or more is a continuous load and the circuit must be rated for 125 % of it. The 1,500 W heater above draws 12.5 A, and 12.5 × 1.25 = 15.6 A, so a 15 A breaker is too small and the next standard size is 20 A. The <a href="/breaker-size-calculator/">breaker size calculator</a> does this step for you.
+
+## Common mistakes
+
+- **Using the line-to-neutral voltage on three-phase.** With the √3 formula, use the line-to-line voltage, such as 400 V or 208 V. Using 230 V understates the power, or overstates the current, by a factor of 1.732.
+- **Ignoring power factor.** A motor load at 0.8 draws 25 % more current than the same watts at unity. Take the power factor from the nameplate or from a measurement.
+- **Confusing watts and volt-amps.** A label that gives VA, as on many UPS units, is apparent power. The real power in watts is lower by the power factor.
+- **Sizing from the running current alone.** Motors and compressors draw several times their running current for a moment at start, so a breaker or a generator sized to the running figure may trip.
+
+## Questions
+
+### How many amps is 1,000 watts?
+At 120 V it is 8.33 A. At 230 V it is 4.35 A, and on a 12 V DC supply it is 83.3 A. The answer always depends on the voltage.
+
+### How many watts can a 15 A, 120 V circuit carry?
+15 × 120 = 1,800 W at most. For a continuous load the practical limit is 80 % of that, 1,440 W, because the breaker must be 125 % of a continuous load.
+
+### Do watts to amps and kW to amps give the same answer?
+Yes, if you enter the same power. 1,000 W is 1 kW, so both calculators agree.
+
+### Why does the power factor not appear for DC?
+DC has no phase shift between voltage and current, so the power is simply volts times amps.
+
+<Related items={[
+  { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
+  { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
+  { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+]} />
