@@ -50,6 +50,7 @@ export const calculators: Calc[] = [
 export const guides = [
   { slug: 'voltage-drop-formula', name: 'Voltage drop formula', blurb: 'DC, single-phase and three-phase, worked in mm² and AWG.', hub: 'electrical' as HubId },
   { slug: 'relay-setting-checklist', name: 'Relay setting checklist', blurb: 'Seven stages for a transformer-feeder overcurrent relay, with a worked example.', hub: 'protection' as HubId },
+  { slug: 'how-to-size-a-circuit-breaker', name: 'How to size a circuit breaker', blurb: 'Six steps under the NEC, with EV, mixed-load and water-heater examples.', hub: 'electrical' as HubId },
 ];
 
 export const calcsIn = (hub: HubId) => calculators.filter((c) => c.hub === hub);

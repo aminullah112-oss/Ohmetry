@@ -1,0 +1,95 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "How to Size a Circuit Breaker (NEC, With Examples) | Ohmetry"
+description: "A step-by-step method to size a breaker under the NEC: load current, the 125% continuous-load rule, standard ratings, the wire check and interrupting rating."
+h1: "How to Size a Circuit Breaker, Step by Step"
+hub: Electrical
+hubHref: /electrical/
+crumb: "How to size a breaker"
+---
+import Related from '../../components/Related.astro';
+
+A breaker protects the wire, not the load. That one idea explains most of the rules. If the wire can carry 20 A, the breaker must trip before the wire overheats, so the breaker rating cannot be larger than the wire allows, and it has to be large enough that it does not trip under normal load. The steps below work from the load to a breaker and then check the wire. This guide follows the NEC. Other countries use different methods, and the code and the authority having jurisdiction take precedence over any calculator.
+
+## The six steps
+
+1. **Find the load current.**
+2. **Decide whether the load is continuous.** Apply 125 % to the continuous part.
+3. **Round up to a standard breaker rating.**
+4. **Pick a conductor that is protected by that breaker.**
+5. **Check the terminal temperature rating.**
+6. **Check the interrupting rating.**
+
+## Step 1: load current
+
+If the nameplate gives amps, use that. If it gives watts or kW, convert with the <a href="/watts-to-amps-calculator/">watts to amps calculator</a>, which takes the voltage and, on AC, the power factor. For motors, do not calculate the current from the horsepower. Use the NEC table value, which the <a href="/hp-to-amps-calculator/">HP to amps calculator</a> gives, and follow Article 430.
+
+## Step 2: the 125 % rule for continuous loads
+
+A load that runs for three hours or more is continuous. Examples are EV charging, commercial lighting and some process equipment. The breaker for a continuous load must be rated for at least 125 % of that load plus 100 % of any noncontinuous load on the same circuit (210.20(A) for branch circuits, 215.3 for feeders).
+
+<div class="formula">Minimum breaker = 1.25 × I<sub>continuous</sub> + I<sub>noncontinuous</sub></div>
+
+Equivalently, a continuous load should use no more than 80 % of the breaker's rating.
+
+## Step 3: round up to a standard size
+
+Breakers come in standard ratings, listed in 240.6(A): 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200, 225, 250, 300, 350 and 400 A, and larger sizes after that. The 2023 edition also lists 10 A. Always round up from the calculated minimum, never down. The <a href="/breaker-size-calculator/">breaker size calculator</a> does steps 2 and 3 together.
+
+## Step 4: the conductor
+
+The conductor must carry the load, with the same 125 % on the continuous part, after any adjustments for ambient temperature and the number of conductors in the raceway. The breaker must also not be larger than the conductor can safely be protected by. In general the breaker rating cannot exceed the conductor's ampacity, but the code allows the next standard size above the ampacity in many cases (240.4(B)), so check the conditions. The <a href="/wire-size-calculator/">wire size calculator</a> picks the conductor from Table 310.16 with those adjustments.
+
+Small conductors have a hard limit (240.4(D)): 14 AWG copper is protected at no more than 15 A, 12 AWG at 20 A and 10 AWG at 30 A. This is why a 25 A breaker cannot go on 12 AWG wire, even though the wire's table ampacity at 75 °C is 25 A.
+
+## Step 5: terminal temperature
+
+Breakers and equipment terminals are rated for a maximum conductor temperature, commonly 60 °C or 75 °C (110.14(C)). The conductor's ampacity for this check is taken from the column that matches the terminal rating, even if the insulation is rated higher. Use the equipment's marking.
+
+## Step 6: interrupting rating
+
+The breaker must be able to interrupt the fault current available at its location, which comes from the supply, not from the load. Many common panel breakers are rated 10 kA, and breakers with higher ratings are available. For a panel fed from a large transformer the available fault current can exceed 10 kA, so check the marking on the breaker. The <a href="/short-circuit-current-calculator/">short-circuit current calculator</a> gives the value at a transformer secondary, and the <a href="/cable-fault-current-calculator/">fault current at the end of a cable</a> shows how much it falls along the cable.
+
+## Worked examples
+
+**A 32 A EV charger (continuous).**
+- Minimum breaker: 1.25 × 32 = 40 A, which is a standard rating, so a 40 A breaker.
+- Conductor: it needs at least 40 A. 8 AWG copper is 50 A in the 75 °C column of Table 310.16, so it works, and 10 AWG, at 35 A, does not.
+
+**A mixed circuit: 16 A continuous and 10 A noncontinuous.**
+- Minimum breaker: 1.25 × 16 + 10 = 30 A, so a 30 A breaker.
+- Conductor: 10 AWG copper is allowed on a 30 A breaker under 240.4(D), and its 75 °C ampacity is 35 A.
+
+**A 4,500 W electric water heater on 240 V.**
+- Current: 4,500 / 240 = 18.75 A.
+- A storage water heater of 120 gallons or less is treated as a continuous load (422.13), so the minimum breaker is 1.25 × 18.75 = 23.4 A, and the next standard size is 25 A.
+- Conductor: 12 AWG copper cannot be protected at 25 A under 240.4(D), so the circuit uses 10 AWG.
+
+## Common mistakes
+
+- **Sizing the breaker to the load without the 125 %.** A continuous load then runs the breaker at 100 % and it may trip, or the terminals overheat.
+- **Fitting a bigger breaker to stop nuisance tripping.** The wire is then unprotected. Find why it trips, and replace the conductor if a larger breaker is genuinely needed.
+- **Choosing the wire from the breaker's rating alone.** The wire must also carry the load after derating, at the terminal temperature.
+- **Using 12 AWG or 14 AWG wire on a larger breaker than the small-conductor limits allow.**
+- **Forgetting the interrupting rating.** It matters most on circuits close to a large transformer.
+
+## Questions
+
+### What size breaker do I need for a 100 A continuous load?
+1.25 × 100 = 125 A, which is a standard rating, so a 125 A breaker.
+
+### Can I put a 20 A breaker on 14 AWG wire?
+No. 14 AWG copper is limited to a 15 A breaker by 240.4(D).
+
+### Is the 125 % rule the same in other countries?
+No. IEC systems size the protective device against the design current and the conductor's current-carrying capacity by a different method, and many IEC regions use 230/400 V supplies. This guide covers the NEC only.
+
+### Do air conditioners and motors follow the same steps?
+No. Motors use Article 430 and air conditioners and heat pumps use Article 440, each with its own rules. The motor circuit calculator covers motors.
+
+<Related items={[
+  { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+  { href: '/watts-to-amps-calculator/', label: 'Watts to amps calculator' },
+  { href: '/motor-circuit-calculator/', label: 'Motor circuit calculator' },
+]} />
