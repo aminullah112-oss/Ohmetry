@@ -36,17 +36,22 @@ const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
     {toolkitReady ? (
       <>
         <h2>Get the toolkit</h2>
-        <p><a class="btn" href={site.gumroadUrl}>Get the toolkit on Gumroad</a></p>
-        <h2>Not ready to buy?</h2>
-        <p>Leave your email and get new calculators and corrections as they are published. No spam, and you can unsubscribe at any time.</p>
-        <form class="optin" method="post" action={site.emailFormAction}>
-          <label>Email address<input type="email" name="email" required autocomplete="email" /></label>
-          <button class="btn" type="submit">Subscribe</button>
-        </form>
+        <p><a class="btn" href={site.gumroadUrl}>Get the toolkit for {site.price}</a></p>
+        <p class="meta">One-time payment through Gumroad. You download the Excel workbook straight away.</p>
+        {site.emailFormAction && (
+          <>
+            <h2>Not ready to buy?</h2>
+            <p>Leave your email and get new calculators and corrections as they are published. No spam, and you can unsubscribe at any time.</p>
+            <form class="optin" method="post" action={site.emailFormAction}>
+              <label>Email address<input type="email" name="email" required autocomplete="email" /></label>
+              <button class="btn" type="submit">Subscribe</button>
+            </form>
+          </>
+        )}
         <p class="meta">See the <a href="/privacy/">privacy policy</a> for what is collected and how it is used.</p>
       </>
     ) : (
-      <p class="meta">This page is a draft: the product link and email form have not been configured yet (see <code>src/data/site.ts</code>). It is hidden from search engines until they are.</p>
+      <p class="meta">This page is a draft: the Gumroad link has not been set yet (see <code>src/data/site.ts</code>). It is hidden from search engines until they are.</p>
     )}
   </article>
 </Base>

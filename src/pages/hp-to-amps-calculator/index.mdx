@@ -1,0 +1,96 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "HP to Amps Calculator (NEC Motor Full-Load Current) | Ohmetry"
+description: "Convert motor horsepower to amps using the NEC full-load current tables for single-phase and three-phase motors, plus a running-current estimate."
+h1: "HP to Amps Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "HP to amps"
+needsTables: true
+---
+import HpToAmps from '../../components/HpToAmps.tsx';
+import Related from '../../components/Related.astro';
+
+<HpToAmps client:load />
+
+Horsepower does not convert to amps with one formula, because the current also depends on the voltage, the motor's efficiency and its power factor. That is why the code uses a table. This calculator gives you both numbers: the NEC table value that is used to size circuits, and an estimate of the current the motor actually draws at full load.
+
+## Two different answers
+
+<div class="formula">Table: Table 430.250 (three-phase) or 430.248 (single-phase), by hp and voltage<br/>Estimate, three-phase: I = hp × 745.7 / (√3 × V × efficiency × PF)<br/>Estimate, single-phase: I = hp × 745.7 / (V × efficiency × PF)</div>
+
+**The table current** is a standard value for each horsepower and voltage. The NEC uses it to size the conductors and the short-circuit protection, whatever is on the nameplate. It is deliberately a little higher than a typical motor draws.
+
+**The estimate** applies the formula, with the efficiency and power factor you enter. It is an approximation of the running current at full load. For a real motor, the nameplate current is better, and it is the figure used to set the overload protection.
+
+## Worked example
+
+A 10 hp three-phase motor on 460 V:
+
+- **Table current:** 14 A.
+- **Estimate** at 90 % efficiency and 0.85 power factor: 7,457 / (1.732 × 460 × 0.9 × 0.85) = 12.2 A.
+
+The estimate is lower than the table value, which is normal. The next step, the conductor, uses the table: 1.25 × 14 = 17.5 A. The <a href="/motor-circuit-calculator/">motor circuit calculator</a> carries on from here to the overload and the breaker.
+
+## Three-phase motors: full-load current in amps
+
+| hp | 208 V | 230 V | 460 V | 575 V |
+|---|---|---|---|---|
+| 1 | 4.6 | 4.2 | 2.1 | 1.7 |
+| 2 | 7.5 | 6.8 | 3.4 | 2.7 |
+| 3 | 10.6 | 9.6 | 4.8 | 3.9 |
+| 5 | 16.7 | 15.2 | 7.6 | 6.1 |
+| 7.5 | 24.2 | 22 | 11 | 9 |
+| 10 | 30.8 | 28 | 14 | 11 |
+| 15 | 46.2 | 42 | 21 | 17 |
+| 20 | 59.4 | 54 | 27 | 22 |
+| 25 | 74.8 | 68 | 34 | 27 |
+| 50 | 143 | 130 | 65 | 52 |
+| 100 | 273 | 248 | 124 | 99 |
+
+## Single-phase motors: full-load current in amps
+
+| hp | 115 V | 230 V |
+|---|---|---|
+| 1/6 | 4.4 | 2.2 |
+| 1/4 | 5.8 | 2.9 |
+| 1/3 | 7.2 | 3.6 |
+| 1/2 | 9.8 | 4.9 |
+| 3/4 | 13.8 | 6.9 |
+| 1 | 16 | 8 |
+| 1.5 | 20 | 10 |
+| 2 | 24 | 12 |
+| 3 | 34 | 17 |
+| 5 | 56 | 28 |
+| 7.5 | 80 | 40 |
+| 10 | 100 | 50 |
+
+The NEC tables list more horsepower ratings than shown here, and the calculator above has all of them. Supply voltages are matched to the nearest table column: a 480 V supply normally uses the 460 V column and a 240 V supply the 230 V column.
+
+## Common mistakes
+
+- **Using the estimate to size the circuit.** Under the NEC the conductor and the short-circuit device are sized from the table current.
+- **Using the table to set the overload relay.** The overload setting comes from the nameplate current of the motor you have.
+- **Choosing the wrong voltage column.** A 480 V supply normally uses the 460 V column, and a 240 V supply the 230 V column.
+- **Expecting the nameplate to match.** A nameplate can show a different figure from the table, and that is fine. The table is a sizing basis, not a measurement.
+
+## Questions
+
+### How many amps is a 5 hp motor?
+On a three-phase 460 V supply the table gives 7.6 A. On 230 V three-phase it is 15.2 A, and a single-phase 230 V motor has 28 A.
+
+### How many amps is a 1 hp motor?
+The table gives 2.1 A at 460 V three-phase, 4.2 A at 230 V three-phase, and 8 A at 230 V single-phase.
+
+### Why is the table current higher than my measured current?
+The table is a standard value used for sizing. A real motor's current depends on its efficiency, power factor and how heavily it is loaded, so a lightly loaded motor can draw much less.
+
+### Can I use this for a motor with a drive?
+Motors on variable-speed drives have their own requirements. Check the drive manufacturer's data and the NEC provisions for adjustable-speed drives.
+
+<Related items={[
+  { href: '/motor-circuit-calculator/', label: 'Motor circuit calculator' },
+  { href: '/kw-to-hp-calculator/', label: 'kW to HP calculator' },
+  { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+]} />

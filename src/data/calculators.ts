@@ -27,6 +27,7 @@ export const calculators: Calc[] = [
   { slug: 'wire-size-calculator', name: 'Wire size', blurb: 'Conductor size from load, derating and voltage drop.', hub: 'electrical', tag: necTag('wire-size-calculator') },
   { slug: 'conduit-fill-calculator', name: 'Conduit fill', blurb: 'Smallest EMT for a mix of conductors.', hub: 'electrical', tag: necTag('conduit-fill-calculator') },
   { slug: 'motor-circuit-calculator', name: 'Motor circuit', blurb: 'Table full-load current, conductor, overload and device maximum.', hub: 'electrical', tag: necTag('motor-circuit-calculator') },
+  { slug: 'hp-to-amps-calculator', name: 'HP to amps', blurb: 'NEC table full-load current for a motor, plus a running-current estimate.', hub: 'electrical', tag: necTag('hp-to-amps-calculator') },
   { slug: 'generator-size-calculator', name: 'Generator size', blurb: 'kW and kVA from a load list, with motor starting.', hub: 'electrical' },
 
   { slug: 'solar-panel-calculator', name: 'Solar panel size', blurb: 'How many panels for your daily energy use.', hub: 'solar-ev' },

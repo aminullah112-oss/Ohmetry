@@ -45,6 +45,7 @@ export const PAGE_REQUIRES: Record<string, TableId[]> = {
   '/wire-size-calculator/': ['310.16', '310.15(B)(1)', '310.15(C)(1)'],
   '/conduit-fill-calculator/': ['Ch9-T5', 'Ch9-T1', 'Ch9-T4-EMT', 'Ch9-T4-RMC', 'Ch9-T4-PVC40'],
   '/motor-circuit-calculator/': ['430.250', '430.248', '430.52', '240.6(A)'],
+  '/hp-to-amps-calculator/': ['430.250', '430.248'],
 };
 
 export const TABLE_PAGES = Object.keys(PAGE_REQUIRES);

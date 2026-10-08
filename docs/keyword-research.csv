@@ -31,7 +31,7 @@ amps to kw,calculator,(new or fold into kw-to-amps),candidate,,,Same-intent caut
 kva to kw,calculator,/kva-to-kw-calculator/,live,,,
 kw to kva,calculator,/kva-to-kw-calculator/,live,,,One page can cover both directions
 kw to hp,calculator,/kw-to-hp-calculator/,live,,,
-hp to amps,calculator,"(new, uses motor table)",candidate,,,Needs verified NEC motor table for the NEC answer
+hp to amps,calculator,/hp-to-amps-calculator/,live,,,Needs verified NEC motor table for the NEC answer
 volts to watts,calculator,(new),candidate,,,
 electricity cost calculator,calculator,(new),candidate,,,"Broad audience, weak fit with an engineering brand"
 box fill calculator,calculator,"(new, NEC 314.16)",candidate,,,Needs verified NEC table
