@@ -39,6 +39,7 @@ export const calculators: Calc[] = [
 
   { slug: 'transformer-full-load-current-calculator', name: 'Transformer full-load current', blurb: 'Primary and secondary current from kVA and voltage.', hub: 'protection' },
   { slug: 'short-circuit-current-calculator', name: 'Short-circuit current', blurb: 'Fault level at a transformer secondary from %Z.', hub: 'protection' },
+  { slug: 'cable-fault-current-calculator', name: 'Fault current at cable end', blurb: 'Source, transformer and cable impedance, with peak and minimum values.', hub: 'protection', tag: 'IEC' },
   { slug: 'cable-size-calculator', name: 'Cable size with derating', blurb: 'Tabulated rating needed after IEC derating factors.', hub: 'protection', tag: 'IEC' },
   { slug: 'ct-burden-calculator', name: 'CT burden', blurb: 'Connected burden and effective accuracy limit factor.', hub: 'protection', tag: 'IEC' },
   { slug: 'idmt-relay-calculator', name: 'IDMT relay time', blurb: 'Operating time on the four IEC 60255 curves.', hub: 'protection', tag: 'IEC' },

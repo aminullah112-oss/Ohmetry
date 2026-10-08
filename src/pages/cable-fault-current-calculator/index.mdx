@@ -1,0 +1,76 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Fault Current at the End of a Cable (IEC 60909) | Ohmetry"
+description: "Calculate the three-phase fault current at the end of a cable, including source, transformer and cable impedance, with peak and minimum values."
+h1: "Fault Current at the End of a Cable"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Cable fault current"
+---
+import CableFault from '../../components/CableFault.tsx';
+import Related from '../../components/Related.astro';
+
+<CableFault client:load />
+
+The fault level at a transformer is the highest the system can produce. Move down a cable and it drops, often by a large factor, because the cable adds resistance and reactance in series. That lower value matters twice: the devices at the cable end can be rated for less, and the protection must still see the smallest fault that can occur there. This calculator follows the simplified IEC 60909 method and gives the maximum, the peak and the minimum.
+
+## Method
+
+<div class="formula">Z<sub>source</sub> = c × U<sub>n</sub>² / S<sub>k</sub>″<br/>Z<sub>transformer</sub> = (z% / 100) × U<sub>n</sub>² / S<sub>tr</sub><br/>Z<sub>cable</sub> = R + jX, R = ρ × L / (A × n)<br/>I<sub>k</sub>″ = c × U<sub>n</sub> / (√3 × |Z|)<br/>i<sub>p</sub> = κ × √2 × I<sub>k</sub>″, κ = 1.02 + 0.98 × e<sup>−3R/X</sup></div>
+
+The source and transformer impedances are split into resistance and reactance using their X/R ratios. All resistances in the path are added, all reactances are added, and the magnitude of the total gives the fault current. U<sub>n</sub> is the line-to-line voltage, S<sub>k</sub>″ the source fault level, S<sub>tr</sub> the transformer rating, L the cable length, A its cross-section and n the number of cables in parallel. The voltage factor c is 1.05 for the maximum fault. For the minimum fault the calculator uses 0.95 and the cable resistance at the temperature you enter, because a hot cable has higher resistance.
+
+## Worked example
+
+A 1,000 kVA, 5 % transformer on a 400 V system fed from a 500 MVA source, with 30 m of 25 mm² copper cable (0.08 Ω/km).
+
+- Source impedance: 1.05 × 400² / 500,000,000 = 0.000336 Ω.
+- Transformer impedance: 0.05 × 400² / 1,000,000 = 0.008 Ω.
+- Cable: R = 0.017241 / 25 × 30 = 0.0207 Ω and X = 0.0024 Ω.
+- Fault at the transformer terminals: 29.1 kA.
+- Fault at the cable end: 9.83 kA, about a third of the value at the transformer.
+- Peak at the cable end: κ = 1.022, so i<sub>p</sub> = 14.2 kA.
+- Minimum fault with the cable at 80 °C and c = 0.95: 7.52 kA.
+
+A short 25 mm² cable cuts the fault level by two thirds, because its resistance is more than twice the transformer's impedance. Over a longer or thinner cable the effect is stronger still.
+
+## How to use the results
+
+- **Breaking capacity at the cable end.** The device there must be rated for at least the maximum fault at its own location, not the transformer value. The transformer value is the right figure for the device at the transformer.
+- **Making capacity.** Breakers must also close onto the peak current, so compare their making rating with i<sub>p</sub>.
+- **Cable withstand.** The cable itself must survive the fault for the clearing time, which depends on its short-time rating.
+- **Minimum fault and protection.** An overcurrent device or relay must operate for the smallest fault it protects against. A long cable can bring the minimum fault so close to the setting that the protection is slow or does not operate.
+
+## What this does not cover
+
+- **Motor contribution.** Running induction motors feed current into a fault for the first few cycles and can raise the maximum, mostly at motor control centres.
+- **The transformer correction factor.** IEC 60909 applies a factor K<sub>T</sub>, slightly below 1 for a typical distribution transformer, to the transformer impedance. That lowers the impedance and raises the maximum fault by a few percent. It is left out here, so the maximum values can come out a few percent low. Allow for this when comparing against an equipment rating.
+- **Earth faults and unbalanced faults.** Only the three-phase fault is calculated.
+- **Several sources or loops.** The method assumes one radial path.
+
+For a final design, use a short-circuit study that follows the standard your project cites.
+
+## Common mistakes
+
+- **Using the transformer value for devices downstream.** Fault level falls along every cable.
+- **Ignoring parallel cables.** Two cables in parallel halve the cable impedance, which raises the fault level at the end.
+- **Using cold resistance for the minimum fault.** Use the cable temperature during the fault or just before it.
+- **Leaving out reactance.** Reactance is small for a thin cable but matters for large conductors, where it can dominate.
+
+## Questions
+
+### Why does fault current fall along a cable?
+The cable's resistance and reactance add to the impedance in the fault path, so less current flows.
+
+### What source fault level should I use?
+The value from the utility, in MVA or as a current in kA at the connection point. Leave it empty for an infinite bus, which gives the highest possible result.
+
+### What is the peak factor?
+The ratio between the first-cycle peak and the steady RMS fault current. It depends on how resistive the path is, and it is smaller at the end of a cable than at the transformer.
+
+<Related items={[
+  { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
+  { href: '/idmt-relay-calculator/', label: 'IDMT relay time calculator' },
+  { href: '/cable-size-calculator/', label: 'Cable size calculator' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+]} />

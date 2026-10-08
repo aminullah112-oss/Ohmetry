@@ -38,7 +38,7 @@ I<sub>sc</sub> = 1,443 / 0.052 = 27.8 kA. A strong source changes the answer by 
 
 ## What the simple method leaves out
 
-This is a screening calculation. IEC 60909, the standard for short-circuit calculation in three-phase AC systems, applies a voltage factor c (1.05 or 1.10 for maximum currents, depending on the voltage tolerance) and a correction factor for network transformer impedance. It also takes account of cable impedance between the transformer and the fault, which reduces the current. Induction motors connected to the bus feed current into the fault for the first few cycles, and the commonly used estimate is a few times their rated current, which can add materially to the peak at a motor control centre. Asymmetry is also omitted. The first-cycle peak current is higher than the symmetrical RMS value, by a factor that depends on the X/R ratio of the circuit and can reach roughly 1.5 to 2.5. That peak governs the making capacity of breakers and the mechanical forces on busbars.
+This is a screening calculation. IEC 60909, the standard for short-circuit calculation in three-phase AC systems, applies a voltage factor c (1.05 or 1.10 for maximum currents, depending on the voltage tolerance) and a correction factor for network transformer impedance. It also takes account of cable impedance between the transformer and the fault, which reduces the current: the <a href="/cable-fault-current-calculator/">fault current at the end of a cable calculator</a> does that step. Induction motors connected to the bus feed current into the fault for the first few cycles, and the commonly used estimate is a few times their rated current, which can add materially to the peak at a motor control centre. Asymmetry is also omitted. The first-cycle peak current is higher than the symmetrical RMS value, by a factor that depends on the X/R ratio of the circuit and can reach roughly 1.5 to 2.5. That peak governs the making capacity of breakers and the mechanical forces on busbars.
 
 For a final design, use a short-circuit study or a calculation method that follows the standard your project cites.
 
@@ -64,4 +64,5 @@ No. The calculation covers the three-phase fault. Earth-fault levels depend on t
   { href: '/idmt-relay-calculator/', label: 'IDMT relay time calculator' },
   { href: '/ct-burden-calculator/', label: 'CT burden calculator' },
   { href: '/earth-resistance-calculator/', label: 'Earth rod resistance calculator' },
+  { href: '/cable-fault-current-calculator/', label: 'Fault current at the end of a cable' },
 ]} />
