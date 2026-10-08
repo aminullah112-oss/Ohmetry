@@ -9,7 +9,8 @@
     "preview": "astro preview",
     "test": "vitest run",
     "tables": "node --experimental-strip-types scripts/print-tables.mjs",
-    "og": "node scripts/make-og.mjs"
+    "og": "node scripts/make-og.mjs",
+    "seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.0.3",

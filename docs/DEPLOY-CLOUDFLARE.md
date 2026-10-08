@@ -38,3 +38,8 @@ Needs two repository secrets (Settings > Secrets and variables > Actions):
 Until both exist the deploy step is skipped with a warning; tests and build still run.
 
 Deploys run automatically on every push to main (see .github/workflows/deploy.yml).
+
+## SEO automation
+- `npm run seo` audits the built site (titles, descriptions, canonicals, one h1, og images, broken internal links, sitemap against noindex). It runs on every deploy and a failure stops the deploy.
+- `scripts/indexnow.mjs` pings IndexNow search engines (not Google) about pages changed in each push.
+- `.github/workflows/gsc-report.yml` writes `docs/seo/gsc-report.md` every Monday from Search Console. One-time setup: in Google Cloud create a service account and a JSON key, add the service account's email as a user (restricted is enough) of the `ohmetry.com` property in Search Console, and save the JSON as the repository secret `GSC_SERVICE_ACCOUNT`. Set `GSC_SITE` only if the property is not `sc-domain:ohmetry.com`.

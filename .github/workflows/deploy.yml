@@ -28,6 +28,8 @@ jobs:
         run: npm test
       - name: Build for ohmetry.com
         run: npm run build
+      - name: SEO audit (broken links, titles, canonicals, sitemap)
+        run: npm run seo
       - name: Deploy
         if: env.CLOUDFLARE_API_TOKEN != '' && env.CLOUDFLARE_ACCOUNT_ID != ''
         uses: cloudflare/wrangler-action@v3
@@ -39,3 +41,7 @@ jobs:
       - name: Skipped deploy
         if: env.CLOUDFLARE_API_TOKEN == '' || env.CLOUDFLARE_ACCOUNT_ID == ''
         run: echo "::warning::Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets to deploy."
+      - name: Tell IndexNow search engines about changed pages
+        if: github.event_name == 'push'
+        continue-on-error: true
+        run: node scripts/indexnow.mjs "${{ github.event.before }}" "${{ github.sha }}"

@@ -46,6 +46,7 @@ const ld = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0e171e" />
     {breadcrumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+    <slot name="head" />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>

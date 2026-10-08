@@ -19,9 +19,13 @@ const reviewed = reviews[slug];
 const pageCorrections = corrections.filter((c) => c.page === slug);
 const pageUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const reportHref = `mailto:hello@ohmetry.com?subject=${encodeURIComponent(`Error report: ${frontmatter.h1}`)}&body=${encodeURIComponent(`Page: ${pageUrl}\n\nInputs I used:\n\nResult I got:\n\nResult I expected, and why:\n`)}`;
+const pageSchema = isGuide
+  ? { '@context': 'https://schema.org', '@type': 'Article', headline: frontmatter.h1, description: frontmatter.description, url: pageUrl, ...(updated ? { dateModified: updated } : {}), publisher: { '@type': 'Organization', name: 'Ohmetry', url: new URL('/', Astro.site).toString() } }
+  : { '@context': 'https://schema.org', '@type': 'WebApplication', name: frontmatter.h1, description: frontmatter.description, url: pageUrl, applicationCategory: 'UtilitiesApplication', operatingSystem: 'Any', browserRequirements: 'Requires JavaScript', offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' }, publisher: { '@type': 'Organization', name: 'Ohmetry', url: new URL('/', Astro.site).toString() } };
 const chips = [{ label: frontmatter.hub, href: frontmatter.hubHref }, { label: 'Free, no sign-up' }, { label: isGuide ? 'Worked examples' : 'Formula and worked example' }];
 ---
 <Base title={frontmatter.title} description={frontmatter.description} breadcrumbs={crumbs} activeHub={hubId} noindex={Boolean(frontmatter.needsTables) && pendingTables(`/${slug}/`).length > 0}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
   <PageHeader title={frontmatter.h1} lead={frontmatter.description} eyebrow={isGuide ? 'Guide' : 'Calculator'} crumbs={crumbs} chips={chips} updated={updated} reviewed={reviewed} />
   <article class="article prose">
     {frontmatter.needsTables && <TableNotice path={`/${slug}/`} />}
