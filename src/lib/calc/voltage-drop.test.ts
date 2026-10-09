@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { awgToMm2 } from './awg-to-mm2';
 import { voltageDrop } from './voltage-drop';
 
 const base = { amps: 20, oneWayMetres: 30, areaMm2: 4, volts: 230, material: 'copper' as const, tempC: 70, circuit: 'two-wire' as const };
@@ -32,6 +33,13 @@ describe('voltageDrop', () => {
   });
   it('aluminium drops more than copper', () => {
     expect(voltageDrop({ ...base, material: 'aluminium' }).dropV).toBeGreaterThan(voltageDrop(base).dropV);
+  });
+  // US units, hand check: 12 AWG = 3.3088 mm2, 100 ft = 30.48 m, copper at 75 C: rho = 0.017241*(1+0.00393*55) = 0.020968
+  // R = 0.020968/3.3088*60.96 = 0.38631 ohm; 20 A -> 7.726 V = 6.44 % of 120 V
+  it('US units: 20 A, 100 ft of 12 AWG on 120 V', () => {
+    const r = voltageDrop({ amps: 20, oneWayMetres: 100 * 0.3048, areaMm2: awgToMm2(12), volts: 120, material: 'copper', tempC: 75, circuit: 'two-wire' });
+    expect(r.dropV).toBeCloseTo(7.726, 2);
+    expect(r.dropPercent).toBeCloseTo(6.438, 2);
   });
   it('rejects bad input', () => {
     expect(() => voltageDrop({ ...base, areaMm2: 0 })).toThrow();

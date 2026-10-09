@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "Voltage Drop Calculator (Single and Three-Phase) | Ohmetry"
-description: "Calculate voltage drop in volts and percent for single-phase, DC and three-phase cables from current, length and conductor size."
+title: "Voltage Drop Calculator (NEC, AWG and mm²) | Ohmetry"
+description: "Calculate voltage drop in volts and percent for single-phase and three-phase cables in AWG and feet or mm² and metres. Formula, NEC 3 % and 5 % guidance."
 h1: "Voltage Drop Calculator"
 hub: Electrical
 hubHref: /electrical/
@@ -27,6 +27,18 @@ A 230 V single-phase circuit carries 20 A over 30 m of 4 mm² copper at an opera
 ΔV = 2 × 30 × 20 × 0.020629 / 4 = 6.19 V, which is 2.7 % of 230 V. The load sees 223.8 V.
 
 Now a three-phase 400 V feeder carrying 100 A over 50 m of 25 mm² copper at 20 °C: ΔV = 1.732 × 100 × 50 × 0.017241 / 25 = 5.97 V, or 1.49 % of 400 V.
+
+## Example in US units (feet and AWG)
+
+Choose **US (ft, AWG)** in the calculator for NEC-style inputs. A 20 A load sits 100 ft from the panel on a 120 V single-phase circuit, copper at 75 °C:
+
+| Wire | Voltage drop | Percent of 120 V |
+|---|---|---|
+| 12 AWG | 7.73 V | 6.4 % |
+| 10 AWG | 4.86 V | 4.1 % |
+| 8 AWG | 3.06 V | 2.5 % |
+
+Only 8 AWG meets the commonly used 3 % target. The NEC's 3 % and 5 % figures are recommendations, not requirements, unless your specification adopts them. The <a href="/nec-voltage-drop-guide/">NEC voltage drop guide</a> explains where they come from and works through the same circuit with the rounded K values used by hand.
 
 ## Temperature, resistance and reactance
 
