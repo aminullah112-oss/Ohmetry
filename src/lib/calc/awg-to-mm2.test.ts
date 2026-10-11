@@ -29,3 +29,29 @@ describe('awgToMm2', () => {
     expect(() => awgToMm2(1.5)).toThrow();
   });
 });
+
+// The published chart on /awg-to-mm2-converter/ must agree with the formula, row by row.
+import fs from 'node:fs';
+describe('AWG chart on the converter page', () => {
+  const page = fs.readFileSync('src/pages/awg-to-mm2-converter/index.mdx', 'utf8');
+  const rows = [...page.matchAll(/^\| (4\/0|3\/0|2\/0|1\/0|\d+) \| ([\d.]+) \| ([\d.]+) \| ([\d.]+) \| ([\d.]+) mm² \|$/gm)];
+  it('has every listed size', () => expect(rows.length).toBe(31));
+  it('every row matches the formula', () => {
+    for (const [, label, dMm, dIn, area, metric] of rows) {
+      const n = label === '4/0' ? -3 : label === '3/0' ? -2 : label === '2/0' ? -1 : label === '1/0' ? 0 : Number(label);
+      expect(awgToDiameterMm(n)).toBeCloseTo(Number(dMm), 3);
+      expect(awgToDiameterMm(n) / 25.4).toBeCloseTo(Number(dIn), 4);
+      expect(awgToMm2(n)).toBeCloseTo(Number(area), area.split('.')[1].length);
+      expect(Number(metric)).toBeGreaterThanOrEqual(awgToMm2(n) - 1e-9);
+    }
+  });
+  it('metric table: nearest AWG area is correct', () => {
+    const m = [...page.matchAll(/^\| ([\d.]+) mm² \| ([\d/]+) \| ([\d.]+) \| ([\d/]+) \| ([\d.]+) \|$/gm)];
+    expect(m.length).toBe(14);
+    for (const [, mm2, near, nearArea] of m) {
+      const n = (l: string) => (l === '1/0' ? 0 : l === '2/0' ? -1 : l === '3/0' ? -2 : l === '4/0' ? -3 : Number(l));
+      expect(mm2ToNearestAwg(Number(mm2))).toBe(n(near));
+      expect(awgToMm2(n(near))).toBeCloseTo(Number(nearArea), 2);
+    }
+  });
+});
