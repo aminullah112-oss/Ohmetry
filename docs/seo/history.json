@@ -39,8 +39,10 @@
   "calculators": 30,
   "guides": 4,
   "tests": 204,
-  "commits": 43,
+  "commits": 44,
   "auditFailures": 0,
-  "auditWarnings": 7
+  "auditWarnings": 7,
+  "gscClicks28": 0,
+  "gscImpressions28": 285
  }
 ]

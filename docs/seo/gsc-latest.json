@@ -1,0 +1,620 @@
+{
+ "generated": "2026-10-11",
+ "start": "2026-09-11",
+ "end": "2026-10-09",
+ "totals": {
+  "clicks": 0,
+  "impressions": 285
+ },
+ "daily": [
+  {
+   "date": "2026-10-06",
+   "clicks": 0,
+   "impressions": 0,
+   "position": 0
+  },
+  {
+   "date": "2026-10-07",
+   "clicks": 0,
+   "impressions": 11,
+   "position": 82.5
+  },
+  {
+   "date": "2026-10-08",
+   "clicks": 0,
+   "impressions": 87,
+   "position": 70.6
+  },
+  {
+   "date": "2026-10-09",
+   "clicks": 0,
+   "impressions": 187,
+   "position": 74.3
+  }
+ ],
+ "pages": [
+  {
+   "page": "http://ohmetry.com/generator-size-calculator/",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 46.3
+  },
+  {
+   "page": "/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 1
+  },
+  {
+   "page": "/amps-to-watts-calculator/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 55
+  },
+  {
+   "page": "/awg-to-mm2-converter/",
+   "clicks": 0,
+   "impressions": 29,
+   "ctr": 0,
+   "position": 75.6
+  },
+  {
+   "page": "/breaker-size-calculator/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 16
+  },
+  {
+   "page": "/cable-size-calculator/",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 93.5
+  },
+  {
+   "page": "/conduit-fill-calculator/",
+   "clicks": 0,
+   "impressions": 18,
+   "ctr": 0,
+   "position": 76.8
+  },
+  {
+   "page": "/contact/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 4
+  },
+  {
+   "page": "/corrections/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 6
+  },
+  {
+   "page": "/ct-burden-calculator/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 9.5
+  },
+  {
+   "page": "/disclaimer/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 17
+  },
+  {
+   "page": "/earth-resistance-calculator/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "/electrical/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 3
+  },
+  {
+   "page": "/ev-charger-wire-size-calculator/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 19.5
+  },
+  {
+   "page": "/generator-size-calculator/",
+   "clicks": 0,
+   "impressions": 11,
+   "ctr": 0,
+   "position": 70
+  },
+  {
+   "page": "/kva-to-amps-calculator/",
+   "clicks": 0,
+   "impressions": 13,
+   "ctr": 0,
+   "position": 62.4
+  },
+  {
+   "page": "/kw-to-amps-calculator/",
+   "clicks": 0,
+   "impressions": 23,
+   "ctr": 0,
+   "position": 74.9
+  },
+  {
+   "page": "/methodology/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 6
+  },
+  {
+   "page": "/off-grid-solar-calculator/",
+   "clicks": 0,
+   "impressions": 8,
+   "ctr": 0,
+   "position": 48.5
+  },
+  {
+   "page": "/ohms-law-calculator/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 10
+  },
+  {
+   "page": "/privacy/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 2
+  },
+  {
+   "page": "/protection/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 5
+  },
+  {
+   "page": "/relay-setting-checklist/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 18
+  },
+  {
+   "page": "/short-circuit-current-calculator/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 80
+  },
+  {
+   "page": "/solar-ev/",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 7
+  },
+  {
+   "page": "/solar-panel-calculator/",
+   "clicks": 0,
+   "impressions": 25,
+   "ctr": 0,
+   "position": 81.1
+  },
+  {
+   "page": "/solar-wire-size-calculator/",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 62.8
+  },
+  {
+   "page": "/three-phase-power-calculator/",
+   "clicks": 0,
+   "impressions": 12,
+   "ctr": 0,
+   "position": 79
+  },
+  {
+   "page": "/transformer-full-load-current-calculator/",
+   "clicks": 0,
+   "impressions": 7,
+   "ctr": 0,
+   "position": 44
+  },
+  {
+   "page": "/voltage-drop-calculator/",
+   "clicks": 0,
+   "impressions": 81,
+   "ctr": 0,
+   "position": 75.2
+  },
+  {
+   "page": "/voltage-drop-formula/",
+   "clicks": 0,
+   "impressions": 4,
+   "ctr": 0,
+   "position": 57.3
+  },
+  {
+   "page": "/watts-to-amps-calculator/",
+   "clicks": 0,
+   "impressions": 16,
+   "ctr": 0,
+   "position": 72.2
+  },
+  {
+   "page": "/wire-size-calculator/",
+   "clicks": 0,
+   "impressions": 22,
+   "ctr": 0,
+   "position": 63.5
+  }
+ ],
+ "queries": [
+  {
+   "query": "\"direct-voltage.eu\" -site:direct-voltage.eu -site:se.com -site:facebook.com -site:instagram.com -site:threads.com -site:threads.net -site:linkedin.com -site:x.com -site:twitter.com -site:tiktok.com -site:youtube.com -site:youtu.be -site:reddit.com -site:t.me -site:telegram.me -site:telegram.org -site:pinterest.com -site:vimeo.com",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 4.5
+  },
+  {
+   "query": "0 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 79
+  },
+  {
+   "query": "1 awg in mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 76
+  },
+  {
+   "query": "1 kilowatt to ampere",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 88
+  },
+  {
+   "query": "1 kw kaç amper çeker",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 78
+  },
+  {
+   "query": "1 kw to amps in 3 phase",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 67
+  },
+  {
+   "query": "10 awg in mm2",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 82
+  },
+  {
+   "query": "10 kilowatts to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 77
+  },
+  {
+   "query": "10mm2 to awg",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 68
+  },
+  {
+   "query": "11 kw til ampere",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 77
+  },
+  {
+   "query": "12 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 73
+  },
+  {
+   "query": "12awg in mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 82
+  },
+  {
+   "query": "14 awg wire mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 71
+  },
+  {
+   "query": "140 watts to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 50
+  },
+  {
+   "query": "15 kw to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 76
+  },
+  {
+   "query": "16awg in mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 72
+  },
+  {
+   "query": "18kw to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 75
+  },
+  {
+   "query": "19 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 70
+  },
+  {
+   "query": "20 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 74
+  },
+  {
+   "query": "22 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 73
+  },
+  {
+   "query": "240v voltage drop calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 71.5
+  },
+  {
+   "query": "25 kva amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 80
+  },
+  {
+   "query": "3 phase cable voltage drop calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 82
+  },
+  {
+   "query": "3 phase current calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 76
+  },
+  {
+   "query": "3 phase electrical calculations",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 89
+  },
+  {
+   "query": "3 phase heater amps calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 79
+  },
+  {
+   "query": "3 phase power calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 81.5
+  },
+  {
+   "query": "3 phase power formula calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 86
+  },
+  {
+   "query": "3 phase voltage drop",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 74
+  },
+  {
+   "query": "3 phase wire size calculator",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 90.5
+  },
+  {
+   "query": "3.5 kw to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 77
+  },
+  {
+   "query": "30kw to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 79
+  },
+  {
+   "query": "320 watts to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 68
+  },
+  {
+   "query": "4 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 85
+  },
+  {
+   "query": "5 amp in watts",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 86
+  },
+  {
+   "query": "6 awg to mm",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 76
+  },
+  {
+   "query": "6 awg to mm2",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 76.5
+  },
+  {
+   "query": "7.2 kw to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 75
+  },
+  {
+   "query": "8 awg to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 71
+  },
+  {
+   "query": "american wire gauge to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 78
+  },
+  {
+   "query": "amps from watts",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 92
+  },
+  {
+   "query": "armoured cable voltage drop calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 78
+  },
+  {
+   "query": "awg 4 to mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 76
+  },
+  {
+   "query": "awg in mm2",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 89
+  },
+  {
+   "query": "awg to millimeters",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 75
+  },
+  {
+   "query": "awg to mm",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 75
+  },
+  {
+   "query": "awg to mm conversion chart",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 73
+  },
+  {
+   "query": "awg to mm2",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 83
+  },
+  {
+   "query": "cable calculator",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 89
+  },
+  {
+   "query": "cable calculator voltage drop",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 84
+  }
+ ]
+}
