@@ -8,7 +8,7 @@ export const site = {
   /** Price shown next to the buy button. Change it here and on Gumroad together. */
   price: '$19',
   /** Gumroad product URL, e.g. https://yourname.gumroad.com/l/toolkit */
-  gumroadUrl: '',
+  gumroadUrl: 'https://aminullah11.gumroad.com/l/hdauo',
   /** POST endpoint of the email service (Buttondown, ConvertKit, Formspree, ...). Receives a field named "email". */
   emailFormAction: '',
 };
