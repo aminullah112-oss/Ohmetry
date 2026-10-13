@@ -1,0 +1,59 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Transformer Fault Current Chart (kVA, %Z, 208 and 480 V) | Ohmetry"
+description: "Maximum fault current at a transformer secondary in kA for 45 to 2,500 kVA and 2 to 5.75 % impedance at 480 V and 208 V, with the formula and example."
+h1: "Transformer Fault Current Chart"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Transformer fault chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { transformerFaultChart } from '../../lib/calc/charts';
+
+These charts give the highest symmetrical fault current at the secondary terminals of a three-phase transformer, from its kVA, voltage and per-unit impedance. They assume an infinite bus, meaning the utility supplies unlimited current to the primary. That is the worst case, and the real value is lower. The transformer's impedance is on its nameplate as %Z.
+
+<ChartTable chart={transformerFaultChart(480, [2, 3, 4, 5, 5.75])} />
+
+<ChartTable chart={transformerFaultChart(208, [2, 3, 4, 5, 5.75])} />
+
+## The formula
+
+<div class="formula">I<sub>FLC</sub> = kVA × 1000 / (√3 × V<sub>LL</sub>)<br/>I<sub>sc</sub> = I<sub>FLC</sub> / (%Z / 100)</div>
+
+The fault current is the full-load current divided by the per-unit impedance. A transformer with 5 % impedance can deliver 20 times its full-load current into a fault at its terminals. The <a href="/short-circuit-current-calculator/">short-circuit current calculator</a> adds the utility source impedance, and the <a href="/cable-fault-current-calculator/">fault current at the cable end</a> calculator carries on down a cable.
+
+## Worked example
+
+A 1,000 kVA, 5.75 % transformer on a 480 V secondary has a full-load current of 1,203 A. The fault current is 1,203 / 0.0575 = 20.9 kA, as in the 5.75 % column. A 1,000 kVA unit with 5 % impedance would give 24.1 kA, so a small change in impedance shifts the available fault current noticeably.
+
+On 208 V the same 1,000 kVA, 5.75 % unit gives 48.3 kA, because the full-load current is larger at the lower voltage.
+
+## Limits of these numbers
+
+- **They are the maximum at the terminals.** Cable, bus and switchgear impedance between the transformer and the fault bring the value down quickly. A 30 m cable can cut it by two thirds, as shown in the <a href="/cable-fault-current-calculator/">cable end fault current page</a>.
+- **No motor contribution.** Running induction motors add current for the first few cycles of a fault.
+- **No utility impedance.** Using a real source impedance lowers every figure in the table.
+- **Not a short-circuit study.** For a final design or an equipment rating, use a study to the standard your project cites.
+
+## Why this matters
+
+Breakers and busbars have an interrupting or short-circuit rating, and it must not be lower than the fault current at their location. The NEC requires interrupting ratings of at least the available fault current (110.9). Starting from the chart is a reasonable first check. Then refine the value with the actual source, cable lengths and motors.
+
+## Questions
+
+### What is the fault current at a 500 kVA, 5 % transformer on 480 V?
+12.0 kA on an infinite bus.
+
+### Why is the fault current higher at 208 V than at 480 V?
+Fault current is proportional to the full-load current, and the same kVA draws 2.3 times more current at 208 V.
+
+### Where do I find the %Z?
+On the transformer nameplate or test report. Typical distribution units fall between 2 % and 6 %.
+
+<Related items={[
+  { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
+  { href: '/cable-fault-current-calculator/', label: 'Fault current at cable end' },
+  { href: '/transformer-full-load-current-chart/', label: 'Transformer full-load current chart' },
+  { href: '/protection/', label: 'Protection and MV calculators' },
+]} />

@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { site, toolkitReady } from '../../data/site';
+import EmailCapture from '../../components/EmailCapture.astro';
 const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
 ---
 <Base
@@ -38,16 +39,7 @@ const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
         <h2>Get the toolkit</h2>
         <p><a class="btn" href={site.gumroadUrl}>Get the toolkit for {site.price}</a></p>
         <p class="meta">One-time payment through Gumroad. You download the Excel workbook straight away.</p>
-        {site.emailFormAction && (
-          <>
-            <h2>Not ready to buy?</h2>
-            <p>Leave your email and get new calculators and corrections as they are published. No spam, and you can unsubscribe at any time.</p>
-            <form class="optin" method="post" action={site.emailFormAction}>
-              <label>Email address<input type="email" name="email" required autocomplete="email" /></label>
-              <button class="btn" type="submit">Subscribe</button>
-            </form>
-          </>
-        )}
+        <EmailCapture heading="Not ready to buy? Get the free sample sheet" />
         <p class="meta">See the <a href="/privacy/">privacy policy</a> for what is collected and how it is used.</p>
       </>
     ) : (

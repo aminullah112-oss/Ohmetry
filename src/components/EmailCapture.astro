@@ -1,0 +1,17 @@
+---
+import { site, emailReady } from '../data/site';
+const { heading = 'Get the free sample sheet' } = Astro.props as { heading?: string };
+---
+{emailReady && (
+  <aside class="capture">
+    <p class="capture-title">{heading}</p>
+    <p class="capture-sub">Leave your email for {site.emailOffer}. No spam, and you can unsubscribe from any message.</p>
+    <form class="optin" method="post" action={site.emailFormAction}>
+      <label>Email address<input type="email" name={site.emailFieldName} required autocomplete="email" /></label>
+      {Object.entries(site.emailHidden).map(([k, v]) => <input type="hidden" name={k} value={v} />)}
+      {site.emailHoneypot && <input type="text" name={site.emailHoneypot} value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px" />}
+      <button class="btn" type="submit">Send it to me</button>
+    </form>
+    <p class="meta">Handled by the email service named in the <a href="/privacy/">privacy policy</a>.</p>
+  </aside>
+)}

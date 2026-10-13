@@ -1,0 +1,54 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "kW to Amps Chart (Single and Three-Phase) | Ohmetry"
+description: "kW to amps for 120, 208, 240, 480 and 600 V, single-phase and three-phase, with the formulas and a worked example for other power factors."
+h1: "kW to Amps Chart"
+hub: Electrical
+hubHref: /electrical/
+crumb: "kW to amps chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { kwToAmpsChart } from '../../lib/calc/charts';
+
+This chart gives the line current for loads from 1 to 100 kW. Single-phase values assume a power factor of 1.0, which suits heaters and other resistive loads. Three-phase values assume 0.9, a common figure for a mix of motors and electronics. If your power factor is different, the correction is one multiplication, shown below.
+
+<ChartTable chart={kwToAmpsChart('single')} />
+
+<ChartTable chart={kwToAmpsChart('three')} />
+
+## The formulas
+
+<div class="formula">Single-phase: I = P × 1000 / (V × PF)<br/>Three-phase: I = P × 1000 / (√3 × V<sub>LL</sub> × PF)</div>
+
+P is the real power in kW, V the voltage and PF the power factor. For three-phase, V<sub>LL</sub> is the line-to-line voltage, such as 208, 480 or 600 V, and the result is the current in each line. For anything not in the chart, the <a href="/kw-to-amps-calculator/">kW to amps calculator</a> takes any value.
+
+## Worked example
+
+A 25 kW three-phase load at 480 V and a power factor of 0.9. The chart gives 33.4 A. If the power factor is 0.8, multiply by 0.9 / 0.8 = 1.125, which gives 37.6 A. Direct calculation agrees: 25,000 / (1.732 × 480 × 0.8) = 37.6 A.
+
+Current scales in a straight line with power, so you can add rows. A 35 kW load at 480 V and PF 0.9 is the 25 kW row plus the 10 kW row: 33.4 + 13.4 = 46.8 A.
+
+## Before you use the number for sizing
+
+- **Line current is not the design current.** A continuous load, one that runs for three hours or more, needs 125 % of its current when you choose the breaker. See <a href="/how-to-size-a-circuit-breaker/">how to size a circuit breaker</a>.
+- **Motors are different.** The NEC sizes motor circuits from table full-load current, not from kW. Use the <a href="/hp-to-amps-calculator/">HP to amps calculator</a> for motors.
+- **A kW rating may be shaft power.** On a motor nameplate, kW is usually the mechanical output. The electrical input is higher by the efficiency.
+
+## Questions
+
+### How many amps is 10 kW?
+At 240 V single-phase and PF 1.0, 41.7 A. At 480 V three-phase and PF 0.9, 13.4 A. Higher voltage means less current for the same power, which is why large loads use three-phase at 480 V.
+
+### Why is the 208 V three-phase current higher than at 240 V?
+Current is power divided by voltage, so a lower voltage needs more current for the same kW. A 30 kW load draws 92.5 A at 208 V and 80.2 A at 240 V.
+
+### Which power factor should I use?
+Use the figure from the equipment data or measurements. Resistive heaters are 1.0, lightly loaded motors can be 0.6 or below, and 0.8 to 0.9 is a usual planning value.
+
+<Related items={[
+  { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
+  { href: '/amps-to-kw-chart/', label: 'Amps to kW chart' },
+  { href: '/watts-to-amps-chart/', label: 'Watts to amps chart' },
+  { href: '/how-to-size-a-circuit-breaker/', label: 'How to size a circuit breaker' },
+]} />

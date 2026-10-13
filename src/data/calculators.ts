@@ -54,4 +54,17 @@ export const guides = [
   { slug: 'nec-voltage-drop-guide', name: 'NEC voltage drop: 3 % and 5 %', blurb: 'What the NEC recommends and how to size AWG wire for it, with examples.', hub: 'electrical' as HubId },
 ];
 
+export const charts = [
+  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 1 to 100 kW, single-phase and three-phase, 120 to 600 V.', hub: 'electrical' as HubId },
+  { slug: 'amps-to-kw-chart', name: 'Amps to kW chart', blurb: 'Real power for 5 to 200 A at the common voltages.', hub: 'electrical' as HubId },
+  { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 60 to 5,000 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
+  { slug: 'breaker-amps-to-watts-chart', name: 'Breaker amps to watts', blurb: 'Continuous load that 15 to 200 A breakers support.', hub: 'electrical' as HubId },
+  { slug: 'voltage-drop-chart', name: 'Voltage drop chart', blurb: 'Drop per amp and longest run for AWG copper and aluminum.', hub: 'electrical' as HubId },
+  { slug: 'wire-resistance-chart', name: 'Wire resistance chart', blurb: 'AWG diameter, area and ohms per 1,000 ft, copper and aluminum.', hub: 'electrical' as HubId },
+  { slug: 'hp-to-kw-chart', name: 'HP to kW chart', blurb: 'Mechanical and metric horsepower, with motor input power.', hub: 'electrical' as HubId },
+  { slug: 'transformer-full-load-current-chart', name: 'Transformer full-load current', blurb: 'Amps for 15 to 2,500 kVA at secondary and primary voltages.', hub: 'protection' as HubId },
+  { slug: 'transformer-short-circuit-current-chart', name: 'Transformer fault current', blurb: 'Fault level in kA by kVA and impedance at 208 and 480 V.', hub: 'protection' as HubId },
+  { slug: 'power-factor-correction-chart', name: 'Power factor correction chart', blurb: 'Capacitor kvar per kW from the present to the target power factor.', hub: 'protection' as HubId },
+];
+
 export const calcsIn = (hub: HubId) => calculators.filter((c) => c.hub === hub);

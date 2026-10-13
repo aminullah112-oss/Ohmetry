@@ -1,0 +1,62 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Voltage Drop Chart for Copper and Aluminum Wire (AWG) | Ohmetry"
+description: "Volts dropped per amp per 100 ft for AWG 14 to 4/0 copper and aluminum, plus the longest run for a 3 % drop at 120 V and 240 V, with a worked example."
+h1: "Voltage Drop Chart for Copper and Aluminum Wire"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Voltage drop chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { dropPerAmpChart, maxLengthChart } from '../../lib/calc/charts';
+
+Voltage drop is the voltage lost along a wire because of its resistance. These charts give it for common AWG sizes in feet and amps, so you can check a run without a calculator. Values are for a two-wire circuit, with the length of the return conductor counted, and for conductors at 75 °C.
+
+<ChartTable chart={dropPerAmpChart()} />
+
+Multiply the table value by the current in amps and by the one-way length in hundreds of feet.
+
+<ChartTable chart={maxLengthChart(240, [15, 20, 30, 50])} />
+
+<ChartTable chart={maxLengthChart(120, [15, 20])} />
+
+## How the numbers are calculated
+
+<div class="formula">V<sub>drop</sub> = 2 × I × L × ρ / A</div>
+
+I is the current, L the one-way length, A the conductor area and ρ the resistivity at the conductor temperature (0.017241 Ω·mm²/m for copper and 0.028264 for aluminum at 20 °C, raised for 75 °C). Reactance is ignored, which is accurate for short single-phase runs in small wire and understates the drop in large conductors. The maximum lengths are the length where the drop reaches 3 % of the supply voltage.
+
+## Worked example
+
+A 20 A load sits 150 ft from the panel on a 240 V circuit in 10 AWG copper. The drop is 0.243 × 20 × 1.5 = 7.3 V, or 3.0 % of 240 V, so the run is at the limit. The chart agrees: the longest 10 AWG run at 20 A is 148 ft.
+
+The same 20 A load, 150 ft away on a 120 V circuit, drops the same 7.3 V, but that is 6.1 % of 120 V. Moving to 6 AWG cuts it to 0.096 × 20 × 1.5 = 2.9 V, or 2.4 %. A higher supply voltage or a larger conductor both fix the problem.
+
+## What the NEC says
+
+The NEC does not set a mandatory voltage drop limit for ordinary circuits. It recommends in informational notes a maximum of 3 % for a branch circuit and 5 % for feeder and branch together. The details are in the <a href="/nec-voltage-drop-guide/">NEC voltage drop guide</a>.
+
+## What the chart leaves out
+
+- **Ampacity.** A wire that satisfies the voltage drop may still be too small for the breaker, and the reverse. Check the ampacity separately. The 14 AWG row is shown for length only; small conductors have their own overcurrent limits.
+- **Three-phase.** Multiply the single-phase drop by 0.866 for a balanced three-phase circuit at the same current.
+- **Resistance method.** The <a href="/nec-voltage-drop-guide/">guide</a> uses the circular-mil constant K = 12.9, which is about 2 % higher than these exact values. Both are good estimates.
+
+## Questions
+
+### What size wire for 100 ft at 20 amps?
+At 240 V, 12 AWG gives 0.386 × 20 × 1 = 7.7 V which is 3.2 %, so 10 AWG is the next choice with 4.9 V (2.0 %). At 120 V the same run needs 8 AWG for under 3 %.
+
+### Is aluminum drop higher than copper?
+About 65 % higher at the same size, because aluminum resistivity is higher. A larger aluminum size gives the same drop as copper.
+
+### Does the drop change with temperature?
+Yes. A hot conductor has higher resistance. The chart uses 75 °C. At 20 °C the drop is about 18 % lower.
+
+<Related items={[
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/nec-voltage-drop-guide/', label: 'NEC voltage drop guide' },
+  { href: '/wire-resistance-chart/', label: 'Wire resistance chart' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+]} />

@@ -1,0 +1,53 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Power Factor Correction Chart (kvar per kW) | Ohmetry"
+description: "Capacitor kvar needed per kW of load to raise the power factor from 0.5-0.9 to 0.9, 0.95, 0.98 or 1.0, with the formula and a worked example."
+h1: "Power Factor Correction Chart"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Power factor correction chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { pfMultiplierChart } from '../../lib/calc/charts';
+
+To raise a load's power factor you add capacitors that supply part of its reactive power. This chart gives the kvar of capacitance needed for each kW of load, from the present power factor to a target. Multiply the table value by the load in kW.
+
+<ChartTable chart={pfMultiplierChart()} />
+
+## The formula
+
+<div class="formula">Q<sub>c</sub> = P × (tan(acos PF<sub>1</sub>) − tan(acos PF<sub>2</sub>))</div>
+
+P is the real power in kW, PF<sub>1</sub> the present power factor and PF<sub>2</sub> the target. The table is the bracket for P = 1 kW. The <a href="/power-factor-correction-calculator/">power factor correction calculator</a> also gives the apparent power and the current before and after.
+
+## Worked example
+
+A plant draws 200 kW at a power factor of 0.75. To reach 0.95, read 0.553 kvar per kW in the table and multiply: 200 × 0.553 = 110.6 kvar. Apparent power falls from 200 / 0.75 = 267 kVA to 200 / 0.95 = 211 kVA, and the current falls by 1 − 0.75 / 0.95 = 21 %.
+
+Moving to unity needs 200 × 0.882 = 176 kvar, 60 % more capacitance, for a small extra gain. Few installations are corrected all the way to 1.0, and most stop between 0.95 and 0.98.
+
+## Practical points
+
+- **Utility charges.** Many utilities bill for a low power factor or for kVA demand. Correction pays only if your tariff charges for it. Check the bill first.
+- **Do not overcorrect.** A leading power factor at light load can raise the voltage. Banks are often split into steps that switch with the load.
+- **Harmonics.** Variable-speed drives and other electronic loads put harmonic currents through capacitors, and resonance with the supply can overload them. A harmonic study or detuned (reactor) capacitors may be needed.
+- **Motor-mounted capacitors.** A capacitor at a motor must not be larger than the motor's magnetizing current, or the motor can overshoot when it is switched off.
+
+## Questions
+
+### How many kvar do I need to correct 100 kW from 0.8 to 0.95?
+100 × 0.421 = 42.1 kvar. The next standard capacitor size above that is used in practice.
+
+### Does power factor correction lower the kW I use?
+No. It lowers the kVA and the current. The kW doing useful work stays the same, and the savings come from lower current and, where it applies, lower charges.
+
+### What is a good power factor?
+0.95 or higher is a usual target. Many utilities start to charge below 0.9.
+
+<Related items={[
+  { href: '/power-factor-correction-calculator/', label: 'Power factor correction calculator' },
+  { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
+  { href: '/kva-to-kw-calculator/', label: 'kVA to kW calculator' },
+  { href: '/protection/', label: 'Protection and MV calculators' },
+]} />

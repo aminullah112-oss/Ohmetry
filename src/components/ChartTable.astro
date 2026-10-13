@@ -1,0 +1,11 @@
+---
+import type { Chart } from '../lib/calc/charts';
+const { chart } = Astro.props as { chart: Chart };
+---
+<div class="chart-wrap" role="region" aria-label={chart.caption} tabindex="0">
+  <table class="chart">
+    <caption>{chart.caption}</caption>
+    <thead><tr>{chart.headers.map((h) => <th scope="col">{h}</th>)}</tr></thead>
+    <tbody>{chart.rows.map((r) => <tr>{r.map((c, i) => i === 0 ? <th scope="row">{c}</th> : <td>{c}</td>)}</tr>)}</tbody>
+  </table>
+</div>

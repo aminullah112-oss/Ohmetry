@@ -89,6 +89,7 @@ const hubIds = Object.keys(hubs) as HubId[];
         {guides.map((g) => (
           <a class="card calc-card" href={`/${g.slug}/`}><span class="tag">GUIDE</span><h3>{g.name}</h3><p>{g.blurb}</p></a>
         ))}
+        <a class="card calc-card" href="/charts/"><span class="tag">CHARTS</span><h3>Charts and tables</h3><p>kW, amps, voltage drop, wire resistance, transformer and power factor charts, with the formulas.</p></a>
         <a class="card calc-card" href="/toolkit/"><span class="tag">WORKBOOK</span><h3>Electrical Engineer's Toolkit</h3><p>The calculations in a spreadsheet you can keep, check and adapt.</p></a>
       </div>
     </div>

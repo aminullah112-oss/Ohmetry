@@ -1,0 +1,54 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "AWG Wire Resistance Chart (Ohms per 1,000 ft) | Ohmetry"
+description: "DC resistance of copper and aluminum wire from 4/0 to 24 AWG in ohms per 1,000 ft at 20 °C and 75 °C, with diameter, area and a worked example."
+h1: "AWG Wire Resistance Chart"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Wire resistance chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { wireResistanceChart } from '../../lib/calc/charts';
+
+This chart lists the diameter, cross-sectional area and DC resistance of AWG conductors. Resistance is given for copper and aluminum at 20 °C and at 75 °C, a common conductor rating. The values are calculated for a solid round conductor from the AWG definition and the resistivity of each metal.
+
+<ChartTable chart={wireResistanceChart()} />
+
+## How it is calculated
+
+<div class="formula">d = 0.127 × 92<sup>(36 − n)/39</sup> mm<br/>R = ρ × L / A, with ρ(T) = ρ<sub>20</sub> × (1 + α × (T − 20))</div>
+
+The AWG number n gives the diameter d, and the area is π d² / 4. The resistivity ρ at 20 °C is 0.017241 Ω·mm²/m for copper and 0.028264 for aluminum. The temperature coefficient α is 0.00393 per °C for copper and 0.00403 for aluminum. The <a href="/awg-to-mm2-converter/">AWG to mm² converter</a> gives the diameter and area for any gauge.
+
+## Worked example
+
+A 14 AWG copper cable runs 200 ft to a load, so the loop is 400 ft of conductor. At 20 °C the resistance is 2.525 Ω per 1,000 ft × 0.4 = 1.01 Ω. At 10 A that loses 10.1 V, which is 8.4 % of a 120 V supply. With the conductor at 75 °C the resistance rises to 3.071 × 0.4 = 1.23 Ω and the drop to 12.3 V. Moving to 10 AWG (0.999 Ω per 1,000 ft at 20 °C) cuts the loss to 4.0 V.
+
+## Differences from published tables
+
+- **Stranding.** Stranded conductors are a few percent higher in resistance than solid ones of the same size, because the individual wires follow a slightly longer path. Code and manufacturer tables for stranded wire give the higher figure. Use those for a final design.
+- **Coating.** Tinned or coated copper has slightly higher resistance than bare.
+- **AC resistance.** At 60 Hz, large conductors have a small skin effect, and reactance adds to the impedance. For long, large conductors use an impedance table.
+
+## Using it
+
+Resistance is the starting point for voltage drop, power loss and fault current. Power lost in a conductor is I² × R, so a 10 A load through 1.01 Ω wastes 101 W as heat. The <a href="/voltage-drop-chart/">voltage drop chart</a> turns these resistances into volts per amp and maximum lengths.
+
+## Questions
+
+### What is the resistance of 12 AWG copper wire?
+1.588 Ω per 1,000 ft at 20 °C, or 1.932 Ω at 75 °C, for a solid conductor.
+
+### Why does resistance go up as the AWG number goes down?
+A smaller AWG number is a thicker wire with more area, so its resistance is lower. The numbers run backwards: 4/0 is the thickest and 24 the thinnest on this chart.
+
+### How does temperature change the resistance?
+Copper rises by about 0.4 % per °C. From 20 °C to 75 °C that is about 22 %.
+
+<Related items={[
+  { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
+  { href: '/voltage-drop-chart/', label: 'Voltage drop chart' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/nec-voltage-drop-guide/', label: 'NEC voltage drop guide' },
+]} />

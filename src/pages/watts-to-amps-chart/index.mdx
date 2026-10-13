@@ -1,0 +1,55 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Watts to Amps Chart (12 V to 240 V) | Ohmetry"
+description: "Amps for loads from 60 to 5,000 watts at 12, 24, 48, 120, 230 and 240 V, with the formula and a worked example for inverters and low-voltage DC."
+h1: "Watts to Amps Chart"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Watts to amps chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { wattsToAmpsChart } from '../../lib/calc/charts';
+
+This chart gives the current drawn by a load of known wattage on common DC and single-phase AC voltages. It assumes a power factor of 1.0, which is exact for DC and for resistive AC loads such as heaters and incandescent lamps. For electronic or motor loads on AC, the current is higher by 1 / PF.
+
+<ChartTable chart={wattsToAmpsChart()} />
+
+## The formula
+
+<div class="formula">I = P / V<br/>AC with power factor: I = P / (V × PF)</div>
+
+I is in amps, P in watts and V in volts. For three-phase loads and for any wattage not shown, use the <a href="/watts-to-amps-calculator/">watts to amps calculator</a>.
+
+## Why low-voltage loads draw so much current
+
+The same power at one tenth of the voltage needs ten times the current. A 1,500 W load draws 12.5 A at 120 V and 125 A at 12 V. The cable has to carry that current, and its voltage drop eats a bigger share of a low supply voltage. This is why 12 V systems need thick, short cables and why larger systems move to 24 V or 48 V.
+
+## Worked example: an inverter on a 12 V battery
+
+A 2,000 W inverter load at 12 V draws 2,000 / 12 = 167 A according to the chart. The inverter is not 100 % efficient. At 90 % efficiency the battery supplies 2,000 / 0.9 = 2,222 W, which is 185 A. That is the current the battery, fuse and cable must handle, and it is why the cable between a battery and a large inverter is so heavy. For the cable size, use the <a href="/solar-wire-size-calculator/">DC cable size calculator</a>.
+
+## Things the chart leaves out
+
+- **Power factor.** On AC, a 1,000 W load at PF 0.8 draws 1,000 / (120 × 0.8) = 10.4 A at 120 V, not the 8.33 A in the table.
+- **Motor starting.** Motors draw several times their running current for a moment when they start.
+- **Efficiency.** Inverters, chargers and power supplies draw more input power than the output they deliver.
+- **Continuous operation.** Wiring and breaker sizing rules add margin for continuous loads. See <a href="/how-to-size-a-circuit-breaker/">how to size a circuit breaker</a>.
+
+## Questions
+
+### How many amps is 1,000 watts?
+8.33 A at 120 V, 4.17 A at 240 V, 83.3 A at 12 V and 20.8 A at 48 V, for a power factor of 1.0.
+
+### How many watts is 15 amps at 120 V?
+1,800 W. The 1,800 W row shows 15.0 A at 120 V.
+
+### Does the chart work for a heat pump or a motor?
+Not directly. Those loads have a power factor below 1 and a high starting current. Use the nameplate current or the NEC table value for the motor.
+
+<Related items={[
+  { href: '/watts-to-amps-calculator/', label: 'Watts to amps calculator' },
+  { href: '/kw-to-amps-chart/', label: 'kW to amps chart' },
+  { href: '/solar-wire-size-calculator/', label: 'DC cable size calculator' },
+  { href: '/inverter-size-calculator/', label: 'Inverter size calculator' },
+]} />

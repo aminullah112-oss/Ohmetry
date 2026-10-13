@@ -1,0 +1,54 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Transformer Full-Load Current Chart (kVA to Amps) | Ohmetry"
+description: "Three-phase transformer full-load amps for 15 to 2,500 kVA at 208, 240, 480 and 600 V, plus 4,160, 12,470 and 13,800 V, with formula and example."
+h1: "Transformer Full-Load Current Chart"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Transformer FLC chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { transformerFlcChart } from '../../lib/calc/charts';
+
+The full-load current of a transformer is the current at its rated kVA. It sets the minimum size of conductors and overcurrent devices on each side. The tables cover standard three-phase sizes at the usual secondary voltages and at common primary voltages.
+
+<ChartTable chart={transformerFlcChart([208, 240, 480, 600])} />
+
+<ChartTable chart={transformerFlcChart([4160, 12470, 13800])} />
+
+## The formula
+
+<div class="formula">I = kVA × 1000 / (√3 × V<sub>LL</sub>)</div>
+
+kVA is the rated apparent power and V<sub>LL</sub> the line-to-line voltage on the side you are checking. Full-load current is independent of the load power factor, because kVA already includes it. The <a href="/transformer-full-load-current-calculator/">transformer full-load current calculator</a> gives both sides at once for any rating. For a single-phase unit, divide kVA × 1000 by the voltage.
+
+## Worked example
+
+A 500 kVA transformer with a 480 V secondary has a full-load current of 500,000 / (1.732 × 480) = 601 A, matching the chart. The same transformer on a 208 V secondary has 1,388 A. The lower the voltage, the larger the bus, cable and breaker needed for the same kVA.
+
+On a 13,800 V primary the same 500 kVA unit draws 20.9 A, so the primary side is a small cable and a modest fuse. This large ratio between sides is also why the primary and secondary protection are chosen separately.
+
+## What the number is used for
+
+- **Conductor and device sizing.** NEC Article 450 sets the maximum overcurrent protection as a percentage of the full-load current, and the percentage depends on the voltage and on whether protection is on one or both sides. Check the current edition for the exact figures.
+- **Inrush.** On energizing, a transformer can draw many times its full-load current for a short time. Protective devices must ride through it.
+- **Fault level.** The fault current at the secondary follows from the full-load current and the impedance. See the <a href="/transformer-short-circuit-current-chart/">transformer fault current chart</a>.
+
+## Questions
+
+### What is the full-load current of a 1,000 kVA transformer at 480 V?
+1,203 A on the secondary.
+
+### What is the full-load current of a 75 kVA transformer at 208 V?
+208 A.
+
+### Do the primary and secondary currents multiply to the same kVA?
+Yes. 500 kVA at 13,800 V gives 20.9 A, and the same 500 kVA at 480 V gives 601 A. The power is equal on both sides, ignoring the small losses.
+
+<Related items={[
+  { href: '/transformer-full-load-current-calculator/', label: 'Transformer full-load current calculator' },
+  { href: '/transformer-short-circuit-current-chart/', label: 'Transformer fault current chart' },
+  { href: '/kva-to-amps-calculator/', label: 'kVA to amps calculator' },
+  { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
+]} />

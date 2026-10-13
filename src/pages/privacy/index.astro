@@ -1,4 +1,5 @@
 ---
+import { site, emailReady } from '../../data/site';
 import Article from '../../layouts/Article.astro';
 ---
 <Article title="Privacy Policy" description="What Ohmetry collects and what it does not: calculator inputs stay in your browser, and analytics use no cookies." h1="Privacy Policy">
@@ -12,7 +13,12 @@ import Article from '../../layouts/Article.astro';
 <p>The site is served through Cloudflare, which processes standard request data such as IP address and browser type to deliver pages and protect against abuse.</p>
 
 <h2>Email</h2>
-<p>If you write to hello@ohmetry.com, the message and your address are used only to reply. If a mailing list is added later, the sign-up form will name the email provider, and you can unsubscribe from any message.</p>
+<p>If you write to hello@ohmetry.com, the message and your address are used only to reply.</p>
+{emailReady ? (
+  <p>If you subscribe through a sign-up form, your email address is stored by {site.emailProvider}, which sends the sample sheet and occasional updates about new calculators and corrections. It is used for nothing else and is not sold or shared. You can unsubscribe from any message, and you can ask for your address to be deleted at hello@ohmetry.com.</p>
+) : (
+  <p>There is no mailing list at present. If one is added, the sign-up form will name the email provider, and you will be able to unsubscribe from any message.</p>
+)}
 
 <h2>Purchases</h2>
 <p>The Excel workbook is sold through Gumroad. Payment, your email address and the download are handled by Gumroad under its own <a href="https://gumroad.com/privacy">privacy policy</a>. Ohmetry does not see your payment details. Refund requests go to hello@ohmetry.com.</p>

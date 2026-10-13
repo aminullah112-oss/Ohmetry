@@ -96,6 +96,12 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 .prose sub, .prose sup { line-height: 0; }
 .prose table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-size: 0.93rem; margin: 1.2rem 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
 .prose th { text-align: left; font: 500 0.72rem var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--paper-2); }
+.chart-wrap { margin: 1.2rem 0; overflow-x: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
+.prose .chart-wrap table.chart { display: table; width: 100%; margin: 0; border: 0; border-radius: 0; overflow: visible; }
+.prose table.chart caption { caption-side: top; text-align: left; padding: 10px 14px; font-weight: 650; font-size: 0.9rem; color: var(--ink); border-bottom: 1px solid var(--line-soft); }
+.prose table.chart td, .prose table.chart tbody th { font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 0.88rem; white-space: nowrap; text-transform: none; letter-spacing: 0; color: var(--ink); background: transparent; font-weight: 500; }
+.prose table.chart tbody th { color: var(--muted); }
+.prose table.chart tbody tr:nth-child(even) { background: color-mix(in srgb, var(--paper-2) 55%, transparent); }
 .prose th, .prose td { padding: 10px 14px; border-bottom: 1px solid var(--line-soft); }
 .prose tr:last-child td { border-bottom: 0; }
 .prose .contains-task-list { list-style: none; padding-left: 0; }
@@ -222,3 +228,7 @@ section.block { padding-block: 40px 8px; }
   body { background: #fff; color: #000; }
   .calc, .formula, .prose table { box-shadow: none; }
 }
+.capture { margin: 32px 0 8px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.capture p { margin: 0 0 6px; }
+.capture .capture-title { font: 750 1.1rem var(--font-display); }
+.capture .capture-sub { color: var(--muted); font-size: 0.93rem; }

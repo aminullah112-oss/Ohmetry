@@ -1,0 +1,52 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Amps to kW Chart (Single and Three-Phase) | Ohmetry"
+description: "Real power in kW for 5 to 200 A at 120, 208, 240, 480 and 600 V, single-phase and three-phase, with formulas and a worked example."
+h1: "Amps to kW Chart"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Amps to kW chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { ampsToKwChart } from '../../lib/calc/charts';
+
+This chart converts a measured or rated current into real power in kW. Single-phase values use a power factor of 1.0. Three-phase values use 0.9, so scale them for your own power factor with the factor given below the tables.
+
+<ChartTable chart={ampsToKwChart('single')} />
+
+<ChartTable chart={ampsToKwChart('three')} />
+
+## The formulas
+
+<div class="formula">Single-phase: P = V × I × PF / 1000<br/>Three-phase: P = √3 × V<sub>LL</sub> × I × PF / 1000</div>
+
+P is in kW, I is the line current in amps and V<sub>LL</sub> the line-to-line voltage. The same relations in reverse are on the <a href="/kw-to-amps-chart/">kW to amps chart</a>. For a value between rows or a different voltage, use the <a href="/amps-to-watts-calculator/">amps to watts calculator</a>.
+
+## Worked example
+
+A 40 A single-phase circuit at 240 V carries up to 40 × 240 = 9,600 W, or 9.6 kW at a power factor of 1.0. A three-phase feeder at 480 V and 60 A with a power factor of 0.9 carries 1.732 × 480 × 60 × 0.9 = 44.9 kW, matching the 60 A row.
+
+To change the power factor, multiply the three-phase values by PF / 0.9. At a power factor of 0.8, the 60 A row becomes 44.9 × 0.8 / 0.9 = 39.9 kW.
+
+## Rated current is not available power
+
+The numbers show what a given current represents, not what a circuit can safely supply. A 50 A breaker does not mean you can use 50 A for hours: continuous loads are limited to 80 % of the breaker rating under the NEC. The <a href="/breaker-amps-to-watts-chart/">breaker amps to watts chart</a> shows the usable power for each standard breaker. The conductor and its terminals also set a limit that this chart ignores.
+
+## Questions
+
+### How many kW is 100 amps?
+At 240 V single-phase it is 24 kW. At 480 V three-phase and PF 0.9 it is 74.8 kW.
+
+### Is kW the same as kVA?
+No. kVA is apparent power, V × I with no power factor. kW is the real part, kVA × PF. A load at PF 0.9 drawing 100 kVA is delivering 90 kW. Transformers and generators are rated in kVA for that reason.
+
+### Why does the three-phase formula have a square root of three?
+The three line currents are 120° apart. Power from three balanced phases adds to √3 times the product of line voltage and line current.
+
+<Related items={[
+  { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
+  { href: '/kw-to-amps-chart/', label: 'kW to amps chart' },
+  { href: '/breaker-amps-to-watts-chart/', label: 'Breaker amps to watts chart' },
+  { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
+]} />

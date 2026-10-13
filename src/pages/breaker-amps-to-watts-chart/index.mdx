@@ -1,0 +1,53 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "How Many Watts Can a Breaker Handle? Chart (15-200 A) | Ohmetry"
+description: "Continuous load in watts that 15 to 200 A breakers support at 80 % of rating on 120 V, 240 V, 208 V and 480 V circuits, with the NEC rule explained."
+h1: "How Many Watts Can a Breaker Handle?"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Breaker amps to watts chart"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { breakerWattsChart } from '../../lib/calc/charts';
+
+A breaker rating in amps sets how much load the circuit can carry. This chart converts standard breaker ratings into watts at the common voltages. The values are the largest continuous load, 80 % of the breaker rating, because a continuous load is the case that usually governs. The single-phase columns use a power factor of 1.0, and the three-phase columns multiply by √3.
+
+<ChartTable chart={breakerWattsChart()} />
+
+## Why 80 %
+
+Under the NEC, the overcurrent device for a continuous load, one expected to run for three hours or more, must be rated at least 125 % of that load (210.20(A) for branch circuits). Turned around, a breaker supports a continuous load of 1 / 1.25 = 80 % of its rating. A noncontinuous load can use the full rating, up to the limit of the wire.
+
+<div class="formula">Continuous load (W) = 0.8 × breaker amps × V (single-phase)<br/>Continuous load (W) = 0.8 × breaker amps × √3 × V<sub>LL</sub> (three-phase)</div>
+
+## Worked example
+
+A 20 A, 120 V circuit supports a continuous load of 0.8 × 20 × 120 = 1,920 W, which is the figure in the table. At its full rating, 20 × 120 = 2,400 W is available for loads that are not continuous. A 50 A, 240 V circuit supports 9,600 W continuously, a figure used for sizing an EV charger circuit: a 40 A charger on a 50 A breaker is exactly at the limit.
+
+To go the other way, a continuous 3,000 W load at 240 V draws 12.5 A. The breaker must be at least 1.25 × 12.5 = 15.6 A, so choose a 20 A breaker. The <a href="/breaker-size-calculator/">breaker size calculator</a> does this for any load.
+
+## What the chart does not tell you
+
+- **The wire sets a second limit.** A 20 A breaker needs a conductor rated for 20 A or more. The <a href="/wire-size-calculator/">wire size calculator</a> checks the conductor.
+- **The panel and the supply.** The sum of all circuits is limited by the panel rating and the service, not by adding up breaker sizes.
+- **Specific loads have their own rules.** Motors, welders, air-conditioning equipment and EV chargers each have their own sections in the NEC.
+- **Power factor.** For a lagging load, real power is lower than shown.
+
+## Questions
+
+### How many watts can a 15 amp breaker handle?
+1,800 W at 120 V at its full rating, and 1,440 W continuously.
+
+### How many watts is a 100 amp panel?
+At 240 V single-phase, 24,000 W at the full rating of the main breaker. Real service sizing uses a load calculation, not the rating of the main.
+
+### Can a 20 amp breaker run a 2,000 W heater?
+At 120 V the heater draws 16.7 A. If it runs for three hours or more it is a continuous load and 16.7 A exceeds 80 % of 20 A (16 A), so use a 240 V heater or a larger circuit.
+
+<Related items={[
+  { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
+  { href: '/how-to-size-a-circuit-breaker/', label: 'How to size a circuit breaker' },
+  { href: '/amps-to-kw-chart/', label: 'Amps to kW chart' },
+  { href: '/ev-charger-wire-size-calculator/', label: 'EV charger circuit calculator' },
+]} />

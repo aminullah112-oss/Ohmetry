@@ -9,11 +9,23 @@ export const site = {
   price: '$19',
   /** Gumroad product URL, e.g. https://yourname.gumroad.com/l/toolkit */
   gumroadUrl: 'https://aminullah11.gumroad.com/l/hdauo',
-  /** POST endpoint of the email service (Buttondown, ConvertKit, Formspree, ...). Receives a field named "email". */
+  /** POST endpoint of the email service (Brevo, Buttondown, ConvertKit, ...). Leave empty to hide every sign-up form. */
   emailFormAction: '',
+  /** Name of the email service, shown on the privacy page once the form is live. */
+  emailProvider: 'Brevo',
+  /** Name of the email input the service expects ("EMAIL" for Brevo, "email" for most others). */
+  emailFieldName: 'email',
+  /** Extra hidden fields the service asks for, copied from its embed code (for Brevo: locale, html_type). */
+  emailHidden: {} as Record<string, string>,
+  /** Name of the empty honeypot field some services add to block bots (Brevo: email_address_check). Leave empty if none. */
+  emailHoneypot: '',
+  /** What the subscriber gets. Shown on the form. Say only what the welcome email actually delivers. */
+  emailOffer: 'a free sample sheet from the workbook, plus new calculators and corrections as they are published',
 };
 
 /** Shown on the home page. Update when the test count changes (`npm test`). */
-export const testCount = 204;
+export const testCount = 216;
 
 export const toolkitReady = Boolean(site.gumroadUrl);
+
+export const emailReady = Boolean(site.emailFormAction);
