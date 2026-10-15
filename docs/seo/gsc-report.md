@@ -1,45 +1,47 @@
 # Search Console report
 
-Site: sc-domain:ohmetry.com. Period: 2026-09-14 to 2026-10-12. Generated 2026-10-14.
+Site: sc-domain:ohmetry.com. Period: 2026-09-15 to 2026-10-13. Generated 2026-10-15.
 
 ## Top pages
 
 | Page | Clicks | Impressions | CTR | Avg position |
 |---|---|---|---|---|
+| /earth-resistance-calculator/ | 1 | 4 | 25.0 % | 9.5 |
 | http://ohmetry.com/generator-size-calculator/ | 0 | 4 | 0.0 % | 46.3 |
-| / | 0 | 4 | 0.0 % | 3.5 |
-| /amps-to-watts-calculator/ | 0 | 15 | 0.0 % | 75.7 |
-| /awg-to-mm2-converter/ | 0 | 85 | 0.0 % | 76.6 |
+| / | 0 | 5 | 0.0 % | 17.4 |
+| /amps-to-watts-calculator/ | 0 | 18 | 0.0 % | 74.5 |
+| /awg-to-mm2-converter/ | 0 | 90 | 0.0 % | 76.1 |
 | /breaker-size-calculator/ | 0 | 1 | 0.0 % | 16.0 |
+| /cable-fault-current-calculator/ | 0 | 1 | 0.0 % | 8.0 |
 | /cable-size-calculator/ | 0 | 10 | 0.0 % | 89.6 |
-| /conduit-fill-calculator/ | 0 | 36 | 0.0 % | 74.8 |
+| /conduit-fill-calculator/ | 0 | 37 | 0.0 % | 75.1 |
 | /contact/ | 0 | 2 | 0.0 % | 4.5 |
 | /corrections/ | 0 | 2 | 0.0 % | 6.5 |
 | /ct-burden-calculator/ | 0 | 3 | 0.0 % | 31.7 |
 | /disclaimer/ | 0 | 1 | 0.0 % | 17.0 |
-| /earth-resistance-calculator/ | 0 | 1 | 0.0 % | 10.0 |
 | /electrical/ | 0 | 5 | 0.0 % | 56.8 |
 | /ev-charger-wire-size-calculator/ | 0 | 2 | 0.0 % | 19.5 |
-| /generator-size-calculator/ | 0 | 19 | 0.0 % | 71.1 |
-| /kva-to-amps-calculator/ | 0 | 28 | 0.0 % | 74.9 |
-| /kw-to-amps-calculator/ | 0 | 58 | 0.0 % | 73.7 |
+| /generator-size-calculator/ | 0 | 30 | 0.0 % | 73.2 |
+| /kva-to-amps-calculator/ | 0 | 35 | 0.0 % | 76.5 |
+| /kva-to-kw-calculator/ | 0 | 3 | 0.0 % | 54.7 |
+| /kw-to-amps-calculator/ | 0 | 69 | 0.0 % | 72.1 |
 | /methodology/ | 0 | 3 | 0.0 % | 5.3 |
 | /nec-voltage-drop-guide/ | 0 | 3 | 0.0 % | 7.3 |
-| /off-grid-solar-calculator/ | 0 | 11 | 0.0 % | 58.8 |
-| /ohms-law-calculator/ | 0 | 4 | 0.0 % | 40.0 |
+| /off-grid-solar-calculator/ | 0 | 23 | 0.0 % | 74.1 |
+| /ohms-law-calculator/ | 0 | 6 | 0.0 % | 51.5 |
 | /privacy/ | 0 | 2 | 0.0 % | 2.0 |
 | /protection/ | 0 | 2 | 0.0 % | 5.5 |
-| /relay-setting-checklist/ | 0 | 2 | 0.0 % | 12.5 |
-| /short-circuit-current-calculator/ | 0 | 3 | 0.0 % | 83.7 |
+| /relay-setting-checklist/ | 0 | 3 | 0.0 % | 21.7 |
+| /short-circuit-current-calculator/ | 0 | 4 | 0.0 % | 83.3 |
 | /solar-ev/ | 0 | 2 | 0.0 % | 7.5 |
-| /solar-panel-calculator/ | 0 | 37 | 0.0 % | 83.2 |
-| /solar-wire-size-calculator/ | 0 | 13 | 0.0 % | 58.6 |
+| /solar-panel-calculator/ | 0 | 38 | 0.0 % | 83.6 |
+| /solar-wire-size-calculator/ | 0 | 16 | 0.0 % | 58.7 |
 | /three-phase-power-calculator/ | 0 | 19 | 0.0 % | 80.0 |
-| /transformer-full-load-current-calculator/ | 0 | 11 | 0.0 % | 38.2 |
-| /voltage-drop-calculator/ | 0 | 93 | 0.0 % | 74.3 |
+| /transformer-full-load-current-calculator/ | 0 | 17 | 0.0 % | 36.0 |
+| /voltage-drop-calculator/ | 0 | 97 | 0.0 % | 74.9 |
 | /voltage-drop-formula/ | 0 | 4 | 0.0 % | 57.3 |
-| /watts-to-amps-calculator/ | 0 | 72 | 0.0 % | 60.1 |
-| /wire-size-calculator/ | 0 | 29 | 0.0 % | 58.2 |
+| /watts-to-amps-calculator/ | 0 | 82 | 0.0 % | 57.4 |
+| /wire-size-calculator/ | 0 | 30 | 0.0 % | 56.4 |
 
 ## Top queries
 
@@ -55,14 +57,17 @@ Site: sc-domain:ohmetry.com. Period: 2026-09-14 to 2026-10-12. Generated 2026-10
 | 1 kw kaç amper çeker | 0 | 1 | 0.0 % | 78.0 |
 | 1 kw to amps | 0 | 1 | 0.0 % | 80.0 |
 | 1 kw to amps in 3 phase | 0 | 1 | 0.0 % | 67.0 |
+| 1 watts how many amps | 0 | 1 | 0.0 % | 94.0 |
 | 1.2 amps to watts | 0 | 1 | 0.0 % | 81.0 |
 | 10 amps to watts 220v | 0 | 1 | 0.0 % | 82.0 |
 | 10 awg in mm2 | 0 | 3 | 0.0 % | 80.0 |
 | 10 kilowatts to amps | 0 | 2 | 0.0 % | 76.0 |
 | 10kw in amps 240v | 0 | 2 | 0.0 % | 72.0 |
 | 10mm2 to awg | 0 | 1 | 0.0 % | 68.0 |
-| 11 kw til ampere | 0 | 1 | 0.0 % | 77.0 |
+| 11 kw til ampere | 0 | 6 | 0.0 % | 58.3 |
+| 12 amps to watts | 0 | 1 | 0.0 % | 81.0 |
 | 12 awg to mm2 | 0 | 2 | 0.0 % | 74.0 |
+| 120 mm2 to awg | 0 | 1 | 0.0 % | 65.0 |
 | 120 watts is how many amps | 0 | 1 | 0.0 % | 75.0 |
 | 1200 watts to amps | 0 | 1 | 0.0 % | 2.0 |
 | 12awg in mm2 | 0 | 1 | 0.0 % | 82.0 |
@@ -92,9 +97,6 @@ Site: sc-domain:ohmetry.com. Period: 2026-09-14 to 2026-10-12. Generated 2026-10
 | 20 awg to mm | 0 | 1 | 0.0 % | 73.0 |
 | 20 awg to mm2 | 0 | 2 | 0.0 % | 73.5 |
 | 20 kw to amps | 0 | 1 | 0.0 % | 81.0 |
-| 200 watts to amps | 0 | 1 | 0.0 % | 71.0 |
-| 22 awg to mm2 | 0 | 1 | 0.0 % | 73.0 |
-| 22awg to mm2 | 0 | 1 | 0.0 % | 80.0 |
 
 ## How to read this
 
