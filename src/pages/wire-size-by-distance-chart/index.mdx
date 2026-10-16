@@ -1,0 +1,65 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Wire Size by Distance Chart (3 % Drop, 120 V and 240 V) | Ohmetry"
+description: "Smallest copper wire for 15, 20 and 30 A circuits over 25 to 300 ft on 120 V and 240 V, sized for a 3 % voltage drop, with the formula and a worked example."
+h1: "Wire Size by Distance Chart"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Wire size by distance"
+---
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { wireSizeByDistanceChart } from '../../lib/calc/charts';
+
+How thick the wire needs to be depends on how far it runs. A long run loses voltage, and the load gets less than the supply provides. These charts give the smallest copper wire for a 3 % voltage drop at 25 to 300 feet, for 15, 20 and 30 A circuits on 120 V and 240 V. Each answer is also checked against the smallest wire the NEC allows for that breaker size, so a short run never returns a wire that is too small for the breaker.
+
+<ChartTable chart={wireSizeByDistanceChart(120)} />
+
+<ChartTable chart={wireSizeByDistanceChart(240)} />
+
+Run length is one-way, from the panel to the load. The return conductor is counted for you.
+
+## How the sizes are chosen
+
+<div class="formula">V<sub>drop</sub> = 2 × I × L × ρ / A ≤ 0.03 × V</div>
+
+For each current and length, the chart takes the smallest AWG whose drop is within 3 % of the supply voltage, with copper at 75 °C and resistance only. It then applies a floor: 14 AWG for a 15 A circuit, 12 AWG for 20 A and 10 AWG for 30 A, the smallest copper conductors the NEC allows to be protected by those devices (240.4(D)). The calculation is the same one behind the <a href="/voltage-drop-chart/">voltage drop chart</a> and the <a href="/voltage-drop-calculator/">voltage drop calculator</a>.
+
+## Worked example
+
+A 20 A load sits 150 ft from the panel on a 240 V circuit. The 240 V chart gives 8 AWG. Check it: 8 AWG drops 0.153 V per amp per 100 ft, so 0.153 × 20 × 1.5 = 4.6 V, which is 1.9 % of 240 V. The next size down, 10 AWG, would drop 7.3 V, or 3.04 %, just over the limit.
+
+On a 120 V circuit the same load needs 6 AWG. 8 AWG would drop 4.6 V, which is 3.8 % of 120 V. Using 240 V halves the current for the same power, and the wire gets smaller.
+
+On a short run the floor takes over. A 20 A load 25 ft away would pass the drop test with 14 AWG at 2.6 % on 120 V, but the chart says 12 AWG, because 14 AWG may not be protected by a 20 A breaker.
+
+## What this chart does not check
+
+- **Currents above 30 A.** Larger circuits are sized by ampacity first, using the NEC tables, with drop checked afterward. Use the <a href="/wire-size-calculator/">wire size calculator</a>, which checks both.
+- **Ampacity corrections.** Hot ambient temperatures, more than three current-carrying conductors in a conduit, and terminal temperature ratings can all require a larger wire.
+- **Aluminum.** Larger sizes are needed. The <a href="/voltage-drop-chart/">voltage drop chart</a> lists aluminum separately.
+- **Three-phase.** The drop per amp is about 0.866 times the single-phase value on a balanced three-phase circuit at the same current.
+- **Special loads.** Motors, EV chargers and welders have their own rules.
+
+The NEC does not set a mandatory voltage drop limit for ordinary circuits. It recommends 3 % for a branch circuit and 5 % for feeder and branch together. The details are in the <a href="/nec-voltage-drop-guide/">NEC voltage drop guide</a>.
+
+## Questions
+
+### What size wire for 100 feet at 20 amps?
+10 AWG copper on a 240 V circuit, and 8 AWG on 120 V, for a 3 % drop.
+
+### What size wire for 200 feet at 30 amps on 240 V?
+6 AWG copper. On 120 V it is 3 AWG.
+
+### Why does the chart stop at 30 amps?
+Above 30 A the wire is chosen by its current rating first, and that depends on temperature, insulation and installation, so a distance chart alone could give a wire that is too small. The wire size calculator handles that case.
+
+### Is 3 % the right limit?
+It is the NEC recommendation for a branch circuit, not a requirement. A looser limit may be acceptable for a load that tolerates it, and a tighter one is better for motors and sensitive equipment.
+
+<Related items={[
+  { href: '/voltage-drop-chart/', label: 'Voltage drop chart' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+  { href: '/nec-voltage-drop-guide/', label: 'NEC voltage drop guide' },
+]} />

@@ -60,6 +60,7 @@ export const charts = [
   { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 60 to 5,000 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
   { slug: 'breaker-amps-to-watts-chart', name: 'Breaker amps to watts', blurb: 'Continuous load that 15 to 200 A breakers support.', hub: 'electrical' as HubId },
   { slug: 'voltage-drop-chart', name: 'Voltage drop chart', blurb: 'Drop per amp and longest run for AWG copper and aluminum.', hub: 'electrical' as HubId },
+  { slug: 'wire-size-by-distance-chart', name: 'Wire size by distance', blurb: 'Smallest copper wire for a 3 % drop over 25 to 300 ft at 120 V and 240 V.', hub: 'electrical' as HubId },
   { slug: 'wire-resistance-chart', name: 'Wire resistance chart', blurb: 'AWG diameter, area and ohms per 1,000 ft, copper and aluminum.', hub: 'electrical' as HubId },
   { slug: 'hp-to-kw-chart', name: 'HP to kW chart', blurb: 'Mechanical and metric horsepower, with motor input power.', hub: 'electrical' as HubId },
   { slug: 'transformer-full-load-current-chart', name: 'Transformer full-load current', blurb: 'Amps for 15 to 2,500 kVA at secondary and primary voltages.', hub: 'protection' as HubId },

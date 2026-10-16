@@ -26,7 +26,7 @@ Free NEC-first electrical, solar and protection calculators plus a paid Excel wo
 2. **Oct 22 check:** /kw-to-hp-calculator/, /voltage-drop-chart/, /wire-resistance-chart/ were "Crawled, currently not indexed". If still so, look at what each page offers that overlapping pages do not.
 3. **Brevo form values** from the owner into `src/data/site.ts` (action URL, field name, hidden fields, honeypot) per `docs/EMAIL-SETUP.md`.
 4. **Link building (owner-led, anonymous):** Eng-Tips and Reddit answers; 5 polite resource-page emails a week from hello@ohmetry.com. Targets and the email template: tricountyelectricservice.com (EV breaker post), northernmistersparky.com (generator sizing), innovativehobbysupply.com (NEC 80 % rule), aldridgeconstruction.biz, safetyspace.co, rvnews.com. Disclose that Ohmetry is the sender's site. No paid links, no exchanges.
-5. **Possible next pages:** "wire size for X feet" voltage-drop-only page (competitors rank for it); keep any new page formula-based.
+5. **Built 2026-10-16:** /wire-size-by-distance-chart/ (smallest copper AWG for a 3 % drop, 15/20/30 A, 25 to 300 ft, with the 240.4(D) floor). Request indexing for it. Keep any new page formula-based.
 6. **Nov 12 review:** compare pilot chart-page impressions with the rest. Gate: if there is no upward trend and fewer than 5 real backlinks, change how outreach is done before building more pages.
 
 ## Targets and honesty

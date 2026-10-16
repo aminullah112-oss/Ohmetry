@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
-  dropPerAmpChart, maxLengthChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, type Chart,
+  dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, type Chart,
 } from './charts';
 
 const cell = (c: Chart, row: string, col: string) => c.rows.find((r) => r[0] === row)![c.headers.indexOf(col)];
@@ -69,8 +69,29 @@ describe('reference charts', () => {
     expect(cell(c, '0.9', 'Target 0.9')).toBe('–');
   });
 
+  it('wire size by distance: 20 A over 100 ft is 10 AWG on 240 V and 8 AWG on 120 V', () => {
+    expect(cell(wireSizeByDistanceChart(240), '100 ft', '20 A')).toBe('10');
+    expect(cell(wireSizeByDistanceChart(120), '100 ft', '20 A')).toBe('8');
+  });
+
+  it('wire size by distance: the 240.4(D) floor holds on short runs (20 A at 25 ft is 12 AWG, 15 A is 14 AWG, 30 A is 10 AWG)', () => {
+    const c = wireSizeByDistanceChart(120);
+    expect(cell(c, '25 ft', '15 A')).toBe('14');
+    expect(cell(c, '25 ft', '20 A')).toBe('12');
+    expect(cell(c, '25 ft', '30 A')).toBe('10');
+  });
+
+  it('wire size by distance: sizes never shrink as the run gets longer', () => {
+    const c = wireSizeByDistanceChart(240);
+    const num = (s: string) => (s.includes('/') ? -Number(s.split('/')[0]) : s === '> 4/0' ? -99 : Number(s));
+    for (let col = 1; col < c.headers.length; col++) {
+      const sizes = c.rows.map((r) => num(r[col]));
+      for (let i = 1; i < sizes.length; i++) expect(sizes[i]).toBeLessThanOrEqual(sizes[i - 1]);
+    }
+  });
+
   it('every chart row has one cell per header', () => {
-    for (const c of [kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart()]) {
+    for (const c of [kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);
     }
   });

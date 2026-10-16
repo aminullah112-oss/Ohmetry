@@ -148,3 +148,26 @@ export function pfMultiplierChart(): Chart {
     rows: PF_NOW.map((now) => [String(now), ...PF_TARGET.map((t) => (t > now ? fixed(pfCorrection(1, now, t).kvarNeeded, 3) : '–'))]),
   };
 }
+
+export const RUN_LENGTHS_FT = [25, 50, 75, 100, 150, 200, 300];
+/** Smallest copper size the NEC allows to be protected by a 15, 20 or 30 A device (240.4(D)): 14, 12 and 10 AWG. Index = AWG number. */
+const SMALL_CONDUCTOR_FLOOR: Record<number, number> = { 15: 14, 20: 12, 30: 10 };
+
+/**
+ * Smallest copper AWG for a single-phase two-wire run that keeps the drop within 3 %, and is also not smaller than the
+ * conductor 240.4(D) allows for a 15, 20 or 30 A device. Only those three currents are charted because above 30 A the
+ * ampacity table, not this method, decides the size. Resistance only, conductors at 75 C.
+ */
+export function wireSizeByDistanceChart(systemV: number, ampsList: number[] = [15, 20, 30]): Chart {
+  const smallest = (amps: number, lengthFt: number) => {
+    const floor = SMALL_CONDUCTOR_FLOOR[amps];
+    if (floor === undefined) throw new Error(`${amps} A has no small-conductor floor`);
+    const ok = DROP_AWG.filter((n) => n <= floor).find((n) => (2 * amps * lengthFt * rhoPerFt('copper', n)) / systemV <= 0.03);
+    return ok === undefined ? '> 4/0' : awgLabel(ok);
+  };
+  return {
+    caption: `Smallest copper AWG for a 3 % drop, ${systemV} V single-phase, conductors at 75 °C`,
+    headers: ['One-way run', ...ampsList.map((a) => `${a} A`)],
+    rows: RUN_LENGTHS_FT.map((ft) => [`${ft} ft`, ...ampsList.map((a) => smallest(a, ft))]),
+  };
+}
