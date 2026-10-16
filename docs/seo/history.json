@@ -99,15 +99,15 @@
  },
  {
   "date": "2026-10-16",
-  "pages": 57,
-  "indexable": 56,
+  "pages": 58,
+  "indexable": 57,
   "calculators": 30,
-  "guides": 14,
-  "tests": 216,
-  "commits": 62,
+  "guides": 15,
+  "tests": 219,
+  "commits": 64,
   "auditFailures": 0,
-  "auditWarnings": 7,
+  "auditWarnings": 6,
   "gscClicks28": 1,
-  "gscImpressions28": 885
+  "gscImpressions28": 1203
  }
 ]

@@ -1,10 +1,9 @@
 {
-  "pages": 57,
-  "indexable": 56,
+  "pages": 58,
+  "indexable": 57,
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/charts/: only 295 words",
     "/contact/: only 160 words",
     "/corrections/: only 187 words",
     "/disclaimer/: only 160 words",
