@@ -90,6 +90,13 @@ describe('reference charts', () => {
     }
   });
 
+  it('new rows: 22 kW at 400 V three-phase is 35.3 A; 7.6 kW at 240 V single-phase is 31.7 A; 1,440 W at 120 V is 12.0 A; 4,500 W at 240 V is 18.8 A', () => {
+    expect(cell(kwToAmpsChart('three'), '22', '400 V')).toBe('35.3');
+    expect(cell(kwToAmpsChart('single'), '7.6', '240 V')).toBe('31.7');
+    expect(cell(wattsToAmpsChart(), '1440', '120 V')).toBe('12.0');
+    expect(cell(wattsToAmpsChart(), '4500', '240 V')).toBe('18.8');
+  });
+
   it('every chart row has one cell per header', () => {
     for (const c of [kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);

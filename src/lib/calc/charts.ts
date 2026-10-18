@@ -19,15 +19,15 @@ const fixed = (n: number, d: number) => n.toLocaleString('en-US', { minimumFract
 const auto = (n: number) => (n < 10 ? fixed(n, 2) : n < 100 ? fixed(n, 1) : fixed(n, 0));
 const volts = (v: number) => `${v} V`;
 
-export const KW_ROWS = [1, 2, 3, 5, 7.5, 10, 15, 20, 25, 30, 40, 50, 75, 100];
+export const KW_ROWS = [1, 1.5, 2, 3, 4, 5, 6, 7.2, 7.5, 7.6, 8, 10, 11, 12, 15, 20, 22, 25, 30, 40, 50, 75, 100];
 export const AMP_ROWS = [5, 10, 15, 20, 30, 40, 50, 60, 80, 100, 150, 200];
-export const WATT_ROWS = [60, 100, 500, 750, 1000, 1500, 1800, 2000, 3000, 5000];
+export const WATT_ROWS = [60, 100, 140, 150, 200, 250, 300, 400, 500, 600, 700, 750, 800, 900, 1000, 1200, 1400, 1440, 1500, 1800, 2000, 2400, 2500, 3000, 3500, 4000, 4500, 5000, 6000, 7500];
 export const TRANSFORMER_KVA = [15, 30, 45, 75, 112.5, 150, 225, 300, 500, 750, 1000, 1500, 2000, 2500];
 export const HP_ROWS = [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 5, 7.5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 100, 150, 200, 250, 300, 400, 500];
 
 /** kW to amps. Single-phase at power factor 1, three-phase at 0.9. */
 export function kwToAmpsChart(phase: 'single' | 'three'): Chart {
-  const volt = phase === 'single' ? [120, 208, 240] : [208, 240, 480, 600];
+  const volt = phase === 'single' ? [120, 208, 230, 240] : [208, 240, 400, 480, 600];
   const pf = phase === 'single' ? 1 : 0.9;
   return {
     caption: phase === 'single' ? 'Single-phase line current in amps, power factor 1.0' : 'Three-phase line current in amps, power factor 0.9',
@@ -38,7 +38,7 @@ export function kwToAmpsChart(phase: 'single' | 'three'): Chart {
 
 /** Amps to kW. Single-phase at power factor 1, three-phase at 0.9. */
 export function ampsToKwChart(phase: 'single' | 'three'): Chart {
-  const volt = phase === 'single' ? [120, 208, 240] : [208, 240, 480, 600];
+  const volt = phase === 'single' ? [120, 208, 230, 240] : [208, 240, 400, 480, 600];
   const pf = phase === 'single' ? 1 : 0.9;
   const k = phase === 'three' ? Math.sqrt(3) : 1;
   return {

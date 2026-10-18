@@ -51,13 +51,14 @@ export const guides = [
   { slug: 'voltage-drop-formula', name: 'Voltage drop formula', blurb: 'DC, single-phase and three-phase, worked in mm² and AWG.', hub: 'electrical' as HubId },
   { slug: 'relay-setting-checklist', name: 'Relay setting checklist', blurb: 'Seven stages for a transformer-feeder overcurrent relay, with a worked example.', hub: 'protection' as HubId },
   { slug: 'how-to-size-a-circuit-breaker', name: 'How to size a circuit breaker', blurb: 'Six steps under the NEC, with EV, mixed-load and water-heater examples.', hub: 'electrical' as HubId },
+  { slug: 'how-to-size-a-cable', name: 'How to size a cable', blurb: 'Five checks, one worked example: current, derating, voltage drop and fault withstand.', hub: 'electrical' as HubId },
   { slug: 'nec-voltage-drop-guide', name: 'NEC voltage drop: 3 % and 5 %', blurb: 'What the NEC recommends and how to size AWG wire for it, with examples.', hub: 'electrical' as HubId },
 ];
 
 export const charts = [
-  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 1 to 100 kW, single-phase and three-phase, 120 to 600 V.', hub: 'electrical' as HubId },
+  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 1 to 100 kW, single-phase and three-phase, 120 to 600 V including 230 and 400 V.', hub: 'electrical' as HubId },
   { slug: 'amps-to-kw-chart', name: 'Amps to kW chart', blurb: 'Real power for 5 to 200 A at the common voltages.', hub: 'electrical' as HubId },
-  { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 60 to 5,000 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
+  { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 60 to 7,500 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
   { slug: 'breaker-amps-to-watts-chart', name: 'Breaker amps to watts', blurb: 'Continuous load that 15 to 200 A breakers support.', hub: 'electrical' as HubId },
   { slug: 'voltage-drop-chart', name: 'Voltage drop chart', blurb: 'Drop per amp and longest run for AWG copper and aluminum.', hub: 'electrical' as HubId },
   { slug: 'wire-size-by-distance-chart', name: 'Wire size by distance', blurb: 'Smallest copper wire for a 3 % drop over 25 to 300 ft at 120 V and 240 V.', hub: 'electrical' as HubId },

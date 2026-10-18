@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/CalcPage.astro
 title: "kW to Amps Chart (Single and Three-Phase) | Ohmetry"
-description: "kW to amps for 120, 208, 240, 480 and 600 V, single-phase and three-phase, with the formulas and a worked example for other power factors."
+description: "kW to amps for 120 to 600 V, including 230 V and 400 V, single-phase and three-phase, with the formulas and a worked example for other power factors."
 h1: "kW to Amps Chart"
 hub: Electrical
 hubHref: /electrical/
@@ -21,9 +21,11 @@ This chart gives the line current for loads from 1 to 100 kW. Single-phase value
 
 <div class="formula">Single-phase: I = P × 1000 / (V × PF)<br/>Three-phase: I = P × 1000 / (√3 × V<sub>LL</sub> × PF)</div>
 
-P is the real power in kW, V the voltage and PF the power factor. For three-phase, V<sub>LL</sub> is the line-to-line voltage, such as 208, 480 or 600 V, and the result is the current in each line. For anything not in the chart, the <a href="/kw-to-amps-calculator/">kW to amps calculator</a> takes any value.
+P is the real power in kW, V the voltage and PF the power factor. For three-phase, V<sub>LL</sub> is the line-to-line voltage, such as 208, 400, 480 or 600 V, and the result is the current in each line. For anything not in the chart, the <a href="/kw-to-amps-calculator/">kW to amps calculator</a> takes any value.
 
 ## Worked example
+
+A 22 kW three-phase load at 400 V and a power factor of 0.9 draws 35.3 A, the 22 kW row. An EV charger of 7.6 kW on a 240 V single-phase supply draws 31.7 A.
 
 A 25 kW three-phase load at 480 V and a power factor of 0.9. The chart gives 33.4 A. If the power factor is 0.8, multiply by 0.9 / 0.8 = 1.125, which gives 37.6 A. Direct calculation agrees: 25,000 / (1.732 × 480 × 0.8) = 37.6 A.
 

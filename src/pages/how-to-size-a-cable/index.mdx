@@ -1,0 +1,106 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "How to Size a Cable: Current, Derating and Voltage Drop | Ohmetry"
+description: "Cable sizing step by step for IEC and NEC: design current, protective device, derating factors, voltage drop and fault withstand, with one worked example."
+h1: "How to Size a Cable, Step by Step"
+hub: Electrical
+hubHref: /electrical/
+crumb: "How to size a cable"
+---
+import Related from '../../components/Related.astro';
+
+A cable has to pass several separate checks, and the size that satisfies one check often fails another. Sizing it from the current alone is the most common mistake, and it works only for short runs. This guide takes one example through all five checks. It follows the IEC 60364 method and notes where the NEC differs. It does not reproduce the standards' rating tables: those belong to the standard you work to, and you take the numbers you need from your own copy.
+
+## The five checks
+
+1. **Design current.** How much current does the circuit actually carry?
+2. **Protective device.** What rating protects it?
+3. **Current-carrying capacity.** Can the cable carry that rating in its real installation, after derating?
+4. **Voltage drop.** Does the load still get enough voltage at the end of the run?
+5. **Fault withstand.** Does the cable survive a short circuit until the device clears it?
+
+The cable must pass all five. Which one decides the size depends on the run. Short runs are usually decided by checks 3 and 5, and long runs by check 4.
+
+## Step 1: design current
+
+For a three-phase circuit, I<sub>b</sub> = P × 1000 / (√3 × V × PF), and for single-phase, I<sub>b</sub> = P × 1000 / (V × PF). The <a href="/kw-to-amps-calculator/">kW to amps calculator</a> and the <a href="/kw-to-amps-chart/">kW to amps chart</a> do the arithmetic. For motors, use the nameplate or the NEC table full-load current, not a kW conversion. See the <a href="/hp-to-amps-calculator/">HP to amps calculator</a>.
+
+**Example.** A 30 kW three-phase load on 400 V at a power factor of 0.9 gives I<sub>b</sub> = 30,000 / (1.732 × 400 × 0.9) = **48.1 A**.
+
+## Step 2: protective device
+
+Under the IEC method the device rating I<sub>n</sub> must be at least I<sub>b</sub>, so I<sub>b</sub> ≤ I<sub>n</sub> ≤ I<sub>z</sub>. Under the NEC, a continuous load, which runs for three hours or more, is multiplied by 125 % before choosing the next standard rating (see <a href="/how-to-size-a-circuit-breaker/">how to size a circuit breaker</a>).
+
+**Example.** The next standard rating above 48.1 A is **50 A**.
+
+## Step 3: current-carrying capacity and derating
+
+A cable's tabulated rating is for reference conditions. Real conditions change it. Under IEC, the capacity in service is I<sub>z</sub> = I<sub>t</sub> × k<sub>1</sub> × k<sub>2</sub> × …, where each k corrects for ambient temperature, grouping with other circuits, soil thermal resistivity, thermal insulation or similar effects. To find the tabulated rating you need, turn it around:
+
+<div class="formula">I<sub>t</sub> ≥ I<sub>n</sub> / (k<sub>1</sub> × k<sub>2</sub> × …)</div>
+
+The factors come from the correction tables in the standard. The <a href="/cable-size-calculator/">cable size calculator</a> takes them as inputs. Under the NEC, you start from the ampacity table for the conductor, correct it for ambient temperature and for more than three current-carrying conductors, and respect the temperature rating of the terminals. The <a href="/wire-size-calculator/">wire size calculator</a> applies those corrections.
+
+**Example.** Suppose your standard gives an ambient factor of 0.94 and a grouping factor of 0.70. These are illustrative values, so use the ones for your installation. Then k = 0.94 × 0.70 = 0.658, and I<sub>t</sub> ≥ 50 / 0.658 = **76.0 A**. Look up the smallest size whose tabulated rating for your cable type and installation method is at least 76 A. Suppose that is **16 mm²**, with a tabulated rating of 80 A. The real value depends on the insulation, the number of loaded conductors and the method.
+
+## Step 4: voltage drop
+
+For a balanced three-phase circuit, V<sub>drop</sub> = √3 × I × L × ρ / A, and for single-phase it is 2 × I × L × ρ / A, where ρ is the resistivity at the operating temperature. Copper at 70 °C is about 0.0206 Ω·mm²/m. Typical limits are 3 to 5 %. The NEC recommends 3 % for a branch circuit and 5 % overall, but does not require them for ordinary circuits. See the <a href="/voltage-drop-calculator/">voltage drop calculator</a> and the <a href="/nec-voltage-drop-guide/">NEC voltage drop guide</a>.
+
+**Example.** The load is 60 m from the board. For 16 mm² copper at 70 °C, V<sub>drop</sub> = 1.732 × 48.1 × 60 × 0.0206 / 16 = 6.4 V, which is **1.6 %** of 400 V. A 10 mm² cable would drop 2.6 %, still inside a 3 % limit, but it would not pass step 3 in this example.
+
+## Step 5: fault withstand
+
+During a short circuit the conductor heats up faster than it can lose heat. The minimum area that survives it is given by the adiabatic equation:
+
+<div class="formula">S ≥ √(I² × t) / k</div>
+
+I is the fault current in amps, t the time the device takes to clear it in seconds, and k a constant for the conductor and insulation. A typical value is 115 for PVC-insulated copper and 143 for XLPE-insulated copper. Take yours from the standard. The <a href="/cable-fault-current-calculator/">fault current at the cable end calculator</a> gives the fault current at the far end of the cable.
+
+**Example.** A fault of 5 kA cleared in 0.1 s with k = 115 needs S ≥ √(5,000² × 0.1) / 115 = **13.7 mm²**. The 16 mm² cable passes.
+
+## Result
+
+| Check | Result for 16 mm² | Pass? |
+|---|---|---|
+| Tabulated rating (step 3) | needs at least 76.0 A, has 80 A | Yes |
+| Voltage drop (step 4) | 1.6 % against a 3 % limit | Yes |
+| Fault withstand (step 5) | needs at least 13.7 mm² | Yes |
+
+The cable is **16 mm²**. If it had failed any one check, you would move up a size and repeat the checks. Many sizing errors come from checking only one of the three.
+
+## What usually decides the size
+
+- **A short run on a high current:** the tabulated rating and derating decide it.
+- **A long run:** voltage drop decides it, and the cable can be much larger than the current requires.
+- **A high fault level with slow protection:** fault withstand decides it, as a cable sized for the load may not survive the fault.
+
+## Common mistakes
+
+- **Sizing from the load current instead of the device rating.** The cable must be protected by its device, so use I<sub>n</sub>, not I<sub>b</sub>, to find the tabulated rating.
+- **Applying the same factor twice.** For example, counting grouping both in the table and again as a separate factor.
+- **Skipping voltage drop on long runs.** A cable that passes on current can lose 5 % or more over a long run.
+- **Using the wrong conductor temperature.** Resistance rises with temperature, so use the operating temperature for voltage drop.
+- **Ignoring harmonics and the neutral.** In circuits with many non-linear loads, the neutral carries more current than the phases, and extra derating may apply.
+- **Treating a calculator as a design.** A calculator checks arithmetic. The design, including the installation method, the standard and the local rules, belongs to a qualified engineer.
+
+## Questions
+
+### What is a derating factor?
+A number below 1 that reduces a cable's tabulated current rating when its conditions are worse than the reference conditions, such as a hot ambient temperature or several circuits bundled together.
+
+### Where do I find the derating factors?
+In the correction tables of the standard you work to, such as IEC 60364-5-52 or the NEC's ampacity section. This site doesn't reproduce them.
+
+### Which standard should I use?
+The one your project, your client and your local authority require. This guide follows the IEC method and points out where the NEC differs.
+
+### Is a bigger cable always safer?
+It passes the current and voltage drop checks more easily, but it costs more, can be harder to terminate and may not fit a terminal or conduit. Choose the smallest cable that passes every check.
+
+<Related items={[
+  { href: '/cable-size-calculator/', label: 'Cable size calculator with derating' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator (NEC)' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/cable-fault-current-calculator/', label: 'Fault current at the cable end' },
+]} />

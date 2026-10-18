@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/CalcPage.astro
 title: "Watts to Amps Chart (12 V to 240 V) | Ohmetry"
-description: "Amps for loads from 60 to 5,000 watts at 12, 24, 48, 120, 230 and 240 V, with the formula and a worked example for inverters and low-voltage DC."
+description: "Amps for loads from 60 to 7,500 watts at 12, 24, 48, 120, 230 and 240 V, with the formula and a worked example for inverters and low-voltage DC."
 h1: "Watts to Amps Chart"
 hub: Electrical
 hubHref: /electrical/
@@ -20,6 +20,18 @@ This chart gives the current drawn by a load of known wattage on common DC and s
 <div class="formula">I = P / V<br/>AC with power factor: I = P / (V × PF)</div>
 
 I is in amps, P in watts and V in volts. For three-phase loads and for any wattage not shown, use the <a href="/watts-to-amps-calculator/">watts to amps calculator</a>.
+
+## Common loads
+
+These are typical figures. Check the nameplate on your own equipment, because wattages vary.
+
+- **1,200 W** (a microwave or a small heater) is 10 A at 120 V and 5 A at 240 V.
+- **1,440 W** is 12 A at 120 V. A 12 A load on 120 V is a common current for slow electric vehicle charging.
+- **1,500 W** (a typical portable heater setting) is 12.5 A at 120 V, close to the continuous limit of a 15 A circuit.
+- **1,800 W** is 15 A at 120 V, the full rating of a 15 A breaker.
+- **4,500 W** (a common water heater element) is 18.75 A at 240 V.
+
+Add 25 % when the load runs for three hours or more, to size the breaker. The <a href="/breaker-amps-to-watts-chart/">breaker amps to watts chart</a> does that for you.
 
 ## Why low-voltage loads draw so much current
 
