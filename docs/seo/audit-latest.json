@@ -1,14 +1,14 @@
 {
-  "pages": 58,
-  "indexable": 57,
+  "pages": 59,
+  "indexable": 58,
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/contact/: only 160 words",
-    "/corrections/: only 187 words",
-    "/disclaimer/: only 160 words",
-    "/methodology/: only 238 words",
-    "/protection/: only 237 words",
-    "/solar-ev/: only 188 words"
+    "/contact/: only 165 words",
+    "/corrections/: only 192 words",
+    "/disclaimer/: only 165 words",
+    "/methodology/: only 243 words",
+    "/protection/: only 242 words",
+    "/solar-ev/: only 193 words"
   ]
 }
