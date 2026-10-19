@@ -1,8 +1,10 @@
 name: Site audit (Lighthouse across every page)
 
-# Advisory only. Read-only audit of the public site. It cannot fail the build or touch the repository:
-# read-only permissions, no repository secrets, own workflow so the deploy and dashboard secrets are never exposed.
-# The report is kept as an artifact for 30 days and the CSV is printed in the run log.
+# Advisory only. Builds the site, serves the build locally and runs Lighthouse on every page. A local build gives
+# repeatable scores (the live site on a shared runner swung by 10 or more points between identical runs), so a
+# drop here means a real change in the code. It cannot fail the build or touch the repository: read-only
+# permissions, no repository secrets, own workflow so the deploy and dashboard secrets are never exposed.
+# The report is kept as an artifact for 30 days, the CSV is printed in the run log and pages below 95 are listed.
 
 on:
   schedule:
@@ -14,22 +16,40 @@ permissions:
 
 jobs:
   lighthouse:
-    name: Unlighthouse
+    name: Unlighthouse (local build)
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Scan the sitemap
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Serve the build
+        # http-server 14.1.1, pinned. -g serves gzip like the live site does.
+        run: |
+          npx --yes http-server@14.1.1 dist -g -p 4321 -s &
+          for i in $(seq 1 30); do curl -sf http://localhost:4321/ >/dev/null && break; sleep 1; done
+      - name: Scan every page
         # unlighthouse-ci 0.19.1 (MIT), pinned. No --budget, so it reports and never fails on score.
-        run: npx --yes unlighthouse-ci@0.19.1 --site https://ohmetry.com --desktop --disable-dynamic-sampling --reporter csv --output-path .unlighthouse
+        run: |
+          URLS=$(cd dist && find . -name index.html | sed 's|^\./||; s|index.html$||; s|^$|/|; s|^\([^/]\)|/\1|' | sort | paste -sd, -)
+          echo "Scanning $(echo "$URLS" | tr ',' '\n' | wc -l) pages"
+          npx --yes unlighthouse-ci@0.19.1 --site http://localhost:4321 --desktop --urls "$URLS" --reporter csv --output-path .unlighthouse
       - name: Summarise
         run: |
-          echo "### Lighthouse (desktop), every page in the sitemap" >> "$GITHUB_STEP_SUMMARY"
-          f=$(find .unlighthouse -name '*.csv' | head -1)
-          if [ -n "$f" ]; then
+          f=.unlighthouse/ci-result.csv
+          echo "### Lighthouse (desktop), local build, every page" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f "$f" ]; then
             echo "::group::$f"; cat "$f"; echo "::endgroup::"
+            echo "Pages with any score below 95:" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            awk -F, 'NR>1 && ($2<95 || $3<95 || $4<95 || $5<95 || $6<95)' "$f" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
             echo '```' >> "$GITHUB_STEP_SUMMARY"; head -c 30000 "$f" >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
           else
             echo "No CSV produced. Files:" >> "$GITHUB_STEP_SUMMARY"; find .unlighthouse -type f | head -40 >> "$GITHUB_STEP_SUMMARY"
