@@ -40,6 +40,13 @@ jobs:
         run: |
           echo "### GEO audit: $URL" >> "$GITHUB_STEP_SUMMARY"
           echo "Score: **$SCORE** / 100 ($BAND)" >> "$GITHUB_STEP_SUMMARY"
+          echo "<details><summary>Full report (JSON)</summary>" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```json' >> "$GITHUB_STEP_SUMMARY"
+          head -c 60000 geo-report.json >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "</details>" >> "$GITHUB_STEP_SUMMARY"
       - name: Keep the report
         uses: actions/upload-artifact@v4
         with:
