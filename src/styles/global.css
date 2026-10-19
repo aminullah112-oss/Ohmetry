@@ -105,6 +105,7 @@ a.chip:hover { border-color: var(--accent); color: var(--accent); }
 .prose th, .prose td { padding: 10px 14px; border-bottom: 1px solid var(--line-soft); }
 .prose tr:last-child td { border-bottom: 0; }
 .prose .contains-task-list { list-style: none; padding-left: 0; }
+.prose .task-list-item label { display: flex; gap: 10px; align-items: flex-start; flex: 1; }
 .prose .task-list-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 12px; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 8px; margin: 6px 0; }
 .prose input[type='checkbox'] { accent-color: var(--accent); width: 18px; height: 18px; margin-top: 4px; flex: none; }
 .formula { position: relative; margin: 1.3rem 0; padding: 30px 18px 16px; background: var(--surface); border: 1px dashed var(--line); border-radius: 10px; font: 400 0.98rem/1.9 var(--font-mono); overflow-x: auto; }

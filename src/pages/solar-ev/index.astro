@@ -12,7 +12,7 @@ const crumbs = [{ name: hub.name, href: hub.href }];
       {calcsIn('solar-ev').map((c) => (
         <a class="card calc-card" href={`/${c.slug}/`}>
           {c.tag && <span class="tag">{c.tag}</span>}
-          <h3>{c.name}</h3>
+          <h2>{c.name}</h2>
           <p>{c.blurb}</p>
         </a>
       ))}

@@ -12,11 +12,11 @@ const crumbs = [{ name: hub.name, href: hub.href }];
       {calcsIn('electrical').map((c) => (
         <a class="card calc-card" href={`/${c.slug}/`}>
           {c.tag && <span class="tag">{c.tag}</span>}
-          <h3>{c.name}</h3>
+          <h2>{c.name}</h2>
           <p>{c.blurb}</p>
         </a>
       ))}
     </div>
-    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/voltage-drop-formula/"><span class="tag">GUIDE</span><h3>Voltage drop formula</h3><p>DC, single-phase and three-phase, worked in mm² and AWG.</p></a></div>
+    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/voltage-drop-formula/"><span class="tag">GUIDE</span><h2>Voltage drop formula</h2><p>DC, single-phase and three-phase, worked in mm² and AWG.</p></a></div>
   </div>
 </Base>

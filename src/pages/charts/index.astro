@@ -13,7 +13,7 @@ const groups = (['electrical', 'protection'] as const).map((id) => ({ hub: hubs[
         <div class="group-title">{g.hub.name}</div>
         <div class="card-grid">
           {g.items.map((c) => (
-            <a class="card calc-card" href={`/${c.slug}/`}><span class="tag">CHART</span><h3>{c.name}</h3><p>{c.blurb}</p></a>
+            <a class="card calc-card" href={`/${c.slug}/`}><span class="tag">CHART</span><h2>{c.name}</h2><p>{c.blurb}</p></a>
           ))}
         </div>
       </>

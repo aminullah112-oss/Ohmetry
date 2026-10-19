@@ -33,11 +33,30 @@ const rebaseLinks = {
   },
 };
 
+
+// Markdown task-list checkboxes have no label. Wrap each item's contents in a <label> so screen readers announce them.
+const labelTaskItems = {
+  name: 'label-task-items',
+  hooks: {
+    'astro:build:done': ({ dir }) => {
+      const walk = (d) => fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {
+        const p = path.join(d, e.name);
+        if (e.isDirectory()) return walk(p);
+        if (!e.name.endsWith('.html')) return;
+        const html = fs.readFileSync(p, 'utf8');
+        if (!html.includes('task-list-item')) return;
+        fs.writeFileSync(p, html.replace(/<li class="task-list-item">(.*?)<\/li>/gs, '<li class="task-list-item"><label>$1</label></li>'));
+      });
+      walk(fileURLToPath(dir));
+    },
+  },
+};
+
 export default defineConfig({
   site: process.env.SITE_URL || 'https://ohmetry.com',
   base,
   trailingSlash: 'always',
   // Small site: inline the CSS so each page needs one fewer request.
   build: { inlineStylesheets: 'always' },
-  integrations: [react(), mdx(), sitemap({ filter: (page) => (toolkitReady || !page.includes('/toolkit/')) && TABLE_PAGES.every((p) => !page.includes(p) || pageVerified(p)) }), rebaseLinks],
+  integrations: [react(), mdx(), sitemap({ filter: (page) => (toolkitReady || !page.includes('/toolkit/')) && TABLE_PAGES.every((p) => !page.includes(p) || pageVerified(p)) }), rebaseLinks, labelTaskItems],
 });

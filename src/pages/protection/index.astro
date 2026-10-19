@@ -12,11 +12,11 @@ const crumbs = [{ name: hub.name, href: hub.href }];
       {calcsIn('protection').map((c) => (
         <a class="card calc-card" href={`/${c.slug}/`}>
           {c.tag && <span class="tag">{c.tag}</span>}
-          <h3>{c.name}</h3>
+          <h2>{c.name}</h2>
           <p>{c.blurb}</p>
         </a>
       ))}
     </div>
-    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/relay-setting-checklist/"><span class="tag">GUIDE</span><h3>Relay setting checklist</h3><p>Seven stages for a transformer-feeder overcurrent relay, with a worked example.</p></a></div>
+    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/relay-setting-checklist/"><span class="tag">GUIDE</span><h2>Relay setting checklist</h2><p>Seven stages for a transformer-feeder overcurrent relay, with a worked example.</p></a></div>
   </div>
 </Base>
