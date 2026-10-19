@@ -5,6 +5,10 @@ import { hubs, guides, type HubId } from '../data/calculators';
 import fs from 'node:fs';
 import path from 'node:path';
 import { slugFromPath } from '../lib/updated';
+import archivo from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import plex400 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import plex600 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?url';
+const preloadFonts = [archivo, plex400, plex600];
 
 interface Props { title: string; description: string; breadcrumbs?: { name: string; href: string }[]; noindex?: boolean; activeHub?: HubId }
 const { title, description, breadcrumbs = [], noindex: noindexProp = false, activeHub } = Astro.props;
@@ -48,6 +52,7 @@ const siteSchema = [
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    {preloadFonts.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0e171e" />
     {breadcrumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
