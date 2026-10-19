@@ -8,7 +8,8 @@ import { slugFromPath } from '../lib/updated';
 import archivo from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import plex400 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
 import plex600 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2?url';
-const preloadFonts = [archivo, plex400, plex600];
+// Only the home page shifted when the web fonts swapped in; on other pages preloading just competes with the CSS.
+const preloadFonts = Astro.url.pathname === '/' ? [archivo, plex400, plex600] : [];
 
 interface Props { title: string; description: string; breadcrumbs?: { name: string; href: string }[]; noindex?: boolean; activeHub?: HubId }
 const { title, description, breadcrumbs = [], noindex: noindexProp = false, activeHub } = Astro.props;
