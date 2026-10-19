@@ -1,0 +1,42 @@
+name: Site audit (Lighthouse across every page)
+
+# Advisory only. Read-only audit of the public site. It cannot fail the build or touch the repository:
+# read-only permissions, no repository secrets, own workflow so the deploy and dashboard secrets are never exposed.
+# The report is kept as an artifact for 30 days and the CSV is printed in the run log.
+
+on:
+  schedule:
+    - cron: '17 7 * * 4' # Thursdays, 07:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Unlighthouse
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Scan the sitemap
+        # unlighthouse-ci 0.19.1 (MIT), pinned. No --budget, so it reports and never fails on score.
+        run: npx --yes unlighthouse-ci@0.19.1 --site https://ohmetry.com --desktop --disable-dynamic-sampling --reporter csv --output-path .unlighthouse
+      - name: Summarise
+        run: |
+          echo "### Lighthouse (desktop), every page in the sitemap" >> "$GITHUB_STEP_SUMMARY"
+          f=$(find .unlighthouse -name '*.csv' | head -1)
+          if [ -n "$f" ]; then
+            echo "::group::$f"; cat "$f"; echo "::endgroup::"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"; head -c 30000 "$f" >> "$GITHUB_STEP_SUMMARY"; echo '```' >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No CSV produced. Files:" >> "$GITHUB_STEP_SUMMARY"; find .unlighthouse -type f | head -40 >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: .unlighthouse
+          retention-days: 30
+          if-no-files-found: warn

@@ -21,6 +21,11 @@ const ld = {
   '@type': 'BreadcrumbList',
   itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: new URL(c.href, Astro.site).toString() })),
 };
+const siteUrl = new URL('/', Astro.site).toString();
+const siteSchema = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Ohmetry', url: siteUrl },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ohmetry', url: siteUrl, logo: new URL('/favicon.svg', Astro.site).toString() },
+];
 ---
 <!doctype html>
 <html lang="en">
@@ -46,6 +51,7 @@ const ld = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#0e171e" />
     {breadcrumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
+    {Astro.url.pathname === '/' && <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />}
     <slot name="head" />
   </head>
   <body>
