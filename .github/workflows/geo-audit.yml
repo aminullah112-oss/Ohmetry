@@ -1,0 +1,48 @@
+name: GEO audit (AI search readiness)
+
+# Advisory only. Audits the public site with a third-party action, reports the score in the run summary,
+# and never fails the build (min-score is left at 0). Runs with read-only permissions and no repository
+# secrets, in its own workflow, so the deploy and dashboard secrets are never exposed to it.
+# The action installs the geo-optimizer-skill package from PyPI at run time (it does not pin a version).
+
+on:
+  schedule:
+    - cron: '41 6 * * 3' # Wednesdays, 06:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  geo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        url:
+          - https://ohmetry.com/
+          - https://ohmetry.com/voltage-drop-calculator/
+    steps:
+      - name: Run the audit
+        id: geo
+        # v4.19.5, pinned to its commit
+        uses: Auriti-Labs/geo-optimizer-skill@0503ce2f30908ef17ce37d1a6150757da3239409
+        with:
+          url: ${{ matrix.url }}
+          format: json
+          output-file: geo-report
+      - name: Summarise
+        env:
+          URL: ${{ matrix.url }}
+          SCORE: ${{ steps.geo.outputs.score }}
+          BAND: ${{ steps.geo.outputs.band }}
+        run: |
+          echo "### GEO audit: $URL" >> "$GITHUB_STEP_SUMMARY"
+          echo "Score: **$SCORE** / 100 ($BAND)" >> "$GITHUB_STEP_SUMMARY"
+      - name: Keep the report
+        uses: actions/upload-artifact@v4
+        with:
+          name: geo-report-${{ strategy.job-index }}
+          path: geo-report.json
+          retention-days: 30
