@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "NEC Voltage Drop: The 3% and 5% Recommendations | Ohmetry"
+title: "NEC Voltage Drop Limits: Is 3% or 5% Required? | Ohmetry"
 description: "What the NEC says about voltage drop (3% on a branch circuit or feeder, 5% in total), why it is a recommendation, and how to size wire with worked examples in AWG."
 h1: "NEC Voltage Drop: What the 3 % and 5 % Mean"
 hub: Electrical
@@ -10,6 +10,18 @@ crumb: "NEC voltage drop"
 import Related from '../../components/Related.astro';
 
 Most voltage drop questions in US work come down to two numbers, 3 % and 5 %, and one question: are they required? Mostly they are not. This guide explains where the numbers come from, how they are applied, and how to size wire for them in AWG, with examples you can check by hand.
+
+**Short answer.** The NEC recommends no more than 3 % voltage drop on a branch circuit or feeder and 5 % from the service to the farthest outlet. These figures sit in informational notes, so they are not enforceable unless your specification or local authority adopts them.
+
+| System voltage | 3 % drop | 5 % drop |
+|---|---|---|
+| 120 V | 3.6 V | 6.0 V |
+| 208 V | 6.24 V | 10.4 V |
+| 240 V | 7.2 V | 12.0 V |
+| 277 V | 8.31 V | 13.85 V |
+| 480 V | 14.4 V | 24.0 V |
+
+Those are the most volts you can lose before the circuit goes past the recommendation. The sections below show how to find the wire size that stays inside them.
 
 ## What the NEC says
 
@@ -74,11 +86,17 @@ The <a href="/voltage-drop-calculator/">voltage drop calculator</a> works with A
 
 ## Questions
 
+### Is 5 % voltage drop acceptable?
+It is the commonly used limit for the whole path from the service to the farthest outlet, with 3 % of it on any one feeder or branch circuit. Whether it is acceptable for your job depends on the load and the specification. A motor starting across a long feeder or sensitive electronics may need less.
+
 ### Is voltage drop an NEC requirement?
 Not as a general rule. The 3 % and 5 % figures are in informational notes. They become requirements when a specification or local rule adopts them. A few other sections, for specific equipment, have their own limits.
 
 ### What is an acceptable voltage drop?
 3 % on a feeder or branch circuit and 5 % overall is the commonly used target. Sensitive equipment, long motor starts and critical loads may call for less.
+
+### Is there a stricter limit for sensitive electronic equipment?
+Yes. The NEC section on sensitive electronic equipment (647.4(D)) sets 1.5 % on a branch circuit and 2.5 % for feeder and branch together. Check the section number and values in your adopted edition before relying on them.
 
 ### Does voltage drop affect breaker size?
 No. The breaker is chosen from the load and the conductor's ampacity. Voltage drop only changes how large the wire needs to be.
@@ -92,5 +110,6 @@ The load current, unless you are designing for the circuit to carry its full rat
   { href: '/wire-size-calculator/', label: 'Wire size calculator' },
   { href: '/how-to-size-a-circuit-breaker/', label: 'How to size a circuit breaker' },
   { href: '/wire-size-by-distance-chart/', label: 'Wire size by distance chart' },
+  { href: '/voltage-drop-chart/', label: 'Voltage drop per amp chart' },
   { href: '/how-to-size-a-cable/', label: 'How to size a cable' },
 ]} />

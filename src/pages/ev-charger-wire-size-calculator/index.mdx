@@ -30,6 +30,21 @@ Under the NEC, the overcurrent device for EV supply equipment is sized at no les
 
 **Charge time.** Adding 60 kWh at 7.7 kW with 90 % charging efficiency takes 60 / (7.68 × 0.9) = 8.7 hours.
 
+## Charger current to breaker size
+
+The same 125 % rule worked out for common charger sizes at 240 V. Read across for the breaker, or read the last column to see the largest charger a given breaker supports.
+
+| Charger current | Power at 240 V | Minimum breaker (125 %) | Largest charger on that breaker |
+|---|---|---|---|
+| 16 A | 3.84 kW | 20 A | 16 A on a 20 A breaker |
+| 24 A | 5.76 kW | 30 A | 24 A on a 30 A breaker |
+| 32 A | 7.68 kW | 40 A | 32 A on a 40 A breaker |
+| 40 A | 9.60 kW | 50 A | 40 A on a 50 A breaker |
+| 48 A | 11.52 kW | 60 A | 48 A on a 60 A breaker |
+| 80 A | 19.20 kW | 100 A | 80 A on a 100 A breaker |
+
+The cable still has to be at least as large as the breaker's duty requires and meet the voltage-drop check below. The table gives the breaker only.
+
 ## Ampacity versus voltage drop
 
 The ampacity figure tells you the minimum current rating of the cable, and you read the conductor size off the code's table for your insulation, temperature rating and installation method. The voltage-drop size is a second requirement that matters on long runs. The cable must satisfy both, so use the larger. For a 20 m run at 32 A the drop calculation is satisfied by a small cable and the 40 A ampacity decides, while at 60 m the drop calculation asks for about 10 mm² and takes over.
@@ -58,12 +73,20 @@ The car's onboard charger can limit AC charging below the supply's capacity. Man
 ### What gauge wire for a Level 2 charger?
 It depends on the current, the insulation and the installation. Use the 125 % ampacity above with the NEC table, then compare with the voltage-drop result.
 
+### How big a charger can I put on a 40 A circuit?
+A 40 A breaker supports a charger drawing up to 32 A, which is 7.68 kW at 240 V. 80 % of 40 A is 32 A.
+
+### How many amps does a 7.2 kW charger draw?
+At 240 V, 7,200 / 240 = 30 A. Size the breaker at 125 %, which is 37.5 A, so a 40 A breaker.
+
 ### Can I use a 50 A breaker for a 32 A charger?
-It is allowed to protect a larger circuit if the cable and the charger instructions support it, but the minimum is 40 A.
+The 125 % rule sets a minimum, not a maximum. A 50 A breaker is only allowed if the conductors are rated for it, because the breaker must not exceed what protects the cable, and if the charger's installation instructions accept that circuit size. Otherwise use the 40 A minimum.
 
 <Related items={[
   { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
   { href: '/solar-wire-size-calculator/', label: 'Solar DC cable size calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
   { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/breaker-amps-to-watts-chart/', label: 'Breaker amps to watts chart' },
 ]} />
