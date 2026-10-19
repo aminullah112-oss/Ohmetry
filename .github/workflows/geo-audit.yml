@@ -38,6 +38,10 @@ jobs:
           SCORE: ${{ steps.geo.outputs.score }}
           BAND: ${{ steps.geo.outputs.band }}
         run: |
+          echo "::group::GEO report for $URL"
+          cat geo-report.json
+          echo
+          echo "::endgroup::"
           echo "### GEO audit: $URL" >> "$GITHUB_STEP_SUMMARY"
           echo "Score: **$SCORE** / 100 ($BAND)" >> "$GITHUB_STEP_SUMMARY"
           echo "<details><summary>Full report (JSON)</summary>" >> "$GITHUB_STEP_SUMMARY"
