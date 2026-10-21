@@ -26,8 +26,8 @@ body{width:1200px;height:630px;background:#0e171e;color:#e7eef4;font-family:'IBM
 h1{font:800 76px/1.04 'Archivo Variable';font-stretch:108%;letter-spacing:-.02em;max-width:1000px}
 .foot{display:flex;justify-content:space-between;align-items:center;font:400 22px 'IBM Plex Mono';color:#8a9ba7}
 .read{background:#060c11;border:1px solid #223340;border-radius:12px;padding:12px 20px;color:#ffb84d;font:500 26px 'IBM Plex Mono';text-shadow:0 0 14px rgba(255,184,77,.35)}
-svg{width:44px;height:44px}`;
-const logo = `<svg viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#0e171e" stroke="#223340"/><path d="M7 22h4.2c-2-1.6-3.2-3.8-3.2-6.3C8 11.4 11.4 8.5 16 8.5s8 2.9 8 7.2c0 2.5-1.2 4.7-3.2 6.3H25" fill="none" stroke="#ffb84d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 26.5h4l1.5-2.2 2.4 3.4 2.2-4.4 1.8 3.2H27" fill="none" stroke="#6b93ff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+img{width:48px;height:48px}`;
+const logo = `<img src="data:image/png;base64,${fs.readFileSync(path.join(root, 'public', 'logo-mark.png')).toString('base64')}" alt="">`;
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
 
 function pages() {

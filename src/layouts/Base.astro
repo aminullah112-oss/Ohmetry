@@ -29,7 +29,7 @@ const ld = {
 const siteUrl = new URL('/', Astro.site).toString();
 const siteSchema = [
   { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Ohmetry', url: siteUrl },
-  { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ohmetry', url: siteUrl, logo: new URL('/favicon.svg', Astro.site).toString() },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: 'Ohmetry', url: siteUrl, logo: new URL('/logo-512.png', Astro.site).toString() },
 ];
 ---
 <!doctype html>
@@ -54,7 +54,9 @@ const siteSchema = [
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     {preloadFonts.map((href) => <link rel="preload" href={href} as="font" type="font/woff2" crossorigin />)}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#0e171e" />
     {breadcrumbs.length > 0 && <script type="application/ld+json" set:html={JSON.stringify(ld)} />}
     {Astro.url.pathname === '/' && <script type="application/ld+json" set:html={JSON.stringify(siteSchema)} />}
