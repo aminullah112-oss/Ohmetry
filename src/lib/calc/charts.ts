@@ -10,6 +10,7 @@ import { resistivity } from './conductor-drop';
 import { hpToKw, inputKw } from './kw-hp';
 import { STANDARD_RATINGS } from './breaker-size';
 import { pfCorrection } from './pf-correction';
+import { kvaToKw, kwToKva } from './kva-kw';
 
 export interface Chart { caption: string; headers: string[]; rows: string[][] }
 
@@ -169,5 +170,27 @@ export function wireSizeByDistanceChart(systemV: number, ampsList: number[] = [1
     caption: `Smallest copper AWG for a 3 % drop, ${systemV} V single-phase, conductors at 75 °C`,
     headers: ['One-way run', ...ampsList.map((a) => `${a} A`)],
     rows: RUN_LENGTHS_FT.map((ft) => [`${ft} ft`, ...ampsList.map((a) => smallest(a, ft))]),
+  };
+}
+
+export const KVA_ROWS = [1, 2, 3, 5, 7.5, 10, 15, 20, 25, 30, 37.5, 45, 50, 75, 100, 112.5, 150, 200, 225, 250, 300, 400, 500, 750, 1000, 1500, 2000];
+export const KW_TO_KVA_ROWS = [1, 2, 5, 10, 15, 20, 25, 30, 40, 50, 60, 75, 80, 100, 150, 200, 250, 300, 400, 500, 800, 1000];
+export const KVA_PF = [0.7, 0.8, 0.85, 0.9, 0.95, 1];
+
+/** Real power in kW for a given apparent power, at common power factors. Same for single-phase and three-phase. */
+export function kvaToKwChart(): Chart {
+  return {
+    caption: 'Real power in kW for each kVA rating and power factor',
+    headers: ['kVA', ...KVA_PF.map((pf) => `PF ${pf}`)],
+    rows: KVA_ROWS.map((kva) => [String(kva), ...KVA_PF.map((pf) => auto(kvaToKw(kva, pf).kw))]),
+  };
+}
+
+/** Apparent power in kVA a given real load needs, at common power factors. */
+export function kwToKvaChart(): Chart {
+  return {
+    caption: 'Apparent power in kVA needed for each kW load and power factor',
+    headers: ['kW', ...KVA_PF.map((pf) => `PF ${pf}`)],
+    rows: KW_TO_KVA_ROWS.map((kw) => [String(kw), ...KVA_PF.map((pf) => auto(kwToKva(kw, pf).kva))]),
   };
 }

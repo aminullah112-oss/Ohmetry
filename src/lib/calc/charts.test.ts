@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import {
   kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
-  dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, type Chart,
+  dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, kvaToKwChart, kwToKvaChart, type Chart,
 } from './charts';
 
 const cell = (c: Chart, row: string, col: string) => c.rows.find((r) => r[0] === row)![c.headers.indexOf(col)];
@@ -101,5 +101,22 @@ describe('reference charts', () => {
     for (const c of [kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);
     }
+  });
+
+  it('kVA to kW: 100 kVA is 80.0 kW at PF 0.8 and 90.0 kW at 0.9; 1 kVA is 0.80 kW at 0.8; 500 kVA at 0.9 is 450 kW', () => {
+    const c = kvaToKwChart();
+    expect(cell(c, '100', 'PF 0.8')).toBe('80.0');
+    expect(cell(c, '100', 'PF 0.9')).toBe('90.0');
+    expect(cell(c, '1', 'PF 0.8')).toBe('0.80');
+    expect(cell(c, '500', 'PF 0.9')).toBe('450');
+    expect(cell(c, '1000', 'PF 1')).toBe('1,000');
+  });
+
+  it('kW to kVA: 80 kW at PF 0.8 is 100 kVA; 50 kW at 0.85 is 58.8 kVA; 250 kW at 0.9 is 278 kVA', () => {
+    const c = kwToKvaChart();
+    expect(cell(c, '80', 'PF 0.8')).toBe('100');
+    expect(cell(c, '50', 'PF 0.85')).toBe('58.8');
+    expect(cell(c, '250', 'PF 0.9')).toBe('278');
+    expect(cell(c, '10', 'PF 1')).toBe('10.0');
   });
 });

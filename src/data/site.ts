@@ -24,7 +24,7 @@ export const site = {
 };
 
 /** Shown on the home page. Update when the test count changes (`npm test`). */
-export const testCount = 224;
+export const testCount = 226;
 
 export const toolkitReady = Boolean(site.gumroadUrl);
 

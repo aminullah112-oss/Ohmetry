@@ -12,7 +12,22 @@ import Related from '../../components/Related.astro';
 
 <KvaToKw client:load />
 
+**Short answer:** kW = kVA × power factor. At 0.8 power factor 1 kVA is 0.8 kW, at 0.9 it is 0.9 kW, and at a power factor of 1 they are equal. For common sizes see the <a href="/kva-to-kw-chart/">kVA to kW conversion chart</a>.
+
 kVA is apparent power, the total the supply must carry. kW is real power, the part that does useful work. The ratio between them is the power factor. Transformers, generators and UPS units are rated in kVA because their heating depends on current, and current does not care how much of it does useful work.
+
+## Quick conversions
+
+| kVA | 0.8 PF | 0.9 PF | 1.0 PF |
+|---|---|---|---|
+| 1 | 0.8 kW | 0.9 kW | 1 kW |
+| 5 | 4 kW | 4.5 kW | 5 kW |
+| 10 | 8 kW | 9 kW | 10 kW |
+| 50 | 40 kW | 45 kW | 50 kW |
+| 100 | 80 kW | 90 kW | 100 kW |
+| 500 | 400 kW | 450 kW | 500 kW |
+
+The same formula applies to single-phase and three-phase, because the √3 for three-phase is already in the kVA figure.
 
 ## Formulas
 
@@ -51,6 +66,12 @@ Take the 80 kW load above at a power factor of 0.8. It draws 100 kVA. If capacit
 
 ## Questions
 
+### How many kW is 1 kVA?
+At 0.8 power factor it is 0.8 kW, at 0.9 it is 0.9 kW and at 1.0 it is 1 kW.
+
+### Is the kVA to kW formula different for three-phase?
+No. kW = kVA × PF for both. The three-phase √3 is already inside the kVA value, so only the current changes.
+
 ### Is kVA bigger than kW?
 kVA is always greater than or equal to kW. They are equal at a power factor of 1.
 
@@ -64,6 +85,7 @@ Divide by 0.85. For example, 50 kW is 50 / 0.85 = 58.8 kVA.
 Their losses depend on the current they carry, not on the power factor of the load. A transformer rated in kVA can carry that current whatever the load does with it.
 
 <Related items={[
+  { href: '/kva-to-kw-chart/', label: 'kVA to kW conversion chart' },
   { href: '/kva-to-amps-calculator/', label: 'kVA to amps calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
   { href: '/power-factor-correction-calculator/', label: 'Power factor correction calculator' },
