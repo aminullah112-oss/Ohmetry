@@ -3,7 +3,7 @@
 Read this first in a new session. Written 2026-10-15.
 
 ## What the project is
-Free NEC-first electrical, solar and protection calculators plus a paid Excel workbook ($19, Gumroad). Astro + React islands + MDX, Vitest (216 tests), static site on Cloudflare Workers, deployed by GitHub Actions on every push to `main`. Domain ohmetry.com (Cloudflare). Email: hello@ohmetry.com forwards to the owner's mailbox.
+Free NEC-first electrical, solar and protection calculators plus a paid Excel workbook ($19, Gumroad). Astro + React islands + MDX, Vitest (216 tests), static site on Cloudflare Workers, deployed by GitHub Actions on every push to `main`. Domain ohmetry.com (Cloudflare). Email: hello@ohmetry.com is a Zoho Mail mailbox (India data centre, free plan); setup and checks are in `docs/EMAIL-SETUP.md`. Cloudflare Email Routing was removed.
 
 ## Standing rules from the owner
 - Direct, concise answers. Push back on weak assumptions. No hype words.
