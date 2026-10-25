@@ -3,8 +3,8 @@
  "start": "2026-09-25",
  "end": "2026-10-23",
  "totals": {
-  "clicks": 1,
-  "impressions": 4634
+  "clicks": 3,
+  "impressions": 5253
  },
  "daily": [
   {
@@ -108,15 +108,28 @@
    "clicks": 0,
    "impressions": 540,
    "position": 67.2
+  },
+  {
+   "date": "2026-10-23",
+   "clicks": 2,
+   "impressions": 619,
+   "position": 67.1
   }
  ],
  "pages": [
   {
    "page": "/earth-resistance-calculator/",
+   "clicks": 2,
+   "impressions": 91,
+   "ctr": 0.022,
+   "position": 45.9
+  },
+  {
+   "page": "/transformer-full-load-current-calculator/",
    "clicks": 1,
-   "impressions": 81,
-   "ctr": 0.0123,
-   "position": 47
+   "impressions": 104,
+   "ctr": 0.0096,
+   "position": 50.7
   },
   {
    "page": "http://ohmetry.com/generator-size-calculator/",
@@ -128,9 +141,9 @@
   {
    "page": "/",
    "clicks": 0,
-   "impressions": 80,
+   "impressions": 85,
    "ctr": 0,
-   "position": 71.7
+   "position": 72.4
   },
   {
    "page": "/about/",
@@ -142,44 +155,44 @@
   {
    "page": "/amps-to-watts-calculator/",
    "clicks": 0,
-   "impressions": 146,
+   "impressions": 168,
    "ctr": 0,
-   "position": 68.6
+   "position": 68.8
   },
   {
    "page": "/awg-to-mm2-converter/",
    "clicks": 0,
-   "impressions": 342,
+   "impressions": 390,
    "ctr": 0,
-   "position": 76
+   "position": 75.4
   },
   {
    "page": "/battery-bank-calculator/",
    "clicks": 0,
-   "impressions": 21,
+   "impressions": 26,
    "ctr": 0,
-   "position": 68.7
+   "position": 66.5
   },
   {
    "page": "/breaker-size-calculator/",
    "clicks": 0,
-   "impressions": 2,
+   "impressions": 4,
    "ctr": 0,
-   "position": 11
+   "position": 8
   },
   {
    "page": "/cable-fault-current-calculator/",
    "clicks": 0,
-   "impressions": 14,
+   "impressions": 15,
    "ctr": 0,
-   "position": 34.7
+   "position": 38.1
   },
   {
    "page": "/cable-size-calculator/",
    "clicks": 0,
-   "impressions": 270,
+   "impressions": 302,
    "ctr": 0,
-   "position": 75.1
+   "position": 75.4
   },
   {
    "page": "/charts/",
@@ -191,9 +204,9 @@
   {
    "page": "/conduit-fill-calculator/",
    "clicks": 0,
-   "impressions": 114,
+   "impressions": 117,
    "ctr": 0,
-   "position": 71.5
+   "position": 71.4
   },
   {
    "page": "/contact/",
@@ -212,9 +225,9 @@
   {
    "page": "/ct-burden-calculator/",
    "clicks": 0,
-   "impressions": 61,
+   "impressions": 66,
    "ctr": 0,
-   "position": 64.1
+   "position": 63.7
   },
   {
    "page": "/disclaimer/",
@@ -226,72 +239,79 @@
   {
    "page": "/electrical/",
    "clicks": 0,
-   "impressions": 25,
+   "impressions": 29,
    "ctr": 0,
    "position": 77
   },
   {
    "page": "/ev-charger-wire-size-calculator/",
    "clicks": 0,
-   "impressions": 6,
+   "impressions": 7,
    "ctr": 0,
-   "position": 41.2
+   "position": 36.7
   },
   {
    "page": "/generator-size-calculator/",
    "clicks": 0,
-   "impressions": 157,
+   "impressions": 177,
    "ctr": 0,
-   "position": 76.4
+   "position": 76.6
+  },
+  {
+   "page": "/how-to-size-a-circuit-breaker/",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 89.5
   },
   {
    "page": "/hp-to-amps-calculator/",
    "clicks": 0,
-   "impressions": 74,
+   "impressions": 82,
    "ctr": 0,
-   "position": 59.9
+   "position": 57.7
   },
   {
    "page": "/idmt-relay-calculator/",
    "clicks": 0,
-   "impressions": 51,
+   "impressions": 62,
    "ctr": 0,
-   "position": 49.1
+   "position": 48.3
   },
   {
    "page": "/inverter-size-calculator/",
    "clicks": 0,
-   "impressions": 1,
+   "impressions": 2,
    "ctr": 0,
-   "position": 99
+   "position": 81.5
   },
   {
    "page": "/kva-to-amps-calculator/",
    "clicks": 0,
-   "impressions": 275,
+   "impressions": 310,
    "ctr": 0,
-   "position": 75.9
+   "position": 74.7
   },
   {
    "page": "/kva-to-kw-calculator/",
    "clicks": 0,
-   "impressions": 313,
+   "impressions": 350,
    "ctr": 0,
-   "position": 50.6
+   "position": 52.1
   },
   {
    "page": "/kw-to-amps-calculator/",
    "clicks": 0,
-   "impressions": 366,
+   "impressions": 411,
    "ctr": 0,
-   "position": 75.1
+   "position": 74.7
   },
   {
    "page": "/kw-to-amps-chart/",
    "clicks": 0,
-   "impressions": 24,
+   "impressions": 39,
    "ctr": 0,
-   "position": 35.1
+   "position": 28.7
   },
   {
    "page": "/methodology/",
@@ -303,44 +323,44 @@
   {
    "page": "/motor-circuit-calculator/",
    "clicks": 0,
-   "impressions": 19,
+   "impressions": 26,
    "ctr": 0,
-   "position": 43.2
+   "position": 44.3
   },
   {
    "page": "/nec-voltage-drop-guide/",
    "clicks": 0,
-   "impressions": 17,
+   "impressions": 19,
    "ctr": 0,
-   "position": 17.9
+   "position": 16.3
   },
   {
    "page": "/off-grid-solar-calculator/",
    "clicks": 0,
-   "impressions": 58,
+   "impressions": 61,
    "ctr": 0,
-   "position": 76.3
+   "position": 75
   },
   {
    "page": "/ohms-law-calculator/",
    "clicks": 0,
-   "impressions": 32,
+   "impressions": 36,
    "ctr": 0,
-   "position": 48
+   "position": 49
   },
   {
    "page": "/power-factor-correction-calculator/",
    "clicks": 0,
-   "impressions": 40,
+   "impressions": 45,
    "ctr": 0,
-   "position": 76
+   "position": 75
   },
   {
    "page": "/power-factor-correction-chart/",
    "clicks": 0,
-   "impressions": 19,
+   "impressions": 26,
    "ctr": 0,
-   "position": 43.6
+   "position": 43
   },
   {
    "page": "/privacy/",
@@ -359,16 +379,16 @@
   {
    "page": "/relay-setting-checklist/",
    "clicks": 0,
-   "impressions": 15,
+   "impressions": 17,
    "ctr": 0,
-   "position": 15.4
+   "position": 14.1
   },
   {
    "page": "/short-circuit-current-calculator/",
    "clicks": 0,
-   "impressions": 69,
+   "impressions": 79,
    "ctr": 0,
-   "position": 74.9
+   "position": 74.3
   },
   {
    "page": "/solar-ev/",
@@ -380,58 +400,58 @@
   {
    "page": "/solar-panel-calculator/",
    "clicks": 0,
-   "impressions": 197,
+   "impressions": 230,
    "ctr": 0,
-   "position": 78.8
+   "position": 78.6
   },
   {
    "page": "/solar-wire-size-calculator/",
    "clicks": 0,
-   "impressions": 185,
+   "impressions": 212,
    "ctr": 0,
    "position": 75.2
   },
   {
    "page": "/three-phase-power-calculator/",
    "clicks": 0,
-   "impressions": 186,
+   "impressions": 197,
    "ctr": 0,
-   "position": 79.6
+   "position": 79.4
   },
   {
-   "page": "/transformer-full-load-current-calculator/",
+   "page": "/toolkit/",
    "clicks": 0,
-   "impressions": 93,
+   "impressions": 2,
    "ctr": 0,
-   "position": 50.9
+   "position": 2.5
   },
   {
    "page": "/voltage-drop-calculator/",
    "clicks": 0,
-   "impressions": 471,
+   "impressions": 543,
    "ctr": 0,
-   "position": 79.5
+   "position": 78.6
   },
   {
    "page": "/voltage-drop-formula/",
    "clicks": 0,
-   "impressions": 143,
+   "impressions": 157,
    "ctr": 0,
-   "position": 85.6
+   "position": 85.2
   },
   {
    "page": "/watts-to-amps-calculator/",
    "clicks": 0,
-   "impressions": 86,
+   "impressions": 107,
    "ctr": 0,
-   "position": 57.7
+   "position": 58.5
   },
   {
    "page": "/wire-size-calculator/",
    "clicks": 0,
-   "impressions": 608,
+   "impressions": 685,
    "ctr": 0,
-   "position": 76.7
+   "position": 76.6
   }
  ],
  "queries": [
@@ -471,6 +491,13 @@
    "position": 68
   },
   {
+   "query": "0.75 mm2 awg",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 73
+  },
+  {
    "query": "1 0 awg to mm2",
    "clicks": 0,
    "impressions": 2,
@@ -494,9 +521,9 @@
   {
    "query": "1 emt conduit fill",
    "clicks": 0,
-   "impressions": 3,
+   "impressions": 4,
    "ctr": 0,
-   "position": 80.7
+   "position": 80.8
   },
   {
    "query": "1 kilowatt to ampere",
@@ -504,6 +531,13 @@
    "impressions": 1,
    "ctr": 0,
    "position": 88
+  },
+  {
+   "query": "1 kilowatt to amps",
+   "clicks": 0,
+   "impressions": 1,
+   "ctr": 0,
+   "position": 80
   },
   {
    "query": "1 kva berapa ampere",
@@ -522,7 +556,7 @@
   {
    "query": "1 kva to amps",
    "clicks": 0,
-   "impressions": 2,
+   "impressions": 4,
    "ctr": 0,
    "position": 86
   },
@@ -562,11 +596,18 @@
    "position": 78
   },
   {
-   "query": "1 kw to amps",
+   "query": "1 kw to ampere",
    "clicks": 0,
    "impressions": 1,
    "ctr": 0,
-   "position": 80
+   "position": 84
+  },
+  {
+   "query": "1 kw to amps",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 79.5
   },
   {
    "query": "1 kw to amps 415v",
@@ -578,9 +619,9 @@
   {
    "query": "1 kw to amps in 3 phase",
    "clicks": 0,
-   "impressions": 2,
+   "impressions": 3,
    "ctr": 0,
-   "position": 67.5
+   "position": 67
   },
   {
    "query": "1 watts how many amps",
@@ -611,6 +652,13 @@
    "position": 78
   },
   {
+   "query": "1.45 kw to amps",
+   "clicks": 0,
+   "impressions": 2,
+   "ctr": 0,
+   "position": 90.5
+  },
+  {
    "query": "1.5 amperes to watts",
    "clicks": 0,
    "impressions": 1,
@@ -623,6 +671,13 @@
    "impressions": 1,
    "ctr": 0,
    "position": 73
+  },
+  {
+   "query": "1.5 kw motor amps",
+   "clicks": 0,
+   "impressions": 3,
+   "ctr": 0,
+   "position": 72
   },
   {
    "query": "1.7 kw a amperios",
@@ -662,9 +717,9 @@
   {
    "query": "10 awg to mm2",
    "clicks": 0,
-   "impressions": 4,
+   "impressions": 5,
    "ctr": 0,
-   "position": 77.3
+   "position": 75.4
   },
   {
    "query": "10 gauge to mm2",
@@ -749,41 +804,6 @@
    "impressions": 1,
    "ctr": 0,
    "position": 69
-  },
-  {
-   "query": "100 kva kw",
-   "clicks": 0,
-   "impressions": 3,
-   "ctr": 0,
-   "position": 74.3
-  },
-  {
-   "query": "100 kva to amps",
-   "clicks": 0,
-   "impressions": 1,
-   "ctr": 0,
-   "position": 69
-  },
-  {
-   "query": "100 kva to kw",
-   "clicks": 0,
-   "impressions": 1,
-   "ctr": 0,
-   "position": 57
-  },
-  {
-   "query": "1000 kva to kw",
-   "clicks": 0,
-   "impressions": 1,
-   "ctr": 0,
-   "position": 95
-  },
-  {
-   "query": "1000 kva transformer amps",
-   "clicks": 0,
-   "impressions": 1,
-   "ctr": 0,
-   "position": 74
   }
  ]
 }
