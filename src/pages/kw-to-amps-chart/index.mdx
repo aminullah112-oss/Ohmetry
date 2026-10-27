@@ -11,7 +11,7 @@ import ChartTable from '../../components/ChartTable.astro';
 import Related from '../../components/Related.astro';
 import { kwToAmpsChart } from '../../lib/calc/charts';
 
-This chart gives the line current for loads from 1 to 100 kW. Single-phase values assume a power factor of 1.0, which suits heaters and other resistive loads. Three-phase values assume 0.9, a common figure for a mix of motors and electronics. If your power factor is different, the correction is one multiplication, shown below.
+This chart gives the line current for loads from 0.5 to 200 kW. Single-phase values assume a power factor of 1.0, which suits heaters and other resistive loads. Three-phase values assume 0.9, a common figure for a mix of motors and electronics. If your power factor is different, the correction is one multiplication, shown below.
 
 <ChartTable chart={kwToAmpsChart('single')} />
 
@@ -44,6 +44,15 @@ At 240 V single-phase and PF 1.0, 41.7 A. At 480 V three-phase and PF 0.9, 13.4 
 
 ### Why is the 208 V three-phase current higher than at 240 V?
 Current is power divided by voltage, so a lower voltage needs more current for the same kW. A 30 kW load draws 92.5 A at 208 V and 80.2 A at 240 V.
+
+### How many amps is 7.6 kW?
+31.7 A at 240 V single-phase and PF 1.0, or 63.3 A at 120 V. The 7.6 kW row is a common size for a home EV charger.
+
+### How many amps is 5.9 kW?
+24.6 A at 240 V single-phase and PF 1.0, or 49.2 A at 120 V.
+
+### How many amps is 150 kW?
+At 480 V three-phase and PF 0.9, 200 A. At 400 V it is 241 A, and at 208 V it is 463 A.
 
 ### Which power factor should I use?
 Use the figure from the equipment data or measurements. Resistive heaters are 1.0, lightly loaded motors can be 0.6 or below, and 0.8 to 0.9 is a usual planning value.

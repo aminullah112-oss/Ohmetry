@@ -97,6 +97,13 @@ describe('reference charts', () => {
     expect(cell(wattsToAmpsChart(), '4500', '240 V')).toBe('18.8');
   });
 
+  it('long-tail rows: 5.9 kW at 240 V is 24.6 A; 150 kW at 400 V three-phase is 241 A; 1,200 W at 120 V is 10.0 A; 10,000 W at 240 V is 41.7 A', () => {
+    expect(cell(kwToAmpsChart('single'), '5.9', '240 V')).toBe('24.6');
+    expect(cell(kwToAmpsChart('three'), '150', '400 V')).toBe('241');
+    expect(cell(wattsToAmpsChart(), '1200', '120 V')).toBe('10.0');
+    expect(cell(wattsToAmpsChart(), '10000', '240 V')).toBe('41.7');
+  });
+
   it('every chart row has one cell per header', () => {
     for (const c of [kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);

@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/CalcPage.astro
 title: "Watts to Amps Chart (12 V to 240 V) | Ohmetry"
-description: "Amps for loads from 60 to 7,500 watts at 12, 24, 48, 120, 230 and 240 V, with the formula and a worked example for inverters and low-voltage DC."
+description: "Amps for loads from 10 to 10,000 watts at 12, 24, 48, 120, 230 and 240 V, with the formula and a worked example for inverters and low-voltage DC."
 h1: "Watts to Amps Chart"
 hub: Electrical
 hubHref: /electrical/
@@ -29,7 +29,15 @@ These are typical figures. Check the nameplate on your own equipment, because wa
 - **1,440 W** is 12 A at 120 V. A 12 A load on 120 V is a common current for slow electric vehicle charging.
 - **1,500 W** (a typical portable heater setting) is 12.5 A at 120 V, close to the continuous limit of a 15 A circuit.
 - **1,800 W** is 15 A at 120 V, the full rating of a 15 A breaker.
-- **4,500 W** (a common water heater element) is 18.75 A at 240 V.
+- **1,100 W** is 9.17 A at 120 V and 4.58 A at 240 V.
+- **1,300 W** is 10.8 A at 120 V and 5.42 A at 240 V.
+- **1,400 W** is 11.7 A at 120 V and 5.83 A at 240 V.
+- **2,200 W** is 18.3 A at 120 V and 9.17 A at 240 V.
+- **3,300 W** is 27.5 A at 120 V and 13.75 A at 240 V.
+- **4,500 W** (a common water heater element) is 18.75 A at 240 V and 37.5 A at 120 V.
+- **5,500 W** is 22.9 A at 240 V.
+- **8,000 W** is 33.3 A at 240 V.
+- **10,000 W** is 41.7 A at 240 V.
 
 Add 25 % when the load runs for three hours or more, to size the breaker. The <a href="/breaker-amps-to-watts-chart/">breaker amps to watts chart</a> does that for you.
 
@@ -55,6 +63,15 @@ A 2,000 W inverter load at 12 V draws 2,000 / 12 = 167 A according to the chart.
 
 ### How many watts is 15 amps at 120 V?
 1,800 W. The 1,800 W row shows 15.0 A at 120 V.
+
+### How many amps is 1,200 watts?
+10 A at 120 V and 5 A at 240 V, for a power factor of 1.0. At 12 V it is 100 A.
+
+### How many amps is 1,400 watts?
+11.7 A at 120 V and 5.83 A at 240 V. At 12 V it is 117 A.
+
+### How many amps is 4,500 watts at 240 V?
+18.75 A. For a water heater element that runs for hours, use 125 % of that, 23.4 A, to choose the breaker, which points to a 30 A breaker. See the <a href="/breaker-amps-to-watts-chart/">breaker chart</a>.
 
 ### Does the chart work for a heat pump or a motor?
 Not directly. Those loads have a power factor below 1 and a high starting current. Use the nameplate current or the NEC table value for the motor.

@@ -57,9 +57,9 @@ export const guides = [
 
 export const charts = [
   { slug: 'kva-to-kw-chart', name: 'kVA to kW chart', blurb: 'Real power for 1 to 2,000 kVA at power factors 0.7 to 1, plus kW to kVA.', hub: 'electrical' as HubId },
-  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 1 to 100 kW, single-phase and three-phase, 120 to 600 V including 230 and 400 V.', hub: 'electrical' as HubId },
+  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 0.5 to 200 kW, single-phase and three-phase, 120 to 600 V including 230 and 400 V.', hub: 'electrical' as HubId },
   { slug: 'amps-to-kw-chart', name: 'Amps to kW chart', blurb: 'Real power for 5 to 200 A at the common voltages.', hub: 'electrical' as HubId },
-  { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 60 to 7,500 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
+  { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 10 to 10,000 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
   { slug: 'breaker-amps-to-watts-chart', name: 'Breaker amps to watts', blurb: 'Continuous load that 15 to 200 A breakers support.', hub: 'electrical' as HubId },
   { slug: 'voltage-drop-chart', name: 'Voltage drop chart', blurb: 'Drop per amp and longest run for AWG copper and aluminum.', hub: 'electrical' as HubId },
   { slug: 'wire-size-by-distance-chart', name: 'Wire size by distance', blurb: 'Smallest copper wire for a 3 % drop over 25 to 300 ft at 120 V and 240 V.', hub: 'electrical' as HubId },
