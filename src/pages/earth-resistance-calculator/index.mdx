@@ -8,11 +8,19 @@ hubHref: /protection/
 crumb: "Earth rod resistance"
 ---
 import EarthRod from '../../components/EarthRod.tsx';
+import ChartTable from '../../components/ChartTable.astro';
 import Related from '../../components/Related.astro';
+import { earthRodChart } from '../../lib/calc/charts';
 
 <EarthRod client:load />
 
 The resistance of an earth electrode to the general mass of earth decides how much the electrode's potential rises when fault current flows into it. That rise, the earth potential rise (EPR = fault current × resistance), drives touch and step voltages and the operation of earth-fault protection. This calculator estimates the resistance of a single vertical rod.
+
+**Short answer.** One 3 m, 16 mm rod in 100 Ω·m soil is about 33.5 Ω, and doubling the length to 6 m only brings it to 18.6 Ω. The table below gives the single-rod value for other lengths and soils.
+
+<ChartTable chart={earthRodChart()} />
+
+The values assume uniform soil and a 16 mm rod. A measured soil resistivity and a measured resistance at the installed rod always override a table.
 
 ## Formula
 
@@ -34,6 +42,10 @@ Doubling the rod to 6 m gives 18.6 Ω, which is 55 % of the 3 m value, not 50 %.
 
 Soil resistivity ranges from tens of Ω·m in wet clay to over a thousand in dry sand, gravel or rock, and it changes with moisture, temperature and depth. A value taken from a table is only a rough guide. Measure it on site, with the Wenner four-pin method, at a range of spacings, and design for the dry season, when resistivity peaks. Layered soils, such as a wet topsoil over dry sand, make a single resistivity figure unreliable and call for a two-layer analysis.
 
+## Rods in US practice
+
+The NEC does not set an ohm target for a single rod. It requires a rod at least 2.44 m (8 ft) long (250.52(A)(5)), and where one rod does not measure 25 Ω or less it must be supplemented by another electrode (250.53(A)(2)). Rods spaced farther apart than 1.8 m (6 ft) work better in parallel (250.53(B)). Section numbers change between editions, so check yours. An 8 ft, 5/8 in rod in 100 Ω·m soil comes to about 40 Ω by the formula, so in soil like that a second electrode would normally be needed.
+
 ## Using several rods
 
 Rods in parallel do not divide the resistance by the number of rods unless they are far apart, because their fields overlap. At a spacing equal to the rod length the combined resistance is noticeably higher than R divided by the number of rods, and larger spacings help. This calculator handles a single rod only, so apply a factor from a design guide or a software tool for groups, rings and grids.
@@ -54,6 +66,12 @@ The required resistance comes from the standard, the utility or the application.
 - **Assuming a low resistance alone makes a safe system.** Touch and step voltages are the real test.
 
 ## Questions
+
+### How many ohms should a ground rod be?
+It depends on the standard. Under the NEC a single rod above 25 Ω needs another electrode, and a protection or substation design may set a lower target or a permitted earth potential rise instead. Measure the installed value and compare it with your requirement.
+
+### How deep should an earth rod be driven?
+The NEC minimum is 2.44 m (8 ft) for a rod electrode. Going deeper helps, but with diminishing returns: in the table, doubling 3 m to 6 m lowers the resistance by 45 %, not 50 %.
 
 ### What is the effect of rod diameter?
 Little. Resistance depends on the logarithm of the ratio of length to radius, so a thicker rod lowers the value only slightly. Corrosion and mechanical strength decide the diameter.

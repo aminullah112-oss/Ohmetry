@@ -8,7 +8,9 @@ hubHref: /protection/
 crumb: "IDMT relay"
 ---
 import IdmtRelay from '../../components/IdmtRelay.tsx';
+import ChartTable from '../../components/ChartTable.astro';
 import Related from '../../components/Related.astro';
+import { idmtTimesChart } from '../../lib/calc/charts';
 
 <IdmtRelay client:load />
 
@@ -37,6 +39,10 @@ t = 0.2 × 0.14 / (10<sup>0.02</sup> − 1) = 0.028 / 0.04713 = 0.594 s.
 
 The same relay trips in 2.0 s at twice the pickup and in 0.45 s at twenty times. At TMS 1 and ten times the setting, the four curves give 2.97 s for SI, 1.50 s for VI, 0.81 s for EI and 13.3 s for LTI, which are widely tabulated values you can use to check any implementation.
 
+<ChartTable chart={idmtTimesChart()} />
+
+The times scale directly with TMS, so at TMS 0.1 and ten times pickup a standard inverse relay trips in 0.30 s. The 1.5× row shows how steeply the time climbs near the pickup: a standard inverse relay takes 17.2 s at 1.5 times pickup, against 2.97 s at ten times.
+
 ## Choosing a curve
 
 - **Standard inverse** is the general choice for feeders and incomers, and its flat shape suits cases where the fault level varies little.
@@ -60,6 +66,9 @@ This is the IEC characteristic. North American relays often use the IEEE C37.112
 - **Forgetting the relay's tolerance.** Time accuracy classes allow a few percent of error.
 
 ## Questions
+
+### What is the trip time at ten times pickup?
+At TMS 1: 2.97 s on standard inverse, 1.50 s on very inverse, 0.81 s on extremely inverse and 13.3 s on long-time inverse. Multiply by your TMS.
 
 ### What does TMS mean?
 Time multiplier setting. It scales the whole curve in time, so TMS 0.5 gives half the time of TMS 1 at every current.

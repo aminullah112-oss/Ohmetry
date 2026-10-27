@@ -11,6 +11,8 @@ import { hpToKw, inputKw } from './kw-hp';
 import { STANDARD_RATINGS } from './breaker-size';
 import { pfCorrection } from './pf-correction';
 import { kvaToKw, kwToKva } from './kva-kw';
+import { earthRodOhms } from './earth-rod';
+import { idmtTime, type Curve } from './idmt';
 
 export interface Chart { caption: string; headers: string[]; rows: string[][] }
 
@@ -192,5 +194,29 @@ export function kwToKvaChart(): Chart {
     caption: 'Apparent power in kVA needed for each kW load and power factor',
     headers: ['kW', ...KVA_PF.map((pf) => `PF ${pf}`)],
     rows: KW_TO_KVA_ROWS.map((kw) => [String(kw), ...KVA_PF.map((pf) => auto(kwToKva(kw, pf).kva))]),
+  };
+}
+
+export const ROD_LENGTHS_M = [1.2, 2.4, 3, 4.8, 6, 9];
+export const SOIL_OHM_M = [30, 50, 100, 200, 500];
+
+/** Resistance of one 16 mm vertical rod in uniform soil, by driven length and soil resistivity. */
+export function earthRodChart(): Chart {
+  return {
+    caption: 'Resistance in ohms of one 16 mm vertical rod in uniform soil',
+    headers: ['Driven length', ...SOIL_OHM_M.map((r) => `${r} Ω·m`)],
+    rows: ROD_LENGTHS_M.map((l) => [`${l} m`, ...SOIL_OHM_M.map((r) => auto(earthRodOhms(r, l, 16)))]),
+  };
+}
+
+export const IDMT_MULTIPLES = [1.5, 2, 3, 5, 10, 20];
+
+/** IDMT operating time in seconds at TMS 1 for the four IEC curves, by multiple of pickup. */
+export function idmtTimesChart(): Chart {
+  const curves: Curve[] = ['SI', 'VI', 'EI', 'LTI'];
+  return {
+    caption: 'Operating time in seconds at TMS 1 (multiply by your TMS)',
+    headers: ['I / pickup', 'Standard inverse', 'Very inverse', 'Extremely inverse', 'Long-time inverse'],
+    rows: IDMT_MULTIPLES.map((m) => [`${m}×`, ...curves.map((c) => auto(idmtTime(c, 1, m * 100, 100)))]),
   };
 }

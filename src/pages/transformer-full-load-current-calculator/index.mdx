@@ -33,6 +33,20 @@ Primary 8.75 A, secondary 26.2 A.
 **2,500 kVA, 11 kV / 415 V.**
 Primary 131 A, secondary 3,478 A. A secondary current this size usually means busbar trunking and several parallel cables, not a single circuit.
 
+## Common sizes
+
+Three-phase full-load current on the low-voltage side, from the same formula:
+
+- **100 kVA:** 144 A at 400 V, 139 A at 415 V.
+- **500 kVA:** 722 A at 400 V, 696 A at 415 V.
+- **1,000 kVA:** 1,443 A at 400 V, 1,391 A at 415 V.
+- **2,000 kVA:** 2,887 A at 400 V, 2,782 A at 415 V.
+- **75 kVA:** 208 A at 208 V, 90.2 A at 480 V.
+- **150 kVA:** 416 A at 208 V, 180 A at 480 V.
+- **500 kVA:** 601 A at 480 V.
+
+On an 11 kV primary, 1,000 kVA draws 52.5 A and 500 kVA draws 26.2 A. The <a href="/transformer-full-load-current-chart/">transformer full-load current chart</a> lists more sizes and voltages.
+
 ## What to do with the result
 
 On the primary side, full-load current sets the minimum rating of the switchgear and the fuse or relay element. Protection is normally set well above it, because a transformer drawing magnetizing inrush on energization can take several times its rated current for a short time. Values of 8 to 12 times rated current are often quoted for inrush, and the real figure depends on the design, the residual flux in the core and the point on the voltage wave where the breaker closes. Relays on the supply side either have an inrush restraint or are set with a time delay or high enough pickup to avoid tripping on energization.
@@ -53,6 +67,12 @@ On the secondary side, the full-load current sets the size of the main breaker a
 - **Confusing kVA with kW.** The nameplate rating is apparent power.
 
 ## Questions
+
+### What is the full-load current of a 500 kVA transformer?
+On the 400 V side it is 722 A, and at 415 V it is 696 A. At 480 V it is 601 A. On an 11 kV primary it is 26.2 A.
+
+### What is the full-load current of a 1,000 kVA transformer?
+1,443 A at 400 V and 1,391 A at 415 V on the secondary, and 52.5 A on an 11 kV primary.
 
 ### How do I find the full-load current from the nameplate?
 Many nameplates print both currents. If they do, use them. If not, calculate from kVA and the rated voltages.

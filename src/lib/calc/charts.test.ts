@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
+  earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
   dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, kvaToKwChart, kwToKvaChart, type Chart,
 } from './charts';
 
@@ -104,8 +104,20 @@ describe('reference charts', () => {
     expect(cell(wattsToAmpsChart(), '10000', '240 V')).toBe('41.7');
   });
 
+  it('earth rod chart matches the worked example: 3 m at 100 ohm.m is 33.5 ohm, 6 m is 18.6 ohm', () => {
+    expect(cell(earthRodChart(), '3 m', '100 Ω·m')).toBe('33.5');
+    expect(cell(earthRodChart(), '6 m', '100 Ω·m')).toBe('18.6');
+  });
+
+  it('IDMT chart at ten times pickup, TMS 1: SI 2.97 s, VI 1.50 s, EI 0.81 s, LTI 13.3 s', () => {
+    expect(cell(idmtTimesChart(), '10×', 'Standard inverse')).toBe('2.97');
+    expect(cell(idmtTimesChart(), '10×', 'Very inverse')).toBe('1.50');
+    expect(cell(idmtTimesChart(), '10×', 'Extremely inverse')).toBe('0.81');
+    expect(cell(idmtTimesChart(), '10×', 'Long-time inverse')).toBe('13.3');
+  });
+
   it('every chart row has one cell per header', () => {
-    for (const c of [kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
+    for (const c of [earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);
     }
   });
