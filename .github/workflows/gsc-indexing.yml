@@ -1,0 +1,31 @@
+name: Indexing status (Search Console)
+
+# Read-only. Asks Google through the URL Inspection API whether each sitemap page is indexed and commits
+# docs/seo/indexing.md. Uses the same GSC_SERVICE_ACCOUNT secret as the weekly report; it never requests indexing.
+
+on:
+  schedule:
+    - cron: '41 6 * * 3' # Wednesdays, 06:41 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  indexing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check indexing status
+        run: node scripts/gsc-indexing.mjs
+        env:
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+      - name: Commit the report
+        run: |
+          git config user.name "ohmetry-bot"
+          git config user.email "hello@ohmetry.com"
+          git add docs/seo/indexing.md docs/seo/indexing.json || true
+          git diff --cached --quiet || (git commit -m "Indexing status report" && git pull --rebase origin main && git push)
