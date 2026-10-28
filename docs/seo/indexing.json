@@ -2,7 +2,7 @@
  "checked": "2026-10-28",
  "site": "sc-domain:ohmetry.com",
  "total": 59,
- "indexed": 51,
+ "indexed": 52,
  "results": [
   {
    "url": "https://ohmetry.com/",
@@ -30,7 +30,7 @@
    "url": "https://ohmetry.com/amps-to-kw-chart/",
    "verdict": "NEUTRAL",
    "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-16",
+   "crawled": "2026-10-28",
    "fetch": "SUCCESSFUL",
    "robots": "ALLOWED",
    "indexing": "INDEXING_ALLOWED",
@@ -261,7 +261,7 @@
    "url": "https://ohmetry.com/hp-to-kw-chart/",
    "verdict": "NEUTRAL",
    "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-16",
+   "crawled": "2026-10-28",
    "fetch": "SUCCESSFUL",
    "robots": "ALLOWED",
    "indexing": "INDEXING_ALLOWED",
@@ -305,23 +305,12 @@
    "url": "https://ohmetry.com/kva-to-kw-calculator/",
    "verdict": "NEUTRAL",
    "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-23",
+   "crawled": "2026-10-28",
    "fetch": "SUCCESSFUL",
    "robots": "ALLOWED",
    "indexing": "INDEXING_ALLOWED",
    "googleCanonical": "https://ohmetry.com/kva-to-kw-calculator/",
    "userCanonical": "https://ohmetry.com/kva-to-kw-calculator/"
-  },
-  {
-   "url": "https://ohmetry.com/kva-to-kw-chart/",
-   "verdict": "NEUTRAL",
-   "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-23",
-   "fetch": "SUCCESSFUL",
-   "robots": "ALLOWED",
-   "indexing": "INDEXING_ALLOWED",
-   "googleCanonical": "https://ohmetry.com/kva-to-kw-chart/",
-   "userCanonical": "https://ohmetry.com/kva-to-kw-chart/"
   },
   {
    "url": "https://ohmetry.com/kw-to-amps-calculator/",
@@ -349,7 +338,7 @@
    "url": "https://ohmetry.com/kw-to-hp-calculator/",
    "verdict": "NEUTRAL",
    "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-09",
+   "crawled": "2026-10-28",
    "fetch": "SUCCESSFUL",
    "robots": "ALLOWED",
    "indexing": "INDEXING_ALLOWED",
@@ -546,7 +535,7 @@
   {
    "url": "https://ohmetry.com/transformer-full-load-current-chart/",
    "verdict": "NEUTRAL",
-   "coverage": "Discovered - currently not indexed",
+   "coverage": "URL is unknown to Google",
    "fetch": "PAGE_FETCH_STATE_UNSPECIFIED",
    "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
    "indexing": "INDEXING_STATE_UNSPECIFIED"
@@ -575,9 +564,9 @@
   },
   {
    "url": "https://ohmetry.com/voltage-drop-chart/",
-   "verdict": "NEUTRAL",
-   "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-14",
+   "verdict": "PASS",
+   "coverage": "Submitted and indexed",
+   "crawled": "2026-10-28",
    "fetch": "SUCCESSFUL",
    "robots": "ALLOWED",
    "indexing": "INDEXING_ALLOWED",
@@ -618,10 +607,18 @@
    "userCanonical": "https://ohmetry.com/watts-to-amps-chart/"
   },
   {
+   "url": "https://ohmetry.com/what-happens-when-lightning-strikes-a-building/",
+   "verdict": "NEUTRAL",
+   "coverage": "Discovered - currently not indexed",
+   "fetch": "PAGE_FETCH_STATE_UNSPECIFIED",
+   "robots": "ROBOTS_TXT_STATE_UNSPECIFIED",
+   "indexing": "INDEXING_STATE_UNSPECIFIED"
+  },
+  {
    "url": "https://ohmetry.com/wire-resistance-chart/",
    "verdict": "NEUTRAL",
    "coverage": "Crawled - currently not indexed",
-   "crawled": "2026-10-14",
+   "crawled": "2026-10-28",
    "fetch": "SUCCESSFUL",
    "robots": "ALLOWED",
    "indexing": "INDEXING_ALLOWED",

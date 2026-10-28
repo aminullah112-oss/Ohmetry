@@ -1,19 +1,18 @@
 # Indexing status (URL Inspection API)
 
-Site: sc-domain:ohmetry.com. Checked 2026-10-28. 59 sitemap URLs: 51 indexed, 8 not indexed, 0 could not be checked.
+Site: sc-domain:ohmetry.com. Checked 2026-10-28. 59 sitemap URLs: 52 indexed, 7 not indexed, 0 could not be checked.
 
 ## Not indexed
 
 | Page | Status | Last crawl | Page fetch |
 |---|---|---|---|
-| /amps-to-kw-chart/ | Crawled - currently not indexed | 2026-10-16 | SUCCESSFUL |
-| /hp-to-kw-chart/ | Crawled - currently not indexed | 2026-10-16 | SUCCESSFUL |
-| /kva-to-kw-calculator/ | Crawled - currently not indexed | 2026-10-23 | SUCCESSFUL |
-| /kva-to-kw-chart/ | Crawled - currently not indexed | 2026-10-23 | SUCCESSFUL |
-| /kw-to-hp-calculator/ | Crawled - currently not indexed | 2026-10-09 | SUCCESSFUL |
-| /transformer-full-load-current-chart/ | Discovered - currently not indexed | never | PAGE_FETCH_STATE_UNSPECIFIED |
-| /voltage-drop-chart/ | Crawled - currently not indexed | 2026-10-14 | SUCCESSFUL |
-| /wire-resistance-chart/ | Crawled - currently not indexed | 2026-10-14 | SUCCESSFUL |
+| /amps-to-kw-chart/ | Crawled - currently not indexed | 2026-10-28 | SUCCESSFUL |
+| /hp-to-kw-chart/ | Crawled - currently not indexed | 2026-10-28 | SUCCESSFUL |
+| /kva-to-kw-calculator/ | Crawled - currently not indexed | 2026-10-28 | SUCCESSFUL |
+| /kw-to-hp-calculator/ | Crawled - currently not indexed | 2026-10-28 | SUCCESSFUL |
+| /transformer-full-load-current-chart/ | URL is unknown to Google | never | PAGE_FETCH_STATE_UNSPECIFIED |
+| /what-happens-when-lightning-strikes-a-building/ | Discovered - currently not indexed | never | PAGE_FETCH_STATE_UNSPECIFIED |
+| /wire-resistance-chart/ | Crawled - currently not indexed | 2026-10-28 | SUCCESSFUL |
 
 ## Indexed with a different Google canonical
 
@@ -66,6 +65,7 @@ Site: sc-domain:ohmetry.com. Checked 2026-10-28. 59 sitemap URLs: 51 indexed, 8 
 - /transformer-full-load-current-calculator/ (last crawl 2026-10-15)
 - /transformer-short-circuit-current-chart/ (last crawl 2026-10-18)
 - /voltage-drop-calculator/ (last crawl 2026-10-15)
+- /voltage-drop-chart/ (last crawl 2026-10-28)
 - /voltage-drop-formula/ (last crawl 2026-10-18)
 - /watts-to-amps-calculator/ (last crawl 2026-10-25)
 - /watts-to-amps-chart/ (last crawl 2026-10-15)
