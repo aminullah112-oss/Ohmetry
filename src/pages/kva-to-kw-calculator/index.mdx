@@ -1,31 +1,34 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "kVA to kW Calculator (and kW to kVA) | Ohmetry"
-description: "Convert kVA to kW and kW to kVA using power factor, and see the reactive kvar. Formulas, worked examples and typical power factors."
+title: "kVA to kW Calculator and Conversion Table (kW to kVA) | Ohmetry"
+description: "Convert kVA to kW and kW to kVA using power factor, with a table from 1 to 2,000 kVA at power factors 0.7 to 1.0 and the reactive kvar. Formulas and worked examples."
 h1: "kVA to kW Calculator"
 hub: Electrical
 hubHref: /electrical/
 crumb: "kVA to kW"
 ---
 import KvaToKw from '../../components/KvaToKw.tsx';
+import ChartTable from '../../components/ChartTable.astro';
 import Related from '../../components/Related.astro';
+import { kvaToKwChart, kwToKvaChart } from '../../lib/calc/charts';
 
 <KvaToKw client:load />
 
-**Short answer:** kW = kVA × power factor. At 0.8 power factor 1 kVA is 0.8 kW, at 0.9 it is 0.9 kW, and at a power factor of 1 they are equal. For common sizes see the <a href="/kva-to-kw-chart/">kVA to kW conversion chart</a>.
+**Short answer:** kW = kVA × power factor. At 0.8 power factor 1 kVA is 0.8 kW, at 0.9 it is 0.9 kW, and at a power factor of 1 they are equal. The tables below cover common ratings and power factors.
 
 kVA is apparent power, the total the supply must carry. kW is real power, the part that does useful work. The ratio between them is the power factor. Transformers, generators and UPS units are rated in kVA because their heating depends on current, and current does not care how much of it does useful work.
 
-## Quick conversions
+## kVA to kW table
 
-| kVA | 0.8 PF | 0.9 PF | 1.0 PF |
-|---|---|---|---|
-| 1 | 0.8 kW | 0.9 kW | 1 kW |
-| 5 | 4 kW | 4.5 kW | 5 kW |
-| 10 | 8 kW | 9 kW | 10 kW |
-| 50 | 40 kW | 45 kW | 50 kW |
-| 100 | 80 kW | 90 kW | 100 kW |
-| 500 | 400 kW | 450 kW | 500 kW |
+Find the kVA rating of the transformer, generator or UPS in the first column, then read across to the power factor of the load.
+
+<ChartTable chart={kvaToKwChart()} />
+
+## kW to kVA table
+
+To size equipment for a known real load, divide by the power factor. Read the kW load in the first column and the kVA rating it needs in the column for your power factor.
+
+<ChartTable chart={kwToKvaChart()} />
 
 The same formula applies to single-phase and three-phase, because the √3 for three-phase is already in the kVA figure.
 
@@ -44,6 +47,16 @@ kW = 100 × 0.8 = 80 kW, and kvar = √(100² − 80²) = 60 kvar.
 A 45 kW load at 0.9 power factor:
 
 kVA = 45 / 0.9 = 50 kVA, and kvar = √(50² − 45²) = 21.8 kvar.
+
+More examples:
+
+- **A 500 kVA generator at 0.8 power factor** delivers 500 × 0.8 = 400 kW. Look at the 500 kVA row, 0.8 column.
+- **A 250 kW load at 0.9 power factor** needs 250 / 0.9 = 277.8 kVA. Choose the next standard rating above that, and use the <a href="/generator-size-calculator/">generator size calculator</a> if you are sizing a set.
+- **A 100 kVA transformer feeding motors at 0.85** can supply 100 × 0.85 = 85 kW of real load before it reaches its kVA limit.
+
+## Single-phase and three-phase
+
+The conversion is the same. For example, a three-phase load drawing 100 A at 480 V is √3 × 480 × 100 / 1,000 = 83.1 kVA. At a power factor of 0.85 that is 83.1 × 0.85 = 70.7 kW. The <a href="/kva-to-amps-calculator/">kVA to amps calculator</a> and the <a href="/transformer-full-load-current-chart/">transformer full-load current chart</a> give the current for a given kVA.
 
 ## Typical power factors
 
@@ -85,7 +98,7 @@ Divide by 0.85. For example, 50 kW is 50 / 0.85 = 58.8 kVA.
 Their losses depend on the current they carry, not on the power factor of the load. A transformer rated in kVA can carry that current whatever the load does with it.
 
 <Related items={[
-  { href: '/kva-to-kw-chart/', label: 'kVA to kW conversion chart' },
+  { href: '/transformer-full-load-current-chart/', label: 'Transformer full-load current chart' },
   { href: '/kva-to-amps-calculator/', label: 'kVA to amps calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
   { href: '/power-factor-correction-calculator/', label: 'Power factor correction calculator' },
