@@ -50,7 +50,7 @@ const hubIds = Object.keys(hubs) as HubId[];
     <div class="wrap">
       <div class="block-head">
         <div><div class="eyebrow">All calculators</div><h2>Find the one you need</h2></div>
-        <label class="search"><span class="sr-only" style="position:absolute;left:-999px">Search calculators</span><Icon name="search" /><input id="q" type="search" placeholder={`Search ${calculators.length} calculators`} autocomplete="off" /></label>
+        <label class="search"><span class="sr-only">Search calculators</span><Icon name="search" /><input id="q" type="search" placeholder={`Search ${calculators.length} calculators`} autocomplete="off" /></label>
       </div>
       {hubIds.map((id) => (
         <div class="group" data-group>
