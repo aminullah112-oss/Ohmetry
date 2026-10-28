@@ -1,0 +1,103 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "What Happens When Lightning Strikes a Building? | Ohmetry"
+description: "The path a lightning strike takes through a building, why bonding matters as much as low earth resistance, what surge protection does, and how to stay safe indoors."
+h1: "What Happens When Lightning Strikes a Building?"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Lightning and earthing"
+---
+import Related from '../../components/Related.astro';
+
+**Short answer.** A strike delivers a pulse of current, typically tens of thousands of amps, that lasts microseconds to a fraction of a millisecond. It takes every path to earth it can find: a lightning conductor if there is one, otherwise the roof, the walls, the wiring and the plumbing. The damage comes less from the current itself than from the voltages it creates along those paths. Protection is a chain of three things: a safe path to earth, bonding that keeps everything inside the building at the same voltage, and surge protective devices on the incoming wires.
+
+This page explains what happens electrically and what each protective measure is for. It is an explanation, not a design guide. Lightning protection systems are designed to IEC 62305 or NFPA 780 after a risk assessment, and neither standard is reproduced here.
+
+## How big is a strike?
+
+Numbers vary widely. A typical first stroke peaks at around 30 kA, and a small share of strokes exceed 100 kA. The current rises to its peak in a few to ten microseconds and falls away over tens to hundreds of microseconds. Test standards describe the shape by two times, time to peak and time to half value. IEC 62305 uses a 10/350 µs current to represent a direct strike and an 8/20 µs current to represent the surge induced on wiring by a strike nearby. Devices are rated against one or the other, so a surge protector's kA rating is meaningless unless you know which wave it refers to.
+
+## Four ways a strike reaches your electrics
+
+1. **A direct strike on the building.** The current flows down the structure or its conductors to earth. Heating at poor joints, and side flashes to nearby metal, are the fire risks.
+2. **A strike on the incoming power line, phone line or aerial.** Part of the current travels along the conductor into the building. This is the most common cause of damaged equipment.
+3. **A strike near the building.** The changing magnetic field induces a voltage in loops of wiring, even with no contact. It is smaller than a direct hit but enough to damage electronics.
+4. **A rise in the earth's potential.** The current spreading out through the soil lifts the ground voltage around the strike point, and anything connected to a distant earth sees a large difference.
+
+## Earth potential rise: why resistance is only part of the story
+
+When current I flows into an earth electrode of resistance R, the electrode rises above distant earth by V = I × R. Take the 3 m, 16 mm rod in 100 Ω·m soil from the <a href="/earth-resistance-calculator/">earth rod resistance calculator</a>, which comes to 33.5 Ω. A 30 kA strike into it gives 30,000 × 33.5 = 1,005,000 V, about 1 MV. Even a good 10 Ω earth would rise to 300 kV.
+
+Real figures are lower than this, because fast impulses see the electrode's inductance and the soil's behaviour, not just its steady resistance, and the current divides between many paths. The sum is a scale illustration, not a prediction. It shows why the aim is not to make one point's voltage low but to keep everything from rising apart.
+
+## Equipotential bonding is what protects people
+
+If every metal part in a building is bonded to the same earthing system, they all rise together during a strike. There is a large voltage to the outside world and almost none between the objects you can touch. That is the idea behind bonding the water pipe, gas pipe, structural steel, the earth bar and the surge protector to one earthing point. A bird on a high-voltage line is safe for the same reason.
+
+The danger appears where something is not bonded: a metal pipe that enters the building from a different earth, a sensor cable running to an outbuilding, or an aerial lead. These can carry a different voltage into the building, and the gap shows up across whatever is in between, including you or your equipment.
+
+## What an earth electrode is for
+
+The earth electrode lets the current spread into the soil without a large local voltage. A low resistance helps, and a ring or several rods spread the current better than one rod. Resistance matters most for protecting equipment and for the voltages around the electrode. It does not on its own make a building safe. A building with a 5 Ω earth and unbonded services can be more dangerous than one with 20 Ω and everything bonded.
+
+## What a surge protective device does
+
+A surge protective device (SPD) fitted at the main panel limits the voltage a surge can reach inside the building. It diverts surge current to the earth bar and clamps the voltage at a level the equipment can survive. In the US, NEC 230.67 requires one at the service of a dwelling in recent editions. Check the edition your jurisdiction has adopted.
+
+What an SPD does not do:
+- **It does not stop a lightning strike.** A power strip with a surge symbol is not lightning protection.
+- **It does not protect people.** Bonding does that.
+- **It does not last forever.** It absorbs energy and wears out. Many show an indicator that changes when they need replacing.
+- **It does not work with long leads.** Voltage across a conductor is its inductance times the rate of change of current. A wire has about 1 µH per metre, so a surge rising at 1 kA/µs adds roughly 1 kV for every metre of lead. Keep the connections from the SPD to the busbars and the earth bar as short and straight as possible, and a surge protector at a long distance from the equipment protects it less.
+
+One device at the panel limits what enters the building. Sensitive equipment, such as computers or a solar inverter, may still need a second SPD close to it, and the two must be rated to work together. A competent electrician or the manufacturer's coordination guidance should settle that.
+
+## Does a building need a lightning conductor?
+
+Not always. A lightning protection system (air terminals, down conductors and an earth termination) is decided by a risk assessment that weighs the chance of a strike against the cost of a loss. The assessment looks at the height and size of the building, the local strike density, what is inside and who occupies it. A tall isolated building on a hilltop is a very different case from a house in a dense street. If a system is installed, its earthing must be bonded to the building's electrical earth, and its design belongs with a specialist.
+
+## What to do during a thunderstorm
+
+- **Go indoors.** There is no safe place outside. A fully enclosed building or a hard-topped metal vehicle is safe. An open shelter, a tree and a tent are not.
+- **Stay away from the wiring and plumbing.** Current can travel through both, so avoid showers, baths, washing up and wired phones, and keep your hands off plugged-in equipment.
+- **Do not rely on unplugging at the last moment.** Unplug sensitive equipment before the storm arrives if you can, not during it.
+- **Wait 30 minutes after the last thunder** before going back out, which is the standard guidance from the US National Weather Service. See its <a href="https://www.weather.gov/safety/lightning">lightning safety pages</a>.
+
+## After a strike
+
+- Call the emergency services for a fire or an injury, and give first aid. A person struck by lightning does not carry a charge.
+- Do not keep resetting a breaker that trips. A burning smell, dead sockets, a scorched receptacle or a warm panel needs an electrician.
+- Check the SPD indicator, and replace the device if it shows it has operated.
+- A strike can damage equipment that seems to work, so look for equipment that fails days later.
+
+## Common mistakes and myths
+
+- **"Lightning never strikes twice."** It does, and tall structures are hit repeatedly.
+- **"Rubber soles protect you."** They do not.
+- **"A low earth resistance makes the building safe."** Bonding matters as much.
+- **"A surge strip protects against a direct strike."** It does not.
+- **"A lightning conductor attracts lightning."** It gives a strike that would hit the building anyway a controlled path to earth.
+
+## Questions
+
+### Does a surge protector stop lightning damage?
+It limits the surge that comes in through the wiring and so cuts the risk to equipment, but it does not stop a direct strike or protect people, and it needs short leads and a good earth connection to work.
+
+### Should I unplug appliances during a storm?
+Unplug them before the storm if you have time. Do not go near wiring or plugged-in equipment during one.
+
+### How much current is in a lightning strike?
+A typical first stroke peaks at about 30 kA, and a small share exceed 100 kA. The pulse lasts microseconds to a fraction of a millisecond.
+
+### Why is the earth resistance not the whole answer?
+Fast impulses meet the inductance of conductors and the behaviour of the soil, and the safety of the people inside depends on all the metalwork rising together. That is the job of bonding.
+
+### Can lightning travel through plumbing and wiring?
+Yes. Current from a strike follows any conductor into a building, which is why plumbing and wired equipment are best avoided during a storm.
+
+<Related items={[
+  { href: '/earth-resistance-calculator/', label: 'Earth rod resistance calculator' },
+  { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
+  { href: '/how-to-size-a-circuit-breaker/', label: 'How to size a circuit breaker' },
+  { href: '/protection/', label: 'Protection and MV calculators' },
+]} />

@@ -52,6 +52,7 @@ export const guides = [
   { slug: 'relay-setting-checklist', name: 'Relay setting checklist', blurb: 'Seven stages for a transformer-feeder overcurrent relay, with a worked example.', hub: 'protection' as HubId },
   { slug: 'how-to-size-a-circuit-breaker', name: 'How to size a circuit breaker', blurb: 'Six steps under the NEC, with EV, mixed-load and water-heater examples.', hub: 'electrical' as HubId },
   { slug: 'how-to-size-a-cable', name: 'How to size a cable', blurb: 'Five checks, one worked example: current, derating, voltage drop and fault withstand.', hub: 'electrical' as HubId },
+  { slug: 'what-happens-when-lightning-strikes-a-building', name: 'What happens when lightning strikes', blurb: 'The path a strike takes through a building, why bonding matters, and what surge protection does.', hub: 'protection' as HubId },
   { slug: 'nec-voltage-drop-guide', name: 'NEC voltage drop: 3 % and 5 %', blurb: 'What the NEC recommends and how to size AWG wire for it, with examples.', hub: 'electrical' as HubId },
 ];
 
