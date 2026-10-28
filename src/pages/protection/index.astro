@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import { hubs, calcsIn } from '../../data/calculators';
+import { hubs, calcsIn, charts } from '../../data/calculators';
 const hub = hubs['protection'];
 const crumbs = [{ name: hub.name, href: hub.href }];
 ---
@@ -18,5 +18,31 @@ const crumbs = [{ name: hub.name, href: hub.href }];
       ))}
     </div>
     <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/relay-setting-checklist/"><span class="tag">GUIDE</span><h2>Relay setting checklist</h2><p>Seven stages for a transformer-feeder overcurrent relay, with a worked example.</p></a></div>
+    <div class="group-title">Charts</div>
+    <div class="card-grid">
+      {charts.filter((c) => c.hub === 'protection').map((c) => (
+        <a class="card calc-card" href={`/${c.slug}/`}>
+          <span class="tag">CHART</span>
+          <h2>{c.name}</h2>
+          <p>{c.blurb}</p>
+        </a>
+      ))}
+    </div>
   </div>
+  <article class="article prose">
+    <h2>How the protection tools fit together</h2>
+    <p>The tools follow the order of a protection study. The answer from one is the input to the next.</p>
+    <ol>
+      <li><a href="/transformer-full-load-current-calculator/">Transformer full-load current</a> gives the rated current on each side, the base for switchgear, cable and relay settings.</li>
+      <li><a href="/short-circuit-current-calculator/">Short-circuit current</a> estimates the fault level at the transformer secondary from kVA, impedance and the source level.</li>
+      <li><a href="/cable-fault-current-calculator/">Fault current at the cable end</a> shows how cable impedance lowers the fault level along a feeder. The minimum value decides whether the relay still sees the fault.</li>
+      <li><a href="/cable-size-calculator/">Cable size with derating</a> checks the cable rating after installation factors.</li>
+      <li><a href="/ct-burden-calculator/">CT burden</a> checks that the current transformer stays accurate at fault current.</li>
+      <li><a href="/idmt-relay-calculator/">IDMT relay time</a> gives the operating time on the four IEC curves, the starting point for grading. The <a href="/relay-setting-checklist/">relay setting checklist</a> walks through the full sequence.</li>
+      <li><a href="/earth-resistance-calculator/">Earth rod resistance</a> estimates one driven rod in uniform soil.</li>
+      <li><a href="/power-factor-correction-calculator/">Power factor correction</a> sizes the capacitor bank for a target power factor.</li>
+    </ol>
+    <p>Tools tagged IEC follow IEC methods, such as the IEC 60255 relay curves and IEC 60364 cable ratings. Each page states its formula, its assumptions and a worked example you can check by hand.</p>
+    <p>These are estimating tools. They do not replace a coordination study, the relay manufacturer's manual or your utility's requirements, and a measured value always overrides a calculated one.</p>
+  </article>
 </Base>

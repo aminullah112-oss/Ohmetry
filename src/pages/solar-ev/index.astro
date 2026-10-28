@@ -1,9 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import { hubs, calcsIn } from '../../data/calculators';
+import { hubs, calcsIn, guides, charts } from '../../data/calculators';
 const hub = hubs['solar-ev'];
 const crumbs = [{ name: hub.name, href: hub.href }];
+const related = [
+  ...guides.filter((g) => ['voltage-drop-formula', 'how-to-size-a-cable'].includes(g.slug)).map((g) => ({ ...g, tag: 'GUIDE' })),
+  ...charts.filter((c) => ['watts-to-amps-chart', 'voltage-drop-chart'].includes(c.slug)).map((c) => ({ ...c, tag: 'CHART' })),
+];
 ---
 <Base title="Solar and EV Calculators | Ohmetry" description="Solar array, battery, inverter, DC cable and EV charger calculators with stated assumptions and worked examples." breadcrumbs={crumbs} activeHub="solar-ev">
   <PageHeader title={`${hub.name} calculators`} lead={hub.blurb} eyebrow="Toolbox" crumbs={crumbs} />
@@ -17,6 +21,28 @@ const crumbs = [{ name: hub.name, href: hub.href }];
         </a>
       ))}
     </div>
-    
+    <div class="group-title">Related guides and charts</div>
+    <div class="card-grid">
+      {related.map((c) => (
+        <a class="card calc-card" href={`/${c.slug}/`}>
+          <span class="tag">{c.tag}</span>
+          <h2>{c.name}</h2>
+          <p>{c.blurb}</p>
+        </a>
+      ))}
+    </div>
   </div>
+  <article class="article prose">
+    <h2>Sizing a solar or EV system in order</h2>
+    <p>Most mistakes in a small solar system come from sizing the parts in the wrong order. These tools follow the sequence that avoids that.</p>
+    <ol>
+      <li>Start with energy. The <a href="/solar-panel-calculator/">solar panel calculator</a> turns your daily use and site sun hours into a panel count.</li>
+      <li>Size storage next. The <a href="/battery-bank-calculator/">battery bank calculator</a> gives capacity in Ah and kWh, or the runtime of a battery you already have.</li>
+      <li>Choose the inverter from the loads. The <a href="/inverter-size-calculator/">inverter size calculator</a> covers continuous power and the surge from motor starts.</li>
+      <li>Then check the cable. At low voltage the current is large: the same power at one tenth of the voltage needs ten times the current, so a 1,500 W load draws 125 A at 12 V. The <a href="/solar-wire-size-calculator/">DC cable size calculator</a> finds the smallest cable for a voltage-drop limit.</li>
+      <li>The <a href="/off-grid-solar-calculator/">off-grid system calculator</a> does the whole chain in one pass if you want a first estimate.</li>
+    </ol>
+    <p>For a home EV charger, use the <a href="/ev-charger-wire-size-calculator/">EV charger circuit calculator</a>. It applies the NEC 125 % rule for continuous loads to give the breaker, the minimum conductor ampacity and a cable size that keeps voltage drop in check.</p>
+    <p>Every calculator states its assumptions, such as sun hours, efficiency and depth of discharge, and lets you change them. The results are estimates. Check them against the equipment data sheets, your local code and a qualified electrician before you buy or install.</p>
+  </article>
 </Base>
