@@ -1,12 +1,12 @@
 {
-  "pages": 59,
-  "indexable": 58,
+  "pages": 60,
+  "indexable": 59,
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/contact/: only 165 words",
-    "/corrections/: only 192 words",
-    "/disclaimer/: only 165 words",
-    "/methodology/: only 243 words"
+    "/contact/: only 170 words",
+    "/corrections/: only 197 words",
+    "/disclaimer/: only 170 words",
+    "/methodology/: only 248 words"
   ]
 }
