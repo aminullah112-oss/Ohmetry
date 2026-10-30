@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
+  earthConductorKChart, earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
   dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, kvaToKwChart, kwToKvaChart, type Chart,
 } from './charts';
 
@@ -116,8 +116,14 @@ describe('reference charts', () => {
     expect(cell(idmtTimesChart(), '10×', 'Long-time inverse')).toBe('13.3');
   });
 
+  it('earth conductor k chart: copper PVC 142.7, copper XLPE 175.6, aluminium XLPE core 94.6', () => {
+    expect(cell(earthConductorKChart(), 'Separate conductor, PVC (30 to 160 °C)', 'Copper')).toBe('142.7');
+    expect(cell(earthConductorKChart(), 'Separate conductor, XLPE or EPR (30 to 250 °C)', 'Copper')).toBe('175.6');
+    expect(cell(earthConductorKChart(), 'Core of a cable, XLPE or EPR (90 to 250 °C)', 'Aluminium')).toBe('94.6');
+  });
+
   it('every chart row has one cell per header', () => {
-    for (const c of [earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
+    for (const c of [earthConductorKChart(), earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);
     }
   });

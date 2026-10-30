@@ -1,0 +1,82 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Earth Conductor Size Calculator (IEC, Adiabatic) | Ohmetry"
+description: "Size an earth (protective) conductor from the fault current and clearing time with the adiabatic formula S = √(I²t)/k. Copper, aluminium and steel, PVC and XLPE."
+h1: "Earth Conductor Size Calculator"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Earth conductor size"
+---
+import EarthConductor from '../../components/EarthConductor.tsx';
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { earthConductorKChart } from '../../lib/calc/charts';
+
+<EarthConductor client:load />
+
+**Short answer.** The earth cable has to carry the earth fault current for as long as the protective device takes to clear it, without overheating. The minimum cross-section is S = √(I²t) / k, where I is the fault current in amps, t the clearing time in seconds and k a factor that depends on the conductor material and insulation. A 10 kA fault cleared in 0.5 s needs 40.3 mm² of copper with XLPE insulation, so the next standard size is 50 mm².
+
+This is the adiabatic method of IEC 60364-5-54 and IEC 60949. It sizes the earthing conductor, the circuit protective conductor (CPC) and the bonding conductor for thermal withstand. It does not set the earth electrode: for that see the <a href="/earth-resistance-calculator/">earth rod resistance calculator</a>.
+
+## Formula
+
+<div class="formula">S = √(I² × t) / k</div>
+
+The method treats the fault as so fast that all the heat stays in the conductor, which is why it is called adiabatic. It holds for clearing times up to about 5 s. S is the cross-section in mm², I the r.m.s. earth fault current in A, t the clearing time in s, and k in A·√s/mm².
+
+## Where k comes from
+
+k depends on the metal and on the temperature the conductor starts at and may reach. The final temperature is the highest the insulation tolerates without damage, 160 °C for PVC and 250 °C for XLPE and EPR. The starting temperature is 30 °C for a separate conductor, and the normal operating temperature of the insulation for a core inside a cable, 70 °C for PVC and 90 °C for XLPE. A core starts hotter, so it has a lower k and needs more copper.
+
+<ChartTable chart={earthConductorKChart()} />
+
+These values are calculated, not copied from a table, using the material constants of IEC 60949: for copper a volumetric heat capacity of 3.45 × 10⁻³ J/°C·mm³, a temperature constant of 234.5 °C and a resistivity at 20 °C of 17.241 × 10⁻⁶ Ω·mm, with matching constants for aluminium and steel. The result is k = √( Qc × (β + 20) / ρ20 × ln(1 + (θf − θi) / (β + θi)) ). The standard prints rounded values such as 143 for copper PVC and 176 for copper XLPE, and the calculated ones agree to within about 1 %.
+
+## Worked examples
+
+**A separate copper conductor with XLPE insulation, 10 kA for 0.5 s.** I²t = 10,000² × 0.5 = 50 × 10⁶ A²s, so √(I²t) = 7,071 A·√s. With k = 175.6, S = 7,071 / 175.6 = 40.3 mm². The next standard size is 50 mm².
+
+**The same fault on PVC insulation, 25 kA for 1 s.** √(I²t) = 25,000. With k = 142.7, S = 175.2 mm², so use 185 mm².
+
+**A copper PVC core inside a multicore cable, 6 kA for 0.2 s.** √(I²t) = 6,000 × √0.2 = 2,683. With the core's k of 114.8, S = 23.4 mm², so use 25 mm².
+
+## What it does not cover
+
+- **It is a thermal check only.** Standards also set minimum sizes for mechanical strength, often 2.5 mm² for a separate copper conductor that is mechanically protected and 4 mm² where it is not. Check your edition.
+- **The phase-conductor rule is an alternative, not a result of this formula.** IEC 60364-5-54 also lets a protective conductor of the same material take a size from a table related to the phase conductor, equal to it up to 16 mm², 16 mm² for phase sizes up to 35 mm², and half the phase size above that. Use whichever the standard allows and the larger of that and this calculation where both apply.
+- **The NEC works differently.** It sizes equipment grounding conductors from the rating of the overcurrent device, in Table 250.122, not from the fault current and time. This page does not reproduce that table.
+- **PVC above 300 mm².** The final temperature drops to 140 °C. The calculator switches to it automatically when the PVC result exceeds 300 mm².
+- **The fault current and time must be right.** Use the highest earth fault current the conductor can carry and the operating time of the protective device at that current, not its rating. The <a href="/cable-fault-current-calculator/">fault current at the end of a cable</a> and the <a href="/idmt-relay-calculator/">IDMT relay calculator</a> help find them.
+
+## Common mistakes
+
+- **Using the clearing time at the rated current** instead of at the fault current, which gives a time that is far too long.
+- **Using the phase fault level for a single-phase earth fault** when the earth fault current is lower. For a conductor that must survive, use the highest value that can flow through it.
+- **Using the copper k for an aluminium or steel conductor.**
+- **Forgetting that a core in a cable starts hotter** than a separate conductor.
+- **Choosing the minimum without rounding up** to a standard size.
+
+## Questions
+
+### How do I calculate the earth cable size?
+Divide √(I²t) by k. Take I as the earth fault current in amps and t as the time the protection takes to clear it, then find k for your material and insulation. Round up to the next standard cross-section.
+
+### What is the k factor in the earth conductor formula?
+A constant that combines the heat capacity and resistivity of the metal with the temperatures the conductor starts at and may reach. The table above gives k for copper, aluminium and steel with PVC and XLPE insulation.
+
+### Why does the standard give a lower k for a cable core?
+A core in a loaded cable is already at its operating temperature, 70 °C for PVC and 90 °C for XLPE, before the fault starts. It has less temperature rise left before it reaches the final temperature, so it can absorb less energy and needs more copper.
+
+### Does this give the CPC size under BS 7671?
+It gives the thermal withstand size of a protective conductor, the same adiabatic check that BS 7671 and IEC 60364 use. BS 7671 also has a table of sizes related to the phase conductor, and the final size is the one your edition requires.
+
+### What fault current should I use?
+The highest earth fault current that can flow through the conductor, with the operating time of the device at that current. Both come from the protection study, not from the device rating.
+
+<Related items={[
+  { href: '/earth-resistance-calculator/', label: 'Earth rod resistance calculator' },
+  { href: '/cable-fault-current-calculator/', label: 'Fault current at the end of a cable' },
+  { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
+  { href: '/idmt-relay-calculator/', label: 'IDMT relay time calculator' },
+  { href: '/what-happens-when-lightning-strikes-a-building/', label: 'What happens when lightning strikes a building' },
+]} />

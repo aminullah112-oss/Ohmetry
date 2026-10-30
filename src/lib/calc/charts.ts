@@ -12,6 +12,7 @@ import { STANDARD_RATINGS } from './breaker-size';
 import { pfCorrection } from './pf-correction';
 import { kvaToKw, kwToKva } from './kva-kw';
 import { earthRodOhms } from './earth-rod';
+import { kFactor } from './earth-conductor';
 import { idmtTime, type Curve } from './idmt';
 
 export interface Chart { caption: string; headers: string[]; rows: string[][] }
@@ -218,5 +219,20 @@ export function idmtTimesChart(): Chart {
     caption: 'Operating time in seconds at TMS 1 (multiply by your TMS)',
     headers: ['I / pickup', 'Standard inverse', 'Very inverse', 'Extremely inverse', 'Long-time inverse'],
     rows: IDMT_MULTIPLES.map((m) => [`${m}×`, ...curves.map((c) => auto(idmtTime(c, 1, m * 100, 100)))]),
+  };
+}
+
+/** k for the adiabatic earth conductor formula, calculated from the IEC 60949 constants. */
+export function earthConductorKChart(): Chart {
+  const cases: [string, number, number, boolean][] = [
+    ['Separate conductor, PVC (30 to 160 °C)', 30, 160, true],
+    ['Separate conductor, XLPE or EPR (30 to 250 °C)', 30, 250, true],
+    ['Core of a cable, PVC (70 to 160 °C)', 70, 160, false],
+    ['Core of a cable, XLPE or EPR (90 to 250 °C)', 90, 250, false],
+  ];
+  return {
+    caption: 'k in A·√s/mm², calculated from the IEC 60949 material constants',
+    headers: ['Installation and insulation', 'Copper', 'Aluminium', 'Steel'],
+    rows: cases.map(([label, i, f, steel]) => [label, fixed(kFactor('copper', i, f), 1), fixed(kFactor('aluminium', i, f), 1), steel ? fixed(kFactor('steel', i, f), 1) : '–']),
   };
 }

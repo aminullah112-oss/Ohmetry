@@ -43,6 +43,7 @@ export const calculators: Calc[] = [
   { slug: 'cable-size-calculator', name: 'Cable size with derating', blurb: 'Tabulated rating needed after IEC derating factors.', hub: 'protection', tag: 'IEC' },
   { slug: 'ct-burden-calculator', name: 'CT burden', blurb: 'Connected burden and effective accuracy limit factor.', hub: 'protection', tag: 'IEC' },
   { slug: 'idmt-relay-calculator', name: 'IDMT relay time', blurb: 'Operating time on the four IEC 60255 curves.', hub: 'protection', tag: 'IEC' },
+  { slug: 'earth-conductor-size-calculator', name: 'Earth conductor size', blurb: 'Minimum earth cable from fault current and clearing time, adiabatic method.', hub: 'protection', tag: 'IEC' },
   { slug: 'earth-resistance-calculator', name: 'Earth rod resistance', blurb: 'One driven rod from soil resistivity and length.', hub: 'protection' },
   { slug: 'power-factor-correction-calculator', name: 'Power factor correction', blurb: 'Capacitor kvar to reach a target power factor.', hub: 'protection' },
 ];
