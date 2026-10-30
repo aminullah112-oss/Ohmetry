@@ -15,7 +15,7 @@ Free NEC-first electrical, solar and protection calculators plus a paid Excel wo
 
 ## State (2026-10-15)
 - Live: 56 indexable pages, including 10 formula-based chart pages under `/charts/` (kW to amps, voltage drop, wire resistance, transformer, power factor and others). Chart numbers come from `src/lib/calc/charts.ts`, which has tests.
-- Gumroad product live at https://aminullah11.gumroad.com/l/hdauo, verified (cover, 5 gallery images, 57.7 KB workbook v1.1.1, thumbnail, 30-day refund). `gumroadUrl` is set in `src/data/site.ts`.
+- Gumroad product live at https://ohmetry.gumroad.com/l/hdauo, verified (cover, 5 gallery images, 57.7 KB workbook v1.1.1, thumbnail, 30-day refund). `gumroadUrl` is set in `src/data/site.ts`.
 - Email capture is built and **hidden** until `emailFormAction` in `src/data/site.ts` is set. Setup steps: `docs/EMAIL-SETUP.md` (Brevo). Free sample workbook: `public/downloads/ohmetry-sample-sheet.xlsx` (build script `docs/build_sample_sheet.py`).
 - Search Console (domain property sc-domain:ohmetry.com): 42 of 56 pages indexed as of 2026-10-15. 632 impressions, 1 click, average position 70.7 (data to Oct 12). Dashboard: GitHub Pages site built by `.github/workflows/dashboard.yml`, data in `docs/seo/`.
 - Ahrefs Webmaster Tools verified. The 51 "backlinks" it shows are spam on numeric .xyz domains (nofollow); real backlinks = 0. Ignore them, do not disavow.

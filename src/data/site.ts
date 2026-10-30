@@ -7,8 +7,8 @@ export const site = {
   toolkitName: "Electrical Engineer's Toolkit",
   /** Price shown next to the buy button. Change it here and on Gumroad together. */
   price: '$19',
-  /** Gumroad product URL, e.g. https://yourname.gumroad.com/l/toolkit */
-  gumroadUrl: 'https://aminullah11.gumroad.com/l/hdauo',
+  /** Gumroad product URL, e.g. https://ohmetry.gumroad.com/l/toolkit */
+  gumroadUrl: 'https://ohmetry.gumroad.com/l/hdauo',
   /** POST endpoint of the email service (Brevo, Buttondown, ConvertKit, ...). Leave empty to hide every sign-up form. */
   emailFormAction: '',
   /** Name of the email service, shown on the privacy page once the form is live. */
