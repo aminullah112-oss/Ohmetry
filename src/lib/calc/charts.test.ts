@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  earthConductorKChart, earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
+  deratingTempChart, earthConductorKChart, earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
   dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, kvaToKwChart, kwToKvaChart, type Chart,
 } from './charts';
 
@@ -122,8 +122,16 @@ describe('reference charts', () => {
     expect(cell(earthConductorKChart(), 'Core of a cable, XLPE or EPR (90 to 250 °C)', 'Aluminium')).toBe('94.6');
   });
 
+  it('derating chart reads like the IEC tables: air PVC 0.87 at 40, XLPE 0.91 at 40, ground PVC 0.95 at 25, none above max minus 10', () => {
+    expect(cell(deratingTempChart('air'), '40', 'PVC, 70 °C')).toBe('0.87');
+    expect(cell(deratingTempChart('air'), '40', 'XLPE or EPR, 90 °C')).toBe('0.91');
+    expect(cell(deratingTempChart('ground'), '25', 'PVC, 70 °C')).toBe('0.95');
+    expect(cell(deratingTempChart('air'), '65', 'PVC, 70 °C')).toBe('–');
+    expect(cell(deratingTempChart('air'), '80', 'XLPE or EPR, 90 °C')).toBe('0.41');
+  });
+
   it('every chart row has one cell per header', () => {
-    for (const c of [earthConductorKChart(), earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
+    for (const c of [deratingTempChart('air'), deratingTempChart('ground'), earthConductorKChart(), earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);
     }
   });

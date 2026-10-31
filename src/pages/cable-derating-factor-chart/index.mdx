@@ -1,0 +1,95 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Cable Derating Factor Chart (Ambient Temperature, IEC) | Ohmetry"
+description: "Cable derating factors for ambient air and ground temperature, PVC and XLPE, with the formula, worked examples and how to combine them with grouping factors."
+h1: "Cable Derating Factor Chart"
+hub: Protection and MV
+hubHref: /protection/
+crumb: "Cable derating factors"
+---
+import DeratingTemp from '../../components/DeratingTemp.tsx';
+import ChartTable from '../../components/ChartTable.astro';
+import Related from '../../components/Related.astro';
+import { deratingTempChart } from '../../lib/calc/charts';
+
+<DeratingTemp client:load />
+
+**Short answer.** A derating factor is a number below 1 that you multiply a cable's tabulated current rating by to allow for conditions worse than the rating table assumes. For ambient temperature, a PVC cable in 40 °C air has a factor of 0.87 and an XLPE cable in 40 °C air has 0.91. Several factors usually apply at once, and you multiply them together.
+
+This page gives the ambient temperature factors, which come from a formula and can be shown in full. The grouping factors and the soil factors depend on tables in the standard, which are not reproduced here.
+
+## Ambient air temperature
+
+The rating tables in IEC 60364-5-52 assume an ambient air temperature of 30 °C. In a warmer room, roof space or plant area the cable cannot shed heat as well, so its allowable current falls. In a cooler one it rises above 1.
+
+<ChartTable chart={deratingTempChart('air')} />
+
+## Ground temperature
+
+For buried cables the reference ground temperature is 20 °C.
+
+<ChartTable chart={deratingTempChart('ground')} />
+
+A dash means the ambient is less than 10 °C below the conductor's maximum, where the factor falls steeply. Check the installation instead of derating it.
+
+## The formula
+
+<div class="formula">k = √( (T<sub>max</sub> − T<sub>ambient</sub>) / (T<sub>max</sub> − T<sub>reference</sub>) )</div>
+
+T<sub>max</sub> is the conductor's maximum operating temperature: 70 °C for PVC and 90 °C for XLPE and EPR. T<sub>reference</sub> is 30 °C for air and 20 °C for ground. The heat a cable can lose depends on the gap between its conductor and its surroundings. When the surroundings are warmer, that gap shrinks, and the current has to shrink with it. Current produces heat as I²R, which is why the factor is a square root.
+
+The standards print the result rounded to two decimals, and the values above agree with them. The NEC temperature correction table follows the same formula with a 30 °C reference. For example, a 75 °C conductor at 40 °C has a factor of 0.88, and a 90 °C one has 0.91. Use the NEC table for the official values.
+
+## How to use the factors
+
+The rule is Iz = It × k₁ × k₂ × …, where It is the tabulated rating, Iz the rating in your conditions, and k₁, k₂ and so on the derating factors. The cable must satisfy In ≤ Iz, so It ≥ In / (k₁ × k₂ × …).
+
+**Worked example.** A 63 A breaker protects a PVC cable in a 40 °C plant room, grouped with other circuits for a grouping factor of 0.80, read from the standard. Combined factor = 0.87 × 0.80 = 0.696. The cable's tabulated rating must be at least 63 / 0.696 = 90.5 A. Pick the smallest cable whose tabulated rating, for your installation method, is at least that.
+
+**Cool ambient.** A PVC cable in 20 °C air has a factor of 1.12, so it can carry 12 % more than the table says. Check the standard and your project rules before relying on a factor above 1.
+
+The <a href="/cable-size-calculator/">cable size calculator</a> does this division for any set of factors and adds the voltage drop check.
+
+## Other derating factors
+
+- **Grouping.** More loaded circuits close together heat each other. The factor depends on how many circuits there are and how the cables are arranged: touching, spaced, on a tray, in conduit or in trunking. It falls as circuits are added. Read it from the standard's table for your arrangement.
+- **Soil thermal resistivity.** Dry soil carries heat away more slowly than damp soil. Buried cables take a factor for it.
+- **Depth of burial.** Deeper cables lose heat more slowly.
+- **Harmonics.** Triplen harmonics in the neutral of a three-phase system can add heating that the ordinary rating does not allow for.
+- **Insulation and installation method.** These set the tabulated rating itself, not a correction.
+
+## Common mistakes
+
+- **Applying only the temperature factor** when the cable is also grouped.
+- **Multiplying the design current instead of dividing the rating.** The factors lower the cable's capacity, which is the same as raising the rating you need.
+- **Using the air factor for a buried cable**, or the reverse, because the reference temperatures differ.
+- **Using an ambient temperature that is the average** rather than the highest the cable will see for long periods.
+- **Taking credit for a factor above 1** without checking that your standard and project allow it.
+
+## Questions
+
+### What is a derating factor for a cable?
+A multiplier below 1 applied to the tabulated current rating to allow for installation conditions, such as high ambient temperature or grouping, that make the cable run hotter than the rating table assumes.
+
+### How do I calculate the derating factor for temperature?
+Take the square root of (maximum conductor temperature minus ambient) divided by (maximum minus reference). For PVC at 40 °C in air that is √(30/40) = 0.87.
+
+### Do I add or multiply derating factors?
+Multiply them. Two factors of 0.87 and 0.80 give a combined 0.696.
+
+### How much do I derate at 40 °C?
+0.87 for a PVC cable in air and 0.91 for XLPE. For a buried PVC cable at 40 °C the factor is 0.77, because the reference is 20 °C.
+
+### Do the same factors apply in the NEC?
+The NEC temperature correction table follows the same formula with a 30 °C reference, for conductors rated 60, 75 or 90 °C, so the values are alike. The NEC also applies its own adjustment factors for more than three current-carrying conductors. Use the NEC tables for the official numbers.
+
+### Where do I find the grouping factors?
+In the standard you work to. IEC 60364-5-52 gives them by arrangement and number of circuits, and BS 7671 has equivalent tables. This page does not copy them.
+
+<Related items={[
+  { href: '/cable-size-calculator/', label: 'Cable size calculator with derating' },
+  { href: '/how-to-size-a-cable/', label: 'How to size a cable' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator (NEC)' },
+  { href: '/earth-conductor-size-calculator/', label: 'Earth conductor size calculator' },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+]} />

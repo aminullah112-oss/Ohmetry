@@ -66,6 +66,7 @@ export const charts = [
   { slug: 'wire-size-by-distance-chart', name: 'Wire size by distance', blurb: 'Smallest copper wire for a 3 % drop over 25 to 300 ft at 120 V and 240 V.', hub: 'electrical' as HubId },
   { slug: 'wire-resistance-chart', name: 'Wire resistance chart', blurb: 'AWG diameter, area and ohms per 1,000 ft, copper and aluminum.', hub: 'electrical' as HubId },
   { slug: 'hp-to-kw-chart', name: 'HP to kW chart', blurb: 'Mechanical and metric horsepower, with motor input power.', hub: 'electrical' as HubId },
+  { slug: 'cable-derating-factor-chart', name: 'Cable derating factors', blurb: 'Ambient air and ground temperature correction for PVC and XLPE cables, with the formula.', hub: 'protection' as HubId },
   { slug: 'transformer-full-load-current-chart', name: 'Transformer full-load current', blurb: 'Amps for 15 to 2,500 kVA at secondary and primary voltages.', hub: 'protection' as HubId },
   { slug: 'transformer-short-circuit-current-chart', name: 'Transformer fault current', blurb: 'Fault level in kA by kVA and impedance at 208 and 480 V.', hub: 'protection' as HubId },
   { slug: 'power-factor-correction-chart', name: 'Power factor correction chart', blurb: 'Capacitor kvar per kW from the present to the target power factor.', hub: 'protection' as HubId },

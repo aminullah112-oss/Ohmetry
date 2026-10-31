@@ -13,6 +13,7 @@ import { pfCorrection } from './pf-correction';
 import { kvaToKw, kwToKva } from './kva-kw';
 import { earthRodOhms } from './earth-rod';
 import { kFactor } from './earth-conductor';
+import { tempCorrection, AIR_REFERENCE_C, GROUND_REFERENCE_C } from './derating-temp';
 import { idmtTime, type Curve } from './idmt';
 
 export interface Chart { caption: string; headers: string[]; rows: string[][] }
@@ -234,5 +235,18 @@ export function earthConductorKChart(): Chart {
     caption: 'k in A·√s/mm², calculated from the IEC 60949 material constants',
     headers: ['Installation and insulation', 'Copper', 'Aluminium', 'Steel'],
     rows: cases.map(([label, i, f, steel]) => [label, fixed(kFactor('copper', i, f), 1), fixed(kFactor('aluminium', i, f), 1), steel ? fixed(kFactor('steel', i, f), 1) : '–']),
+  };
+}
+
+export const AMBIENT_ROWS_C = [10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80];
+
+/** Ambient temperature correction factors, listed while the ambient is at least 10 degC below the conductor maximum. */
+export function deratingTempChart(medium: 'air' | 'ground'): Chart {
+  const ref = medium === 'air' ? AIR_REFERENCE_C : GROUND_REFERENCE_C;
+  const cell = (maxC: number, amb: number) => (amb <= maxC - 10 ? fixed(tempCorrection(maxC, ref, amb), 2) : '–');
+  return {
+    caption: `Correction factor for ${medium === 'air' ? 'ambient air temperature (reference 30 °C)' : 'ground temperature (reference 20 °C)'}`,
+    headers: [medium === 'air' ? 'Ambient air (°C)' : 'Ground (°C)', 'PVC, 70 °C', 'XLPE or EPR, 90 °C'],
+    rows: AMBIENT_ROWS_C.map((a) => [String(a), cell(70, a), cell(90, a)]),
   };
 }
