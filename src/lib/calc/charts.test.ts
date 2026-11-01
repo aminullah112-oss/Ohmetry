@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  deratingTempChart, earthConductorKChart, earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
+  kvaToAmpsChart, deratingTempChart, earthConductorKChart, earthRodChart, idmtTimesChart, kwToAmpsChart, ampsToKwChart, wattsToAmpsChart, transformerFlcChart, transformerFaultChart,
   dropPerAmpChart, maxLengthChart, wireSizeByDistanceChart, wireResistanceChart, hpToKwChart, breakerWattsChart, pfMultiplierChart, kvaToKwChart, kwToKvaChart, type Chart,
 } from './charts';
 
@@ -130,8 +130,14 @@ describe('reference charts', () => {
     expect(cell(deratingTempChart('air'), '80', 'XLPE or EPR, 90 °C')).toBe('0.41');
   });
 
+  it('kVA to amps chart: 5 kVA single-phase at 230 V is 21.7 A, 100 kVA three-phase at 400 V is 144 A, 500 kVA at 480 V is 601 A', () => {
+    expect(cell(kvaToAmpsChart('single'), '5', '230 V')).toBe('21.7');
+    expect(cell(kvaToAmpsChart('three'), '100', '400 V')).toBe('144');
+    expect(cell(kvaToAmpsChart('three'), '500', '480 V')).toBe('601');
+  });
+
   it('every chart row has one cell per header', () => {
-    for (const c of [deratingTempChart('air'), deratingTempChart('ground'), earthConductorKChart(), earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
+    for (const c of [kvaToAmpsChart('single'), kvaToAmpsChart('three'), deratingTempChart('air'), deratingTempChart('ground'), earthConductorKChart(), earthRodChart(), idmtTimesChart(), kwToAmpsChart('three'), ampsToKwChart('single'), wattsToAmpsChart(), transformerFlcChart([480]), dropPerAmpChart(), wireResistanceChart(), hpToKwChart(), breakerWattsChart(), pfMultiplierChart(), wireSizeByDistanceChart(120)]) {
       for (const r of c.rows) expect(r.length).toBe(c.headers.length);
     }
   });

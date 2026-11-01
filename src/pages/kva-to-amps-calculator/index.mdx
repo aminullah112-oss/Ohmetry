@@ -8,11 +8,27 @@ hubHref: /electrical/
 crumb: "kVA to amps"
 ---
 import KvaToAmps from '../../components/KvaToAmps.tsx';
+import ChartTable from '../../components/ChartTable.astro';
 import Related from '../../components/Related.astro';
+import { kvaToAmpsChart } from '../../lib/calc/charts';
 
 <KvaToAmps client:load />
 
 kVA is apparent power, the rating on transformers, generators and UPS units. Converting it to amps gives the full-load current at the rated voltage. Unlike the kW conversion, no power factor is involved, because apparent power already includes it.
+
+**Short answer.** Three-phase: amps = kVA × 1000 / (√3 × volts). Single-phase: amps = kVA × 1000 / volts. A 100 kVA three-phase supply at 400 V is 144 A, and a 5 kVA single-phase supply at 230 V is 21.7 A. The tables below cover common ratings.
+
+## kVA to amps table, single-phase
+
+For generators, inverters and small transformers.
+
+<ChartTable chart={kvaToAmpsChart('single')} />
+
+## kVA to amps table, three-phase
+
+For transformers, three-phase generators and UPS units, at the line-to-line voltage.
+
+<ChartTable chart={kvaToAmpsChart('three')} />
 
 ## Formulas
 
@@ -64,6 +80,15 @@ A generator's kVA rating is the apparent power at its rated voltage, but the rea
 - **Mixing up sides.** Quote which winding the current refers to.
 
 ## Questions
+
+### How many amps is 5 kVA?
+On a single-phase 230 V supply, 21.7 A. At 120 V it is 41.7 A, and at 240 V it is 20.8 A.
+
+### How many amps is 100 kVA?
+Three-phase at 400 V, 144 A. At 415 V it is 139 A, at 480 V it is 120 A and at 208 V it is 278 A.
+
+### How many amps is 10 kVA?
+Single-phase at 230 V, 43.5 A. Three-phase at 400 V, 14.4 A.
 
 ### What is the difference between kVA and kW?
 kVA is voltage times current. kW is the part that does useful work: kW = kVA × power factor.

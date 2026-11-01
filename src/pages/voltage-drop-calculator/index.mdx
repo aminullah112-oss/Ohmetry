@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "Voltage Drop Calculator (NEC, AWG and mm²) | Ohmetry"
+title: "Voltage Drop Calculator: 1-Phase, 3-Phase, AWG, mm² | Ohmetry"
 description: "Calculate voltage drop in volts and percent for single-phase and three-phase cables in AWG and feet or mm² and metres. Formula, NEC 3 % and 5 % guidance."
 h1: "Voltage Drop Calculator"
 hub: Electrical
@@ -14,7 +14,7 @@ import Related from '../../components/Related.astro';
 
 Voltage drop is the voltage lost along a cable because of its resistance, and for longer AC runs its reactance. Too much of it makes motors run hot, lights dim and electronics reset. This calculator gives the drop for a cable you have already chosen. To work the other way and find the smallest cable for a limit, use the <a href="/cable-size-calculator/">cable size calculator</a> or the <a href="/solar-wire-size-calculator/">solar DC cable size calculator</a>.
 
-## Formulas
+## Voltage drop formulas, single-phase and three-phase
 
 <div class="formula">Two-wire or DC: ΔV = 2 × I × L × R<br/>Three-phase: ΔV = √3 × I × L × R<br/>With reactance: ΔV = k × I × L × (R cos φ + X sin φ)<br/>R = ρ / A</div>
 
@@ -64,6 +64,12 @@ Limits come from the regulations and the equipment. As examples, BS 7671 gives 3
 - **Taking the percentage against the wrong voltage.** On three-phase, use line-to-line voltage with the √3 form.
 
 ## Questions
+
+### What is the 3 phase voltage drop formula?
+ΔV = √3 × I × L × (R cos φ + X sin φ), with R and X the resistance and reactance per unit length, L the one-way length and the result a line-to-line voltage. For small cables, drop the reactance term and use ΔV = √3 × I × L × R. To get a percentage, divide by the line-to-line voltage, for example 400 V.
+
+### How do I calculate voltage drop for an armoured (SWA) cable?
+The method is the same: use the cable's resistance and reactance per metre from its data sheet. BS 7671 Appendix 4 gives the same information as millivolts per amp per metre (mV/A/m), where you multiply the value by the current and the length in metres, then divide by 1,000 to get volts. The calculator here uses the resistivity of the conductor and, if you enter it, the reactance.
 
 ### How do I calculate voltage drop in a three-phase circuit?
 Multiply √3 by the current, the one-way length in kilometres and the resistance per kilometre. Add the reactance term if the cable is large or the load is inductive.

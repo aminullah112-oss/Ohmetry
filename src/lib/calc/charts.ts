@@ -250,3 +250,15 @@ export function deratingTempChart(medium: 'air' | 'ground'): Chart {
     rows: AMBIENT_ROWS_C.map((a) => [String(a), cell(70, a), cell(90, a)]),
   };
 }
+
+export const KVA_AMPS_ROWS = [1, 2, 3, 5, 7.5, 10, 15, 20, 25, 30, 40, 50, 75, 100, 150, 200, 250, 300, 500, 750, 1000];
+
+/** Full-load current for a kVA rating. Single-phase for generators and small supplies, three-phase for transformers. */
+export function kvaToAmpsChart(phase: 'single' | 'three'): Chart {
+  const volt = phase === 'single' ? [120, 208, 230, 240] : [208, 240, 400, 415, 480, 600];
+  return {
+    caption: phase === 'single' ? 'Single-phase full-load current in amps' : 'Three-phase full-load current in amps',
+    headers: ['kVA', ...volt.map(volts)],
+    rows: KVA_AMPS_ROWS.map((k) => [String(k), ...volt.map((v) => auto(kvaToAmps(k, v, phase)))]),
+  };
+}
