@@ -1,6 +1,6 @@
 # Search Console report
 
-Site: sc-domain:ohmetry.com. Period: 2026-10-03 to 2026-10-31. Generated 2026-11-02.
+Site: sc-domain:ohmetry.com. Period: 2026-10-04 to 2026-11-01. Generated 2026-11-03.
 
 ## Top pages
 
