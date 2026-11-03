@@ -6,3 +6,6 @@ dist/
 *.xlsx
 toolkit-build/
 dashboard-dist/
+
+# Free downloads served from /downloads/ are tracked on purpose
+!public/downloads/*.xlsx

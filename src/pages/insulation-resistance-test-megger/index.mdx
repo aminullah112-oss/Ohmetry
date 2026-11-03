@@ -1,0 +1,98 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Insulation Resistance (Megger) Test: Procedure and Free Record Sheet | Ohmetry"
+description: "How an insulation resistance (megger) test works, how to record and read the result, polarization index, and a free Excel record sheet with a pass/fail check."
+h1: "Insulation Resistance (Megger) Test and Record Sheet"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Insulation resistance test"
+---
+import Related from '../../components/Related.astro';
+
+**Short answer.** An insulation resistance test applies a DC voltage across the insulation of a cable or piece of equipment and measures the resistance of the leakage path in megohms (MΩ). A high, stable reading means the insulation is clean and dry. A low or falling reading means moisture, contamination, damage or ageing. The pass limit and the test voltage come from the standard or the project specification you work to, not from this page.
+
+**[Download the free record sheet (Excel)](/downloads/ohmetry-insulation-resistance-record.xlsx).** It has a test record with a pass/fail check, a polarization index calculator and a pre-test checklist. It contains no test voltages or minimum values: you enter the ones your specification gives. Free, no sign-up.
+
+This page explains how to record the test and read the result. It is not a method statement, and it does not replace your standard (IEC 60364-6 and BS 7671 for low-voltage installations, IEEE 43 for rotating machines, and your client's specification), the instrument manual or your company's permit and isolation procedure.
+
+## What the test tells you, and what it does not
+
+It tells you whether the insulation between conductors, and between conductors and earth, is healthy at the time of the test. It does not prove the cable is correctly sized, correctly terminated or correctly rated, and it does not find a fault that only appears under load or at higher voltage. A pass is a snapshot, which is why many specifications also ask for the readings to be recorded and compared over the life of the equipment.
+
+## Before you test
+
+Testing is done on a circuit that is de-energised, isolated and proved dead, under your site's permit to work. The test voltage can damage electronics, surge protective devices, capacitors, dimmers and drives, so those are disconnected or protected first, and the far end of the cable is checked to be clear of people. The sheet's checklist tab lists the usual steps as a reminder. Your own procedure takes precedence.
+
+## What to record
+
+Record enough that someone else can repeat and judge the test:
+
+- project, location, circuit or cable reference and length
+- instrument, its calibration due date and the test voltage used
+- each reading in MΩ, for every conductor combination the specification asks for (phase to phase, phase to neutral, phase to earth and neutral to earth are the usual set on a four-core cable)
+- the time each voltage was applied, if the specification sets one
+- ambient temperature and humidity, since both move the result
+- who tested, who witnessed and the date
+
+## Reading the result
+
+**Compare the lowest reading with the minimum in your specification.** The record sheet does this for you: enter the minimum once, and each circuit shows Pass, FAIL or "Enter minimum". A circuit passes only if every reading entered is at or above it.
+
+**Do not borrow a minimum from a different standard or a different voltage.** The accepted minimum varies with the circuit voltage, the type of equipment and the document you are working to. The sheet leaves it blank for that reason.
+
+**Length matters.** The leakage paths along a cable act in parallel, so a longer cable reads lower than a shorter one of the same quality. Multiplying the lowest reading by the length in kilometres gives a value in MΩ·km that lets you compare cables of different lengths. Use it only against a figure your specification also gives per kilometre.
+
+**Temperature and moisture matter.** A warm, damp cable reads lower than a cool, dry one. Record the conditions. The sheet applies no temperature correction because the correct one depends on the insulation material and the standard.
+
+**Trends matter more than one number.** A reading that falls from one test to the next, even while above the minimum, deserves attention.
+
+## Worked example: a four-core cable
+
+A 250 m cable is tested and the lowest of the ten readings is 800 MΩ.
+
+- Length in km: 250 / 1000 = 0.25
+- MΩ·km = 800 × 0.25 = **200 MΩ·km**
+
+Suppose the specification asks for at least 100 MΩ (an example figure only). The lowest reading is above it, so the circuit passes. The record sheet gives the same results if you type them in.
+
+## Polarization index and dielectric absorption ratio
+
+Some specifications, mostly for motors, generators and transformers, ask for a polarization index (PI). It is the ratio of two readings taken on the same test:
+
+**PI = reading at 10 minutes / reading at 1 minute**
+
+A dry, clean insulation system keeps charging and its resistance rises over the 10 minutes, so PI is well above 1. A wet or contaminated one leaks steadily and PI stays near 1. For example, 400 MΩ at 1 minute and 1,200 MΩ at 10 minutes give PI = 3.0. A shorter variant, the dielectric absorption ratio (DAR), uses 60 s divided by 30 s. The sheet calculates both. The minimum acceptable value is set by the standard or the manufacturer, so enter it from your document.
+
+## Common mistakes
+
+- **Testing a live or not-proved-dead circuit.** The test is only done after isolation is proved.
+- **Leaving electronics connected.** The test voltage can destroy them, and they also give false low readings.
+- **Not discharging.** Insulation stores charge, so the circuit is discharged after the test.
+- **Using the wrong test voltage for the circuit.** Take it from the standard, not from memory.
+- **Recording only pass or fail.** Without the actual readings, there is no trend to compare next time.
+- **Ignoring temperature and humidity.** The same cable can pass on a dry morning and fail on a humid afternoon.
+
+## Questions
+
+### What is a megger test?
+It is an insulation resistance test. "Megger" is a brand name that has become the common word for the instrument, which applies a DC test voltage and reads the resistance in megohms.
+
+### What is a good insulation resistance value?
+There is no single value. It depends on the voltage, the equipment and the standard or specification. Higher is better, and a falling trend is a warning. Use the minimum in your own document.
+
+### Why is the minimum left blank on the sheet?
+Because a wrong minimum would make a failing circuit look like a pass. You enter the value and its source, and the sheet shows the source on the record.
+
+### Why do longer cables read lower?
+The leakage paths along the cable add in parallel, so the total resistance falls as the length rises. That is why the sheet shows a MΩ·km value.
+
+### Can I use this sheet as my official test record?
+It is a record format. Whether it is accepted depends on your client or authority, so check whether they require their own form.
+
+<Related items={[
+  { href: '/earth-resistance-calculator/', label: 'Earth rod resistance calculator' },
+  { href: '/earth-conductor-size-calculator/', label: 'Earth conductor size calculator' },
+  { href: '/how-to-size-a-cable/', label: 'How to size a cable' },
+  { href: '/cable-derating-factor-chart/', label: 'Cable derating factor chart' },
+  { href: '/electrical/', label: 'Electrical calculators' },
+]} />
