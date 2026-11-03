@@ -1,12 +1,13 @@
 {
-  "pages": 62,
-  "indexable": 61,
+  "pages": 63,
+  "indexable": 62,
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/contact/: only 170 words",
-    "/corrections/: only 197 words",
-    "/disclaimer/: only 170 words",
-    "/methodology/: only 248 words"
+    "/contact/: only 174 words",
+    "/corrections/: only 201 words",
+    "/disclaimer/: only 174 words",
+    "/insulation-resistance-test-megger/: title is 78 characters (over 70)",
+    "/methodology/: only 252 words"
   ]
 }
