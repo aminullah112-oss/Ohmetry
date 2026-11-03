@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "Cable Derating Factor Chart (Ambient Temperature, IEC) | Ohmetry"
-description: "Cable derating factors for ambient air and ground temperature, PVC and XLPE, with the formula, worked examples and how to combine them with grouping factors."
-h1: "Cable Derating Factor Chart"
+title: "Cable Derating Factor Table (Ambient Temperature, IEC) | Ohmetry"
+description: "Cable de-rating (derating) factor table for ambient air and ground temperature, PVC and XLPE, with the formula, worked examples and how to combine factors."
+h1: "Cable Derating Factor Table and Chart"
 hub: Protection and MV
 hubHref: /protection/
 crumb: "Cable derating factors"
@@ -14,7 +14,7 @@ import { deratingTempChart } from '../../lib/calc/charts';
 
 <DeratingTemp client:load />
 
-**Short answer.** A derating factor is a number below 1 that you multiply a cable's tabulated current rating by to allow for conditions worse than the rating table assumes. For ambient temperature, a PVC cable in 40 °C air has a factor of 0.87 and an XLPE cable in 40 °C air has 0.91. Several factors usually apply at once, and you multiply them together.
+**Short answer.** A derating factor (also written de-rating factor) is a number below 1 that you multiply a cable's tabulated current rating by to allow for conditions worse than the rating table assumes. For ambient temperature, a PVC cable in 40 °C air has a factor of 0.87 and an XLPE cable in 40 °C air has 0.91. Several factors usually apply at once, and you multiply them together.
 
 This page gives the ambient temperature factors, which come from a formula and can be shown in full. The grouping factors and the soil factors depend on tables in the standard, which are not reproduced here.
 

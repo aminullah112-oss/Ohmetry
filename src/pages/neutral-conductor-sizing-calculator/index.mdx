@@ -1,0 +1,99 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Neutral Conductor Sizing Calculator: Neutral Current | Ohmetry"
+description: "Find the current a neutral carries from unbalanced phases and third-harmonic loads, with the formulas and worked examples, then size the neutral for that current."
+h1: "Neutral Conductor Sizing Calculator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Neutral conductor"
+---
+import NeutralCurrent from '../../components/NeutralCurrent.tsx';
+import Related from '../../components/Related.astro';
+
+<NeutralCurrent client:load />
+
+**Short answer.** The neutral in a three-phase four-wire circuit carries the unbalance between the phases plus any third-harmonic current from electronic loads. With balanced linear loads it carries almost nothing. With 100 A, 60 A and 30 A on the three phases it carries 60.8 A. With 100 A per phase and a 40 % third harmonic, it carries 111 A, more than each phase does. Size the neutral for the larger of the two cases you expect, then check it against the standard you work to.
+
+This page calculates the neutral current. It does not pick a conductor size: that takes the cable's rating table, the installation method and the derating factors, which come from the standard and are not reproduced here. Once you have the current, use the <a href="/cable-size-calculator/">cable size calculator</a> or the <a href="/wire-size-calculator/">wire size calculator</a>.
+
+## Why the neutral carries current
+
+In a balanced three-phase system the three phase currents are equal and 120° apart, so at the star point they add to zero and the neutral carries nothing. Anything that breaks that balance sends the difference down the neutral.
+
+Two causes matter in practice: unbalanced loading, where the phases carry different currents, and harmonic currents from electronic equipment, where the neutral can carry more than any one phase.
+
+## Case 1: unbalanced load
+
+With phase currents Ia, Ib and Ic that are 120° apart (the same power factor on each phase), the neutral current is the phasor sum:
+
+**In = √( Ia² + Ib² + Ic² − Ia·Ib − Ib·Ic − Ic·Ia )**
+
+Worked example: 100 A, 60 A and 30 A on the three phases.
+
+- Ia² + Ib² + Ic² = 10,000 + 3,600 + 900 = 14,500
+- Ia·Ib + Ib·Ic + Ic·Ia = 6,000 + 1,800 + 3,000 = 10,800
+- In = √(14,500 − 10,800) = √3,700 = **60.8 A**
+
+Three checks on the formula: equal currents give zero. One phase loaded alone gives that phase's current. Two equal phases loaded and the third empty also gives that current. The formula assumes the load is not distorted: use the harmonic case below for electronic loads.
+
+## Case 2: third-harmonic load
+
+Switch-mode power supplies, LED drivers, variable speed drives and computer equipment draw current in pulses that contain third-harmonic current. Third harmonics, and the other triplen harmonics (9th, 15th, …), are in phase on all three phases. They do not cancel at the star point. They add up in the neutral.
+
+For a balanced circuit where the third harmonic is a fraction k of the fundamental on each phase:
+
+- Phase current (true RMS) = I1 × √(1 + k²)
+- Neutral current = 3 × k × I1
+
+Worked example: a measured 100 A per phase with a 40 % third harmonic (k = 0.4).
+
+- I1 = 100 / √(1 + 0.16) = 92.8 A
+- Neutral = 3 × 0.4 × 92.8 = **111.4 A**, which is 111 % of the phase current
+
+Another example: with a 33 % third harmonic the neutral carries about 95 % of the phase current. At 50 % it carries 134 %. The neutral can be loaded more heavily than the phases, which is why a "half-size neutral" can be a problem on a circuit with many electronic loads.
+
+The fifth, seventh and other non-triplen harmonics do cancel in the neutral on a balanced circuit, so they are not included in this formula. They still add to the phase current and heating.
+
+## Measure, don't assume
+
+The third-harmonic share depends entirely on the loads. A circuit of resistive heaters has none. A data-processing or lighting circuit can have a lot. Use a true-RMS meter or a power-quality analyser to read the neutral current directly where you can. Typical figures for a load type are a starting point only.
+
+## What the standard adds
+
+This page gives the current. The standards then set rules about how that current is handled. The details are in the documents, so check the edition you work to:
+
+- **Counting conductors:** under IEC 60364-5-52, BS 7671 and the NEC, a neutral that carries harmonic current from nonlinear loads is counted as a current-carrying conductor when applying grouping and derating factors. That lowers the allowable current of the whole cable.
+- **Reduced neutrals:** where the standard allows a neutral smaller than the phase conductors, it depends on the harmonic content and the circuit type, and often does not allow it where triplen harmonics are significant.
+- **Single-phase circuits:** a two-wire single-phase circuit's neutral carries the full phase current. In a shared neutral serving two or three phases, the neutral currents of linear loads can partly cancel, but triplen harmonics add, and a shared neutral that is undersized for them can overheat.
+- **The neutral is not the earth conductor.** Neutral sizing here is for load current. The earth (protective) conductor is sized for fault current: see the <a href="/earth-conductor-size-calculator/">earth conductor size calculator</a>.
+
+## Limits of the calculation
+
+- Case 1 assumes the same power factor on every phase and no harmonics. If power factors differ, the phase angles differ and the neutral current is different.
+- Case 2 assumes balanced phases and only a third-harmonic distortion. A 9th harmonic or an unbalance on top would raise the neutral current, and using the calculator twice does not add them.
+- It calculates current, not temperature. It is not a substitute for the cable manufacturer's data or the project specification.
+
+## Questions
+
+### How do I calculate the neutral current in a three-phase system?
+For unbalanced linear loads use In = √(Ia² + Ib² + Ic² − Ia·Ib − Ib·Ic − Ic·Ia). For electronic loads with a third harmonic on balanced phases use 3 × k × I1, where k is the third harmonic as a fraction of the fundamental.
+
+### Can the neutral carry more current than the phases?
+Yes. On a balanced circuit the neutral current is larger than the true-RMS phase current once the third harmonic passes about 35 % of the fundamental (the exact break-even is 1/√8, or 35.4 %). That can happen on circuits dominated by switch-mode loads.
+
+### Does a balanced load have a neutral current?
+Not for linear loads, because the three currents cancel. It can still carry current for non-linear loads, because triplen harmonics do not cancel.
+
+### Should the neutral be the same size as the phase conductors?
+Often, and for circuits with significant harmonic load it may need to be larger. Whether a reduced neutral is allowed is a rule in the standard you work to.
+
+### Does this calculator size the cable?
+No. It gives the neutral current. The size comes from the cable rating tables, the installation conditions and the derating factors. Use the cable size calculator with the result.
+
+<Related items={[
+  { href: '/cable-size-calculator/', label: 'Cable size calculator with derating' },
+  { href: '/wire-size-calculator/', label: 'Wire size calculator' },
+  { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
+  { href: '/earth-conductor-size-calculator/', label: 'Earth conductor size calculator' },
+  { href: '/cable-derating-factor-chart/', label: 'Cable derating factor table and chart' },
+]} />
