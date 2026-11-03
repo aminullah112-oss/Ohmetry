@@ -333,14 +333,14 @@
  },
  {
   "date": "2026-11-03",
-  "pages": 63,
-  "indexable": 62,
-  "calculators": 31,
+  "pages": 64,
+  "indexable": 63,
+  "calculators": 32,
   "guides": 19,
-  "tests": 259,
-  "commits": 151,
+  "tests": 269,
+  "commits": 153,
   "auditFailures": 0,
-  "auditWarnings": 5,
+  "auditWarnings": 4,
   "gscClicks28": 7,
   "gscImpressions28": 8915
  }
