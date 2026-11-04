@@ -11,6 +11,7 @@
     "tables": "node --experimental-strip-types scripts/print-tables.mjs",
     "og": "node scripts/make-og.mjs",
     "seo": "node scripts/seo-audit.mjs",
+    "links:graph": "node scripts/link-graph.mjs",
     "backlinks": "node --experimental-strip-types scripts/verify-backlinks.mjs"
   },
   "dependencies": {
