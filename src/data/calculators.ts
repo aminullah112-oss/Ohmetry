@@ -60,7 +60,7 @@ export const guides = [
 ];
 
 export const charts = [
-  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 0.5 to 200 kW, single-phase and three-phase, 120 to 600 V including 230 and 400 V.', hub: 'electrical' as HubId },
+  { slug: 'kw-to-amps-chart', name: 'kW to amps chart', blurb: 'Line current for 0.5 to 2,000 kW, single-phase and three-phase, 120 to 600 V including 230 and 400 V.', hub: 'electrical' as HubId },
   { slug: 'amps-to-kw-chart', name: 'Amps to kW chart', blurb: 'Real power for 5 to 200 A at the common voltages.', hub: 'electrical' as HubId },
   { slug: 'watts-to-amps-chart', name: 'Watts to amps chart', blurb: 'Current for 10 to 10,000 W from 12 V DC to 240 V AC.', hub: 'electrical' as HubId },
   { slug: 'breaker-amps-to-watts-chart', name: 'Breaker amps to watts', blurb: 'Continuous load that 15 to 200 A breakers support.', hub: 'electrical' as HubId },

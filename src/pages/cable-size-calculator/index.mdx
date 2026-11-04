@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "Cable Size Calculator with Derating (IEC) | Ohmetry"
+title: "Cable Size Calculator (IEC, mm²) with Derating | Ohmetry"
 description: "Work out the tabulated current rating a cable needs after derating factors, plus the minimum area for voltage drop. IEC 60364 method."
-h1: "IEC Cable Size Calculator with Derating Factors"
+h1: "Cable Size Calculator (IEC, mm²) with Derating Factors"
 hub: Protection and MV
 hubHref: /protection/
 crumb: "Cable size (IEC)"
@@ -11,6 +11,8 @@ import CableDerating from '../../components/CableDerating.tsx';
 import Related from '../../components/Related.astro';
 
 <CableDerating client:load />
+
+Working in AWG with the NEC? Use the <a href="/wire-size-calculator/">wire size calculator</a>.
 
 Under the IEC 60364 method, a cable is selected in three steps: find the tabulated current rating it needs once installation conditions are accounted for, check it against the protective device, and check voltage drop. This calculator does the arithmetic for steps one and three. It does not contain the rating tables or the correction factors, which belong to the standard, so you enter the factors from the tables for your installation.
 

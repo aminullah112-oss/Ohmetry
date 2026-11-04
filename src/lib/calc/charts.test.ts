@@ -12,7 +12,12 @@ describe('reference charts', () => {
     expect(cell(kwToAmpsChart('single'), '10', '240 V')).toBe('41.7');
   });
 
-  it('amps to kW: 40 A at 240 V is 9.60 kW; 60 A three-phase at 480 V, PF 0.9 is 44.89 kW', () => {
+  it('kW to amps, large loads: 350 kW and 2,000 kW three-phase at 400 V, PF 0.9, are 561 A and 3,208 A (by hand: kW x 1000 / (1.7321 x 400 x 0.9))', () => {
+    expect(cell(kwToAmpsChart('three'), '350', '400 V')).toBe('561');
+    expect(cell(kwToAmpsChart('three'), '2000', '400 V')).toBe('3,208');
+  });
+
+    it('amps to kW: 40 A at 240 V is 9.60 kW; 60 A three-phase at 480 V, PF 0.9 is 44.89 kW', () => {
     expect(cell(ampsToKwChart('single'), '40', '240 V')).toBe('9.60');
     expect(cell(ampsToKwChart('three'), '60', '480 V')).toBe('44.89');
   });
