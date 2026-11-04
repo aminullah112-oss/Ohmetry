@@ -6,62 +6,63 @@ Site: sc-domain:ohmetry.com. Period: 2026-10-05 to 2026-11-02. Generated 2026-11
 
 | Page | Clicks | Impressions | CTR | Avg position |
 |---|---|---|---|---|
-| /earth-resistance-calculator/ | 2 | 139 | 1.4 % | 46.5 |
+| /earth-resistance-calculator/ | 2 | 147 | 1.4 % | 45.6 |
 | /toolkit/ | 2 | 8 | 25.0 % | 19.1 |
-| /breaker-amps-to-watts-chart/ | 1 | 19 | 5.3 % | 7.5 |
-| /nec-voltage-drop-guide/ | 1 | 34 | 2.9 % | 20.4 |
-| /transformer-full-load-current-calculator/ | 1 | 210 | 0.5 % | 37.7 |
+| /breaker-amps-to-watts-chart/ | 1 | 21 | 4.8 % | 7.5 |
+| /kva-to-amps-calculator/ | 1 | 548 | 0.2 % | 66.6 |
+| /nec-voltage-drop-guide/ | 1 | 37 | 2.7 % | 19.5 |
+| /transformer-full-load-current-calculator/ | 1 | 229 | 0.4 % | 36.7 |
+| /wire-size-by-distance-chart/ | 1 | 20 | 5.0 % | 18.8 |
 | http://ohmetry.com/generator-size-calculator/ | 0 | 4 | 0.0 % | 46.3 |
-| / | 0 | 117 | 0.0 % | 71.7 |
+| / | 0 | 120 | 0.0 % | 71.5 |
 | /about/ | 0 | 1 | 0.0 % | 8.0 |
-| /amps-to-watts-calculator/ | 0 | 258 | 0.0 % | 64.4 |
-| /awg-to-mm2-converter/ | 0 | 564 | 0.0 % | 73.5 |
-| /battery-bank-calculator/ | 0 | 48 | 0.0 % | 60.4 |
-| /breaker-size-calculator/ | 0 | 32 | 0.0 % | 19.5 |
-| /cable-derating-factor-chart/ | 0 | 10 | 0.0 % | 53.0 |
-| /cable-fault-current-calculator/ | 0 | 28 | 0.0 % | 31.3 |
-| /cable-size-calculator/ | 0 | 412 | 0.0 % | 76.5 |
+| /amps-to-watts-calculator/ | 0 | 269 | 0.0 % | 64.9 |
+| /awg-to-mm2-converter/ | 0 | 570 | 0.0 % | 73.4 |
+| /battery-bank-calculator/ | 0 | 51 | 0.0 % | 59.7 |
+| /breaker-size-calculator/ | 0 | 34 | 0.0 % | 20.6 |
+| /cable-derating-factor-chart/ | 0 | 42 | 0.0 % | 41.3 |
+| /cable-fault-current-calculator/ | 0 | 30 | 0.0 % | 29.3 |
+| /cable-size-calculator/ | 0 | 420 | 0.0 % | 76.7 |
 | /charts/ | 0 | 18 | 0.0 % | 33.9 |
-| /conduit-fill-calculator/ | 0 | 175 | 0.0 % | 66.1 |
+| /conduit-fill-calculator/ | 0 | 180 | 0.0 % | 66.9 |
 | /contact/ | 0 | 2 | 0.0 % | 4.5 |
 | /corrections/ | 0 | 2 | 0.0 % | 6.5 |
-| /ct-burden-calculator/ | 0 | 101 | 0.0 % | 57.0 |
+| /ct-burden-calculator/ | 0 | 106 | 0.0 % | 55.2 |
 | /disclaimer/ | 0 | 1 | 0.0 % | 17.0 |
-| /earth-conductor-size-calculator/ | 0 | 24 | 0.0 % | 81.2 |
-| /electrical/ | 0 | 53 | 0.0 % | 79.8 |
+| /earth-conductor-size-calculator/ | 0 | 34 | 0.0 % | 76.1 |
+| /electrical/ | 0 | 54 | 0.0 % | 80.1 |
 | /ev-charger-wire-size-calculator/ | 0 | 20 | 0.0 % | 19.9 |
-| /generator-size-calculator/ | 0 | 329 | 0.0 % | 64.4 |
-| /how-to-size-a-cable/ | 0 | 12 | 0.0 % | 83.2 |
-| /how-to-size-a-circuit-breaker/ | 0 | 18 | 0.0 % | 37.8 |
-| /hp-to-amps-calculator/ | 0 | 138 | 0.0 % | 53.3 |
-| /idmt-relay-calculator/ | 0 | 141 | 0.0 % | 41.7 |
+| /generator-size-calculator/ | 0 | 344 | 0.0 % | 64.3 |
+| /how-to-size-a-cable/ | 0 | 16 | 0.0 % | 86.1 |
+| /how-to-size-a-circuit-breaker/ | 0 | 21 | 0.0 % | 37.2 |
+| /hp-to-amps-calculator/ | 0 | 149 | 0.0 % | 52.0 |
+| /idmt-relay-calculator/ | 0 | 154 | 0.0 % | 38.6 |
 | /inverter-size-calculator/ | 0 | 2 | 0.0 % | 81.5 |
-| /kva-to-amps-calculator/ | 0 | 524 | 0.0 % | 67.8 |
 | /kva-to-kw-calculator/ | 0 | 350 | 0.0 % | 52.1 |
-| /kw-to-amps-calculator/ | 0 | 573 | 0.0 % | 72.7 |
-| /kw-to-amps-chart/ | 0 | 111 | 0.0 % | 37.7 |
+| /kw-to-amps-calculator/ | 0 | 588 | 0.0 % | 72.6 |
+| /kw-to-amps-chart/ | 0 | 127 | 0.0 % | 38.7 |
 | /methodology/ | 0 | 3 | 0.0 % | 5.3 |
-| /motor-circuit-calculator/ | 0 | 66 | 0.0 % | 42.7 |
-| /off-grid-solar-calculator/ | 0 | 99 | 0.0 % | 72.7 |
-| /ohms-law-calculator/ | 0 | 80 | 0.0 % | 44.1 |
-| /power-factor-correction-calculator/ | 0 | 74 | 0.0 % | 68.1 |
-| /power-factor-correction-chart/ | 0 | 47 | 0.0 % | 43.3 |
+| /motor-circuit-calculator/ | 0 | 70 | 0.0 % | 40.7 |
+| /off-grid-solar-calculator/ | 0 | 115 | 0.0 % | 74.2 |
+| /ohms-law-calculator/ | 0 | 89 | 0.0 % | 43.7 |
+| /power-factor-correction-calculator/ | 0 | 78 | 0.0 % | 67.2 |
+| /power-factor-correction-chart/ | 0 | 52 | 0.0 % | 41.7 |
 | /privacy/ | 0 | 2 | 0.0 % | 2.0 |
-| /protection/ | 0 | 7 | 0.0 % | 67.0 |
-| /relay-setting-checklist/ | 0 | 47 | 0.0 % | 14.0 |
-| /short-circuit-current-calculator/ | 0 | 133 | 0.0 % | 71.3 |
-| /solar-ev/ | 0 | 2 | 0.0 % | 7.5 |
-| /solar-panel-calculator/ | 0 | 489 | 0.0 % | 75.8 |
-| /solar-wire-size-calculator/ | 0 | 327 | 0.0 % | 75.2 |
-| /three-phase-power-calculator/ | 0 | 286 | 0.0 % | 75.3 |
+| /protection/ | 0 | 9 | 0.0 % | 70.3 |
+| /relay-setting-checklist/ | 0 | 50 | 0.0 % | 13.7 |
+| /short-circuit-current-calculator/ | 0 | 141 | 0.0 % | 71.7 |
+| /solar-ev/ | 0 | 3 | 0.0 % | 29.3 |
+| /solar-panel-calculator/ | 0 | 527 | 0.0 % | 75.4 |
+| /solar-wire-size-calculator/ | 0 | 340 | 0.0 % | 74.2 |
+| /three-phase-power-calculator/ | 0 | 302 | 0.0 % | 75.5 |
 | /transformer-short-circuit-current-chart/ | 0 | 10 | 0.0 % | 16.8 |
-| /voltage-drop-calculator/ | 0 | 996 | 0.0 % | 75.9 |
 
 ## Top queries
 
 | Query | Clicks | Impressions | CTR | Avg position |
 |---|---|---|---|---|
 | "direct-voltage.eu" -site:direct-voltage.eu -site:se.com -site:facebook.com -site:instagram.com -site:threads.com -site:threads.net -site:linkedin.com -site:x.com -site:twitter.com -site:tiktok.com -site:youtube.com -site:youtu.be -site:reddit.com -site:t.me -site:telegram.me -site:telegram.org -site:pinterest.com -site:vimeo.com | 0 | 2 | 0.0 % | 4.5 |
+| "run 1 distance to wire [m]: 0.364" or "10 5.49e-05 5.50e-05 0.09990% run 2" or "10 5.45e-03 0.00545 0.00750%" | 0 | 1 | 0.0 % | 10.0 |
 | 0 5 mm2 to awg | 0 | 1 | 0.0 % | 77.0 |
 | 0 awg in mm2 | 0 | 2 | 0.0 % | 87.5 |
 | 0 awg to mm2 | 0 | 5 | 0.0 % | 74.2 |
@@ -110,7 +111,6 @@ Site: sc-domain:ohmetry.com. Period: 2026-10-05 to 2026-11-02. Generated 2026-11
 | 10 kva to amps | 0 | 1 | 0.0 % | 94.0 |
 | 10 kva to kw | 0 | 3 | 0.0 % | 84.7 |
 | 10 kva transformer amps | 0 | 4 | 0.0 % | 61.8 |
-| 10 kw amps | 0 | 1 | 0.0 % | 44.0 |
 
 ## How to read this
 
