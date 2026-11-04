@@ -1,0 +1,28 @@
+name: Search Console queries by page
+
+on:
+  schedule:
+    - cron: '47 6 * * 1' # Mondays, 06:47 UTC, after the weekly report
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  queries:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Pull queries by page and build the opportunity report
+        run: node --experimental-strip-types scripts/gsc-queries.mjs
+        env:
+          GSC_SERVICE_ACCOUNT: ${{ secrets.GSC_SERVICE_ACCOUNT }}
+      - name: Commit the report
+        run: |
+          git config user.name "ohmetry-bot"
+          git config user.email "hello@ohmetry.com"
+          git add docs/seo/query-page-report.md docs/seo/query-page-latest.json docs/seo/query-top10-history.json || true
+          git diff --cached --quiet || (git commit -m "Search Console queries by page" && git pull --rebase -q && git push)
