@@ -1,4 +1,6 @@
-# Proposed internal link additions (awaiting approval)
+# Internal link additions (approved and implemented 2026-11-04; not yet on main)
+
+Status: all 32 rows implemented. Rows 4 and 17 were done as in-text links, and the Protection hub also gets a Guides card for the lightning guide.
 
 Basis: docs/seo/link-graph.md (built site, 2026-11-04). Each addition is one extra item in the source page's existing "Related" list, with the anchor text shown, unless the "Where" column says otherwise. No sitewide or keyword-stuffed links. Hubs, the home page and legal pages are left alone: they are linked from the nav and footer on purpose.
 

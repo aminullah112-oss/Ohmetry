@@ -17,7 +17,7 @@ const crumbs = [{ name: hub.name, href: hub.href }];
         </a>
       ))}
     </div>
-    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/relay-setting-checklist/"><span class="tag">GUIDE</span><h2>Relay setting checklist</h2><p>Seven stages for a transformer-feeder overcurrent relay, with a worked example.</p></a></div>
+    <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/relay-setting-checklist/"><span class="tag">GUIDE</span><h2>Relay setting checklist</h2><p>Seven stages for a transformer-feeder overcurrent relay, with a worked example.</p></a><a class="card calc-card" href="/what-happens-when-lightning-strikes-a-building/"><span class="tag">GUIDE</span><h2>What happens when lightning strikes</h2><p>The path a strike takes through a building, why bonding matters, and what surge protection does.</p></a></div>
     <div class="group-title">Charts</div>
     <div class="card-grid">
       {charts.filter((c) => c.hub === 'protection').map((c) => (
@@ -41,6 +41,7 @@ const crumbs = [{ name: hub.name, href: hub.href }];
       <li><a href="/idmt-relay-calculator/">IDMT relay time</a> gives the operating time on the four IEC curves, the starting point for grading. The <a href="/relay-setting-checklist/">relay setting checklist</a> walks through the full sequence.</li>
       <li><a href="/earth-conductor-size-calculator/">Earth conductor size</a> gives the minimum earth cable for the fault current and clearing time.</li>
       <li><a href="/earth-resistance-calculator/">Earth rod resistance</a> estimates one driven rod in uniform soil.</li>
+      <li>The <a href="/what-happens-when-lightning-strikes-a-building/">lightning and earthing guide</a> explains the path a strike takes, why bonding matters as much as earth resistance, and what surge protection does.</li>
       <li><a href="/power-factor-correction-calculator/">Power factor correction</a> sizes the capacitor bank for a target power factor.</li>
     </ol>
     <p>Tools tagged IEC follow IEC methods, such as the IEC 60255 relay curves and IEC 60364 cable ratings. Each page states its formula, its assumptions and a worked example you can check by hand.</p>
