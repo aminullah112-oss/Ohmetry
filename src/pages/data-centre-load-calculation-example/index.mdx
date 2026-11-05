@@ -1,0 +1,132 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Data Centre Load Calculation Worked Example (Free Excel) | Ohmetry"
+description: "A fictional data hall worked from the load list to UPS, transformer and generator sizing and phase balance, with every formula and a free Excel sheet."
+h1: "Data Centre Load Calculation: Worked Example"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Data centre load example"
+---
+import Related from '../../components/Related.astro';
+
+**Short answer.** A data centre load calculation turns an equipment list into three things: how much power the supply must deliver, how large the UPS, transformers and generators must be, and what current the incoming supply carries. For the fictional hall worked below, the demand is 943 kW, the UPS needs 5 modules of 250 kVA, the supply load is 1,014 kVA at 0.96 power factor, and the transformers and generators come out at 2 + 1 units of 630 kVA each.
+
+**[Download the free Excel sheet](/downloads/ohmetry-data-centre-load-example.xlsx)** with every step as a formula, editable inputs and a self-test. Free, no sign-up.
+
+This is a fictional facility, "DC-1". It is not a real project, and every demand factor, efficiency, loading limit and equipment size is an illustrative assumption that you replace with your own design criteria. Nothing here is for construction. The method is general; the numbers are not.
+
+## The facility
+
+DC-1 has two data halls, a network and core room, a cooling plant, and the usual building loads. The IT load is fed through a UPS; the mechanical and building loads are not. All figures are inputs you can change in the sheet.
+
+| Load | Qty × kW | Connected kW | PF | Demand factor | Demand kW | On UPS | On generator |
+|---|---|---|---|---|---|---|---|
+| Hall A: IT racks | 40 × 8 | 320.0 | 0.95 | 1.00 | 320.0 | Yes | Yes |
+| Hall B: IT racks | 30 × 10 | 300.0 | 0.95 | 1.00 | 300.0 | Yes | Yes |
+| Network and core room | 1 × 40 | 40.0 | 0.95 | 1.00 | 40.0 | Yes | Yes |
+| Cooling: CRAH units | 10 × 6 | 60.0 | 0.85 | 1.00 | 60.0 | No | Yes |
+| Cooling: chillers (2 of 3 run) | 3 × 75 | 225.0 | 0.85 | 0.67 | 150.8 | No | Yes |
+| Chilled-water pumps (2 of 4 run) | 4 × 15 | 60.0 | 0.85 | 0.50 | 30.0 | No | Yes |
+| Lighting | 1 × 15 | 15.0 | 0.90 | 0.80 | 12.0 | No | Yes |
+| Small power and maintenance sockets | 1 × 25 | 25.0 | 0.90 | 0.40 | 10.0 | No | No |
+| Building services (fire, security, BMS) | 1 × 20 | 20.0 | 0.90 | 1.00 | 20.0 | No | Yes |
+| **Total** | | **1,065.0** | | | **942.8** | | |
+
+Chillers show a demand factor of 0.67 because two of three run at a time. The pumps show 0.50 because two of four run. These are assumptions about the operating arrangement, not rules.
+
+## Step 1: connected and demand load
+
+Connected load is quantity times rating. Demand load is connected load times the demand factor. The factor says how much of the connected load runs at the same time at the design point, and it comes from your design criteria and the operating arrangement, not from this page.
+
+For each row the reactive power is the real power times tan(φ), where φ is the angle whose cosine is the power factor. Totals are added as real and reactive power separately, and the apparent power is the square root of the sum of squares:
+
+<div class="formula">S = √( P² + Q² )</div>
+
+Adding kVA figures directly is conservative, because it assumes every load is at the same angle. The method here gives 943 kW and 386 kvar of demand, so 1,019 kVA. Adding each row's demand kVA arithmetically would give 1,025 kVA, a small difference here because the power factors are close.
+
+## Step 2: the UPS
+
+The loads on the UPS are the three IT rows: 660.0 kW and 216.9 kvar, which is **694.7 kVA** at the UPS output.
+
+- **Capacity needed.** If the design limits normal loading to 80 % of capacity, the UPS must be at least 694.7 / 0.80 = **868.4 kVA**.
+- **Modules.** With 250 kVA modules, 4 modules carry that load. One redundant module (N+1) makes 5 installed, or 1,250 kVA.
+- **Loading.** With all 5 modules in service the UPS runs at 55.6 %. With one module out, the remaining 4 carry the load at 69.5 %, inside the 80 % limit.
+- **Input power.** A double-conversion UPS draws more than it delivers. At an assumed efficiency of 95 % the input is 660.0 / 0.95 = **694.7 kW**, which at an input power factor of 0.99 is 701.8 kVA.
+- **Losses.** The difference, 34.7 kW, becomes heat that the cooling must remove.
+
+## Step 3: the load at the supply
+
+Upstream of the UPS, the transformer and generator see the UPS input, not the IT load. The three IT rows are therefore replaced by the UPS input power and its own power factor, and everything else is counted as before. That gives 977.5 kW and 268.5 kvar, so **1,013.7 kVA** at a power factor of 0.964.
+
+## Step 4: transformers
+
+- **Growth margin.** An assumed 20 % margin gives 1,013.7 × 1.20 = 1,216.4 kVA.
+- **Sharing.** With 2 transformers sharing the load and 1 redundant, each of the 2 in service must carry the total divided by 2: 608.2 kVA.
+- **Standard size.** The next standard size in the sheet's list is **630 kVA**, so 3 × 630 kVA are installed. The list is an assumption: use your supplier's range.
+- **Loading.** With 2 in service, the load without the growth margin is 80.5 % of the rated capacity.
+- **Supply current.** At 400 V the full load is 1,013.7 × 1000 / (√3 × 400) = **1,463 A**. Each 630 kVA transformer is rated for 909 A.
+
+## Step 5: generators
+
+Everything marked "On generator" is essential: all rows except small power, with the UPS-fed rows counted at the UPS input. That load is 967.5 kW and 263.7 kvar, or **1,002.8 kVA**.
+
+- With an assumed 15 % margin: 1,153.2 kVA.
+- 2 generators share it, so 576.6 kVA each, and the next standard size is **630 kVA**, with 3 installed (1 redundant).
+- With 2 running, the load is 79.6 % of the capacity.
+
+This is a first sizing. It does not cover motor starting, the derating for non-linear load, altitude or temperature, or the generator's standby and prime ratings. Those come from the manufacturer's data.
+
+## Step 6: phase balance on a PDU
+
+A single-phase PDU circuit set shows why balance matters. Twelve circuits are loaded on three phases, deliberately unevenly, at an assumed power factor of 0.95 and 230 V to neutral.
+
+| Phase | Load (kVA) | Current (A) |
+|---|---|---|
+| L1 | 22.84 | 99.3 |
+| L2 | 12.42 | 54.0 |
+| L3 | 20.21 | 87.9 |
+
+The average is 80.4 A and the largest deviation from it is 32.8 %. The unbalance sends 40.8 A down the neutral, from the same formula as the <a href="/neutral-conductor-sizing-calculator/">neutral conductor current calculator</a>. That figure assumes the same power factor on every phase and no triplen harmonics; electronic loads add third-harmonic current to the neutral, which this simple example leaves out.
+
+## What this example leaves out
+
+This is the load and sizing chapter of a data centre design. It does not cover cable sizing and voltage drop (see the <a href="/cable-size-calculator/">cable size calculator</a> and the <a href="/voltage-drop-calculator/">voltage drop calculator</a>), fault levels (<a href="/short-circuit-current-calculator/">short-circuit current calculator</a>), protection coordination, earthing, harmonics, arc flash or the cooling design. The Toolkit workbook covers several of those for a real project.
+
+## Assumptions to replace
+
+| Assumption | Value used here |
+|---|---|
+| UPS efficiency | 95 % |
+| UPS maximum normal loading | 80 % |
+| UPS module size | 250 kVA, 1 redundant |
+| UPS input power factor | 0.99 |
+| Transformer growth margin | 20 % |
+| Generator margin | 15 % |
+| Transformers, generators | 2 + 1 each |
+| Demand factors | See the table above |
+
+## Would a complete worked project help?
+
+I am considering extending this into a full worked data centre example: cable sizing, voltage drop, fault levels, protection settings and earthing, with the same transparent formulas. It does not exist yet. If you would use it, or if you would want a different facility type, email <a href="mailto:hello@ohmetry.com?subject=Full%20worked%20data%20centre%20example">hello@ohmetry.com</a> and say what you would need. That is the only way I will know whether to build it.
+
+## Questions
+
+### What demand factor should I use for a data centre?
+There is no universal figure. It comes from the project's design criteria, the operating arrangement (which units run, which are standby) and the client's requirements. Use the sheet to see how sensitive the result is to it.
+
+### Why is the UPS input larger than its output?
+Losses in the conversion. A double-conversion UPS at 95 % efficiency draws about 5.3 % more than it delivers, and the difference is heat.
+
+### Why add real and reactive power instead of kVA?
+Loads with different power factors are at different phase angles. Adding kVA directly overstates the total when the power factors differ. Here the gap is small, 1,019 kVA against 1,025 kVA, because the power factors are close.
+
+### Is this suitable for a real design?
+It shows the method. Real designs need project criteria, the standard you work to, manufacturer data and a competent engineer's review.
+
+<Related items={[
+  { href: '/neutral-conductor-sizing-calculator/', label: 'Neutral conductor current' },
+  { href: '/kva-to-kw-calculator/', label: 'kVA to kW calculator' },
+  { href: '/generator-size-calculator/', label: 'Generator size calculator' },
+  { href: '/transformer-full-load-current-calculator/', label: 'Transformer full-load current calculator' },
+  { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
+]} />
