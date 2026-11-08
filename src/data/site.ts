@@ -23,6 +23,20 @@ export const site = {
   emailOffer: 'a free sample sheet from the workbook, plus new calculators and corrections as they are published',
 };
 
+/**
+ * Second product on the toolkit page: the 2 MW data centre electrical sample project (educational, sold on Gumroad as one ZIP).
+ * The section stays hidden until BOTH the Gumroad URL and the price are set. Change the price here and on Gumroad together.
+ */
+export const dcProduct = {
+  name: '2 MW Data Centre Electrical Sample Project',
+  /** e.g. '$39'. Owner's decision. */
+  price: '',
+  /** e.g. https://ohmetry.gumroad.com/l/ohm-dc-2000 */
+  gumroadUrl: '',
+};
+
+export const dcReady = Boolean(dcProduct.gumroadUrl && dcProduct.price);
+
 /** Shown on the home page. Update when the test count changes (`npm test`). */
 export const testCount = 279;
 

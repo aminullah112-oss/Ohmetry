@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import { site, toolkitReady } from '../../data/site';
+import { site, toolkitReady, dcProduct, dcReady } from '../../data/site';
 import EmailCapture from '../../components/EmailCapture.astro';
 const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
 ---
@@ -34,6 +34,24 @@ const crumbs = [{ name: 'Toolkit', href: '/toolkit/' }];
 
     <h2>Free calculators and the workbook</h2>
     <p>The calculators on this site stay free. Use them for a quick answer. The workbook is for checking a whole project at once, working offline and adapting the method. It was built and checked in LibreOffice, its formula types were checked in Google Sheets, and it is designed to open in Excel. Start with the guides on <a href="/voltage-drop-formula/">voltage drop</a> and the <a href="/relay-setting-checklist/">relay setting checklist</a> to see how the calculations are explained.</p>
+
+    {dcReady && (
+      <>
+        <h2>Also: {dcProduct.name}</h2>
+        <p><img src="/images/dc-sample-cover.png" alt="Single-line diagram and title of the 2 MW data centre electrical sample project" width="1280" height="720" loading="lazy" style="max-width:100%;height:auto" /></p>
+        <p>A worked example for engineers who work on data centre projects. It is a <strong>sample and learning reference, not a real project</strong> and not a design for any site. Every number is a labelled assumption, so you can see how each one drives the result and then replace it with your own project data.</p>
+        <ul>
+          <li><strong>Twenty Excel workbooks</strong> for a 2 MW IT load: load estimate and PUE with a sensitivity table, transformer, generator and UPS sizing with options side by side, battery energy, cable sizing, voltage drop, short circuit, switchgear, busduct, earthing screening and an equipment schedule.</li>
+          <li><strong>A single-line diagram</strong> of a 2N, N+1 concept. Bypass, interlocking and the power management system are shown as labelled concept symbols, not as a design.</li>
+          <li><strong>Ten specification templates</strong> with vendor data and compliance schedules, FAT, SAT and commissioning sections, and a twelve-module training suite with exercises and an answer key.</li>
+        </ul>
+        <p>Every input shows whether it is missing, a placeholder, an assumption, supplied or verified. A result calculated from unverified inputs never reads PASS, and a warning is never turned into a pass.</p>
+        <h3>What it is not</h3>
+        <p>It is not construction-ready, not independently verified and not approved by anyone. It does not claim compliance with any standard. Arc flash and lightning protection are out of scope, and protection coordination is a template only. Do not use any result for procurement, construction or safety decisions without manufacturer data and verification by a qualified engineer.</p>
+        <p><a class="btn" href={dcProduct.gumroadUrl}>Get the sample project for {dcProduct.price}</a></p>
+        <p class="meta">One-time payment through Gumroad. You download one ZIP file with a README. Questions: hello@ohmetry.com.</p>
+      </>
+    )}
 
     {toolkitReady ? (
       <>
