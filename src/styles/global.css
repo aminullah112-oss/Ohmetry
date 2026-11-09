@@ -234,3 +234,54 @@ section.block { padding-block: 40px 8px; }
 .capture p { margin: 0 0 6px; }
 .capture .capture-title { font: 750 1.1rem var(--font-display); }
 .capture .capture-sub { color: var(--muted); font-size: 0.93rem; }
+
+/* ---------- electrical simulator ---------- */
+.sim .sim-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.sim .sim-tabs button { font: 600 0.88rem var(--font-body); padding: 9px 14px; min-height: 44px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); color: var(--ink); cursor: pointer; }
+.sim .sim-tabs button:hover { border-color: var(--accent); color: var(--accent); }
+.sim .sim-tabs button.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.sim .sim-lead { margin: 0 0 16px; color: var(--muted); font-size: 0.95rem; max-width: none; }
+.sim .sim-field { display: flex; flex-direction: column; gap: 6px; font-size: 0.85rem; min-width: 0; }
+.sim .sim-field > label { font-weight: 600; }
+.sim .sim-numrow { display: flex; gap: 8px; align-items: center; }
+.sim .sim-numrow input { flex: 1 1 auto; min-width: 0; }
+.sim .sim-numrow select { width: auto; flex: 0 0 auto; min-width: 74px; }
+.sim .sim-unit { font: 500 0.95rem var(--font-mono); color: var(--muted); min-width: 74px; padding-left: 4px; }
+.sim input[aria-invalid='true'] { border-color: #c0392b; }
+.sim .sim-range { padding: 0; min-height: 28px; border: 0; background: transparent; accent-color: var(--accent); }
+.sim .sim-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 18px 0 14px; }
+.sim .sim-controls .print { margin-top: 0; min-height: 44px; }
+.sim .sim-run { font: 700 0.95rem var(--font-body); padding: 10px 22px; min-height: 44px; border: 0; border-radius: 8px; background: var(--accent); color: var(--accent-ink); cursor: pointer; }
+.sim .sim-run:disabled { opacity: 0.55; cursor: default; }
+.sim .sim-speed { display: flex; flex-direction: row; align-items: center; gap: 8px; font-weight: 500; }
+.sim .sim-speed select { width: auto; min-height: 44px; }
+.sim .sim-status { font-size: 0.88rem; color: var(--muted); flex: 1 1 220px; }
+.sim .sim-stage { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 6px; }
+@media (max-width: 860px) { .sim .sim-stage { grid-template-columns: 1fr; } }
+.sim .sim-svg { width: 100%; height: auto; display: block; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; }
+.sim .sim-extra { max-width: 520px; margin-top: 12px; }
+.sim .sim-cap { margin: 0 0 6px; font-size: 0.85rem; color: var(--muted); }
+.sim .sim-wire { fill: none; stroke: var(--muted); stroke-width: 2.5; stroke-linejoin: round; }
+.sim .sim-flow { fill: none; stroke: #ffb84d; stroke-width: 5; stroke-linecap: round; }
+.sim .sim-mask { fill: var(--paper); stroke: none; }
+.sim circle.sim-mask { stroke: var(--ink); stroke-width: 2.5; }
+.sim .sim-part { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+.sim .sim-label { font: 500 11px var(--font-mono); fill: var(--ink); }
+.sim .sim-tick { font: 400 10.5px var(--font-mono); fill: var(--muted); }
+.sim .sim-grid { stroke: var(--line-soft); stroke-width: 1; }
+.sim .sim-axis { stroke: var(--muted); stroke-width: 1.2; }
+.sim .sim-mark { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; }
+.sim .sim-cursor { stroke: #c0392b; stroke-width: 1.5; }
+.sim .sim-curve { fill: none; stroke-width: 2.6; stroke-linejoin: round; }
+.sim .sim-curve.faint { opacity: 0.22; stroke-width: 1.6; }
+.sim .sim-curve.c1, .sim .sim-key.c1, .sim .sim-bar.c1, .sim .sim-arrow.c1 { stroke: var(--accent); fill: var(--accent); }
+.sim .sim-curve.c2, .sim .sim-key.c2, .sim .sim-bar.c2, .sim .sim-arrow.c2 { stroke: #d98a00; fill: #d98a00; }
+.sim .sim-bar.c3, .sim .sim-arrow.c3 { stroke: var(--muted); fill: var(--muted); }
+.sim .sim-curve { fill: none !important; }
+.sim .sim-arrow { stroke-width: 3; }
+.sim .sim-dot { fill: #c0392b; stroke: var(--paper); stroke-width: 2; }
+.sim .sim-summary { margin: 14px 0 0; font-size: 0.95rem; max-width: none; }
+.sim .sim-activities { margin: 10px 0 0; padding-left: 20px; }
+.sim .sim-activities li { margin: 6px 0; }
+.sim .more p { max-width: none; }
+.sim .result strong { font-size: 1.12rem; }

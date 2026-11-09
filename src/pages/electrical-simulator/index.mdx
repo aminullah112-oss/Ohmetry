@@ -1,0 +1,77 @@
+---
+layout: ../../layouts/CalcPage.astro
+title: "Electrical Circuit Simulator: Ohm's Law, RC, RL, RLC | Ohmetry"
+description: "Pick a circuit, set the voltage, resistance, capacitance, inductance and frequency, press run and watch current, voltage, power and phase update live."
+h1: "Electrical Circuit Simulator"
+hub: Electrical
+hubHref: /electrical/
+crumb: "Circuit simulator"
+---
+import Simulator from '../../components/Simulator.tsx';
+import Related from '../../components/Related.astro';
+
+<Simulator client:load />
+
+## What you can simulate
+
+Choose a concept, set the values, press **Run simulation**, and read the results while it runs. Change an input during the run and the numbers follow.
+
+- **Ohm's law.** One source and one resistor. The chart shows every voltage and current the resistor allows, with the operating point marked.
+- **Series and parallel.** Two to four resistors on one source. Series shares one current and divides the voltage. Parallel shares one voltage and divides the current.
+- **Voltage divider.** Two resistors divide a voltage. Connect a load and watch the output sag, the main practical limit of a divider.
+- **RC charging.** A resistor charges or discharges a capacitor along an exponential curve with time constant τ = R × C.
+- **RL current rise.** An inductor resists a change of current, so the current rises along an exponential with τ = L / R, and the inductor voltage starts at the full supply.
+- **AC series RLC.** Reactance, impedance, phase angle, power factor, the power triangle and resonance for a resistor, inductor and capacitor in series.
+
+## Formulas used
+
+<div class="formula">V = I × R &nbsp; P = V × I = V² / R<br/>Series: R<sub>total</sub> = R₁ + R₂ + …&nbsp; Parallel: 1 / R<sub>total</sub> = 1 / R₁ + 1 / R₂ + …<br/>Divider: V<sub>out</sub> = V<sub>in</sub> × R₂ / (R₁ + R₂), with a load R<sub>L</sub> across R₂ use R₂ × R<sub>L</sub> / (R₂ + R<sub>L</sub>)</div>
+
+<div class="formula">RC: v<sub>C</sub> = V (1 − e<sup>−t/τ</sup>), i = (V/R) e<sup>−t/τ</sup>, τ = R × C, energy = ½ C v²<br/>RL: i = (V/R)(1 − e<sup>−t/τ</sup>), v<sub>L</sub> = V e<sup>−t/τ</sup>, τ = L / R, energy = ½ L i²</div>
+
+<div class="formula">X<sub>L</sub> = 2πfL &nbsp; X<sub>C</sub> = 1 / (2πfC) &nbsp; Z = √(R² + (X<sub>L</sub> − X<sub>C</sub>)²)<br/>I = V / Z &nbsp; power factor = R / Z &nbsp; f₀ = 1 / (2π√(LC))</div>
+
+## How the simulation works
+
+Every circuit here is solved with a closed-form formula, so the page can evaluate the exact answer at any instant. There is no stepping error. The clock for the RC, RL and AC circuits runs from zero to five time constants, or three cycles for AC. Playback is compressed to about ten seconds so a slow circuit does not take minutes to watch, and the speed control makes it faster or slower. The clock in the status line shows simulated time, not wall time.
+
+The moving dots on the schematic show current. For the DC circuits their speed follows the size of the current on a log scale, so 1 mA, 10 mA and 100 mA are visibly different. For the transient and AC circuits they follow the instantaneous current and move backwards when it reverses.
+
+## Worked example: RC time constant
+
+Take 5 V, 1 kΩ and 1 mF. The time constant is τ = R × C = 1,000 × 0.001 = 1 s. After one second the capacitor is at 5 × (1 − e⁻¹) = 3.16 V, which is 63.2 % of the supply. After five seconds it is above 99 %, at 4.97 V. The starting current is 5 V / 1 kΩ = 5 mA, and it falls as the capacitor charges. Select RC charging, leave these values, run it and read the cursor at 1 s.
+
+## Worked example: resonance
+
+A 10 Ω resistor, a 0.1 H inductor and a 100 µF capacitor on 230 V at 50 Hz give X<sub>L</sub> = 31.4 Ω and X<sub>C</sub> = 31.8 Ω. The net reactance is only −0.4 Ω, so the impedance is 10.01 Ω and the current is about 23 A, nearly in phase with the voltage. The resonant frequency is 50.3 Hz. Voltages of about 720 V appear across the inductor and the capacitor, three times the supply, because they are 180° apart and cancel in the loop. Run the AC circuit and set the frequency to 50.33 Hz to see the impedance fall to exactly R.
+
+## What this simulator does not do
+
+- **It uses ideal components.** There is no wire resistance, no heating, no tolerance, no saturation of the inductor, no leakage or equivalent series resistance in the capacitor, and no internal resistance in the source.
+- **It is a learning tool, not a design tool.** Do not size a real circuit, protection device or conductor from it. For cable and breaker work use the [wire size](/wire-size-calculator/) and [breaker size](/breaker-size-calculator/) calculators, which apply code rules.
+- **The AC circuit is steady state.** It shows the sinusoidal response after any switching transient has died away, for one frequency.
+- **The inputs have limits.** Values must be positive. The sliders cover a practical range and you can type any positive value outside it.
+
+## Questions
+
+### Why does the current in a parallel circuit go up when I add a resistor?
+Each new branch connects across the same source and takes its own current, V / R. The branch currents add, so the total rises and the total resistance falls, always staying below the smallest branch.
+
+### Why does the output of a voltage divider drop when I connect a load?
+The load is in parallel with the bottom resistor, so the resistance from the output to ground is lower than R2 alone. A lower bottom resistance takes a smaller share of the voltage. Keep the load at least ten times R2 for a small error.
+
+### What is a time constant?
+The time an RC or RL circuit takes to complete 63.2 % of its change. After five time constants the change is more than 99 % complete.
+
+### Why can the voltage across the inductor or capacitor exceed the supply in an RLC circuit?
+Near resonance the inductor and capacitor voltages are large and opposite. They cancel around the loop, so the supply only needs to overcome the resistance. The ratio of the reactive voltage to the supply is the quality factor.
+
+### Can I trust the numbers?
+They are exact for the ideal model and are tested against hand calculations. They are not predictions for a real circuit, where component tolerance, temperature and parasitic effects matter.
+
+<Related items={[
+  { href: '/ohms-law-calculator/', label: "Ohm's law calculator" },
+  { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
+  { href: '/power-factor-correction-calculator/', label: 'Power factor correction calculator' },
+  { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
+]} />
