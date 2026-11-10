@@ -24,8 +24,8 @@ const productSchema = {
   description: project.description,
   offers: {
     '@type': 'Offer',
-    price: project.price.replace('₹', ''),
-    priceCurrency: 'INR',
+    price: project.price.replace(/[^0-9.]/g, ''),
+    priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     url: project.gumroadUrl,
   },
