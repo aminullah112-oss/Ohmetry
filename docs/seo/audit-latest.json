@@ -1,14 +1,16 @@
 {
-  "pages": 64,
-  "indexable": 63,
+  "pages": 72,
+  "indexable": 71,
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/contact/: only 174 words",
-    "/corrections/: only 201 words",
-    "/disclaimer/: only 174 words",
+    "/contact/: only 181 words",
+    "/corrections/: only 208 words",
+    "/disclaimer/: only 181 words",
     "/idmt-relay-calculator/: title is 72 characters (over 70)",
-    "/methodology/: only 252 words",
+    "/makerlab/: description is 195 characters (aim for 50 to 170)",
+    "/makerlab/projects/: only 254 words",
+    "/methodology/: only 259 words",
     "/transformer-full-load-current-calculator/: title is 75 characters (over 70)"
   ]
 }

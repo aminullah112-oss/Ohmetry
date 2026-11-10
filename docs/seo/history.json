@@ -424,14 +424,14 @@
  },
  {
   "date": "2026-11-10",
-  "pages": 64,
-  "indexable": 63,
+  "pages": 72,
+  "indexable": 71,
   "calculators": 32,
-  "guides": 19,
+  "guides": 20,
   "tests": 279,
-  "commits": 183,
+  "commits": 199,
   "auditFailures": 0,
-  "auditWarnings": 6,
+  "auditWarnings": 8,
   "gscClicks28": 12,
   "gscImpressions28": 11796
  }
