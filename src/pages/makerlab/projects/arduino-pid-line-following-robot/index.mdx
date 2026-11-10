@@ -1,0 +1,47 @@
+---
+layout: ../../../../layouts/MakerLabPage.astro
+slug: arduino-pid-line-following-robot
+---
+
+## Overview
+
+This project builds a two-wheeled line-following robot that uses a PID controller to track a black line on a white surface smoothly at higher speeds than a bang-bang controller allows. The PID controller continuously calculates the error (how far the robot is from the centre of the line) and adjusts the left and right motor speeds to correct it. The result is a robot that tracks curves smoothly instead of oscillating.
+
+## What you will build
+
+- **PID line following** — Kp, Ki, Kd tunable at runtime over Serial
+- **5-channel IR sensor array** — weighted error calculation for sub-millimetre sensitivity
+- **PWM motor control** — L298N drives both DC gear motors; PID output directly controls duty cycle
+- **Sensor calibration routine** — automatic min/max calibration on startup
+- **Serial tuning interface** — adjust PID constants without reflashing
+
+## Why PID beats bang-bang
+
+A simple bang-bang controller turns one motor fully off when the robot drifts. Near the centreline it toggles rapidly, causing visible oscillation. PID applies a correction proportional to the error (and its history and rate of change), so a small drift gets a small correction and the robot stays smoother at speed.
+
+```
+Error = weighted sensor reading (−4 to +4 on a 5-channel array)
+P term = Kp × error               (proportional: immediate correction)
+I term = Ki × sum of error         (integral: corrects persistent drift)
+D term = Kd × (error − last error) (derivative: damps oscillation)
+
+PID output → split between left and right motor speeds
+```
+
+## Tuning guide
+
+The package includes a full PID tuning guide, but the typical starting sequence is:
+
+1. Start with Ki = 0, Kd = 0, increase Kp until robot follows the line but oscillates
+2. Increase Kd until oscillation damps
+3. Add a small Ki only if the robot drifts off straight sections
+
+Typical starting values for this hardware: Kp = 25, Ki = 0.001, Kd = 15. The included serial interface lets you change all three values live while the robot is running.
+
+## Chassis
+
+The package includes PDF drawings for a 2-layer acrylic chassis sized for the included motor and sensor spacing. Any laser cutter or CNC router can cut it. If you have a 3D printer, STL files for a printed alternative are also included. Both versions use the same motor mounting holes.
+
+## Circuit notes
+
+The L298N motor driver handles up to 2 A per channel from a 7.4 V Li-Po. Never power the Arduino from the 5 V output of the L298N at high motor currents — use separate regulated supply or a power bank for the logic board. The schematic shows the correct power arrangement.

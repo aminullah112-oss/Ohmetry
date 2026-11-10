@@ -1,0 +1,122 @@
+---
+import Base from './Base.astro';
+import { projects } from '../data/makerlab';
+
+const { frontmatter } = Astro.props;
+const project = projects.find(p => p.slug === frontmatter.slug)!;
+
+const diffColor: Record<string, string> = {
+  Beginner: '#2fbf71',
+  Intermediate: '#f59e0b',
+  Advanced: '#ef4444',
+};
+
+const crumbs = [
+  { name: 'MakerLab', href: '/makerlab/' },
+  { name: 'Projects', href: '/makerlab/projects/' },
+  { name: project.title, href: `/makerlab/projects/${project.slug}/` },
+];
+
+const productSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: project.title,
+  description: project.description,
+  offers: {
+    '@type': 'Offer',
+    price: project.price.replace('₹', ''),
+    priceCurrency: 'INR',
+    availability: 'https://schema.org/InStock',
+    url: project.gumroadUrl,
+  },
+};
+---
+<Base
+  title={`${project.title} — Project Package | Ohmetry MakerLab`}
+  description={project.tagline + ' Complete project package with circuit schematic, source code, component list and documentation.'}
+  breadcrumbs={crumbs}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(productSchema)} slot="head" />
+
+  <div class="wrap ml-product-wrap">
+    <nav class="ml-back" aria-label="Back">
+      <a href="/makerlab/projects/">&larr; All projects</a>
+    </nav>
+
+    <div class="ml-product-layout">
+      <!-- Left: main content -->
+      <div class="ml-product-main">
+        <div class="ml-product-meta">
+          <span class="tag tech-tag">{project.technology}</span>
+          <span class="diff-tag" style={`color:${diffColor[project.difficulty]}`}>{project.difficulty}</span>
+          {project.branch.map(b => <span class="chip branch-chip">{b}</span>)}
+        </div>
+        <h1>{project.title}</h1>
+        <p class="lead">{project.tagline}</p>
+
+        <div class="ml-product-body">
+          <slot />
+        </div>
+
+        <section class="ml-section">
+          <h2>Components</h2>
+          <ul class="ml-parts-list">
+            {project.components.map(c => <li>{c}</li>)}
+          </ul>
+        </section>
+      </div>
+
+      <!-- Right: buy card -->
+      <aside class="ml-buy-card">
+        <div class="card ml-buy-inner">
+          <div class="ml-buy-price">{project.price}</div>
+          <p class="ml-buy-sub">One-time purchase. Instant download via Gumroad.</p>
+          <a class="btn ml-buy-btn" href={project.gumroadUrl} target="_blank" rel="noopener noreferrer">
+            Buy &amp; download
+          </a>
+          <ul class="ml-buy-includes">
+            <li>Full documentation PDF</li>
+            <li>Circuit schematic (PDF)</li>
+            <li>Bill of materials</li>
+            <li>Commented source code</li>
+            <li>Implementation guide</li>
+            <li>Viva preparation Q&amp;A</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </div>
+</Base>
+
+<style>
+.ml-product-wrap { padding-block: 32px 64px; }
+.ml-back { margin-bottom: 20px; font: 400 0.88rem var(--font-mono); }
+.ml-back a { color: var(--muted); text-decoration: none; }
+.ml-back a:hover { color: var(--accent); }
+
+.ml-product-layout { display: grid; grid-template-columns: 1fr 320px; gap: 48px; align-items: start; }
+.ml-product-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.tech-tag { font: 600 0.62rem var(--font-mono); letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.diff-tag { font: 600 0.62rem var(--font-mono); letter-spacing: 0.08em; }
+.branch-chip { font: 400 0.72rem var(--font-mono); padding: 2px 8px; border-radius: 4px; background: var(--surface); border: 1px solid var(--line); color: var(--muted); }
+
+.ml-product-main h1 { font: 800 clamp(1.8rem, 3.5vw, 2.6rem)/1.1 var(--font-display); font-stretch: 112%; letter-spacing: -0.02em; margin: 8px 0 12px; }
+
+.ml-section { margin-top: 40px; }
+.ml-section h2 { font: 700 1.1rem/1.3 var(--font-display); margin-bottom: 12px; }
+.ml-parts-list { padding-left: 20px; }
+.ml-parts-list li { margin-bottom: 6px; font-size: 0.93rem; line-height: 1.5; }
+
+.ml-buy-card { position: sticky; top: 24px; }
+.ml-buy-inner { display: flex; flex-direction: column; gap: 12px; }
+.ml-buy-price { font: 800 2rem/1 var(--font-mono); color: var(--ink); }
+.ml-buy-sub { margin: 0; font-size: 0.82rem; color: var(--muted); }
+.ml-buy-btn { text-align: center; display: block; }
+.ml-buy-includes { margin: 4px 0 0; padding-left: 20px; }
+.ml-buy-includes li { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 860px) {
+  .ml-product-layout { grid-template-columns: 1fr; }
+  .ml-buy-card { position: static; order: -1; }
+}
+</style>
