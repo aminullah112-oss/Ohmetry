@@ -1,0 +1,55 @@
+---
+layout: ../../../../layouts/MakerLabPage.astro
+slug: raspberry-pi-ai-object-detection
+---
+
+## Overview
+
+This project deploys TensorFlow Lite on a Raspberry Pi 4 to perform real-time object detection from a connected camera. The Pi runs inference locally — no cloud API, no network required after setup. Detected objects are highlighted with bounding boxes, class labels and confidence scores overlaid on the live video feed.
+
+An optional MQTT alert module publishes a message whenever a specific object class is detected, making it straightforward to trigger actions in a home automation system.
+
+## What you will build
+
+- **Real-time object detection** — 20–30 FPS on Pi 4 with the MobileNetV2 SSD model
+- **80 object classes** — COCO dataset labels (person, car, bottle, phone, etc.)
+- **Bounding box overlay** — class label and confidence % on live video
+- **Confidence threshold** — tune the minimum confidence to reduce false positives
+- **Optional MQTT alerts** — publish to a broker when a target class is detected
+- **Performance dashboard** — FPS counter and inference time display
+
+## Model selection
+
+The package covers three models with different speed/accuracy trade-offs:
+
+| Model | Speed (Pi 4) | mAP | Use case |
+|---|---|---|---|
+| MobileNetV2 SSD | ~28 FPS | 22 | Demo, low-latency |
+| EfficientDet-D0 | ~15 FPS | 34 | Balanced |
+| EfficientDet-D1 | ~8 FPS | 38 | Higher accuracy |
+
+All three are included. The inference pipeline code is identical — swap the model path in the config file.
+
+## How it works
+
+```
+Camera frame → resize to 300×300 (or 512×512) → 
+TFLite interpreter → tensor outputs → 
+decode boxes + scores → filter by threshold → 
+overlay on original frame → display
+```
+
+The package explains the full pipeline in the documentation PDF, including how the anchor boxes work and how to interpret the model output tensors.
+
+## Setup steps
+
+1. Flash Raspberry Pi OS Lite (64-bit) to the microSD card
+2. Run the included setup script — installs Python 3.11, TFLite runtime, OpenCV and picamera2
+3. Download the model of your choice (download script included)
+4. Run `python detect.py` — detection starts immediately
+
+The setup script is tested on fresh Pi OS Lite and takes around 15 minutes on a decent broadband connection.
+
+## MQTT alerts
+
+Optionally set a `TARGET_CLASS` in the config (e.g. `"person"`). When the detector is confident enough, it publishes `{"class": "person", "confidence": 0.87, "timestamp": "..."}` to your MQTT broker. The documentation shows how to wire this into Home Assistant and Node-RED.

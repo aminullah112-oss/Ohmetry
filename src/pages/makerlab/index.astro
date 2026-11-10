@@ -1,0 +1,172 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { publishedProjects, featuredProjects, technologies, branches } from '../../data/makerlab';
+const crumbs = [{ name: 'MakerLab', href: '/makerlab/' }];
+const techGroups = technologies.filter(t => publishedProjects.some(p => p.technology === t));
+---
+<Base
+  title="MakerLab — Engineering Project Packages | Ohmetry"
+  description="Downloadable project packages for Arduino, ESP32, Raspberry Pi, IoT and Robotics. Full documentation, circuit schematics, source code and components list for final-year EEE, ECE and CSE students."
+  breadcrumbs={crumbs}
+>
+  <!-- Hero -->
+  <section class="ml-hero">
+    <div class="wrap">
+      <div class="ml-hero-inner">
+        <div class="ml-hero-text">
+          <span class="eyebrow">Ohmetry MakerLab</span>
+          <h1>Engineering project packages that <em>actually work</em></h1>
+          <p class="lead">Complete, documented project packages for final-year students and engineers. Circuit schematics, source code, component lists, block diagrams and step-by-step implementation guides — everything in one download.</p>
+          <div class="hero-actions">
+            <a class="btn" href="/makerlab/projects/">Browse all projects</a>
+            <a class="btn ghost" href="#by-tech">Browse by technology</a>
+          </div>
+          <ul class="ml-stats">
+            <li><strong>{publishedProjects.length}</strong> Projects</li>
+            <li><strong>{branches.length}</strong> Branches</li>
+            <li><strong>{techGroups.length}</strong> Technologies</li>
+            <li><strong>India</strong> Primary market</li>
+          </ul>
+        </div>
+        <div class="ml-hero-badge">
+          <div class="badge-inner">
+            <span class="badge-label">MakerLab</span>
+            <span class="badge-sub">by Ohmetry</span>
+            <div class="badge-tags">
+              {techGroups.slice(0, 5).map(t => <span class="chip">{t}</span>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured -->
+  <section class="block wrap">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Featured</span>
+        <h2>Popular projects</h2>
+      </div>
+      <a class="btn ghost" href="/makerlab/projects/">View all</a>
+    </div>
+    <div class="card-grid">
+      {featuredProjects.map(p => <ProjectCard project={p} />)}
+    </div>
+  </section>
+
+  <!-- Browse by technology -->
+  <section class="block wrap" id="by-tech">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Catalogue</span>
+        <h2>Browse by technology</h2>
+      </div>
+    </div>
+    <div class="card-grid ml-tech-grid">
+      {techGroups.map(tech => {
+        const count = publishedProjects.filter(p => p.technology === tech).length;
+        return (
+          <a class="card ml-tech-card" href={`/makerlab/projects/?tech=${encodeURIComponent(tech)}`}>
+            <span class="ml-tech-name">{tech}</span>
+            <span class="card count">{count} project{count !== 1 ? 's' : ''}</span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Browse by branch -->
+  <section class="block wrap">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">By discipline</span>
+        <h2>Find projects for your branch</h2>
+      </div>
+    </div>
+    <div class="card-grid">
+      {branches.map(branch => {
+        const count = publishedProjects.filter(p => p.branch.includes(branch)).length;
+        const labels: Record<string, string> = {
+          EEE: 'Electrical & Electronics Engineering',
+          ECE: 'Electronics & Communication Engineering',
+          CSE: 'Computer Science Engineering',
+          Mechanical: 'Mechanical Engineering',
+        };
+        return (
+          <a class="card calc-card" href={`/makerlab/projects/?branch=${branch}`}>
+            <h2>{branch}</h2>
+            <p>{labels[branch]}</p>
+            <span class="card count">{count} project{count !== 1 ? 's' : ''}</span>
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- What's inside every package -->
+  <section class="block wrap">
+    <div class="block-head">
+      <div>
+        <span class="eyebrow">Package contents</span>
+        <h2>What you get with every project</h2>
+      </div>
+    </div>
+    <div class="card-grid trust">
+      {[
+        { title: 'Full documentation PDF', desc: 'Project overview, objectives, block diagram, hardware architecture and theory.' },
+        { title: 'Circuit schematic', desc: 'Annotated circuit diagram in PDF and editable format.' },
+        { title: 'Components BOM', desc: 'Bill of materials with part numbers, quantities and sourcing notes.' },
+        { title: 'Source code', desc: 'Fully commented source code with setup and loop explained.' },
+        { title: 'Implementation guide', desc: 'Step-by-step wiring, flashing and testing procedure.' },
+        { title: 'Viva preparation Q&A', desc: '20+ questions your examiner is likely to ask, with model answers.' },
+      ].map(item => (
+        <div class="card">
+          <h3>{item.title}</h3>
+          <p>{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="wrap" style="padding-bottom: 48px;">
+    <div class="cta">
+      <div>
+        <p class="cta-title">Looking for electrical engineering calculators?</p>
+        <p class="cta-sub">Ohmetry's free calculators cover voltage drop, cable sizing, relay settings, fault levels and more.</p>
+      </div>
+      <a class="btn" href="/">Go to calculators</a>
+    </div>
+  </div>
+</Base>
+
+<style>
+/* MakerLab hero */
+.ml-hero { position: relative; isolation: isolate; padding-block: 52px 44px; border-bottom: 1px solid var(--line-soft); }
+.ml-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 28px 28px; -webkit-mask-image: linear-gradient(#000, transparent 95%); mask-image: linear-gradient(#000, transparent 95%); }
+.ml-hero-inner { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+.ml-hero h1 { font: 800 clamp(2rem, 4.8vw, 3.4rem)/1.05 var(--font-display); font-stretch: 112%; letter-spacing: -0.02em; margin: 12px 0 16px; text-wrap: balance; }
+.ml-hero h1 em { font-style: normal; color: var(--accent); }
+.ml-stats { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 28px 0 0; padding: 0; list-style: none; font: 400 0.82rem var(--font-mono); color: var(--muted); }
+.ml-stats strong { display: block; font: 800 1.5rem/1.1 var(--font-display); color: var(--ink); }
+
+/* Badge */
+.ml-hero-badge { display: flex; align-items: center; justify-content: center; }
+.badge-inner { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 32px 28px; text-align: center; box-shadow: var(--shadow); min-width: 240px; }
+.badge-label { display: block; font: 800 2rem/1 var(--font-display); font-stretch: 112%; letter-spacing: -0.02em; color: var(--accent); }
+.badge-sub { display: block; font: 400 0.9rem var(--font-mono); color: var(--muted); margin: 4px 0 20px; }
+.badge-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+
+/* Tech grid */
+.ml-tech-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.ml-tech-card { padding: 18px 20px; gap: 6px; }
+.ml-tech-name { font: 700 1rem/1.2 var(--font-display); }
+
+@media (max-width: 860px) {
+  .ml-hero-inner { grid-template-columns: 1fr; }
+  .ml-hero-badge { display: none; }
+}
+</style>

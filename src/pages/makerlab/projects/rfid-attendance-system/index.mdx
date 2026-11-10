@@ -1,0 +1,44 @@
+---
+layout: ../../../../layouts/MakerLabPage.astro
+slug: rfid-attendance-system
+---
+
+## Overview
+
+This project uses an Arduino Uno and an RC522 RFID reader to log student attendance automatically. Each student carries an RFID card or key fob. When they tap it, the system looks up their name from a lookup table in EEPROM, displays their name and a timestamp on the LCD, and writes the record to a CSV file on the microSD card. The CSV imports directly into Excel or Google Sheets with no conversion.
+
+## What you will build
+
+- **Contactless card scanning** — RC522 reads Mifare Classic 1K cards and fobs at up to 10 cm
+- **Student name lookup** — UID-to-name mapping stored in EEPROM (up to 100 students)
+- **Timestamped records** — DS3231 RTC keeps accurate time through power outages
+- **LCD feedback** — 16×2 I2C LCD shows name and "Present" or "Already logged"
+- **CSV export** — microSD card stores daily log files ready for Excel import
+- **Duplicate prevention** — a student can tap twice, only the first scan of the day is logged
+
+## How it works
+
+```
+Card tap → RC522 reads UID (4 bytes) → lookup table → 
+student name → check today's log → not logged: write CSV + LCD → 
+already logged: show "Present at HH:MM" on LCD
+```
+
+Each CSV row has: `Date, Time, UID, Name`. The filename is the date (`2025-01-15.csv`), so a new file starts each day automatically.
+
+## Registering students
+
+The package includes a separate registration sketch:
+
+1. Upload the registration sketch
+2. Open Serial Monitor
+3. Tap a new card — it displays the UID
+4. Type the student name and press Enter
+5. Repeat for all cards
+6. Upload the main attendance sketch
+
+The lookup table is stored in EEPROM so it survives power cycles. The documentation covers how to extend the table for more than 100 students using external EEPROM.
+
+## Connecting to Excel
+
+The microSD card mounts as a drive on any computer. The daily CSV files open directly in Excel. The package includes a sample Excel template with pre-built formulas for attendance percentage, absent list and summary pivot table.

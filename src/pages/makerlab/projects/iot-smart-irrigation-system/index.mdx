@@ -1,0 +1,47 @@
+---
+layout: ../../../../layouts/MakerLabPage.astro
+slug: iot-smart-irrigation-system
+---
+
+## Overview
+
+This project uses an ESP8266 NodeMCU to automate field irrigation based on soil moisture readings. It also monitors temperature and humidity with a DHT22. When soil moisture drops below a configurable threshold, the system turns on a relay-driven water pump. You can override or monitor everything from the Blynk smartphone app.
+
+A Telegram bot sends alerts when the pump starts or stops and when soil moisture is critically low — useful for demonstrating IoT connectivity in viva examinations.
+
+## What you will build
+
+- **Automatic pump control** — turns on when soil moisture drops below threshold, turns off when it recovers
+- **Environment monitoring** — soil moisture %, temperature °C, humidity %
+- **Remote override** — start or stop the pump from anywhere via Blynk
+- **Telegram alerts** — push notifications on pump state changes
+- **Blynk dashboard** — live gauges for all three sensors on Android or iOS
+
+## How it works
+
+The capacitive soil moisture sensor outputs an analog voltage that the NodeMCU ADC reads. Capacitive sensors are significantly more reliable in soil than resistive types (no corrosion) and the package explains the difference.
+
+```
+Sensor output → ADC → map to 0–100% → compare with threshold
+Threshold exceeded → trigger relay → pump ON → log to Blynk
+Threshold recovered → relay OFF → Telegram alert
+```
+
+The DHT22 data is read every 10 seconds using the standard library. All sensor values are pushed to Blynk virtual pins.
+
+## Blynk setup
+
+The package includes a step-by-step Blynk setup guide:
+
+1. Create a new Blynk project and copy the auth token
+2. Add a gauge widget for moisture (V0), temperature (V1), humidity (V2)
+3. Add a button widget for manual pump override (V3)
+4. Paste the auth token into the firmware config header
+
+## Telegram setup
+
+1. Create a bot with BotFather and copy the token
+2. Get your chat ID with the getUpdates method
+3. Paste both into the firmware config header
+
+Detailed instructions with screenshots are included in the documentation PDF.

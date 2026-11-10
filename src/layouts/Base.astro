@@ -68,6 +68,7 @@ const siteSchema = [
         <nav class="site-nav" aria-label="Main">
           {(Object.keys(hubs) as HubId[]).map((id) => <a href={hubs[id].href} aria-current={activeHub === id ? 'page' : undefined}>{hubs[id].name}</a>)}
           <a href="/toolkit/">Toolkit</a>
+          <a href="/makerlab/">MakerLab</a>
         </nav>
       </div>
     </header>
@@ -85,7 +86,7 @@ const siteSchema = [
           </div>
           <div>
             <h2>Guides</h2>
-            <ul>{guides.map((g) => <li><a href={`/${g.slug}/`}>{g.name}</a></li>)}<li><a href="/charts/">Charts and tables</a></li><li><a href="/toolkit/">Toolkit</a></li></ul>
+            <ul>{guides.map((g) => <li><a href={`/${g.slug}/`}>{g.name}</a></li>)}<li><a href="/charts/">Charts and tables</a></li><li><a href="/toolkit/">Toolkit</a></li><li><a href="/makerlab/">MakerLab</a></li></ul>
           </div>
           <div>
             <h2>Site</h2>

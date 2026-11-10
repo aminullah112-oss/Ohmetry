@@ -1,0 +1,30 @@
+---
+import type { Project } from '../data/makerlab';
+interface Props { project: Project; }
+const { project } = Astro.props;
+const diffColor: Record<string, string> = { Beginner: '#2fbf71', Intermediate: '#f59e0b', Advanced: '#ef4444' };
+---
+<a class="card project-card" href={`/makerlab/projects/${project.slug}/`}>
+  <div class="project-card-header">
+    <span class="tag tech-tag">{project.technology}</span>
+    <span class="diff-tag" style={`color:${diffColor[project.difficulty]}`}>{project.difficulty}</span>
+  </div>
+  <h2>{project.title}</h2>
+  <p>{project.tagline}</p>
+  <div class="project-card-footer">
+    <span class="price">{project.price}</span>
+    <span class="branch-list">{project.branch.join(' · ')}</span>
+  </div>
+</a>
+
+<style>
+.project-card { display: flex; flex-direction: column; gap: 8px; }
+.project-card-header { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.tech-tag { font: 600 0.62rem var(--font-mono); letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent); }
+.diff-tag { font: 600 0.62rem var(--font-mono); letter-spacing: 0.08em; }
+.project-card h2 { font: 750 1.05rem/1.25 var(--font-display); font-stretch: 105%; margin: 4px 0 0; }
+.project-card p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; flex: 1; }
+.project-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line-soft); }
+.price { font: 700 1.05rem var(--font-mono); color: var(--ink); }
+.branch-list { font: 400 0.72rem var(--font-mono); color: var(--muted); letter-spacing: 0.04em; }
+</style>

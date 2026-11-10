@@ -1,0 +1,44 @@
+---
+layout: ../../../../layouts/MakerLabPage.astro
+slug: esp32-smart-energy-meter
+---
+
+## Overview
+
+This project turns an ESP32 DevKit into a fully functional smart energy meter. It measures voltage using a ZMPT101B voltage sensor and current using an ACS712 hall-effect sensor, then calculates real power, apparent power, power factor and cumulative energy consumption. All data appears on an OLED display and is served over Wi-Fi to a simple browser dashboard.
+
+You can optionally connect to Google Sheets via IFTTT to log energy readings automatically — useful for final-year project demonstrations.
+
+## What you will build
+
+- **Real-time measurements** — voltage (V), current (A), real power (W), apparent power (VA), power factor
+- **Energy accumulation** — running kWh counter stored in SPIFFS (survives reboot)
+- **OLED display** — four-line reading updated every second
+- **Wi-Fi web dashboard** — simple HTML page served by the ESP32; view on any browser on the same network
+- **Optional IFTTT logging** — POST to Google Sheets every 5 minutes
+
+## How it works
+
+The ZMPT101B outputs an AC voltage waveform proportional to mains voltage. The ACS712 outputs an offset DC voltage proportional to current. The ESP32 ADC samples both at ~1 kHz, computes the RMS values and the phase angle between them, and from those derives the power triangle.
+
+```
+Real power (W)   = Vrms × Irms × cosφ
+Apparent power   = Vrms × Irms
+Power factor     = Real / Apparent
+Energy (kWh)     = accumulated (Real power × time)
+```
+
+The package covers the full signal-conditioning circuit so the ESP32 ADC sees safe voltages.
+
+## Circuit notes
+
+Work on the **low-voltage secondary side** only. The ZMPT101B isolation transformer handles the mains side. Never probe the primary terminals while the device is powered. The package includes a fully annotated schematic and a step-by-step wiring table.
+
+## Calibration
+
+Both sensors need a one-time calibration against a known load:
+
+1. Use a resistive load (incandescent bulb or electric kettle)
+2. Measure the actual voltage with a multimeter
+3. Adjust the `V_CAL` and `I_CAL` constants in the firmware header
+4. The package documents typical values as a starting point

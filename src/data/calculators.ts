@@ -56,6 +56,7 @@ export const guides = [
   { slug: 'how-to-size-a-cable', name: 'How to size a cable', blurb: 'Five checks, one worked example: current, derating, voltage drop and fault withstand.', hub: 'electrical' as HubId },
   { slug: 'what-happens-when-lightning-strikes-a-building', name: 'What happens when lightning strikes', blurb: 'The path a strike takes through a building, why bonding matters, and what surge protection does.', hub: 'protection' as HubId },
   { slug: 'insulation-resistance-test-megger', name: 'Insulation resistance (megger) test', blurb: 'How to record and read the test, polarization index, and a free Excel record sheet.', hub: 'electrical' as HubId },
+  { slug: 'data-centre-load-calculation-example', name: 'Data centre load calculation example', blurb: 'A fictional data hall worked from the load list to UPS, transformer and generator sizing, with a free Excel sheet.', hub: 'electrical' as HubId },
   { slug: 'nec-voltage-drop-guide', name: 'NEC voltage drop: 3 % and 5 %', blurb: 'What the NEC recommends and how to size AWG wire for it, with examples.', hub: 'electrical' as HubId },
 ];
 
