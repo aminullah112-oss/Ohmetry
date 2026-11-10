@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "kVA to kW Calculator and Conversion Table (kW to kVA) | Ohmetry"
+title: "kVA to kW Calculator — Formula, Table & Conversion | Ohmetry"
 description: "Convert kVA to kW and kW to kVA using power factor, with a table from 1 to 2,000 kVA at power factors 0.7 to 1.0 and the reactive kvar. Formulas and worked examples."
 h1: "kVA to kW Calculator"
 hub: Electrical
@@ -96,6 +96,43 @@ Divide by 0.85. For example, 50 kW is 50 / 0.85 = 58.8 kVA.
 
 ### Why are transformers rated in kVA and not kW?
 Their losses depend on the current they carry, not on the power factor of the load. A transformer rated in kVA can carry that current whatever the load does with it.
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How many kW is 1 kVA?",
+      "acceptedAnswer": { "@type": "Answer", "text": "At 0.8 power factor it is 0.8 kW, at 0.9 it is 0.9 kW, and at 1.0 it is 1 kW. Multiply kVA by the power factor to get kW." }
+    },
+    {
+      "@type": "Question",
+      "name": "How many kW is 100 kVA?",
+      "acceptedAnswer": { "@type": "Answer", "text": "At 0.8 power factor it is 80 kW, and at 0.9 it is 90 kW. Use the formula kW = kVA × power factor." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the kVA to kW formula different for three-phase?",
+      "acceptedAnswer": { "@type": "Answer", "text": "No. kW = kVA × PF for both single-phase and three-phase. The three-phase √3 factor is already inside the kVA value." }
+    },
+    {
+      "@type": "Question",
+      "name": "Is kVA bigger than kW?",
+      "acceptedAnswer": { "@type": "Answer", "text": "kVA is always greater than or equal to kW. They are equal only at a power factor of 1.0." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert kW to kVA at 0.85 power factor?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Divide by 0.85. For example, 50 kW is 50 / 0.85 = 58.8 kVA." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why are transformers rated in kVA and not kW?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Transformer losses depend on the current they carry, not on the power factor of the load. A transformer rated in kVA can carry that current whatever the load does with it." }
+    }
+  ]
+})} />
 
 <Related items={[
   { href: '/transformer-full-load-current-chart/', label: 'Transformer full-load current chart' },
