@@ -1,8 +1,8 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "IDMT Relay Calculator (IEC 60255) | Ohmetry"
+title: "IDMT Relay Calculator — IEC Overcurrent Curves & Trip Time | Ohmetry"
 description: "Calculate IDMT overcurrent relay operating time for IEC standard, very, extremely and long-time inverse curves from TMS, pickup and fault current."
-h1: "IDMT Overcurrent Relay Time Calculator"
+h1: "IDMT Relay Calculator"
 hub: Protection and MV
 hubHref: /protection/
 crumb: "IDMT relay"
@@ -78,6 +78,43 @@ The denominator approaches zero as the current approaches the setting. It is a p
 
 ### Which curve should I use for transformer protection?
 Practice varies by utility. The extremely inverse curve is common on the primary of distribution transformers because it grades with fuses and tolerates inrush.
+
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the IDMT relay trip time at ten times pickup?",
+      "acceptedAnswer": { "@type": "Answer", "text": "At TMS 1: 2.97 s on standard inverse, 1.50 s on very inverse, 0.81 s on extremely inverse and 13.3 s on long-time inverse. Multiply by your TMS to scale the result." }
+    },
+    {
+      "@type": "Question",
+      "name": "What does TMS mean on an IDMT relay?",
+      "acceptedAnswer": { "@type": "Answer", "text": "TMS stands for time multiplier setting. It scales the whole curve in time, so TMS 0.5 gives half the operating time of TMS 1 at every fault current." }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does IDMT relay time go very high near the pickup?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The denominator of the IDMT formula approaches zero as the fault current approaches the pickup setting. This is a mathematical property of inverse-time curves." }
+    },
+    {
+      "@type": "Question",
+      "name": "Which IDMT curve should I use for transformer protection?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The extremely inverse curve is common on the primary of distribution transformers because it grades well with fuses and tolerates magnetising inrush current." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the IDMT formula?",
+      "acceptedAnswer": { "@type": "Answer", "text": "t = TMS × k / ((I / Is)^α − 1), where TMS is the time multiplier setting, I the fault current, Is the pickup current, and k and α are curve constants from IEC 60255-151." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between standard inverse and extremely inverse IDMT curves?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Standard inverse has a flatter slope (k=0.14, α=0.02) and suits feeders with little variation in fault level. Extremely inverse is much steeper (k=80, α=2), coordinating well with fuses and motor thermal characteristics." }
+    }
+  ]
+})} />
 
 <Related items={[
   { href: '/ct-burden-calculator/', label: 'CT burden calculator' },
