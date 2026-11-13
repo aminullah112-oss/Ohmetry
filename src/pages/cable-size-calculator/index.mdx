@@ -64,6 +64,8 @@ The factors reduce the cable's capacity, so the tabulated rating at reference co
 ### Does this work for NEC installations?
 No. The NEC uses ampacity tables with different correction factors. Use the <a href="/breaker-size-calculator/">breaker size calculator</a> and the NEC tables.
 
+<script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a typical cable grouping derating factor?","acceptedAnswer":{"@type":"Answer","text":"It depends on the number of circuits grouped together and their arrangement. IEC 60364-5-52 gives grouping factors that fall as more loaded circuits are bundled. For example, two circuits together give about 0.8, and four circuits give about 0.65 — but read the actual table from the standard for your installation method."}},{"@type":"Question","name":"Why do I divide by the derating factors rather than multiply?","acceptedAnswer":{"@type":"Answer","text":"Derating factors reduce the cable's allowable current. To find the minimum tabulated rating needed, you divide the design current by the combined derating factor. This gives a larger value than the design current, which is the minimum cable rating before derating."}},{"@type":"Question","name":"Does the IEC cable size calculator work for NEC installations?","acceptedAnswer":{"@type":"Answer","text":"No. This calculator uses IEC 60364 methods. NEC installations use different ampacity tables and correction factors from the NEC. Use the wire size calculator or breaker size calculator for NEC work."}}]}`}</script>
+
 <Related items={[
   { href: '/cable-derating-factor-chart/', label: 'Cable derating factor chart' },
   { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
