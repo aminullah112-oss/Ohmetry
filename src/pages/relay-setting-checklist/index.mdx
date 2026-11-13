@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/CalcPage.astro
-title: "Overcurrent Relay Setting Checklist With Worked Example | Ohmetry"
-description: "A step-by-step checklist for setting a phase and earth-fault overcurrent relay on a transformer feeder: data, CT check, pickup, curve, grading, high-set, testing."
+title: "Relay Setting Checklist With Worked Example | Ohmetry"
+description: "Step-by-step checklist for setting an overcurrent relay on a transformer feeder, with a worked example covering pickup, curve, TMS and high-set."
 h1: "Overcurrent Relay Setting Checklist"
 hub: Protection and MV
 hubHref: /protection/
@@ -100,6 +100,8 @@ It clears severe faults faster than the inverse curve would, which reduces damag
 - **Grading at one fault level.** Check at both maximum and minimum fault levels.
 - **Setting and not testing.** A wrong ratio or polarity is only found by injection or primary test.
 - **Leaving no record of why.** The next engineer to change a setting needs the basis.
+
+<script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I choose the pickup setting of an overcurrent relay?","acceptedAnswer":{"@type":"Answer","text":"Set it above the maximum load current including any permitted overload, commonly 1.1 to 1.5 times full-load current, and low enough that the minimum fault current is a clear multiple of it, 1.5 or more is a common check. Then round to the next step the relay offers."}},{"@type":"Question","name":"What is a typical grading margin between overcurrent relays?","acceptedAnswer":{"@type":"Answer","text":"0.3 to 0.5 s is common practice. It covers the breaker opening time, relay overshoot and timing error. Use your utility's figure if it gives one."}},{"@type":"Question","name":"What TMS should I set on an overcurrent relay?","acceptedAnswer":{"@type":"Answer","text":"There is no standard value. Start low and raise it until the relay is slower than the downstream device by the grading margin at the maximum fault current, then check the time at the minimum fault current is still acceptable."}},{"@type":"Question","name":"Why set a high-set instantaneous element on an overcurrent relay?","acceptedAnswer":{"@type":"Answer","text":"It clears severe faults faster than the inverse curve would, which reduces damage. It must sit above the largest through-fault current and above energization inrush, or use the relay's inrush restraint."}}]}`}</script>
 
 <Related items={[
   { href: '/idmt-relay-calculator/', label: 'IDMT relay time calculator' },
