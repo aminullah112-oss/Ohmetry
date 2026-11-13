@@ -429,10 +429,36 @@
   "calculators": 32,
   "guides": 20,
   "tests": 279,
-  "commits": 201,
+  "commits": 203,
   "auditFailures": 0,
   "auditWarnings": 8,
   "gscClicks28": 12,
   "gscImpressions28": 11796
+ },
+ {
+  "date": "2026-11-11",
+  "pages": 72,
+  "indexable": 71,
+  "calculators": 32,
+  "guides": 20,
+  "tests": 279,
+  "commits": 204,
+  "auditFailures": 0,
+  "auditWarnings": 8,
+  "gscClicks28": 12,
+  "gscImpressions28": 11663
+ },
+ {
+  "date": "2026-11-12",
+  "pages": 72,
+  "indexable": 71,
+  "calculators": 32,
+  "guides": 20,
+  "tests": 279,
+  "commits": 206,
+  "auditFailures": 0,
+  "auditWarnings": 8,
+  "gscClicks28": 11,
+  "gscImpressions28": 11578
  }
 ]
