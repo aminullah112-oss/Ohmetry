@@ -494,9 +494,9 @@
   "calculators": 32,
   "guides": 20,
   "tests": 279,
-  "commits": 214,
+  "commits": 220,
   "auditFailures": 0,
-  "auditWarnings": 8,
+  "auditWarnings": 13,
   "gscClicks28": 11,
   "gscImpressions28": 10730
  }
