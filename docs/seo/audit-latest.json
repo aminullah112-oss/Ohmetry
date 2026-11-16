@@ -4,18 +4,10 @@
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/contact/: only 181 words",
+    "/contact/: only 193 words",
     "/corrections/: only 208 words",
-    "/disclaimer/: only 181 words",
-    "/generator-size-calculator/: title is 71 characters (over 70)",
-    "/idmt-relay-calculator/: title is 72 characters (over 70)",
-    "/kva-to-amps-calculator/: title is 76 characters (over 70)",
-    "/kw-to-amps-calculator/: title is 76 characters (over 70)",
-    "/makerlab/: description is 195 characters (aim for 50 to 170)",
+    "/disclaimer/: only 189 words",
     "/makerlab/projects/: only 260 words",
-    "/methodology/: only 259 words",
-    "/solar-wire-size-calculator/: title is 77 characters (over 70)",
-    "/three-phase-power-calculator/: description is 171 characters (aim for 50 to 170)",
-    "/transformer-full-load-current-calculator/: title is 81 characters (over 70)"
+    "/methodology/: only 267 words"
   ]
 }
