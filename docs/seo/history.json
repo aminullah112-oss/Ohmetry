@@ -512,5 +512,18 @@
   "auditWarnings": 5,
   "gscClicks28": 11,
   "gscImpressions28": 10248
+ },
+ {
+  "date": "2026-11-17",
+  "pages": 72,
+  "indexable": 71,
+  "calculators": 32,
+  "guides": 20,
+  "tests": 279,
+  "commits": 230,
+  "auditFailures": 0,
+  "auditWarnings": 5,
+  "gscClicks28": 11,
+  "gscImpressions28": 9814
  }
 ]
