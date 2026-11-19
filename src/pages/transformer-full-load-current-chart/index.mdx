@@ -46,6 +46,67 @@ On a 13,800 V primary the same 500 kVA unit draws 20.9 A, so the primary side is
 ### Do the primary and secondary currents multiply to the same kVA?
 Yes. 500 kVA at 13,800 V gives 20.9 A, and the same 500 kVA at 480 V gives 601 A. The power is equal on both sides, ignoring the small losses.
 
+### What is the full-load current of a 2,500 kVA transformer at 480 V?
+2,500,000 / (1.732 × 480) = 3,007 A.
+
+### What is the full-load current on the 11 kV primary of a 1,000 kVA transformer?
+1,000,000 / (1.732 × 11,000) = 52.5 A.
+
+## Sizing conductors and overcurrent protection from the chart
+
+The full-load current on each side of the transformer sets the starting point for cable and device sizing, but the final size follows from the applicable standard.
+
+**NEC Article 450 — overcurrent protection**
+
+For transformers rated over 600 V, Article 450.3 sets the maximum overcurrent protection as a percentage of the rated current. The table values depend on whether protection is on the primary side, the secondary side, or both. Common limits:
+
+- Primary protection only, 600 V and below: 125 % of primary full-load current for fuses; 167 % for circuit breakers if the calculated value does not correspond to a standard size.
+- Both primary and secondary protection: primary 250 %, secondary 125 %.
+- Supervised installations (industrial) have different limits.
+
+Always verify against the current edition of the NEC for the exact row that applies to your voltage and situation.
+
+**Conductor sizing**
+
+A transformer secondary conductor is not a motor branch circuit. It does not get the automatic 125 % factor unless it feeds a continuous load. The conductor must be rated for the full-load current on that side. For a 500 kVA transformer at 480 V, the secondary full-load current is 601 A, which requires 1,000 kcmil copper or three sets of 250 kcmil in parallel, depending on conduit fill and ambient temperature.
+
+## Inrush and its effect on protection
+
+On energising, the transformer draws magnetising inrush current. For distribution transformers this is typically 8–12 times the full-load current for the first few cycles, decaying over several seconds. The exact multiple depends on:
+
+- The design and core material
+- The residual flux in the core when last switched off
+- The point on the voltage wave at energisation
+
+An 8× inrush on a 601 A transformer is 4,808 A for a fraction of a second. Fuses protecting the transformer must not blow on this. Standard transformer fuses (K-type or T-type current-limiting fuses) are selected with this in mind from the manufacturer's curve or table. Relays use an inrush-restraint element or a time delay set to ride through the inrush period.
+
+## Taps and voltage adjustment
+
+Distribution transformers often have no-load taps (±2.5 % and ±5 %) that allow the secondary voltage to be trimmed. If a transformer is set to its +5 % tap:
+
+- The secondary voltage rises by 5 %
+- The turn ratio changes, so the secondary full-load current changes by approximately the same factor
+- A transformer on the +5 % tap at 480 V delivers about 504 V. The full-load current decreases to maintain the same kVA.
+
+Transformer tap adjustments must be made with the transformer de-energised. Only load tap changers (LTCs), found on substation power transformers, allow on-load adjustment.
+
+## Typical transformer ratings for common loads
+
+| Load | kVA | Secondary V | FLC (A) |
+|---|---|---|---|
+| Small commercial unit (lighting, HVAC) | 75 | 208 | 208 |
+| Office floor or small retail | 150 | 208 | 416 |
+| Medium commercial building | 500 | 480 | 601 |
+| Large commercial building | 1,000 | 480 | 1,203 |
+| Industrial facility, medium | 1,500 | 480 | 1,804 |
+| Industrial facility, large | 2,500 | 480 | 3,007 |
+| Data hall, medium | 500 | 480 | 601 |
+| Data hall, large (utility entrance) | 2,500 | 13,800 | 104.7 |
+
+## Single-phase transformers
+
+Single-phase transformers use the formula I = kVA × 1000 / V, with no √3 factor. A 25 kVA single-phase unit at 240 V has a full-load current of 25,000 / 240 = 104.2 A. The <a href="/kva-to-amps-calculator/">kVA to amps calculator</a> handles both phases.
+
 <Related items={[
   { href: '/transformer-full-load-current-calculator/', label: 'Transformer full-load current calculator' },
   { href: '/transformer-short-circuit-current-chart/', label: 'Transformer fault current chart' },

@@ -44,6 +44,98 @@ No. kVA is apparent power, V × I with no power factor. kW is the real part, kVA
 ### Why does the three-phase formula have a square root of three?
 The three line currents are 120° apart. Power from three balanced phases adds to √3 times the product of line voltage and line current.
 
+### What is the kW for a 200 A, 480 V three-phase circuit at PF 0.85?
+200 × 1.732 × 480 × 0.85 / 1000 = 141.0 kW.
+
+### What current does a 50 kW three-phase load at 400 V and PF 0.9 draw?
+50 × 1000 / (1.732 × 400 × 0.9) = 80.2 A.
+
+## Common load types and their typical power factors
+
+The chart uses a fixed power factor of 0.9 for three-phase values, which suits most motor and resistive loads. Real loads vary:
+
+- **Resistive loads** (heaters, incandescent lighting): PF 1.0. The chart overestimates their kW by 11 %. To correct, multiply by 1.0 / 0.9 = 1.11.
+- **Induction motors at full load**: PF 0.85–0.92. Close to the table assumption; use 0.9 as a starting point and refine from the nameplate.
+- **Induction motors at partial load**: PF drops to 0.7–0.8. The motor draws the same current for less shaft work.
+- **LED and fluorescent lighting**: PF 0.85–0.95 with an electronic ballast; can be as low as 0.5 on cheap gear without correction.
+- **Variable-speed drives**: PF at the input is typically 0.95–0.98 with modern drives, but they inject harmonic currents that distort the waveform, so the apparent power meter and a true-power meter may differ.
+- **Welders**: PF 0.5–0.7, highly variable with the arc cycle.
+
+Whenever the power factor differs from 0.9, scale the three-phase table values by (actual PF / 0.9).
+
+## Typical circuits and their continuous loads
+
+**Residential single-phase circuits (North America)**
+
+| Circuit | Volts | Amps | Continuous kW |
+|---|---|---|---|
+| Lighting/outlets | 120 V | 15 A | 1.44 |
+| Lighting/outlets | 120 V | 20 A | 1.92 |
+| Small appliance | 120 V | 20 A | 1.92 |
+| Electric dryer | 240 V | 30 A | 5.76 |
+| Range or oven | 240 V | 50 A | 9.60 |
+| EV charger (Level 2) | 240 V | 48 A | 9.22 |
+| Water heater | 240 V | 25 A | 4.80 |
+
+Continuous loads are limited to 80 % of the breaker rating. The figures above use that limit.
+
+**Industrial three-phase circuits (480 V)**
+
+| Circuit | Amps | Continuous kW at PF 0.9 |
+|---|---|---|
+| Small motor branch | 15 A | 11.2 |
+| General power panel feeder | 60 A | 44.9 |
+| Large motor branch | 150 A | 112.3 |
+| Main distribution panel | 400 A | 299.4 |
+| Transformer secondary | 1,200 A | 898.1 |
+
+**European and IEC single-phase circuits (230 V)**
+
+| Circuit | Amps | Watts |
+|---|---|---|
+| Standard socket circuit | 16 A | 3,680 |
+| Heavy socket circuit | 20 A | 4,600 |
+| Cooker | 32 A | 7,360 |
+
+**European three-phase circuits (400 V line-to-line)**
+
+| Circuit | Amps | kW at PF 0.9 |
+|---|---|---|
+| Small motor, 400 V | 10 A | 6.2 |
+| Medium motor, 400 V | 32 A | 19.9 |
+| Sub-distribution panel | 100 A | 62.4 |
+| Main LV panel | 400 A | 249.4 |
+
+## Reading power from a clamp meter
+
+A clamp meter measures current, not power. To get kW from a clamp reading:
+
+1. Note the voltage of the circuit.
+2. Note the number of phases.
+3. Estimate or measure the power factor (most modern clamp meters can measure PF directly).
+4. Apply the formula: single-phase P = V × I × PF / 1000; three-phase P = 1.732 × V × I × PF / 1000.
+
+If the power factor is unknown, using 1.0 for single-phase resistive loads is accurate. For three-phase motor loads, 0.85 is a reasonable estimate at full load. The resulting kW is an approximation until PF is confirmed.
+
+## kW versus kVA — sizing equipment correctly
+
+Transformers and generators are rated in kVA, not kW. The difference is the power factor:
+
+- A 100 kVA transformer at PF 0.9 supplies 90 kW of real power.
+- If the same transformer supplies loads with PF 0.7, it can only deliver 70 kW before hitting its kVA limit.
+- Connecting motors and electronic loads with low power factor means reaching the transformer's kVA rating before reaching the kW limit.
+
+This is why power factor correction on large sites pays back through smaller transformer and cable sizes, not just lower utility charges.
+
+## Effect of voltage on current for the same power
+
+Lower supply voltage means more current for the same kW:
+
+- 10 kW single-phase at 240 V draws 41.7 A (PF 1.0)
+- 10 kW single-phase at 120 V draws 83.3 A — double the current, four times the I² R loss
+
+This is why high-voltage distribution reduces losses over long runs, and why 480 V is preferred over 240 V for industrial motor loads. The <a href="/voltage-drop-calculator/">voltage drop calculator</a> quantifies the loss for a specific cable run.
+
 <Related items={[
   { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
   { href: '/kw-to-amps-chart/', label: 'kW to amps chart' },

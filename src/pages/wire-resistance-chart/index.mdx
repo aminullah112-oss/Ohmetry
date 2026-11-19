@@ -46,6 +46,63 @@ A smaller AWG number is a thicker wire with more area, so its resistance is lowe
 ### How does temperature change the resistance?
 Copper rises by about 0.4 % per °C. From 20 °C to 75 °C that is about 22 %.
 
+### How do I find the total resistance of a circuit loop?
+Add the resistance of the outgoing conductor and the return conductor. For a 100 ft run with 12 AWG copper, the loop is 200 ft. At 20 °C: 1.588 × 0.2 = 0.318 Ω. Apply Ohm's law to get the voltage drop.
+
+### Is aluminum resistance close enough to substitute for copper?
+No. Aluminum has about 1.64 times the resistance of copper for the same AWG. A 2 AWG aluminum cable has roughly the same resistance as a 4 AWG copper cable. Aluminum is used in feeders for cost and weight, but the cable must be sized up accordingly.
+
+## Voltage drop from resistance
+
+Voltage drop is the most direct use of the chart. The formula is:
+
+<div class="formula">V<sub>drop</sub> = I × R<sub>loop</sub></div>
+
+where I is the current in amps and R<sub>loop</sub> is the total resistance of the outgoing and return conductors. For a 50 A load through 150 ft of 6 AWG copper (loop = 300 ft), the resistance at 20 °C is 0.395 × 0.3 = 0.1185 Ω. Voltage drop is 50 × 0.1185 = 5.9 V on a 240 V circuit, or 2.5 %. The NEC recommends not exceeding 3 % on branch circuits (5 % to the final load including feeders). The <a href="/voltage-drop-calculator/">voltage drop calculator</a> handles arbitrary lengths and conductor types in one step.
+
+## Power loss
+
+The same resistance causes heat. Power dissipated in the conductors is:
+
+<div class="formula">P<sub>loss</sub> = I² × R<sub>loop</sub></div>
+
+For the 50 A, 6 AWG example above, that is 50² × 0.1185 = 296 W lost in the cable run. At typical electricity rates, running a 50 A circuit continuously for a year costs roughly 260 kWh just in cable heat. This is why upsizing conductors on long, heavily loaded runs has a real payback.
+
+## Copper versus aluminum — practical comparison
+
+| AWG | Cu R (Ω/1,000 ft, 20 °C) | Al R (Ω/1,000 ft, 20 °C) | Al:Cu ratio |
+|---|---|---|---|
+| 1/0 | 0.0983 | 0.161 | 1.64 |
+| 2/0 | 0.0779 | 0.128 | 1.64 |
+| 3/0 | 0.0618 | 0.101 | 1.63 |
+| 4/0 | 0.0490 | 0.0804 | 1.64 |
+| 350 kcmil | 0.0297 | 0.0486 | 1.64 |
+
+Aluminum feeders save cost and weight on long runs, but the connection is more critical. Aluminum oxidizes rapidly and connections must use approved anti-oxidant compound with approved connectors. Aluminum is not permitted in sizes below 8 AWG under most code interpretations for branch circuits.
+
+## NEC ampacity and resistance — the two separate limits
+
+A conductor must meet two criteria:
+
+1. **Ampacity** (NEC Table 310.12): the maximum continuous current the insulation can handle at a given ambient temperature.
+2. **Voltage drop**: not a code requirement on most circuits, but a performance issue. The NEC only recommends 3 % on branch circuits and 5 % total to the utilization equipment.
+
+A 10 AWG copper conductor in conduit has a 75 °C ampacity of 35 A. It may also carry 50 A momentarily, but its voltage drop will be higher, and its temperature will exceed the rating. Sizing from ampacity alone without checking voltage drop is a common error on long runs.
+
+## Temperature derating
+
+Resistance in this chart is at 20 °C (68 °F), the standard reference. The table also gives 75 °C values, which are closer to actual operating conditions. For intermediate temperatures, the linear formula applies:
+
+<div class="formula">R(T) = R<sub>20</sub> × (1 + 0.00393 × (T − 20)) for copper</div>
+
+For aluminum, substitute α = 0.00403.
+
+Ampacity also derates with ambient temperature. If the air around a conduit is 40 °C rather than the standard 30 °C, NEC Table 310.15(B)(1) applies a correction factor. At 40 °C ambient the factor is 0.91 on 75 °C conductors. A 35 A conductor is derated to 32 A. This is separate from the resistance increase — the derating protects the insulation, not just the resistance calculation.
+
+## Fault current and cable impedance
+
+On short circuits, the resistance of the circuit conductors limits the available fault current. A large transformer may supply 20 kA at its terminals, but 30 m of 4 AWG copper (loop resistance about 0.012 Ω at 75 °C) limits the fault current at the far end to roughly 20,000 / (1 + 0.012 × 20,000 / 480) ≈ 10 kA. This is why protective devices must be rated for the current at their location, not just at the transformer, and why the <a href="/cable-fault-current-calculator/">cable end fault current calculator</a> is a useful check after the transformer chart.
+
 <Related items={[
   { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
   { href: '/voltage-drop-chart/', label: 'Voltage drop chart' },

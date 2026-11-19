@@ -45,6 +45,72 @@ At 240 V single-phase, 24,000 W at the full rating of the main breaker. Real ser
 ### Can a 20 amp breaker run a 2,000 W heater?
 At 120 V the heater draws 16.7 A. If it runs for three hours or more it is a continuous load and 16.7 A exceeds 80 % of 20 A (16 A), so use a 240 V heater or a larger circuit.
 
+### What is the difference between a tandem breaker and a standard breaker?
+A tandem (slim or half-size) breaker occupies one slot but provides two circuits, each with its own trip. It is used to add a circuit to a full panel without a full-size slot. The combined current is not doubled — each pole is independent, typically 15 or 20 A. Not all panels accept tandem breakers, and the panel's listing labels say which slots allow them.
+
+### Do GFCI and AFCI breakers change the watt ratings?
+No. The continuous load limit (80 % of rating) is the same. GFCI protection trips faster on ground faults; AFCI protection responds to arc signatures. Neither changes the thermal or magnetic trip current.
+
+## NEC continuous load rule in practice
+
+NEC 210.20(A) applies to all branch circuits, not only 120 V circuits. Some examples:
+
+| Circuit | Breaker | 80 % continuous |
+|---|---|---|
+| 120 V / 20 A lighting | 20 A | 1,920 W |
+| 240 V / 50 A range | 50 A | 9,600 W |
+| 120/240 V / 60 A dryer | 60 A | 11,520 W |
+| 480 V three-phase / 30 A | 30 A | 19,948 W |
+| 480 V three-phase / 100 A | 100 A | 66,494 W |
+
+The 80 % applies to the breaker rating, not to the wire ampacity. If the wire's ampacity is the binding constraint, that limit governs instead.
+
+## GFCI and AFCI requirements by circuit type
+
+NEC 2023 requires GFCI protection on all 120 V through 250 V receptacle outlets in many locations, and AFCI protection on most bedroom and living area circuits.
+
+**GFCI required (not exhaustive):** bathrooms, garages, outdoors, crawl spaces, basements, boat hoists, boat houses, kitchen countertop surfaces, rooftop, swimming pool areas.
+
+**AFCI required (not exhaustive):** all 120 V, 15 and 20 A branch circuits supplying outlets in dwelling unit bedrooms, family rooms, dining rooms, living rooms, parlors, libraries, dens, sunrooms, recreation rooms, closets, hallways, laundry areas, similar rooms.
+
+**Combination AFCI/GFCI breakers** cover both requirements in one device. For new construction these are increasingly common for covered areas.
+
+AFCI and GFCI protection can be provided at the first outlet in a circuit rather than the breaker, but breaker-level protection covers the entire run, including the cable from the panel.
+
+## Panel load calculation
+
+Adding a new circuit requires checking that the panel and service are not overloaded. The standard method (NEC 220.40) for a dwelling unit:
+
+1. **General lighting and receptacles**: 3 VA per square foot of living area
+2. **Small appliance circuits**: 1,500 VA each (minimum two for kitchen)
+3. **Laundry circuit**: 1,500 VA
+4. **Major appliances**: nameplate rating (range, dryer, HVAC, water heater)
+5. **Apply demand factors**: first 10,000 VA at 100 %, remainder at 40 %
+
+The result gives the minimum service size in amperes at 240 V. A typical 2,000 ft² home works out to around 100–125 A. A 200 A service provides margin for EV charging, heat pumps and future loads.
+
+## 240 V versus 120 V circuits
+
+The same real power requires twice the current on a 120 V circuit as on a 240 V circuit. A 2,400 W load:
+- At 120 V: 20 A — needs a 25 A breaker for continuous load, or a 20 A breaker if the load draws 20 A for under 3 hours
+- At 240 V: 10 A — fits a 15 A breaker with room to spare
+
+For fixed appliances such as water heaters, dryers and EV chargers, 240 V is preferred because it halves the current, halves the I²R losses, and allows a smaller conductor.
+
+## NEC Table 210.21 — receptacle ratings
+
+NEC Table 210.21(B)(3) limits the receptacle rating to the circuit rating:
+
+| Circuit ampere rating | Receptacle rating |
+|---|---|
+| 15 A | 15 A |
+| 20 A | 15 A or 20 A |
+| 30 A | 30 A |
+| 40 A | 40 or 50 A |
+| 50 A | 50 A |
+
+A 20 A circuit may use 15 A receptacles — the circuit can supply multiple 15 A outlets without overloading them, because the breaker protects the total. Only one 15 A appliance plugs in at a time per outlet. A 30 A circuit needs a 30 A receptacle; a standard 15 A plug will not fit, which prevents inadvertent overloading.
+
 <script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many watts can a 15 amp breaker handle?","acceptedAnswer":{"@type":"Answer","text":"1,800 W at 120 V at its full rating, and 1,440 W continuously (80% of rating under the NEC continuous-load rule)."}},{"@type":"Question","name":"How many watts can a 20 amp breaker handle?","acceptedAnswer":{"@type":"Answer","text":"2,400 W at 120 V at full rating, and 1,920 W continuously. At 240 V: 4,800 W at full rating and 3,840 W continuously."}},{"@type":"Question","name":"How many watts can a 30 amp breaker handle?","acceptedAnswer":{"@type":"Answer","text":"3,600 W at 120 V at full rating and 2,880 W continuously. At 240 V: 7,200 W at full rating and 5,760 W continuously."}},{"@type":"Question","name":"How many watts is a 100 amp panel?","acceptedAnswer":{"@type":"Answer","text":"At 240 V single-phase, 24,000 W at the full rating of the main breaker. Real service sizing uses a load calculation, not the rating of the main."}},{"@type":"Question","name":"Can a 20 amp breaker run a 2,000 W heater?","acceptedAnswer":{"@type":"Answer","text":"At 120 V the heater draws 16.7 A. If it runs for three hours or more it is a continuous load and 16.7 A exceeds 80% of 20 A (16 A), so use a 240 V heater or a larger circuit."}}]}`}</script>
 
 <Related items={[

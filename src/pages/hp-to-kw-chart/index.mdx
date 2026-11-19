@@ -46,6 +46,89 @@ Mechanical horsepower is 745.7 W, which rounds to 746 W. Metric horsepower is 73
 ### How many HP is 1 kW?
 1.341 mechanical HP.
 
+### What is the kW equivalent of a 5 hp motor?
+5 × 0.7457 = 3.73 kW at the shaft. At 90 % efficiency the electrical input is 4.14 kW.
+
+### How do I find the shaft kW from the nameplate?
+IEC nameplates list shaft kW directly. NEMA nameplates list HP; multiply by 0.7457. The input kW is the shaft kW divided by the efficiency, which the nameplate also gives as a percentage.
+
+## Motor efficiency classes
+
+Efficiency at the shaft matters for the electrical load, running cost and generator or transformer size. Modern standards define minimum efficiency levels by class:
+
+**IEC 60034-30-1 (European and international)**
+
+| Class | Description |
+|---|---|
+| IE1 | Standard efficiency (mostly discontinued for new sales) |
+| IE2 | High efficiency — the minimum for most applications in many markets |
+| IE3 | Premium efficiency — mandatory in the EU above 0.75 kW for most uses since 2015 |
+| IE4 | Super premium efficiency — required in some jurisdictions above 75 kW |
+
+**NEMA (North American)**
+
+NEMA Premium is the equivalent of IE3. NEMA High Efficiency is roughly IE2.
+
+For a rough check, typical IE3/NEMA Premium efficiencies:
+- 0.75 kW (1 hp): ~85 %
+- 7.5 kW (10 hp): ~91.7 %
+- 37 kW (50 hp): ~93.6 %
+- 110 kW (150 hp): ~95.4 %
+- 375 kW (500 hp): ~96.2 %
+
+The difference between IE2 and IE3 on a motor that runs 8,000 hours a year at electricity rates of £0.15/kWh adds up to hundreds of pounds per year on a large motor.
+
+## How to read a motor nameplate
+
+A motor nameplate carries everything needed to find the shaft power, the electrical input, and the supply current. Key fields:
+
+- **kW or HP**: shaft output power
+- **RPM**: synchronous or full-load speed
+- **Hz**: supply frequency
+- **V**: rated voltage (may list a range, e.g. 380–420 V)
+- **A**: full-load current at rated voltage
+- **cosφ or PF**: power factor at full load
+- **η or eff**: efficiency at full load
+- **IP**: ingress protection rating
+- **Insulation class**: temperature class of the winding (B, F, H)
+- **Duty cycle**: S1 for continuous, S2 for short-time, S3 for intermittent
+
+The electrical input kW is nameplate kW divided by nameplate efficiency. The electrical apparent power (kVA) is the electrical kW divided by the power factor.
+
+## Common motor sizes and their applications
+
+| Shaft kW | Shaft HP | Typical application |
+|---|---|---|
+| 0.37 | 0.5 | Small pump, fan, conveyor |
+| 0.75 | 1 | Domestic pump, small compressor |
+| 2.2 | 3 | HVAC fan, grinder, small conveyor |
+| 5.5 | 7.5 | Medium pump, compressor |
+| 11 | 15 | Large pump, industrial fan |
+| 22 | 30 | Large compressor, mill drive |
+| 37 | 50 | Chiller, large pump |
+| 75 | 100 | Industrial compressor, large fan |
+| 185 | 248 | Large mill drive, ship propulsion |
+| 375 | 503 | Large compressor train |
+
+## Sizing a generator or transformer for a motor load
+
+A generator or transformer is rated in kVA, not in motor shaft kW. To find the minimum kVA rating for a motor:
+
+1. Convert shaft HP to kW: kW = HP × 0.7457
+2. Divide by the motor efficiency to get electrical input kW: input kW = shaft kW / η
+3. Divide by the power factor to get kVA: kVA = input kW / PF
+4. Apply a service factor (typically 1.25) for starting and other loads
+
+A 50 hp motor with η = 0.93 and PF = 0.88 draws 50 × 0.7457 / 0.93 = 40.1 kW and 40.1 / 0.88 = 45.5 kVA at full load. For a dedicated transformer, the next standard size up is used. For a generator that must also start the motor, the starting kVA, which can be six to ten times the running kVA, governs the sizing. The <a href="/generator-size-calculator/">generator size calculator</a> handles motor starting surge.
+
+## kW versus HP in specifications
+
+Specifications and datasheets from different regions use different units, and mixing them is a common source of error:
+
+- A European pump curve in kW and a North American motor nameplate in HP need the conversion before the motor is confirmed adequate.
+- NEC motor circuit sizing uses HP and the full-load current tables in Article 430, not a calculated current. The <a href="/motor-circuit-calculator/">motor circuit calculator</a> does this lookup.
+- An IEC motor at 400 V running on a 480 V supply will overspeed and possibly fail. Voltage and frequency must both match the nameplate.
+
 <Related items={[
   { href: '/kw-to-hp-calculator/', label: 'kW to HP calculator' },
   { href: '/hp-to-amps-calculator/', label: 'HP to amps calculator' },

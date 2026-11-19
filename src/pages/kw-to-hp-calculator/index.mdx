@@ -67,6 +67,59 @@ It depends on voltage and phase. On a three-phase 460 V supply the NEC table val
 ### Is a 7.5 kW motor a 10 hp motor?
 Yes, within about 0.6 %. 7.5 kW is 10.06 hp.
 
+### How do variable-speed drives affect the kW and hp relationship?
+The drive controls the motor's speed and therefore its shaft output. The motor nameplate kW is the maximum. At reduced speed the torque drops, so the shaft kW is lower — and the input kW drops too. The drive's input kW depends on the motor shaft load and the drive's own efficiency (typically 95–98 %). For energy calculations at partial speed, the kW relationship still holds: shaft kW / efficiency = input kW.
+
+### Why do IEC nameplates list kW but NEMA nameplates list hp?
+Historical convention. The USA standardised on horsepower early in industrial history and the NEMA motor standards followed. The rest of the world moved to SI units, so IEC motors show kW directly. Neither is wrong — they are the same quantity, different units.
+
+## Mechanical and metric horsepower — where the difference matters
+
+The 1.4 % gap between mechanical hp (745.7 W) and metric PS (735.5 W) is usually ignored in practice, but it matters when:
+
+- An imported European motor shows "10 PS" and the cable was sized for a 10 hp (North American) motor. The motor actually draws slightly less, so this is conservative and harmless.
+- A pump curve from a European manufacturer shows shaft power in PS but the motor catalog shows input current for hp ratings. Matching them exactly requires the conversion.
+- A generator or transformer is sized from a motor hp rating on the datasheet, and the datasheet is from a European supplier listing PS. The difference is small, but it adds to the safety margin either way.
+
+## Efficiency at partial load
+
+A motor's nameplate efficiency is at full load. At partial load, efficiency typically drops:
+
+| Load % | Typical IE3 efficiency |
+|---|---|
+| 100 % | 93–96 % |
+| 75 % | 93–96 % (often close to full-load) |
+| 50 % | 90–94 % |
+| 25 % | 80–87 % |
+
+This means a motor running at 25 % load draws proportionally more electrical kW per shaft kW than at full load. For energy cost calculations, using full-load efficiency as a constant underestimates the electricity consumption of lightly loaded motors.
+
+Variable-speed drives allow motors to run at the speed that matches the load, which keeps them in a higher-efficiency band. This is the main energy argument for drives on pump and fan applications with variable flow.
+
+## Sizing a circuit from kW
+
+When you have the shaft kW and motor efficiency, the electrical input kW follows. To get the current for circuit sizing under NEC Article 430:
+
+1. Find the shaft hp: hp = kW × 1.341
+2. Look up the full-load current in NEC Table 430.250 (three-phase) or Table 430.248 (single-phase) for the appropriate voltage.
+3. Apply 125 % for the branch circuit conductor (continuous motor load).
+4. Size the overcurrent protection to the values in NEC Table 430.52.
+
+The <a href="/motor-circuit-calculator/">motor circuit calculator</a> does all of this in one step from the hp and voltage.
+
+Do not substitute a calculated current for the NEC table value — the table values include diversity and starting considerations that a simple kW / V formula does not.
+
+## kW in generator and transformer specifications
+
+A generator is rated in kVA and in kW at a stated power factor (typically 0.8 lagging). To find whether a generator can carry a motor load:
+
+1. Convert shaft hp to electrical input kW: input kW = (hp × 0.7457) / efficiency
+2. Find the kVA: kVA = input kW / power factor
+3. Add other connected loads and apply a demand factor
+4. Add a surge allowance for starting — motors can draw 6–10× full-load kVA for the first few cycles
+
+A generator sized only on running kW may fail to start the motors. The <a href="/generator-size-calculator/">generator size calculator</a> handles motor starting surge.
+
 <Related items={[
   { href: '/motor-circuit-calculator/', label: 'Motor circuit calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },

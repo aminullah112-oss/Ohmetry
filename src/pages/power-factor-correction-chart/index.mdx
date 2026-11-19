@@ -45,6 +45,65 @@ No. It lowers the kVA and the current. The kW doing useful work stays the same, 
 ### What is a good power factor?
 0.95 or higher is a usual target. Many utilities start to charge below 0.9.
 
+### Can I oversize the capacitor bank?
+Yes, and doing so is a problem. Excess capacitance produces a leading power factor, which raises the voltage. At light load, oversized banks can push the voltage above statutory limits. Banks are typically designed with switching steps so they follow the load.
+
+### How often should capacitor banks be tested?
+Manufacturers recommend checking capacitance and loss angle every two to three years. Capacitors degrade over time, and a failed capacitor in a bank reduces the delivered kvar without obvious symptoms.
+
+## How capacitors correct power factor
+
+Inductive loads — motors, transformers, fluorescent ballasts — draw reactive current that lags the voltage. This reactive current adds to the total current without doing real work. It heats cables, transformers and switchgear, increases voltage drop and raises the apparent power the utility measures.
+
+Capacitors produce reactive current that leads the voltage, which is the opposite sign. When a capacitor is connected in parallel with an inductive load, the two reactive currents cancel in the supply cable. The cable sees only the real component. The load itself is unchanged — the motor still draws the same reactive current internally — but the supply current falls.
+
+The reactive power exchange happens between the motor and the capacitor bank, not between the motor and the utility. This is local reactive power compensation.
+
+## Fixed versus switched banks
+
+**Fixed banks** are connected permanently, regardless of load. They suit loads that run continuously at a constant level, such as large motors on constant-duty pumps. If the load reduces and the capacitor stays connected, the power factor can go leading.
+
+**Switched banks** use contactors or thyristors to connect and disconnect steps of capacitance as the load varies. A power factor controller monitors the reactive demand and switches steps in or out to keep the power factor within a target band. These are standard for sites with variable loads such as manufacturing plants, commercial buildings and hospitals.
+
+**Motor-mounted capacitors** are connected directly at the motor terminals. They switch with the motor, so there is no risk of leaving capacitance energised at no load. The capacitor kvar must not exceed the motor's magnetising kvar; if it does, the capacitor and motor can self-excite after the contactor opens, generating voltage and potentially damaging both.
+
+## Harmonics and resonance
+
+Variable-speed drives, UPS systems, switch-mode power supplies and other electronic loads inject harmonic currents. The fifth and seventh harmonics are the dominant ones in most industrial sites.
+
+Capacitor banks have low impedance at harmonic frequencies. Without a reactor, the bank can absorb large harmonic currents and overheat. It can also resonate with the supply inductance at a harmonic frequency, amplifying the harmonic voltage across the site.
+
+**Detuned or reactor-protected banks** add a series reactor to the capacitor. The reactor shifts the resonant frequency below the fifth harmonic (typically to the 4.7th or 4.3rd), so the system cannot resonate at the dominant harmonic. The capacitors still correct the fundamental power factor but are protected from harmonic overload. For sites with significant drive loads, detuned banks are the standard recommendation.
+
+## Typical power factors by load type
+
+| Load | Typical PF at full load |
+|---|---|
+| Resistive heaters | 1.00 |
+| Incandescent lighting | 1.00 |
+| LED luminaires | 0.90–0.95 |
+| Induction motors (full load) | 0.85–0.92 |
+| Induction motors (50 % load) | 0.70–0.80 |
+| Induction motors (no load) | 0.15–0.30 |
+| Fluorescent lighting with ballast | 0.85–0.95 |
+| Variable-speed drives | 0.95–0.98 |
+| Arc furnaces | 0.70–0.80 |
+| Welding equipment | 0.50–0.70 |
+| UPS systems (at load) | 0.90–0.99 |
+
+Sites dominated by lightly loaded motors — common in older plants with oversized equipment — often have power factors below 0.75 and benefit most from correction.
+
+## Economic payback
+
+The benefit of power factor correction comes from two sources:
+
+1. **Avoided utility charges** — where the tariff penalises reactive demand or charges on kVA rather than kW.
+2. **Reduced conductor and transformer losses** — lower current reduces I²R losses, freeing transformer capacity.
+
+A rough check: if a 200 kW plant at PF 0.75 pays for kVA demand, the apparent power is 267 kVA. Correcting to 0.95 reduces apparent power to 211 kVA, saving 56 kVA of demand charge per month. At typical industrial kVA rates, a 110.6 kvar bank (from the worked example) often pays back in 12–36 months on a medium-sized site.
+
+Sites with harmonics need detuned banks, which cost more and may push payback out beyond three years on a low-penalty tariff.
+
 <Related items={[
   { href: '/power-factor-correction-calculator/', label: 'Power factor correction calculator' },
   { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },

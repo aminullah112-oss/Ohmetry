@@ -51,6 +51,64 @@ Fault current is proportional to the full-load current, and the same kVA draws 2
 ### Where do I find the %Z?
 On the transformer nameplate or test report. Typical distribution units fall between 2 % and 6 %.
 
+### Does the fault current change with the load?
+No. Fault current is calculated from the transformer's rated full-load current and its impedance. It does not depend on the actual load at the time of the fault.
+
+### Why is 5.75 % the highest %Z shown?
+5.75 % is the standard upper limit for liquid-filled distribution transformers under IEEE C57.12.00, and 5 % is common for dry-type units. These cover the standard product range.
+
+## Equipment interrupting ratings
+
+Every protective device at or downstream of the transformer must have an interrupting capacity (IC) rating that meets or exceeds the available fault current at its location. The NEC requires this explicitly (110.9).
+
+**Ratings to know**
+
+| Device | Typical IC rating |
+|---|---|
+| Standard branch circuit breaker (120/240 V) | 10 kAIC |
+| High interrupting capacity (HIC) breaker | 22 kAIC |
+| Current-limiting fuse | 100–200 kAIC |
+| Industrial MCCB | 18, 25, 42 or 65 kAIC |
+| Main distribution breaker | 65–200 kAIC |
+
+A 500 kVA transformer on 480 V at 5 % impedance delivers 12.0 kA. Any 10 kAIC breaker on that panel is under-rated — that is a code violation and a real hazard. The fix is a current-limiting fuse or an HIC breaker upstream, or a breaker rated for the available fault current.
+
+## Asymmetrical factor
+
+The chart shows symmetrical fault current — the RMS value of the symmetrical AC waveform. At the instant of fault, the actual peak current can be much higher because of the DC offset component, depending on the X/R ratio of the circuit. The asymmetrical (or momentary) current is the symmetrical value multiplied by a factor typically between 1.2 and 1.73 for X/R ratios found on distribution transformers.
+
+For equipment duty ratings, distinguish between:
+- **Symmetrical kA** (RMS): used for breaker interrupting ratings (what the breaker ultimately opens)
+- **Momentary duty (peak or RMS asymmetrical)**: used for bus bars, switchgear withstand ratings, and the first cycle of fault
+
+IEEE Std 141 and 242 give procedures for asymmetrical factor calculations in industrial systems.
+
+## Motor contribution
+
+Running induction motors add to the fault current during the first few cycles. A motor acts as a generator briefly after a fault, driven by inertia and residual flux. As a rough check, the motor contribution is approximately 4 times the motor full-load current, applied during the first 1.5–4 cycles. For a large industrial plant with significant motor loads, omitting motor contribution can underestimate the fault current by 10–30 %.
+
+The chart does not include motor contribution. Where motors are significant, add their contribution to the transformer fault current when checking equipment ratings.
+
+## Fault current at the cable end
+
+The numbers in the chart are at the transformer terminals. Any cable or bus between the transformer and the fault point reduces the current. For a conductor with resistance R (Ω) carrying fault current I (kA):
+
+<div class="formula">I<sub>cable end</sub> ≈ I<sub>sc</sub> × V / (V + √3 × I<sub>sc</sub> × R × 1000)</div>
+
+A 1,000 kVA, 5.75 % transformer at 480 V gives 20.9 kA at its terminals. With 20 m of 2/0 copper (loop resistance about 0.0032 Ω), the fault current at the panel drops to around 17 kA. The <a href="/cable-fault-current-calculator/">cable end fault current calculator</a> does this for any length.
+
+## Transformer impedance — typical nameplate values
+
+Standard IEEE C57.12.00 impedance values for distribution transformers:
+
+| kVA | Typical %Z (dry-type) | Typical %Z (liquid-filled) |
+|---|---|---|
+| 45–300 | 4–5 % | 2–4 % |
+| 300–1,000 | 5 % | 4–5 % |
+| 1,000–2,500 | 5–5.75 % | 4.5–5.75 % |
+
+Lower impedance means more fault current, but also lower voltage drop under heavy load. Higher impedance protects downstream equipment from high fault currents but causes more voltage sag when large loads start. The nameplate value is what was tested; the worst-case tolerance is usually ±7.5 %, so a 5 % unit may actually be 4.65–5.35 % depending on the standard.
+
 <Related items={[
   { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
   { href: '/cable-fault-current-calculator/', label: 'Fault current at cable end' },
