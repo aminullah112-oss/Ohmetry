@@ -71,6 +71,80 @@ Not for a pure resistance. For DC the formulas always hold.
 ### What is the unit of resistance?
 The ohm, written Ω, equal to one volt per amp.
 
+### How do I use Ohm's law to size an LED current-limiting resistor?
+An LED needs a fixed forward voltage (typically 1.8–3.3 V depending on color) and a maximum current (typically 20 mA). The resistor drops the remaining voltage. For a red LED (2 V forward voltage, 20 mA) on a 5 V supply: R = (5 − 2) / 0.020 = 150 Ω. Use the next standard size up — 180 Ω — to stay safely under the maximum current.
+
+### How do I find the resistance of a cable?
+Use Ohm's law with a measured voltage drop and current: R = V / I. Alternatively, calculate it from the cable data: R = ρ × L / A, where ρ is the resistivity (0.0172 Ω·mm²/m for copper), L the length in metres and A the cross-section in mm². The <a href="/wire-resistance-chart/">wire resistance chart</a> gives the result in ohms per 1,000 ft for every AWG size.
+
+### How do I calculate total resistance in series and parallel?
+Series: R_total = R₁ + R₂ + R₃ (resistances add directly). Parallel: 1/R_total = 1/R₁ + 1/R₂ + 1/R₃ (reciprocals add, then take the reciprocal of the sum). For two equal resistors in parallel, R_total = R / 2.
+
+### How is Ohm's law used to size a fuse?
+Find the normal operating current with I = P / V, then choose a fuse rated just above that current. The fuse must not carry the load continuously at more than its rating, so a 10 A continuous load needs at least a 12.5 A fuse (125 % of running current). For NEC branch circuit protection, use the breaker-sizing rules rather than the calculated current directly.
+
+## Series and parallel circuits
+
+Ohm's law applies to individual components, but circuits combine components in series and parallel. The key identities:
+
+**Series circuit** — components share the same current; voltages add:
+- V_total = V₁ + V₂ + V₃
+- R_total = R₁ + R₂ + R₃
+- I is the same through every component
+
+**Parallel circuit** — components share the same voltage; currents add:
+- I_total = I₁ + I₂ + I₃
+- 1/R_total = 1/R₁ + 1/R₂ + 1/R₃
+- V is the same across every component
+
+**Worked example — series:** Two resistors, 10 Ω and 15 Ω, in series across 50 V. R_total = 25 Ω, I = 50 / 25 = 2 A. Voltage across the 10 Ω resistor: 2 × 10 = 20 V. Voltage across the 15 Ω: 2 × 15 = 30 V. Check: 20 + 30 = 50 V.
+
+**Worked example — parallel:** The same two resistors in parallel across 50 V. Each has 50 V across it. I₁ = 50 / 10 = 5 A, I₂ = 50 / 15 = 3.33 A. Total current = 8.33 A. Equivalent resistance: R = 50 / 8.33 = 6 Ω. Check with formula: 1/R = 1/10 + 1/15 = 0.1 + 0.067 = 0.167, R = 6 Ω.
+
+## Voltage divider
+
+A voltage divider is two resistors in series used to produce a fraction of the supply voltage. The output voltage is taken from the junction of the two resistors:
+
+<div class="formula">V_out = V_in × R₂ / (R₁ + R₂)</div>
+
+A 10 kΩ and a 15 kΩ resistor in series across 5 V give an output of 5 × 15 / (10 + 15) = 3 V at the mid-point. Voltage dividers are used in sensor interfaces and reference circuits. They assume a high-impedance load — if the output drives a low-resistance load, the loaded output voltage drops because the load parallels R₂.
+
+## LED resistor sizing
+
+The most common practical application of Ohm's law in electronics is selecting a current-limiting resistor for an LED. The formula is:
+
+<div class="formula">R = (V_supply − V_forward) / I_LED</div>
+
+| LED color | Typical V_forward | Resistor at 5 V, 20 mA | Resistor at 12 V, 20 mA |
+|---|---|---|---|
+| Red | 1.8–2.2 V | 140–160 Ω → use 150 Ω | 490–510 Ω → use 510 Ω |
+| Green / yellow | 2.0–2.4 V | 130–150 Ω → use 150 Ω | 480–500 Ω → use 510 Ω |
+| Blue / white | 3.0–3.4 V | 80–100 Ω → use 100 Ω | 430–450 Ω → use 470 Ω |
+
+Always use the next standard resistor size above the calculated value to keep the current at or below the maximum. The power dissipated in the resistor is P = I² × R — for a 150 Ω resistor at 20 mA: P = 0.02² × 150 = 0.06 W. A quarter-watt resistor is more than adequate.
+
+## Cable resistance and fault current
+
+Ohm's law links conductor resistance to fault current. When a short circuit occurs, the fault current is limited by the total impedance of the loop, including the cable resistance. A lower cable resistance means a higher fault current, which trips protection faster and more reliably.
+
+For a 240 V single-phase circuit with a loop resistance of 0.5 Ω (outgoing and return conductors combined), the prospective fault current is 240 / 0.5 = 480 A. This is the worst-case value; at the transformer terminals the fault current is higher because the cable resistance adds to it. The <a href="/short-circuit-current-calculator/">short-circuit current calculator</a> and the <a href="/wire-resistance-chart/">wire resistance chart</a> together let you work through this for any cable run.
+
+## Power dissipation and thermal limits
+
+The P = I² × R form of Ohm's law explains why electrical safety is about current, not just voltage. Heat generated in a conductor scales with the square of the current:
+
+| Current multiplier | Power multiplier |
+|---|---|
+| ×1 (baseline) | ×1 |
+| ×1.5 | ×2.25 |
+| ×2 | ×4 |
+| ×3 | ×9 |
+| ×5 (starting surge) | ×25 |
+
+Tripling the current produces nine times the heat in the same resistance. This is why motor starting surges — which can reach 5–7× the running current for a few seconds — produce far more conductor heating per second than steady running, and why thermal-magnetic breakers have a time-delay to ride through starting without tripping.
+
+The inverse of this is that doubling the conductor cross-section halves its resistance and cuts the heat loss by half for the same current — the economic argument for upsizing conductors on long, heavily loaded circuits.
+
 <Related items={[
   { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
