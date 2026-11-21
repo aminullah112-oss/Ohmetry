@@ -71,6 +71,77 @@ Yes, if you enter the same power. 1,000 W is 1 kW, so both calculators agree.
 ### Why does the power factor not appear for DC?
 DC has no phase shift between voltage and current, so the power is simply volts times amps.
 
+### How many amps is a 1,500 W space heater?
+On a 120 V circuit: 1,500 / 120 = 12.5 A. On 240 V: 6.25 A. Heaters are resistive (power factor 1), so voltage is the only variable.
+
+### How many amps does a 100 W light bulb use?
+A 100 W incandescent on 120 V draws 0.83 A. An LED delivering the same light uses roughly 10–15 W, drawing 0.08–0.13 A.
+
+### How many amps is 2,000 watts on 240 V?
+2,000 / 240 = 8.33 A for a resistive load. For an inductive load at 0.85 power factor: 2,000 / (240 × 0.85) = 9.80 A.
+
+### How do I size a circuit for a 2,000 W load?
+If the load runs continuously: 2,000 W / 120 V = 16.67 A. Apply the 125 % rule: 16.67 × 1.25 = 20.8 A. Use a 25 A breaker (next standard size above 20.8 A) and a conductor rated for at least 25 A — 10 AWG at 75 °C covers 35 A and passes comfortably.
+
+### What is the current draw of a 5,000 W generator output?
+At 240 V single-phase: 5,000 / 240 = 20.8 A. That is the output current. The generator's input from the engine is higher by the alternator efficiency (typically 85–95 %).
+
+## Power factor — what it means in practice
+
+Power factor is the ratio of real power (watts) to apparent power (volt-amps). A load with a power factor of 0.8 draws 25 % more current than the same wattage at unity power factor, because part of the current flows back and forth without doing work.
+
+**Typical power factors by load type:**
+
+| Load | Typical power factor |
+|---|---|
+| Resistive heaters, incandescent lighting | 1.00 |
+| LED luminaires | 0.90–0.95 |
+| Fluorescent lighting with electronic ballast | 0.90–0.95 |
+| Induction motors at full load | 0.85–0.92 |
+| Induction motors at 50 % load | 0.70–0.80 |
+| Variable-speed drives | 0.95–0.98 |
+| UPS systems at load | 0.90–0.99 |
+| Welding equipment | 0.50–0.70 |
+
+For lighting and heating circuits, power factor is effectively 1.0 and the simple P / V formula is accurate. For motor loads, nameplate power factor must be used or the current will be understated. Many industrial meters show power factor directly; for a home circuit a clamp meter measuring both watts and volt-amps will give it.
+
+## Sizing a circuit from watts — the full NEC sequence
+
+Converting watts to amps is step one of sizing a circuit. The full sequence under NEC Article 210:
+
+1. **Calculate the running current**: I = P / (V × PF) for single-phase AC.
+2. **Apply the continuous-load multiplier**: if the load runs for three hours or more, multiply by 1.25 per NEC 210.20(A).
+3. **Select the breaker**: next standard size at or above the multiplied current (NEC 240.6(A)). Standard sizes: 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100 A.
+4. **Select the conductor**: ampacity from NEC Table 310.12 must equal or exceed the breaker size for most circuits. 12 AWG copper covers 20 A at 75 °C, 10 AWG covers 35 A, 8 AWG covers 50 A.
+5. **Check voltage drop**: for runs over 50 ft, check that the drop stays under 3 % at the breaker rating. Use the <a href="/voltage-drop-calculator/">voltage drop calculator</a>.
+
+**Example — 2,400 W continuous resistive load on 240 V:**
+
+Running current: 2,400 / 240 = 10 A. Continuous multiplier: 10 × 1.25 = 12.5 A. Breaker: 15 A (next standard above 12.5). Conductor: 14 AWG at 75 °C covers 15 A — acceptable. For a 100 ft run: loop = 200 ft, 14 AWG resistance at 75 °C = 3.071 Ω/1,000 ft × 0.2 = 0.614 Ω, voltage drop = 10 × 0.614 = 6.14 V or 2.6 % — passes 3 % target.
+
+## Real power, apparent power and VA ratings
+
+Many devices — UPS units, generators, transformers — are rated in volt-amps (VA) rather than watts. VA is the apparent power, which includes both the real power doing work and the reactive power circulating in the system.
+
+<div class="formula">VA = V × I<br/>W = VA × PF<br/>kVAR = √(kVA² − kW²)</div>
+
+A 1,000 VA UPS at a power factor of 0.9 delivers 900 W of real power. The current it draws from the wall is 1,000 / 120 = 8.33 A, not 900 / 120 = 7.5 A. Sizing a UPS circuit from the watt rating understates the current. Always use the VA figure for circuit sizing.
+
+Generators are rated in kVA at a stated power factor (typically 0.8 lagging). A 10 kVA generator at 0.8 PF delivers 8 kW. If the connected load totals 8 kW at 0.95 PF, the apparent power is 8 / 0.95 = 8.42 kVA — the generator has headroom. If the same 8 kW load is at 0.7 PF, the apparent power is 11.4 kVA, which overloads a 10 kVA generator even though the watts are within rating.
+
+## Low-voltage DC systems
+
+On DC systems at 12 V, 24 V or 48 V, the same wattage produces much larger currents than on mains AC. This is why cable sizing on solar, RV, marine and telecom systems is critical.
+
+| Power | 12 V | 24 V | 48 V | 120 V | 240 V |
+|---|---|---|---|---|---|
+| 100 W | 8.33 A | 4.17 A | 2.08 A | 0.83 A | 0.42 A |
+| 500 W | 41.7 A | 20.8 A | 10.4 A | 4.17 A | 2.08 A |
+| 1,000 W | 83.3 A | 41.7 A | 20.8 A | 8.33 A | 4.17 A |
+| 3,000 W | 250 A | 125 A | 62.5 A | 25 A | 12.5 A |
+
+A 3,000 W inverter running from a 12 V battery bank draws 250 A — a cable and connection size that surprises many first-time installers. At 48 V the same inverter draws 62.5 A, which is why 48 V is the standard bus voltage for larger off-grid and backup systems. The <a href="/solar-wire-size-calculator/">solar DC cable size calculator</a> handles these low-voltage sizing problems with voltage drop included.
+
 <Related items={[
   { href: '/amps-to-watts-calculator/', label: 'Amps to watts calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
