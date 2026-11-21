@@ -80,6 +80,45 @@ Divide it by the supply voltage and multiply by 100.
 ### Does cable length or size matter more?
 Both are in the formula directly. Doubling the length doubles the drop, and doubling the cross-section halves it.
 
+### How much voltage drop is acceptable for an EV charger?
+A Level 2 EVSE draws up to 48 A continuously. On a 240 V circuit, 3 % drop is 7.2 V, leaving the charger at 232.8 V. Most EVSEs tolerate down to 208 V, so the headroom is wide, but a large drop means hotter cables and wasted energy. NEC 625.17 does not set a specific limit, so apply the same 3 % branch-circuit recommendation as any continuous load.
+
+### What is the voltage drop on a 100 ft run of 12 AWG at 20 A?
+At 75 °C (the NEC design temperature), 12 AWG copper has a resistance of about 1.93 Ω per 1,000 ft. The loop for a 100 ft run is 200 ft, so resistance is 0.386 Ω. Voltage drop is 20 × 0.386 = 7.72 V, which is 6.4 % of 120 V — well above the 3 % guide. The fix is 10 AWG (0.243 Ω loop, 4.86 V, 4.1 %) or 8 AWG (0.153 Ω loop, 3.06 V, 2.5 %).
+
+### Does voltage drop affect motor performance?
+Yes. Motors draw several times their running current during starting, so the momentary voltage drop at starting is much larger than the running drop. A motor that starts at 600 % FLA on a circuit with 2 % running drop will see 12 % drop at starting. Many motors will not start below 85–90 % of rated voltage, and the torque is proportional to V², so a 10 % low voltage cuts starting torque by roughly 19 %. For motor circuits, check both the running drop and the starting drop.
+
+## EV charger and long feeder circuits
+
+EV chargers, subpanels in detached garages, and outbuilding feeders are the most common sources of large voltage drop in residential work. They share two features: long one-way runs (often 50–150 ft or more) and high continuous current.
+
+**EV charger example.** A 50 A, 240 V circuit (40 A charger on a 50 A breaker) runs 80 ft from the main panel to the garage. Using 6 AWG copper at 75 °C (R = 0.491 Ω/1,000 ft), the loop is 160 ft and the resistance is 0.0785 Ω. Voltage drop: 50 × 0.0785 = 3.93 V, or 1.6 % of 240 V — acceptable. At 150 ft one-way the loop doubles to 300 ft, resistance is 0.147 Ω, and the drop is 7.37 V or 3.1 %. Borderline. Upgrading to 4 AWG (0.308 Ω/1,000 ft) drops it to 4.62 V or 1.9 %.
+
+**Outbuilding feeder.** A detached shop 200 ft from the house runs a 100 A, 240 V feeder. At 100 ft, 2 AWG copper (0.194 Ω/1,000 ft) has a 400 ft loop resistance of 0.0776 Ω and a drop of 7.76 V (3.2 % of 240 V). But at 200 ft the loop is 800 ft and the drop is 15.5 V (6.5 %) — well over the 5 % total guideline. Moving to 1/0 AWG (0.122 Ω/1,000 ft) brings it to 9.75 V or 4.1 %. The <a href="/cable-size-calculator/">cable size calculator</a> works this in reverse: enter the target drop and it returns the minimum conductor size.
+
+## How to reduce voltage drop
+
+When the calculated drop exceeds the target, four options exist — in rough order of cost:
+
+1. **Increase conductor size.** Each AWG step (or the next standard metric size) reduces resistance by about 25 %. Going up two steps halves the drop.
+2. **Reduce circuit length.** Relocating the panel or sub-panel closer to the load is a one-time structural fix that eliminates the problem permanently. Not always practical.
+3. **Increase the supply voltage.** A 120 V circuit that drops 5 % drops only 2.5 % if re-wired as 240 V at the same current, because the percentage is against twice the voltage. This works for loads that accept 240 V (motors, heaters, EV chargers).
+4. **Reduce the current.** Splitting one large circuit into two shorter ones, or reducing the load, cuts the drop proportionally. Used when upsizing the wire is not cost-effective.
+
+## Voltage drop versus ampacity — two separate checks
+
+A conductor must pass two independent tests:
+
+| Check | Limit source | What it protects |
+|---|---|---|
+| Ampacity | NEC Table 310.12 / Table 310.16 | Insulation temperature |
+| Voltage drop | NEC FPN (recommendation) | Equipment performance |
+
+A 10 AWG copper conductor in conduit has a 75 °C ampacity of 35 A under NEC Table 310.12. It passes the ampacity test for a 30 A load. But if the run is 150 ft at 30 A on a 120 V circuit, the loop resistance is 0.584 Ω and the drop is 17.5 V (14.6 %). The wire is safe thermally but the load performs poorly. Sizing from ampacity alone without checking voltage drop is the most common error on long residential and commercial runs.
+
+The reverse error also occurs: upsizing the conductor to control voltage drop can produce a conductor rated far above the breaker size, which is usually fine but requires checking NEC 240.4(B) for the overcurrent protection sizing rules.
+
 <script type="application/ld+json">{`{"@context":"
 https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the 3-phase voltage drop formula?","acceptedAnswer":{"@type":"Answer","text":"ΔV = √3 × I × L × (R cos φ + X sin φ), where R and X are resistance and reactance per unit length, L is the one-way length and the result is line-to-line voltage. For small cables you can drop the reactance term: ΔV = √3 × I × L × R."}},{"@type":"Question","name":"How do I calculate voltage drop for an armoured (SWA) cable?","acceptedAnswer":{"@type":"Answer","text":"The method is the same as for any cable: use the cable's resistance and reactance per metre from its data sheet. BS 7671 Appendix 4 gives these as millivolts per amp per metre (mV/A/m) — multiply by the current and length in metres, then divide by 1,000 to get volts."}},{"@type":"Question","name":"How do I convert voltage drop to a percentage?","acceptedAnswer":{"@type":"Answer","text":"Divide the voltage drop by the supply voltage and multiply by 100. For single-phase use the phase voltage; for three-phase use the line-to-line voltage."}},{"@type":"Question","name":"Does cable length or size matter more?","acceptedAnswer":{"@type":"Answer","text":"Both appear directly in the formula. Doubling the length doubles the drop; doubling the cross-section halves it. For long runs, increasing the cable size is usually the most practical fix."}},{"@type":"Question","name":"What is an acceptable voltage drop?","acceptedAnswer":{"@type":"Answer","text":"BS 7671 recommends 3 % for lighting and 5 % for other uses. The NEC informational notes suggest 3 % on a branch circuit and 5 % combined for feeder and branch. These are recommendations in many codes, but check whether your specification or authority makes them mandatory."}}]}`}</script>
 
