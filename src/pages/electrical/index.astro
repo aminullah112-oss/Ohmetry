@@ -19,4 +19,22 @@ const crumbs = [{ name: hub.name, href: hub.href }];
     </div>
     <div class="group-title">Guides</div><div class="card-grid"><a class="card calc-card" href="/voltage-drop-formula/"><span class="tag">GUIDE</span><h2>Voltage drop formula</h2><p>DC, single-phase and three-phase, worked in mm² and AWG.</p></a></div>
   </div>
+  <article class="article prose">
+    <h2>Using these electrical calculators</h2>
+    <p>The electrical calculators cover the most common tasks in single-phase and three-phase circuit design: Ohm's law, power conversions, current for a known load, wire sizing, breaker sizing, conduit fill and motor circuit calculations. Each one states its formula, so you can verify the result or work through the same steps by hand.</p>
+    <h3>Use them in this order for a new circuit</h3>
+    <ol>
+      <li><strong>Find the load current.</strong> For a resistive load, use the <a href="/watts-to-amps-calculator/">watts to amps calculator</a>. For a motor, use <a href="/hp-to-amps-calculator/">HP to amps</a>, which reads from NEC Table 430.250 rather than calculating from shaft power — the NEC requires the table value for motor circuit sizing.</li>
+      <li><strong>Choose the conductor.</strong> The <a href="/wire-size-calculator/">wire size calculator</a> checks ampacity and voltage drop together. On long runs it will often select a conductor larger than the minimum ampacity requires. The <a href="/voltage-drop-calculator/">voltage drop calculator</a> checks an existing conductor against a 3 % or 5 % target.</li>
+      <li><strong>Size the breaker.</strong> The <a href="/breaker-size-calculator/">breaker size calculator</a> applies the NEC 125 % continuous-load rule and returns the minimum overcurrent device size.</li>
+      <li><strong>Check conduit fill.</strong> The <a href="/conduit-fill-calculator/">conduit fill calculator</a> finds the smallest EMT for a given mix of conductors using NEC Chapter 9 tables.</li>
+    </ol>
+    <p>For generators, the <a href="/generator-size-calculator/">generator size calculator</a> sums a load list in kW and kVA, applies demand factors and adds a motor starting surge so you can compare the result against generator nameplate kVA.</p>
+    <h3>Standards and formulas</h3>
+    <p>The calculators use the NEC (NFPA 70) where relevant — ampacity tables, motor full-load current tables, breaker sizing rules — and IEC formulas for the metric and international variants. Where a result depends on a code-specified value, that value is stated so you can confirm it matches your edition of the code.</p>
+    <p>The <a href="/awg-to-mm2-converter/">AWG to mm² converter</a> handles the wire-gauge system used in North America and the cross-sectional area system used in IEC standards. The <a href="/kw-to-hp-calculator/">kW to HP calculator</a> covers both mechanical and metric horsepower so European and North American motor nameplates can be compared directly.</p>
+    <h3>Guides</h3>
+    <p>The electrical section also includes written guides for tasks where a step-by-step explanation is more useful than a form: <a href="/how-to-size-a-circuit-breaker/">how to size a circuit breaker</a>, <a href="/how-to-size-a-cable/">how to size a cable</a>, and the <a href="/nec-voltage-drop-guide/">NEC voltage drop guide</a>, which explains where the 3 % and 5 % recommendations come from and how to work through a circuit by hand with the rounded K values used in the field.</p>
+    <p>All calculators state their assumptions and let you change the ones that matter — temperature, power factor, efficiency. The results are engineering estimates; check them against equipment data sheets, your local code edition and a licensed electrician before installation.</p>
+  </article>
 </Base>

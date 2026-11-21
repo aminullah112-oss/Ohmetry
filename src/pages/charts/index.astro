@@ -19,4 +19,31 @@ const groups = (['electrical', 'protection'] as const).map((id) => ({ hub: hubs[
       </>
     ))}
   </div>
+  <article class="article prose">
+    <h2>About these electrical charts</h2>
+    <p>The charts section lists pre-calculated reference tables for the most common electrical values. Unlike the calculators, which solve for a specific set of inputs you type, the charts show a range of values at once so you can read across a row and compare options without re-entering anything.</p>
+    <h3>When to use a chart instead of a calculator</h3>
+    <p>A chart is quicker when you need to scan a range — for example, to compare three wire sizes for a 50-foot run, or to find the full-load current of every transformer in a panel without typing each one separately. A calculator is better when you have an exact set of conditions and want one precise answer, especially when the temperature, power factor or another variable differs from the chart's stated assumptions.</p>
+    <h3>Electrical charts</h3>
+    <ul>
+      <li><a href="/kw-to-amps-chart/">kW to amps chart</a> — line current for 0.5 to 2,000 kW at voltages from 120 V to 600 V, single-phase and three-phase.</li>
+      <li><a href="/amps-to-kw-chart/">Amps to kW chart</a> — real power for 5 to 200 A at the common voltages.</li>
+      <li><a href="/watts-to-amps-chart/">Watts to amps chart</a> — current for 10 to 10,000 W from 12 V DC to 240 V AC.</li>
+      <li><a href="/breaker-amps-to-watts-chart/">Breaker amps to watts chart</a> — continuous load that 15 to 200 A breakers support at 80 % of their rating (the NEC continuous-load rule). Includes 120 V, 240 V, 208 V and 480 V columns.</li>
+      <li><a href="/voltage-drop-chart/">Voltage drop chart</a> — drop per amp-metre for each AWG copper and aluminum size, and the longest run before reaching 3 % or 5 % on common voltages.</li>
+      <li><a href="/wire-size-by-distance-chart/">Wire size by distance chart</a> — smallest copper wire for a 3 % drop over 25 to 300 ft at 120 V and 240 V circuits.</li>
+      <li><a href="/wire-resistance-chart/">Wire resistance chart</a> — diameter, cross-sectional area and DC resistance in ohms per 1,000 ft for 4/0 through 24 AWG, copper and aluminum, at 20 °C and 75 °C.</li>
+      <li><a href="/hp-to-kw-chart/">HP to kW chart</a> — mechanical and metric horsepower with motor input power at typical efficiencies.</li>
+    </ul>
+    <h3>Protection and MV charts</h3>
+    <ul>
+      <li><a href="/cable-derating-factor-chart/">Cable derating factor chart</a> — ambient temperature correction factors for PVC and XLPE cables per IEC standards.</li>
+      <li><a href="/transformer-full-load-current-chart/">Transformer full-load current chart</a> — primary and secondary amps for 15 to 2,500 kVA transformers at standard voltages.</li>
+      <li><a href="/transformer-short-circuit-current-chart/">Transformer fault current chart</a> — available fault current in kA by kVA and percentage impedance at 208 V and 480 V.</li>
+      <li><a href="/power-factor-correction-chart/">Power factor correction chart</a> — kvar of capacitance needed per kW of load to raise the power factor from 0.5–0.9 up to 0.9, 0.95, 0.98 or unity.</li>
+    </ul>
+    <h3>How the charts are calculated</h3>
+    <p>Each chart is generated from the same formulas the interactive calculators use — not from look-up tables entered by hand. The formula is shown on the chart page, so you can reproduce any value by hand or check it against a standard. The worked example on each page walks through one row of the table so the method is clear.</p>
+    <p>All values assume standard conditions (20 °C or 75 °C for conductor resistance, unity power factor for simple power charts, balanced three-phase loads). Where the assumption matters, it is stated at the top of the chart.</p>
+  </article>
 </Base>
