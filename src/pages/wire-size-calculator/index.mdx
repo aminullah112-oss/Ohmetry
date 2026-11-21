@@ -71,6 +71,99 @@ Yes, with lower ampacity values. Choose aluminum in the calculator. Check that t
 ### Which NEC edition do the section numbers follow?
 The site follows the latest edition, the 2023 NEC. Where 2020 numbering differs, the page says so: the ambient correction table is 310.15(B)(2)(a) in 2020 and the adjustment table is 310.15(B)(3)(a). The table values were compared with the 2020 code. Check the section references against the edition your jurisdiction has adopted.
 
+## NEC Table 310.16 — copper conductor ampacity
+
+The table below shows the base ampacity for copper conductors, taken from NEC Table 310.16, before any temperature or bundling corrections. Use the column that matches the lower of the conductor's temperature rating and the equipment terminal's rating.
+
+| AWG / kcmil | 60 °C | 75 °C | 90 °C |
+|---|---|---|---|
+| 14 AWG | 15 A | 20 A | 25 A |
+| 12 AWG | 20 A | 25 A | 30 A |
+| 10 AWG | 30 A | 35 A | 40 A |
+| 8 AWG | 40 A | 50 A | 55 A |
+| 6 AWG | 55 A | 65 A | 75 A |
+| 4 AWG | 70 A | 85 A | 95 A |
+| 3 AWG | 85 A | 100 A | 110 A |
+| 2 AWG | 95 A | 115 A | 130 A |
+| 1 AWG | 110 A | 130 A | 150 A |
+| 1/0 AWG | 125 A | 150 A | 170 A |
+| 2/0 AWG | 145 A | 175 A | 195 A |
+| 3/0 AWG | 165 A | 200 A | 225 A |
+| 4/0 AWG | 195 A | 230 A | 260 A |
+
+Aluminum ampacity runs about 2–3 sizes lower for the same current: where 6 AWG copper carries 65 A at 75 °C, 4 AWG aluminum carries 65 A. The calculator handles aluminum separately.
+
+The 60 °C column applies when the equipment is marked for 60 °C terminals, which is common on 15 A and 20 A residential devices. The 75 °C column applies on most modern circuit breakers above 100 A and on many terminals marked "AL/CU 75 °C". Always check the terminal marking on the actual device — it overrides the table column you would otherwise use.
+
+## Sizing a wire for an EV charger circuit
+
+EV charger circuits are a continuous load under NEC 625.42. The sequence:
+
+1. Find the charger's rated output current from its nameplate. A 32 A charger is a continuous load.
+2. Apply the 125 % rule: 32 × 1.25 = 40 A minimum conductor rating. At 75 °C terminals, 8 AWG (50 A) is the minimum copper conductor — there is no 40 A entry in Table 310.16, so the next size up is 8 AWG.
+3. For a 50 ft run on a 240 V circuit, check voltage drop: round-trip = 100 ft. 8 AWG copper at 75 °C has 0.778 Ω/1,000 ft × 0.1 = 0.0778 Ω. Drop = 32 × 0.0778 = 2.49 V = 1.0 % — well within 3 %.
+4. For a 150 ft run: round-trip = 300 ft. Drop = 32 × 0.0778 × 3 = 7.47 V = 3.1 % — marginally over 3 %, so use 6 AWG.
+
+| Charger output | Minimum conductor (75 °C) | Maximum run at 3 % (240 V) |
+|---|---|---|
+| 16 A | 12 AWG | ~135 ft |
+| 24 A | 10 AWG | ~110 ft |
+| 32 A | 8 AWG | ~140 ft |
+| 40 A | 8 AWG | ~110 ft |
+| 48 A | 6 AWG | ~120 ft |
+
+## Sizing a wire for an outbuilding feeder
+
+A detached garage or outbuilding feeder is a common design problem. Suppose the outbuilding has a 60 A subpanel, continuous loads of 30 A and noncontinuous loads of 10 A, over 120 ft (one-way).
+
+**Check (a) — termination limit:** 1.25 × 30 + 10 = 47.5 A. The next conductor at 75 °C is 8 AWG (50 A) — passes.
+
+**Check (b) — derating:** single circuit in conduit, 30 °C ambient, no derating needed. 8 AWG at 90 °C = 55 A ≥ 40 A load — passes.
+
+**Check (c) — voltage drop:** round-trip = 240 ft. At 40 A total load through 8 AWG (0.778 Ω/1,000 ft): drop = 40 × 0.778 × 0.24 = 7.47 V = 3.1 % on 240 V — just over 3 %. Upgrade to 6 AWG.
+
+Result: **6 AWG copper** — voltage drop governs, not ampacity. This is the most common outcome on longer rural runs. The calculator shows which check governed, which is what you need to explain the result to an inspector.
+
+## Temperature derating — common correction factors
+
+When more than three current-carrying conductors share a raceway, or when the ambient temperature exceeds 30 °C (86 °F), the base ampacity must be derated. The two factors multiply together.
+
+**Ambient temperature correction (copper, 90 °C insulation), from NEC Table 310.15(B)(1)(1):**
+
+| Ambient (°C) | Ambient (°F) | Correction factor |
+|---|---|---|
+| 21–25 | 70–77 | 1.04 |
+| 26–30 | 78–86 | 1.00 |
+| 31–35 | 87–95 | 0.96 |
+| 36–40 | 96–104 | 0.91 |
+| 41–45 | 105–113 | 0.87 |
+| 46–50 | 114–122 | 0.82 |
+
+**Bundling adjustment (NEC 310.15(C)(1)):**
+
+| Current-carrying conductors in raceway | Adjustment factor |
+|---|---|
+| 4–6 | 0.80 |
+| 7–9 | 0.70 |
+| 10–20 | 0.50 |
+| 21–30 | 0.45 |
+
+If the ambient is 40 °C and there are 5 conductors in the raceway, the combined factor is 0.91 × 0.80 = 0.73. The 90 °C ampacity must be divided by 0.73 to find the minimum column value: for a 40 A load, the 90 °C ampacity must be at least 40 / 0.73 = 54.8 A, which requires 6 AWG (75 A at 90 °C).
+
+## More Q&As
+
+### What wire size do I need for a 100 A service or subpanel?
+For 100 A at 75 °C terminals (the standard for panels), 3 AWG copper (100 A at 75 °C) meets the ampacity requirement. For a long run with significant voltage drop, 2 AWG or 1 AWG may be needed. The calculator handles this directly.
+
+### Can I use 14 AWG for a 20 A circuit?
+No. Under NEC 240.4(D), 14 AWG copper is limited to a 15 A overcurrent device regardless of the calculated ampacity. For a 20 A circuit, 12 AWG is the minimum.
+
+### What is the difference between wire size and cable size?
+Wire size usually refers to individual conductors (AWG, kcmil). Cable size refers to the whole assembly — conductors plus insulation plus jacket — often specified in mm² under IEC standards. The <a href="/cable-size-calculator/">cable size calculator</a> works in mm² for IEC installations.
+
+### Does wire size change with AC frequency?
+Not meaningfully at power frequencies (50 or 60 Hz). Skin effect is negligible in copper conductors at standard power frequencies. High-frequency applications are a different matter.
+
 <Related items={[
   { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },
   { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
