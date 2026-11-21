@@ -70,6 +70,75 @@ The margin and the starting surge both add to it. The calculator shows which one
 ### Is a 7 kW generator enough for a 5 kW load?
 Often, if the 5 kW does not include a large motor start. Check the starting peak too.
 
+## Generator sizing table — common load scenarios
+
+Approximate minimum generator size for typical applications. These assume a 25 % running margin and a motor starting multiplier of 3 for pumps and air conditioners.
+
+| Application | Running load (kW) | Starting peak (kW) | Minimum generator |
+|---|---|---|---|
+| Essential home (lights, fridge, well pump) | 3–4 kW | 5–7 kW | 7–8 kW |
+| Whole-house backup (US average) | 8–12 kW | 14–20 kW | 20 kW |
+| Small workshop (tools + lighting) | 5–8 kW | 10–15 kW | 15 kW |
+| Central air conditioner (3-ton) | 3.5 kW | 10–14 kW | 14 kW |
+| Well pump (1 hp, 230 V) | 0.75 kW | 2.25 kW | 3 kW |
+| Small commercial (retail, 400 V 3-ph) | 15–30 kW | 25–50 kW | 50 kW |
+
+A central air conditioner is often the hardest load to start. A 3-ton (10.5 kW thermal) unit may draw only 3.5 kW running but needs 10–14 kW for the first few seconds. Generators that otherwise handle the full house load can stall on the AC start alone.
+
+## Load list worked example — home backup
+
+A house wants to run essential loads only during an outage:
+
+| Load | Running watts | Qty | Total (W) | Start multiplier | Start peak (W) |
+|---|---|---|---|---|---|
+| Lighting (LED) | 100 W | 10 | 1,000 W | 1 | 1,000 W |
+| Refrigerator | 150 W | 1 | 150 W | 3 | 450 W |
+| Chest freezer | 100 W | 1 | 100 W | 3 | 300 W |
+| Well pump (1 hp) | 750 W | 1 | 750 W | 3 | 2,250 W |
+| Microwave | 1,200 W | 1 | 1,200 W | 1 | 1,200 W |
+
+Running total: 3,200 W. Largest starting surge: well pump at 2,250 W extra. Total during pump start: 3,200 + (2,250 − 750) = 4,700 W.
+
+For running: 3,200 × 1.25 = 4,000 W. For starting: 4,700 W governs. At a power factor of 0.8: 4,700 / 0.8 = 5,875 VA = 5.875 kVA. Choose the next standard generator size: **7 kVA or 7 kW**, which at 0.8 PF delivers 5.6 kW — just enough. For comfort and to run the microwave while the pump starts, a 10 kW set is a better fit.
+
+## Standby, prime and continuous ratings
+
+Generators carry different output ratings for different duty cycles, defined in ISO 8528:
+
+| Rating | Typical use | Hours per year | Load variation |
+|---|---|---|---|
+| **Standby** | Emergency backup | ≤ 200 h/yr | Variable, up to 100 % |
+| **Prime** | Main power source | Unlimited | Variable, avg ≤ 70 % |
+| **Continuous** | Base load, always on | Unlimited | Constant |
+
+A standby-rated set produces more power but only for limited annual hours. A prime-rated set is derated, typically 10 % below standby. A continuous set is derated further — typically 70–80 % of standby.
+
+If the generator is for emergency backup only, the standby rating is the right one. If it is the primary power source for a remote site, use the prime or continuous rating. Using a standby-rated set at continuous duty wears it out early.
+
+## Transfer switch and NEC considerations
+
+A generator requires a transfer switch to isolate the building from the utility before the generator connects — feeding a generator into a live grid can injure utility workers. Under NEC 702 (optional standby systems), the transfer switch is a required part of the installation.
+
+**Manual transfer switch:** a double-throw switch that physically disconnects the utility before connecting the generator. Cheaper and simpler; the operator must manually start and transfer.
+
+**Automatic transfer switch (ATS):** monitors the utility supply, starts the generator, and transfers load automatically, typically within 10–30 seconds. Required for critical loads such as medical equipment and datacentre UPS bypass.
+
+The transfer switch must be rated for the load it carries. For a 200 A main panel, a 200 A transfer switch is the common choice. For a critical-loads-only panel, a smaller switch feeds only selected circuits.
+
+## More Q&As
+
+### How do I account for an air conditioner that starts automatically?
+An air conditioner starts on its own thermostat, so it may start while other loads are running. Enter its running watts with a start multiplier of 3–5 (check the nameplate LRA/RLA ratio). The calculator sums the running load at the moment of start and adds the extra starting kW.
+
+### Can I run a 240 V well pump from a 120 V generator output?
+No. A well pump requires 240 V (or 230 V). A generator with only 120 V outlets cannot run it. Most portable generators above 3,500 W offer a 240 V outlet; check the outlet configuration before buying.
+
+### What does "rated power factor 0.8" mean on a generator nameplate?
+It means the kVA rating is calculated at a power factor of 0.8. A 10 kVA set at 0.8 PF delivers 8 kW of real power. If the connected load has a better power factor (closer to 1.0), the same set can deliver more watts — but it cannot exceed its kVA limit.
+
+### How much fuel does a generator use?
+Roughly 0.5–0.7 L/hour per kW at half load for a diesel set, and 0.6–0.9 L/hour per kW for gasoline. At full load, consumption is 20–30 % higher. Run-time on a standard tank is usually stated on the nameplate at 50 % load, which is the standard test condition.
+
 <script type="application/ld+json">{`{"@context":"
 https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size generator do I need to run a house?","acceptedAnswer":{"@type":"Answer","text":"It depends on which loads you need to run simultaneously. Enter each load into the calculator — including any motors with their starting surge — and the calculator shows both the running kW and the peak starting demand. A typical whole-house generator ranges from 10 kW to 20 kW."}},{"@type":"Question","name":"Why is the required generator size higher than my running load?","acceptedAnswer":{"@type":"Answer","text":"Two reasons: the starting surge of motors (air conditioners, pumps, well pumps) can be 3–6 times the running current for a few seconds, and generators are typically sized with a 25 % margin above the peak demand. The calculator shows whether the starting surge or the running load governs."}},{"@type":"Question","name":"Is a 7 kW generator enough for a 5 kW load?","acceptedAnswer":{"@type":"Answer","text":"Often yes, if the 5 kW does not include a large motor start. A 7 kW generator at 80 % continuous rating handles 5.6 kW of continuous load. Add the starting peak of any motors and check that the total stays within the generator's short-term surge rating."}}]}`}</script>
 
