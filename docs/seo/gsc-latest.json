@@ -4,7 +4,7 @@
  "end": "2026-11-19",
  "totals": {
   "clicks": 11,
-  "impressions": 8129
+  "impressions": 8130
  },
  "daily": [
   {
@@ -174,6 +174,12 @@
    "clicks": 0,
    "impressions": 1,
    "position": 1
+  },
+  {
+   "date": "2026-11-19",
+   "clicks": 0,
+   "impressions": 1,
+   "position": 80
   }
  ],
  "pages": [
@@ -250,9 +256,9 @@
   {
    "page": "/",
    "clicks": 0,
-   "impressions": 97,
+   "impressions": 98,
    "ctr": 0,
-   "position": 70.8
+   "position": 70.9
   },
   {
    "page": "/about/",
