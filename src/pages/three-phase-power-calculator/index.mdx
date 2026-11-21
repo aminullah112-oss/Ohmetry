@@ -68,6 +68,64 @@ The line-to-line formula is the same for both. Only the phase quantities inside 
 ### What power factor should I enter if I don't know it?
 Use the nameplate or a meter reading. Induction motors near full load are often 0.8 to 0.9.
 
+## Three-phase power — kVA, kW and kvar reference table
+
+For a balanced load at 400 V three-phase:
+
+| Line current | kVA | kW (PF 0.85) | kvar (PF 0.85) |
+|---|---|---|---|
+| 5 A | 3.46 kVA | 2.94 kW | 1.82 kvar |
+| 10 A | 6.93 kVA | 5.89 kW | 3.64 kvar |
+| 20 A | 13.86 kVA | 11.78 kW | 7.28 kvar |
+| 32 A | 22.17 kVA | 18.85 kW | 11.65 kvar |
+| 50 A | 34.64 kVA | 29.45 kW | 18.19 kvar |
+| 100 A | 69.28 kVA | 58.89 kW | 36.38 kvar |
+| 200 A | 138.6 kVA | 117.8 kW | 72.8 kvar |
+
+## Star (wye) and delta connections
+
+The power formula uses line voltage and line current, which are defined the same way for both star and delta:
+
+**Star (wye):** phase voltage = V_line / √3 (230 V on a 400 V system). Line current equals phase current. Used for most low-voltage distribution and small motor feeders.
+
+**Delta:** phase voltage = V_line (400 V phase-to-phase). Line current = √3 × phase current. Used for high-current motor windings and some industrial equipment.
+
+The formula S = √3 × V_LL × I works for both. What changes is the internal current path, not the line quantities you measure.
+
+## Motor circuit sizing from three-phase power
+
+For a motor, the full NEC sequence:
+
+1. **Find the full-load current.** Use NEC Table 430.250 for the horsepower and voltage, or the nameplate. The table value governs circuit sizing. For 15 kW (20 hp) at 460 V, the table gives 27 A.
+2. **Size the conductor:** 1.25 × 27 = 33.75 A minimum conductor ampacity. 10 AWG copper at 75 °C covers 35 A — acceptable. See the <a href="/wire-size-calculator/">wire size calculator</a>.
+3. **Size the short-circuit protection:** for an inverse-time breaker, up to 250 % of table current for a standard motor (NEC 430.52, Table 430.52). 250 % × 27 = 67.5 A — use a 70 A breaker. This device only opens on a fault; it does not protect against running overload.
+4. **Size the overload relay:** based on nameplate current (not table), typically 115–125 % of that value per NEC 430.32.
+5. **Account for starting:** a direct-on-line start draws 5–8× full-load current. 27 × 6 = 162 A for a few seconds — the feeder and transformer must handle this surge without tripping.
+
+## The power triangle
+
+The relationship between kVA, kW and kvar forms a right triangle:
+
+- **kVA** (hypotenuse): what the supply delivers; heats cables and determines equipment rating.
+- **kW** (adjacent side): real power; converts to useful work.
+- **kvar** (opposite side): reactive power; circulates between source and load doing no net work.
+
+**Power factor correction example:** 50 kW load at PF 0.75. kVA = 50 / 0.75 = 66.7. kvar = √(66.7² − 50²) = 44.1 kvar. To reach PF 0.95: target kvar = 50 × tan(cos⁻¹ 0.95) = 50 × 0.329 = 16.4 kvar. Capacitor bank needed: 44.1 − 16.4 = 27.7 kvar. The <a href="/power-factor-correction-calculator/">power factor correction calculator</a> does this directly.
+
+## More Q&As
+
+### How do I calculate three-phase kVA from a clamp meter?
+Clamp one line and measure current. Measure the voltage between any two phases (line-to-line). Then S = √3 × V_LL × I / 1,000. For example, 25 A on a 415 V system: S = 1.732 × 415 × 25 / 1,000 = 17.97 kVA.
+
+### What is the difference between kVA and kW on a three-phase system?
+kVA is apparent power — what flows through the cables. kW is real power — what gets converted to useful work. The ratio kW/kVA is the power factor. A lower power factor means more current in the cables for the same useful output.
+
+### How many amps is 100 kVA at 400 V three-phase?
+I = 100,000 / (1.732 × 400) = 144.3 A. This is the full-load current, the value used to size conductors and overcurrent devices on the secondary of a 100 kVA transformer.
+
+### Can I use the three-phase formula for a single-phase load connected to one phase?
+No. A single-phase load on one phase of a three-phase system uses only one phase and neutral (or one phase-to-phase pair for delta). Use P = V × I × PF with the phase voltage or phase-to-phase voltage.
+
 <script type="application/ld+json">{`{"@context":"
 https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is there a √3 in the three-phase power formula?","acceptedAnswer":{"@type":"Answer","text":"Line-to-line voltage is √3 times the phase voltage in a star-connected system. Summing three phases each carrying V_phase × I gives 3 × V_phase × I, which equals √3 × V_line × I. This is why the formula P = √3 × V_L × I × PF uses the line voltage."}},{"@type":"Question","name":"Do I need a neutral wire for three-phase power calculation?","acceptedAnswer":{"@type":"Answer","text":"No. On a balanced three-phase load the neutral carries no current, and the line-to-line formula P = √3 × V_L × I × PF holds for both star and delta connections."}},{"@type":"Question","name":"Does the three-phase power formula work for both delta and star connections?","acceptedAnswer":{"@type":"Answer","text":"Yes. The line-to-line formula is the same for both delta and star. Only the internal phase quantities differ — the formula uses line voltage and line current, which are defined the same way for both."}},{"@type":"Question","name":"What power factor should I enter if I don't know it?","acceptedAnswer":{"@type":"Answer","text":"Use the nameplate or a power meter reading. Induction motors near full load typically have a power factor of 0.8 to 0.9. For resistive loads such as heaters, use 1.0. If in doubt, 0.8 is a conservative estimate for mixed loads."}}]}`}</script>
 

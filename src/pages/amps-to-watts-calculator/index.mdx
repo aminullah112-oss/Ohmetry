@@ -70,6 +70,66 @@ Yes for the electrical input power, using the motor's power factor. It does not 
 ### Can I use this for a battery?
 Yes, choose DC. Watts are volts times amps at that instant, and watt-hours need the runtime as well.
 
+## Amps to watts reference table
+
+At power factor 1.0. For inductive loads, multiply watts by the power factor — at PF 0.85 the actual watts are 85 % of the PF 1.0 column.
+
+| Amps | 12 V DC | 24 V DC | 120 V | 230 V | 240 V | 400 V 3-ph |
+|---|---|---|---|---|---|---|
+| 1 A | 12 W | 24 W | 120 W | 230 W | 240 W | 693 W |
+| 5 A | 60 W | 120 W | 600 W | 1,150 W | 1,200 W | 3,464 W |
+| 10 A | 120 W | 240 W | 1,200 W | 2,300 W | 2,400 W | 6,928 W |
+| 15 A | 180 W | 360 W | 1,800 W | 3,450 W | 3,600 W | 10,392 W |
+| 20 A | 240 W | 480 W | 2,400 W | 4,600 W | 4,800 W | 13,856 W |
+| 30 A | 360 W | 720 W | 3,600 W | 6,900 W | 7,200 W | 20,784 W |
+
+Three-phase values are √3 × V × I.
+
+## From watts to circuit sizing
+
+Once you have watts, the next step is sizing or evaluating the circuit. Under the NEC:
+
+1. **Check if the load is continuous.** A load that runs three hours or more is a continuous load. A 1,800 W heater drawing 15 A on 120 V is continuous; the minimum breaker is 15 × 1.25 = 18.75 A, so a 20 A breaker. Use the <a href="/breaker-size-calculator/">breaker size calculator</a>.
+2. **Check voltage drop.** For long runs, cable resistance wastes some watts as heat. At 15 A through 100 ft of 12 AWG copper (resistance = 0.614 Ω round-trip), the loss is 15² × 0.614 = 138 W, about 7.6 % of 1,800 W — too high. Use 10 AWG for a long, high-current run.
+3. **Check energy cost.** Watts × hours = watt-hours. The 1,800 W heater running 8 hours uses 14.4 kWh.
+
+## DC voltage and cable size
+
+On a DC system, P = V × I with no power factor. The same 1,200 W drawn at 12 V requires 100 A, while at 48 V it's only 25 A. Higher DC voltage means smaller cables for the same power — the reason 48 V is now standard for larger off-grid systems.
+
+| Power (W) | 12 V current | 24 V current | 48 V current |
+|---|---|---|---|
+| 300 W | 25.0 A | 12.5 A | 6.25 A |
+| 600 W | 50.0 A | 25.0 A | 12.5 A |
+| 1,200 W | 100 A | 50.0 A | 25.0 A |
+| 2,400 W | 200 A | 100 A | 50.0 A |
+
+A 100 A cable run from a 12 V battery to an inverter needs very heavy cable for even a short distance. Moving to 48 V reduces the cable cost by 4× on the same run.
+
+## Watts versus VA: reading labels correctly
+
+Appliances and circuit equipment sometimes use watts and VA interchangeably, which causes errors:
+
+- **Watts (W)** = real power. A resistive heater rated "2,000 W" draws exactly 2,000 W.
+- **Volt-amps (VA)** = apparent power = V × I, with no power factor adjustment. A UPS rated "1,000 VA" may supply only 600–900 W of real power.
+- **What matters for circuit sizing** is the current, which comes from VA, not from watts. A 1,000 VA UPS at 120 V draws 1,000 / 120 = 8.33 A from the wall — that is what the breaker and cable must handle, not the lower 900 W figure.
+
+For motors the nameplate lists the rated current directly. Use that for circuit sizing, not a figure calculated from shaft watts.
+
+## More Q&As
+
+### How many watts can a 20 A, 240 V circuit carry continuously?
+Maximum: 20 × 240 = 4,800 W at PF 1. For a continuous load, 80 % of that is 3,840 W (the NEC 125 % rule limits continuous loads to 80 % of breaker rating).
+
+### How many watts does a 15 A, 120 V circuit support continuously?
+15 × 120 = 1,800 W maximum. For a continuous load: 1,800 × 0.8 = 1,440 W.
+
+### Why does three-phase have √3 in the formula?
+Three-phase delivers power through three conductors 120° apart. The combined power is √3 × V_line × I × PF, not 3 × V_line × I, because the phases partly overlap — their vector sum is √3 times, not 3 times, the per-phase value.
+
+### How do I find watts from a clamp meter reading?
+Measure amps and volts separately on the same conductor. For single-phase: W ≈ V × I × PF. If the load is resistive, PF ≈ 1 and watts ≈ V × I. For an accurate reading on inductive loads, use a watt-meter or a clamp meter that measures both simultaneously.
+
 <script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many watts is 1 amp?","acceptedAnswer":{"@type":"Answer","text":"It depends on voltage. At 120 V, 1 amp is 120 W for a resistive load. At 230 V it is 230 W, and at 12 V DC it is 12 W. The formula is Watts = Amps × Volts × Power Factor."}},{"@type":"Question","name":"Is amps to watts the same as amps to VA?","acceptedAnswer":{"@type":"Answer","text":"No, on AC circuits. VA (volt-amps) is simply V × I with no power factor. Watts are the real power and include the power factor: W = V × I × PF. For DC circuits and purely resistive AC loads they are equal because the power factor is 1."}},{"@type":"Question","name":"Can I use the amps to watts calculator for a motor?","acceptedAnswer":{"@type":"Answer","text":"Yes, for the electrical input power — enter the voltage, current and motor's power factor. It does not give shaft output power (kW mechanical), which is lower by the motor's efficiency."}},{"@type":"Question","name":"Can I use this calculator for a battery?","acceptedAnswer":{"@type":"Answer","text":"Yes, select DC. Watts equals volts times amps at that instant. To find watt-hours, multiply by the runtime in hours."}}]}`}</script>
 
 <Related items={[

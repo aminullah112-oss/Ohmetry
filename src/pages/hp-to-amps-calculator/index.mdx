@@ -88,6 +88,66 @@ The table is a standard value used for sizing. A real motor's current depends on
 ### Can I use this for a motor with a drive?
 Motors on variable-speed drives have their own requirements. Check the drive manufacturer's data and the NEC provisions for adjustable-speed drives.
 
+## HP to amps at common voltages
+
+For quick reference, NEC table values at both single-phase and three-phase voltages:
+
+| HP | 115 V 1-ph | 230 V 1-ph | 230 V 3-ph | 460 V 3-ph | 575 V 3-ph |
+|---|---|---|---|---|---|
+| 1/2 | 9.8 A | 4.9 A | — | — | — |
+| 1 | 16 A | 8 A | 4.2 A | 2.1 A | 1.7 A |
+| 2 | 24 A | 12 A | 6.8 A | 3.4 A | 2.7 A |
+| 3 | 34 A | 17 A | 9.6 A | 4.8 A | 3.9 A |
+| 5 | 56 A | 28 A | 15.2 A | 7.6 A | 6.1 A |
+| 10 | 100 A | 50 A | 28 A | 14 A | 11 A |
+| 15 | — | — | 42 A | 21 A | 17 A |
+| 20 | — | — | 54 A | 27 A | 22 A |
+| 25 | — | — | 68 A | 34 A | 27 A |
+| 50 | — | — | 130 A | 65 A | 52 A |
+
+Values from NEC Tables 430.248 and 430.250. These are the values used for circuit sizing, not nameplate values.
+
+## Motor circuit sizing — the full NEC sequence
+
+Under NEC Article 430, a motor circuit has four components, each with its own sizing rule:
+
+1. **Branch circuit conductors (NEC 430.22):** rated at 125 % of the full-load table current. For a 10 hp / 460 V motor (table current 14 A): 14 × 1.25 = 17.5 A minimum conductor ampacity. 12 AWG copper at 75 °C covers 20 A — adequate.
+
+2. **Short-circuit and ground-fault protection (NEC 430.52):** sized from Table 430.52. For an inverse-time breaker, up to 250 % of table current for a standard motor. 14 × 2.5 = 35 A — use a 35 A breaker. If starting trips the breaker, up to 400 % is permitted under NEC 430.52(C)(1). Never confuse this device with running overload protection: it only opens on a short circuit or ground fault.
+
+3. **Overload protection (NEC 430.32):** set at 115–125 % of the nameplate full-load current (not the table value). For a nameplate of 13.5 A: set the relay at 13.5 × 1.25 = 16.9 A.
+
+4. **Disconnecting means (NEC 430.102):** rated at 115 % of the full-load table current minimum. For 14 A: 14 × 1.15 = 16.1 A — a 20 A disconnect is the standard choice.
+
+**Key point:** the breaker is intentionally oversized to allow the motor to start. The overload relay protects the motor against sustained overload. These two devices do different jobs and are sized by different rules.
+
+## Table current versus nameplate current
+
+The NEC motor sizing rules use two different currents for two different purposes:
+
+| Use | Current to use | Source |
+|---|---|---|
+| Conductor sizing | 125 % × table current | NEC Tables 430.248 / 430.250 |
+| Short-circuit protection | Up to 250 % × table current | NEC Table 430.52 |
+| Overload relay setting | 115–125 % × nameplate current | Motor nameplate |
+| Disconnect sizing | 115 % × table current | NEC 430.110 |
+
+The table current is a standard value that is a little higher than typical measured current. The nameplate current is the measurement for the actual motor installed. Using the wrong one is a common mistake, and it usually results in overload relays that nuisance-trip or fail to protect.
+
+## More Q&As
+
+### What is the full-load current of a 3 hp, 230 V single-phase motor?
+NEC Table 430.248 gives 17 A.
+
+### How many amps is a 25 hp, 460 V three-phase motor?
+NEC Table 430.250 gives 34 A. The conductor must be rated 34 × 1.25 = 42.5 A, so 8 AWG copper at 75 °C (50 A ampacity).
+
+### Why not calculate I = hp × 745.7 / (√3 × V) instead of using the table?
+You can estimate this way, but the NEC requires using the table current for circuit sizing. The table accounts for typical efficiency and power factor variations and provides a standard consistent basis. Your actual motor's nameplate current may be higher or lower, which is why the table is used for circuit sizing and the nameplate is used for the overload relay.
+
+### How does a variable-speed drive change the circuit sizing?
+A VFD limits the starting current to roughly 150 % of full-load current instead of the 500–800 % of a direct-on-line start. This often allows a smaller short-circuit protection device. The drive's input current may exceed the motor's nameplate current, so size the input circuit from the drive's input nameplate or the manufacturer's data, not from the motor's nameplate.
+
 <Related items={[
   { href: '/motor-circuit-calculator/', label: 'Motor circuit calculator' },
   { href: '/kw-to-hp-calculator/', label: 'kW to HP calculator' },

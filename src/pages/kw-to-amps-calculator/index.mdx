@@ -71,6 +71,63 @@ Yes. Frequency does not appear in the formula.
 ### Should I use kW or kVA?
 Use kW with a power factor, or kVA without one. The <a href="/kva-to-amps-calculator/">kVA to amps calculator</a> covers the second.
 
+## kW to amps reference table
+
+At power factor 1.0 for all entries. For inductive loads divide by the actual power factor — a 10 kW motor at 0.85 draws 10 / 0.85 = 11.76 kW equivalent, or use the formula directly.
+
+| Power (kW) | 120 V 1-ph | 230 V 1-ph | 240 V 1-ph | 400 V 3-ph | 480 V 3-ph |
+|---|---|---|---|---|---|
+| 1 | 8.33 A | 4.35 A | 4.17 A | 1.44 A | 1.20 A |
+| 2 | 16.7 A | 8.70 A | 8.33 A | 2.89 A | 2.41 A |
+| 5 | 41.7 A | 21.7 A | 20.8 A | 7.22 A | 6.01 A |
+| 10 | 83.3 A | 43.5 A | 41.7 A | 14.4 A | 12.0 A |
+| 15 | — | 65.2 A | 62.5 A | 21.7 A | 18.0 A |
+| 20 | — | 87.0 A | 83.3 A | 28.9 A | 24.1 A |
+| 30 | — | — | — | 43.3 A | 36.1 A |
+| 50 | — | — | — | 72.2 A | 60.1 A |
+| 75 | — | — | — | 108 A | 90.2 A |
+| 100 | — | — | — | 144 A | 120 A |
+
+## From kW to a complete circuit
+
+Converting kW to amps is the first step. Under the NEC, sizing a circuit from kW alone is not the end — several further checks apply. The sequence:
+
+1. **Calculate the running current**: use the formula above. For a motor, use input kW (shaft kW divided by efficiency), or better, the nameplate amps.
+2. **Apply the continuous-load multiplier**: a load that runs three hours or more is a continuous load under NEC 210.20(A). Multiply running current by 1.25 to get the minimum circuit rating.
+3. **Select the overcurrent device**: round up to the next standard breaker size in NEC 240.6(A) — 15, 20, 25, 30, 35, 40, 50, 60, 70, 80, 90, 100 A. The <a href="/breaker-size-calculator/">breaker size calculator</a> does this step.
+4. **Select the conductor**: ampacity from NEC Table 310.12 must equal or exceed the breaker size. 10 AWG copper at 75 °C covers 35 A, 8 AWG covers 50 A, 6 AWG covers 65 A.
+5. **Check voltage drop**: for runs over 50 ft, check that the drop stays under 3 % at the breaker rating. Use the <a href="/voltage-drop-calculator/">voltage drop calculator</a>.
+
+**Worked example — 7.5 kW pump, 480 V three-phase, PF 0.85:**
+
+Running current: 7,500 / (1.732 × 480 × 0.85) = 10.6 A. Continuous-load multiplier: 10.6 × 1.25 = 13.25 A. Breaker: 15 A (next standard above 13.25). Conductor: 14 AWG at 75 °C covers 15 A — acceptable. For a 100 ft run: loop = 200 ft, 14 AWG resistance = 3.07 Ω/1,000 ft × 0.2 = 0.614 Ω, voltage drop = 10.6 × 0.614 = 6.5 V = 1.4 % — within the 3 % limit.
+
+## How voltage affects cable size for the same kW
+
+Higher voltage means less current for the same power. That is the reason three-phase and 480 V distribution exists in industrial buildings: a 100 kW load draws 833 A at 120 V but only 139 A at 480 V three-phase, and the cable for 139 A costs far less.
+
+| Load (kW) | 120 V 1-ph | 240 V 1-ph | 208 V 3-ph | 480 V 3-ph |
+|---|---|---|---|---|
+| 10 | 83.3 A | 41.7 A | 32.8 A | 14.1 A |
+| 50 | 417 A | 208 A | 164 A | 70.6 A |
+| 100 | — | 417 A | 328 A | 141 A |
+
+PF = 1.0 for simplicity. The 480 V result is about 1/6 of the 120 V result — the economic argument for high-voltage distribution on larger sites.
+
+## More Q&As
+
+### How many amps is 5 kW at 240 V single-phase?
+5,000 / 240 = 20.8 A for a resistive load. At a power factor of 0.9: 5,000 / (240 × 0.9) = 23.1 A.
+
+### How many amps is a 15 kW three-phase load at 415 V?
+15,000 / (1.732 × 415 × 1.0) = 20.9 A at unity power factor. At PF 0.85: 20.9 / 0.85 = 24.6 A.
+
+### Why does the kW to amps formula use √3 for three-phase?
+Line-to-line voltage is √3 times phase voltage in a star system. Power equals three times the per-phase power: 3 × V_phase × I × PF = √3 × V_line × I × PF.
+
+### What is the current for 1 kW on a 12 V DC system?
+1,000 / 12 = 83.3 A. Low-voltage DC systems carry large currents for even modest loads, which is why cable sizing is critical for solar, RV and marine applications.
+
 <script type="application/ld+json">{`{"@context":"
 https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How many amps is 1 kW?","acceptedAnswer":{"@type":"Answer","text":"It depends on voltage and power factor. At 230 V single-phase with unity power factor, 1 kW is 4.35 A. At 400 V three-phase with a power factor of 0.8, it is 1.8 A."}},{"@type":"Question","name":"How do I convert kW to amps at 120 V?","acceptedAnswer":{"@type":"Answer","text":"Divide watts by volts times power factor. At 120 V single-phase with unity power factor, 1 kW is 8.33 A. The formula is: Amps = (kW × 1000) ÷ (Volts × PF)."}},{"@type":"Question","name":"Does frequency (50 Hz vs 60 Hz) affect the kW to amps result?","acceptedAnswer":{"@type":"Answer","text":"No. Frequency does not appear in the kW to amps formula. The result is the same at 50 Hz and 60 Hz for the same voltage and power factor."}},{"@type":"Question","name":"Should I use kW or kVA to calculate amps?","acceptedAnswer":{"@type":"Answer","text":"Use kW with a known power factor. If you only have kVA, use the kVA to amps calculator directly — kVA already accounts for apparent power and does not need a power factor correction."}}]}`}</script>
 

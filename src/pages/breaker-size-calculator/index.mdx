@@ -67,6 +67,68 @@ No. IEC systems size the protective device against design current and the conduc
 ### What counts as continuous?
 Loads expected to run three hours or more, such as EV charging, lighting in commercial buildings and some process equipment.
 
+## Sizing a breaker for common loads
+
+Minimum breaker size (NEC 125 % rule) for continuous loads:
+
+| Continuous load (A) | 125 % minimum (A) | Standard breaker size |
+|---|---|---|
+| 10 A | 12.5 A | 15 A |
+| 12 A | 15.0 A | 15 A |
+| 16 A | 20.0 A | 20 A |
+| 20 A | 25.0 A | 25 A |
+| 24 A | 30.0 A | 30 A |
+| 32 A | 40.0 A | 40 A |
+| 40 A | 50.0 A | 50 A |
+| 48 A | 60.0 A | 60 A |
+| 56 A | 70.0 A | 70 A |
+
+The 80 % rule and the 125 % rule are the same thing stated from different directions. A continuous load must stay at 80 % or below the breaker's rating, which is equivalent to sizing the breaker at 125 % of the continuous load.
+
+## EV charger breaker sizing
+
+Electric vehicle supply equipment (EVSE) is classified as a continuous load under NEC 625.42. For a Level 2 charger, the nameplate lists the rated output current. Apply 125 %:
+
+| Charger output (A) | Minimum breaker (A) | Conductor (AWG, 75 °C) |
+|---|---|---|
+| 16 A | 20 A | 12 AWG |
+| 24 A | 30 A | 10 AWG |
+| 32 A | 40 A | 8 AWG |
+| 40 A | 50 A | 8 AWG |
+| 48 A | 60 A | 6 AWG |
+
+A 48 A charger is the largest common Level 2 output. The 60 A breaker is correct — do not use 50 A because it cannot carry 48 A continuously at 100 % of its rating.
+
+## Feeder sizing with mixed continuous and noncontinuous loads
+
+For a feeder or subpanel serving several circuits, sum the loads separately:
+
+1. Total noncontinuous load at 100 %.
+2. Total continuous load at 125 %.
+3. Add both. That sum is the minimum rating for the feeder overcurrent device.
+
+**Example:** a panel serves 20 A of continuous lighting and 30 A of noncontinuous receptacle loads. Minimum feeder breaker: 20 × 1.25 + 30 = 55 A. Next standard size: 60 A. The feeder conductor must be rated at least 55 A — 6 AWG copper at 75 °C covers 65 A, which is adequate.
+
+## From breaker size to conductor
+
+The breaker is not the last step. The conductor must be rated to carry the minimum calculated current (before rounding to a standard breaker size) after any adjustment for ambient temperature or bundling. The key rule is NEC 110.14(C): the conductor must be rated at the terminal's temperature rating, typically 75 °C for circuit breakers above 100 A.
+
+For a 40 A breaker: use 8 AWG copper at 75 °C (50 A ampacity). The 50 A ampacity leaves room for bundling derating. Avoid matching conductor ampacity exactly to the minimum calculated current if there is any chance of bundling. Use the <a href="/wire-size-calculator/">wire size calculator</a> to include temperature and grouping adjustments.
+
+## More Q&As
+
+### Does the 125 % rule apply to both the breaker and the conductor?
+Yes. NEC 210.20(A) requires both the overcurrent device and the conductor to be rated for 125 % of the continuous load. A 20 A breaker with 14 AWG (15 A ampacity) fails the conductor side of this test for a continuous load above 12 A.
+
+### Can I use a 100-rated breaker to skip the 125 % multiplier?
+In theory, yes. Some listed assemblies — specific breaker and panelboard combinations — are rated at 100 % of continuous load. The listing must be verified on the equipment nameplate. Standard residential breakers are not 100 %-rated.
+
+### How do I size a breaker for a 240 V, 7,200 W continuous load?
+Current: 7,200 / 240 = 30 A. At 125 %: 37.5 A. Next standard size: 40 A. Conductor: 8 AWG at 75 °C covers 50 A — adequate for the 40 A breaker.
+
+### Does the breaker size change at 240 V versus 120 V?
+No — the breaker is sized from the current, not the voltage. The same 3,600 W load draws 30 A at 120 V but only 15 A at 240 V, so the 240 V circuit uses a smaller breaker for the same power.
+
 <Related items={[
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
   { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
