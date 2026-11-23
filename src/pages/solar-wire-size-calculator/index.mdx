@@ -57,6 +57,73 @@ It is used for large feeders. It needs about 1.64 times the area of copper for t
 ### Does the temperature setting matter?
 Modestly. A hot conductor has higher resistance, so use a realistic operating temperature, not 20 °C.
 
+## Solar DC cable sizing reference table
+
+Minimum copper cable area (mm²) for a 2% voltage drop at 25°C, for common PV system voltages:
+
+| Current | 5 m one-way | 10 m | 15 m | 20 m | 30 m |
+|---|---|---|---|---|---|
+| **12 V system** | | | | | |
+| 5 A | 1.0 mm² | 2.5 mm² | 4.0 mm² | 6.0 mm² | 10 mm² |
+| 10 A | 2.5 mm² | 4.0 mm² | 6.0 mm² | 10 mm² | 16 mm² |
+| 20 A | 4.0 mm² | 10 mm² | 16 mm² | 25 mm² | 35 mm² |
+| **48 V system** | | | | | |
+| 10 A | 1.0 mm² | 1.0 mm² | 1.5 mm² | 2.5 mm² | 4.0 mm² |
+| 25 A | 1.5 mm² | 2.5 mm² | 4.0 mm² | 6.0 mm² | 10 mm² |
+| 50 A | 4.0 mm² | 6.0 mm² | 10 mm² | 16 mm² | 25 mm² |
+| **230 V string** | | | | | |
+| 5 A | 1.0 mm² | 1.0 mm² | 1.0 mm² | 1.0 mm² | 1.5 mm² |
+| 10 A | 1.0 mm² | 1.0 mm² | 1.5 mm² | 2.5 mm² | 4.0 mm² |
+
+Minimum cable for PV array wiring: 4 mm² H1Z2Z2-K (EU) or 10 AWG USE-2/PV (US) is the common minimum for panel strings regardless of drop calculation.
+
+## NEC 690.8 sizing for PV circuits
+
+NEC Article 690 applies multipliers to the array's short-circuit current (Isc) before sizing conductors and overcurrent protection. For a string with one panel having Isc = 10 A:
+
+| Step | Factor | Current |
+|---|---|---|
+| Panel Isc (nameplate) | — | 10 A |
+| × 1.25 (NEC 690.8(A)(1)) | × 1.25 | 12.5 A |
+| × 1.25 (continuous load factor) | × 1.25 | 15.6 A |
+| Minimum conductor ampacity | — | ≥ 15.6 A |
+
+The first 1.25 multiplier accounts for the irradiance exceeding STC conditions (up to 1,250 W/m² in some climates). The second 1.25 is the continuous load rule. This double multiplication means PV string wiring is typically sized 2–3× the nameplate Isc.
+
+## Worked example: battery-to-inverter cable on a 48 V system
+
+A 48 V, 3,000 W inverter draws 3,000 / (48 × 0.9) = 69.4 A DC at full load. Cable run is 2 m one-way.
+
+**Voltage drop (2%):** Area = 2 × 2 × 69.4 × 0.017241 / (48 × 0.02) = 4.97 mm². Use **6 mm²** (next size up).
+
+**Actual drop:** V = 2 × 2 × 69.4 × 0.017241 / 6 = 0.80 V = 1.67 % of 48 V. ✓
+
+**Ampacity check:** 6 mm² flexible copper in free air: typically rated 54–63 A. At 69.4 A continuous this is marginal. Use **10 mm²** for the ampacity check.
+
+**Final selection: 10 mm²** (ampacity governs over voltage drop for this short, high-current run).
+
+## Cable types for solar DC applications
+
+| Cable type | Standard | Temperature | Features |
+|---|---|---|---|
+| H1Z2Z2-K | EN 50618 | −40 °C to +90 °C | UV resistant, flexible, EU standard for PV |
+| USE-2 / PV Wire | UL 4703 | 90 °C wet | US standard for exposed PV array wiring |
+| XLPE insulated | Various | 90 °C | General purpose; check UV rating for exposed runs |
+| Standard THHN | UL 83 | 90 °C dry | Not for direct sun exposure without conduit |
+
+Do not use standard THHN in exposed outdoor solar applications. Use PV-rated cable (H1Z2Z2-K or USE-2/PV) for panel-to-combiner and combiner-to-inverter runs outside conduit.
+
+## More Q&As
+
+### What drop percentage should I use for a PV string?
+1–2 % is common for array wiring (panel to combiner to inverter). The loss is real power — a 2 % drop in a 5 kW array wastes 100 W continuously during peak sun. The payback calculation usually favours keeping string wiring under 1 % for central inverter systems.
+
+### Can I use a single cable for multiple parallel strings?
+No — run separate cables for each string. Parallel strings with unequal cable lengths have unequal resistances, causing unequal current sharing. The string with longer (thinner) cable runs at higher current, overheating its cable. Use equal lengths per string and combine at the combiner box.
+
+### What is the minimum cable size for a solar installation in Europe?
+The minimum for PV string wiring under EN 50618 and most installer guides is 4 mm² H1Z2Z2-K, regardless of the calculated drop result. Many manufacturers void inverter warranties if smaller cable is used.
+
 <Related items={[
   { href: '/awg-to-mm2-converter/', label: 'AWG to mm² converter' },
   { href: '/off-grid-solar-calculator/', label: 'Off-grid solar system calculator' },

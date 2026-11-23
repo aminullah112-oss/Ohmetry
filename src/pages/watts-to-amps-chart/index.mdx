@@ -76,6 +76,66 @@ A 2,000 W inverter load at 12 V draws 2,000 / 12 = 167 A according to the chart.
 ### Does the chart work for a heat pump or a motor?
 Not directly. Those loads have a power factor below 1 and a high starting current. Use the nameplate current or the NEC table value for the motor.
 
+## Common load reference — watts and amps
+
+Typical running current for household appliances at standard AC voltages:
+
+| Appliance | Watts | 120 V | 240 V | Notes |
+|---|---|---|---|---|
+| LED bulb | 10 W | 0.08 A | 0.04 A | Negligible current |
+| LED lighting circuit | 400 W | 3.3 A | 1.7 A | Typical room circuit |
+| Laptop charger | 65 W | 0.54 A | 0.27 A | — |
+| Desktop computer | 400 W | 3.3 A | 1.7 A | Under load |
+| Microwave (800 W) | 800 W | 6.7 A | 3.3 A | Running current |
+| Toaster | 1,200 W | 10.0 A | 5.0 A | Resistive load, PF ≈ 1 |
+| Hair dryer | 1,875 W | 15.6 A | 7.8 A | Near 15 A breaker limit |
+| Space heater | 1,500 W | 12.5 A | 6.3 A | Resistive, PF = 1.0 |
+| Electric oven element | 2,000 W | — | 8.3 A | 240 V circuit only |
+| Water heater element | 4,500 W | — | 18.75 A | 240 V, 30 A circuit |
+| Electric dryer | 5,000 W | — | 20.8 A | 240 V, 30 A circuit |
+| Electric range | 8,000 W | — | 33.3 A | 240 V, 50 A circuit |
+| Level 2 EV charger | 7,600 W | — | 31.7 A | 240 V, 40 A circuit |
+
+## Low-voltage DC loads — 12 V and 48 V systems
+
+DC loads convert differently. No power factor applies (assume 1.0 unless stated), but efficiency losses in DC-DC converters or inverters add to the draw.
+
+| Load | Watts | 12 V current | 48 V current |
+|---|---|---|---|
+| LED cabin light | 5 W | 0.42 A | 0.10 A |
+| USB device charging | 20 W | 1.7 A | 0.42 A |
+| Car refrigerator | 60 W | 5.0 A | 1.25 A |
+| Ham radio transceiver | 150 W | 12.5 A | 3.1 A |
+| Inverter (600 W output) | 667 W | 55.6 A | 13.9 A |
+| Inverter (3,000 W output) | 3,333 W | 278 A (too large for 12 V) | 69.4 A |
+
+A 3,000 W load on 12 V draws 278 A, which requires 300 A+ cable and connectors. That is why off-grid systems use 48 V or higher: the 48 V equivalent is 69 A — a manageable current with standard wiring.
+
+## Circuit breaker sizing from wattage
+
+For a **continuous load** (runs 3 hours or more), NEC 210.20(A) requires the breaker to be rated at least 125% of the load current. The chart values are running currents, not breaker sizes:
+
+| Load | 240 V running amps | 125% | Standard breaker |
+|---|---|---|---|
+| Water heater 4,500 W | 18.75 A | 23.4 A | 30 A |
+| Electric dryer 5,000 W | 20.8 A | 26.1 A | 30 A |
+| Level 2 EV 7,600 W | 31.7 A | 39.6 A | 40 A |
+| Electric range 8,000 W | 33.3 A | 41.7 A | 50 A |
+| Hot tub 6,000 W | 25.0 A | 31.3 A | 40 A |
+
+Standard breaker sizes (NEC 240.6(A)): 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100 A.
+
+## More Q&As
+
+### Why does the 120 V current double compared to 240 V?
+Power = Voltage × Current, so for the same watts, halving the voltage doubles the current. A 1,500 W heater draws 12.5 A at 120 V but only 6.25 A at 240 V. Manufacturers design high-draw appliances for 240 V to keep the current and conductor size manageable.
+
+### How many watts can a 15 A circuit supply continuously?
+At 120 V, a 15 A circuit is limited to 80% = 12 A continuous under NEC 210.20(A), giving 12 × 120 = 1,440 W. At 240 V: 12 × 240 = 2,880 W. The 80% rule (or 125% applied to load current) is the same either way.
+
+### Can I run a 1,500 W heater and a coffee maker on the same 15 A circuit?
+Only if neither runs continuously. A 1,500 W heater is 12.5 A at 120 V; a 1,200 W coffee maker is 10 A. Together: 22.5 A, which immediately trips a 15 A breaker. Even at reduced combined loads, a 15 A breaker is not meant to supply both continuously. Use separate circuits.
+
 <Related items={[
   { href: '/watts-to-amps-calculator/', label: 'Watts to amps calculator' },
   { href: '/kw-to-amps-chart/', label: 'kW to amps chart' },

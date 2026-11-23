@@ -63,6 +63,74 @@ Yes, in series, and their burdens add. Check the total, with the leads, against 
 ### What happens if the burden is too high?
 The CT saturates earlier, its output distorts and the relay may under-read the fault current.
 
+## CT burden reference table
+
+Lead burden (VA) for common lead lengths and cross-sections, 5 A secondary (loop resistance = 2 × ρ × L / A, burden = 5² × R):
+
+| Lead length | 1.5 mm² Cu | 2.5 mm² Cu | 4.0 mm² Cu | 6.0 mm² Cu |
+|---|---|---|---|---|
+| 10 m loop | 5.75 VA | 3.45 VA | 2.16 VA | 1.44 VA |
+| 20 m loop | 11.49 VA | 6.90 VA | 4.31 VA | 2.87 VA |
+| 30 m loop | 17.24 VA | 10.34 VA | 6.47 VA | 4.31 VA |
+| 50 m loop | 28.74 VA | 17.24 VA | 10.78 VA | 7.18 VA |
+| 100 m loop | 57.47 VA | 34.48 VA | 21.55 VA | 14.37 VA |
+
+For a 1 A secondary, divide all VA values by 25. The 1 A secondary dramatically reduces lead burden: 20 m loop on 2.5 mm² goes from 6.90 VA to 0.28 VA.
+
+## Worked example: selecting CT class for a distance relay
+
+A 11 kV feeder has a 300/5 A CT installed in a switchroom. The distance relay is 50 m away, connected by 2.5 mm² copper pilot cable. Relay burden: 0.5 VA. CT nameplate: 15 VA 5P20, Rct = 0.5 Ω.
+
+**Step 1 — lead burden:**
+Loop resistance = 2 × 50 × 0.017241 / 2.5 = 0.690 Ω.
+Lead burden = 25 × 0.690 = 17.25 VA.
+
+**Step 2 — total burden:**
+S = 17.25 + 0.5 = 17.75 VA. This **exceeds** the rated 15 VA.
+
+**Step 3 — corrected ALF:**
+Sct = 25 × 0.5 = 12.5 VA.
+ALF′ = 20 × (15 + 12.5) / (17.75 + 12.5) = 20 × 27.5 / 30.25 = **18.2**.
+
+The CT still functions at ALF 18.2, but to meet the full ALF 20 at 50 m, options are: (a) upgrade to 4.0 mm² cable (burden drops to 10.78 + 0.5 = 11.28 VA → ALF′ = 22.6), or (b) specify a 30 VA rated CT.
+
+## 1 A vs 5 A secondary: when to choose each
+
+| Factor | 5 A secondary | 1 A secondary |
+|---|---|---|
+| Short leads (< 10 m) | Preferred | No advantage |
+| Long leads (> 30 m) | High burden risk | 25× lower lead burden |
+| Local metering | Standard | Less common |
+| Remote metering (100+ m) | Pilot upgrade needed | Standard choice |
+| Pilot cable cost saving | — | Smaller cable acceptable |
+| Instrument output | Standard relays | Relays must specify 1 A |
+
+The rule of thumb: use 1 A secondaries when the CT-to-relay distance exceeds 30 m in a 5 A scheme, or when the pilot cable cross-section would need to exceed 4 mm² to stay within the CT's burden.
+
+## IEC CT class designations
+
+| Designation | Class | Composite error | Typical use |
+|---|---|---|---|
+| 5P10 | Protection | ≤ 5% at 10× rated | IDMT overcurrent relays |
+| 5P20 | Protection | ≤ 5% at 20× rated | Feeder and transformer protection |
+| 10P20 | Protection | ≤ 10% at 20× rated | Earth fault protection only |
+| PX / TPX | Special | Defined by Vk | Differential, distance protection |
+| 0.5 | Metering | ≤ 0.5% | Revenue metering |
+| 0.2 | Metering | ≤ 0.2% | High-accuracy metering |
+
+For distance and differential protection, the relay manufacturer specifies a minimum knee-point voltage (Vk) or saturation voltage. Standard 5P class CTs may not meet this requirement: check the relay's CT requirement document before specifying the CT.
+
+## More Q&As
+
+### How do I measure a CT's secondary winding resistance in the field?
+Inject a small DC current (≤ 100 mA) through the secondary terminals with the primary open-circuited. Measure the terminal voltage. Rct = V/I. Never inject current with the primary closed — the primary will see a very high voltage.
+
+### What is remanent flux, and why does it matter for CT saturation?
+Remanent flux is residual magnetisation left in the CT core after a fault is cleared by the breaker. If a subsequent fault occurs before the core demagnetises, the CT reaches saturation much earlier — sometimes on the first cycle. High-remanence cores (class P) can have 80% residual flux. TPX and TPY classes define limits on remanent flux for high-speed protection schemes.
+
+### Can a CT be used at a lower secondary current than rated?
+Yes. A CT rated 300/5 A used on a 100 A primary circuit operates the secondary at 1.67 A rather than 5 A. The burden and accuracy are still governed by the nameplate, but the actual secondary current and burden are proportionally lower. The CT operates well within its rating.
+
 <Related items={[
   { href: '/idmt-relay-calculator/', label: 'IDMT relay time calculator' },
   { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },

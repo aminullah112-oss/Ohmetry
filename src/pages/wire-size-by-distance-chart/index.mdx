@@ -57,6 +57,72 @@ Above 30 A the wire is chosen by its current rating first, and that depends on t
 ### Is 3 % the right limit?
 It is the NEC recommendation for a branch circuit, not a requirement. A looser limit may be acceptable for a load that tolerates it, and a tighter one is better for motors and sensitive equipment.
 
+## Wire size by distance — extended reference
+
+AWG needed for 3% drop at 240 V, copper at 75°C, common circuit sizes:
+
+| Distance (one-way) | 15 A circuit | 20 A circuit | 30 A circuit | 50 A circuit |
+|---|---|---|---|---|
+| 25 ft | 14 AWG | 12 AWG | 10 AWG | 8 AWG |
+| 50 ft | 14 AWG | 12 AWG | 10 AWG | 6 AWG |
+| 75 ft | 14 AWG | 12 AWG | 10 AWG | 6 AWG |
+| 100 ft | 12 AWG | 10 AWG | 8 AWG | 4 AWG |
+| 150 ft | 10 AWG | 8 AWG | 6 AWG | 3 AWG |
+| 200 ft | 8 AWG | 8 AWG | 6 AWG | 2 AWG |
+| 250 ft | 8 AWG | 6 AWG | 4 AWG | 1 AWG |
+| 300 ft | 6 AWG | 6 AWG | 4 AWG | 1/0 AWG |
+
+For 120 V circuits, the same run length needs wire two AWG sizes larger (one size larger for 30 A). Use this table for planning; verify with the calculator for the exact circuit.
+
+## Why 240 V circuits use smaller wire than 120 V
+
+At 240 V, the same wattage requires half the current. Lower current means lower voltage drop for the same wire, so a smaller wire satisfies the 3% limit. This is the main cost benefit of 240 V branch circuits for high-draw loads such as EV chargers and dryers:
+
+| Load (watts) | 120 V current | 240 V current | 240 V wire at 100 ft |
+|---|---|---|---|
+| 1,800 W | 15 A | 7.5 A | 12 AWG |
+| 3,600 W | 30 A | 15 A | 10 AWG |
+| 7,200 W (EV charger) | 60 A (not on 120 V) | 30 A | 8 AWG |
+| 9,600 W (range) | — | 40 A | 6 AWG |
+
+## Derating factors that may require a larger wire
+
+The chart assumes free-air or standard conduit at 30°C with no more than three current-carrying conductors. These conditions require a larger wire:
+
+| Condition | NEC correction | Practical effect |
+|---|---|---|
+| Ambient > 30°C | Table 310.15(B)(1)(a) | Up to 2 AWG sizes larger in attics |
+| > 3 conductors in conduit | Table 310.15(C)(1) | 4 conductors: 80% of ampacity |
+| Continuous load (3 h+) | 210.20(A) × 1.25 | Effectively raises required ampacity |
+| 60°C terminals (older gear) | 110.14(C) | Use 60°C column even with 90°C cable |
+
+A 20 A circuit in a hot attic conduit with 6 conductors may need 8 AWG instead of 12 AWG for ampacity, regardless of the voltage drop calculation. Always check ampacity and derating separately from drop.
+
+## NEC minimum wire sizes per breaker
+
+Regardless of run length or voltage drop, NEC 240.4(D) sets absolute minimums for copper:
+
+| Breaker size | Minimum copper wire |
+|---|---|
+| 15 A | 14 AWG |
+| 20 A | 12 AWG |
+| 30 A | 10 AWG |
+| 40 A | 8 AWG |
+| 60 A | 6 AWG |
+
+The chart already enforces these floors. A 25 ft, 20 A circuit at 240 V passes the drop test with 14 AWG, but the chart returns 12 AWG because NEC 240.4(D) prohibits 14 AWG on a 20 A breaker.
+
+## More Q&As
+
+### What size wire for a 20 A, 50 ft run at 240 V?
+12 AWG. The drop on 12 AWG: 0.386 V/A/100 ft × 20 A × 0.5 = 3.86 V = 1.6% of 240 V. Well within 3%. The NEC floor for a 20 A circuit is also 12 AWG, so no larger wire is needed.
+
+### Does the 3% rule apply to low-voltage DC circuits?
+Not under the NEC, which does not mandate a specific drop limit for most circuits. For solar PV, NEC 690.8 guidance suggests 1-2% drop for array wiring. For 12 V and 48 V battery systems, designers typically use 1-3% because low-voltage drop wastes stored energy directly as heat in the wire.
+
+### My wire must pass through an attic where summer temperatures hit 55°C. What derating applies?
+From NEC Table 310.15(B)(1)(a), at 55°C the correction factor for 90°C-rated cable (THHN) is 0.76. A 20 A circuit needs 20 A × 1.25 (continuous) × (1 / 0.76) = 32.9 A of tabulated ampacity. 10 AWG THHN at 90°C = 40 A. The drop check with 10 AWG at that run length is then secondary.
+
 <script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What size wire for 100 feet at 20 amps?","acceptedAnswer":{"@type":"Answer","text":"10 AWG copper on a 240 V circuit, and 8 AWG on 120 V, for a 3% voltage drop limit."}},{"@type":"Question","name":"What size wire for 200 feet at 30 amps on 240 V?","acceptedAnswer":{"@type":"Answer","text":"6 AWG copper for 3% drop on 240 V. On 120 V the same run needs 3 AWG."}},{"@type":"Question","name":"What size wire for 50 feet at 20 amps on 120 V?","acceptedAnswer":{"@type":"Answer","text":"12 AWG copper satisfies both the 3% drop limit and the NEC minimum for a 20 A circuit at 50 ft on 120 V."}},{"@type":"Question","name":"Why does the wire size chart stop at 30 amps?","acceptedAnswer":{"@type":"Answer","text":"Above 30 A the wire is chosen by its current rating first, and that depends on temperature, insulation and installation, so a distance chart alone could give a wire that is too small. The wire size calculator handles that case."}},{"@type":"Question","name":"Is 3% voltage drop the right limit?","acceptedAnswer":{"@type":"Answer","text":"It is the NEC recommendation for a branch circuit, not a mandatory requirement. A looser limit may be acceptable for loads that tolerate it; a tighter limit is better for motors and sensitive equipment."}}]}`}</script>
 
 <Related items={[

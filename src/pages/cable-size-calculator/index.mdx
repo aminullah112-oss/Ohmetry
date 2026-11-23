@@ -64,6 +64,93 @@ The factors reduce the cable's capacity, so the tabulated rating at reference co
 ### Does this work for NEC installations?
 No. The NEC uses ampacity tables with different correction factors. Use the <a href="/breaker-size-calculator/">breaker size calculator</a> and the NEC tables.
 
+## IEC 60364 derating factor reference
+
+Common correction factors from IEC 60364-5-52. These are indicative values; always consult the full standard tables for the specific installation method and conditions.
+
+**Temperature correction factors (k₁) for XLPE cable (reference 30°C):**
+
+| Ambient temperature | PVC insulation | XLPE insulation |
+|---|---|---|
+| 25°C | 1.04 | 1.02 |
+| 30°C | 1.00 | 1.00 |
+| 35°C | 0.94 | 0.96 |
+| 40°C | 0.87 | 0.91 |
+| 45°C | 0.79 | 0.87 |
+| 50°C | 0.71 | 0.82 |
+| 55°C | 0.61 | 0.76 |
+
+**Grouping factors (k₂) for cables on a cable tray:**
+
+| Number of circuits | Touching | Spaced (one diameter) |
+|---|---|---|
+| 1 | 1.00 | 1.00 |
+| 2 | 0.80 | 0.85 |
+| 3 | 0.70 | 0.79 |
+| 4 | 0.65 | 0.75 |
+| 5 | 0.60 | 0.73 |
+| 6 | 0.57 | 0.72 |
+| 9 | 0.50 | 0.68 |
+| 12 | 0.45 | 0.66 |
+
+Grouping factors apply only to circuits that are loaded simultaneously. A circuit that runs only occasionally does not contribute to group heating and may be excluded.
+
+## Worked example: 55 A design current with two derating factors
+
+A 400 V three-phase circuit has a design current of 55 A and is protected by a 63 A MCCB. The cable is PVC-insulated copper, runs at 40°C ambient, and is grouped in a tray with two other loaded circuits (touching).
+
+**Step 1 — combined derating factor:**
+k₁ (temperature, PVC, 40°C) = 0.87.
+k₂ (grouping, 3 circuits touching) = 0.70.
+k = 0.87 × 0.70 = 0.609.
+
+**Step 2 — required tabulated rating:**
+It ≥ In / k = 63 / 0.609 = 103.4 A.
+
+**Step 3 — select cable from IEC 60364-5-52 Table B.52.4 (method E, three-phase):**
+35 mm² PVC copper: 110 A tabulated. ≥ 103.4 A. ✓
+25 mm² PVC copper: 86 A. Not sufficient.
+Select **35 mm²**.
+
+**Step 4 — voltage drop check:**
+Run length 80 m, 400 V three-phase, 3% limit. R (35 mm² at 70°C) = 0.627 Ω/km.
+Vdrop = √3 × 55 × 0.08 × 0.627 = 4.78 V = 1.2% of 400 V. ✓
+
+**Step 5 — fault withstand (adiabatic):**
+Assume 10 kA fault, 0.1 s clearing. Required S = 10,000 × √0.1 / 143 = 22.1 mm². 35 mm² ✓.
+
+**Final selection: 35 mm² copper PVC**. All three criteria are met.
+
+## Standard IEC cable sizes (mm²)
+
+Standard cross-sections per IEC 60228 (Class 2 stranded copper):
+1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50, 70, 95, 120, 150, 185, 240, 300, 400, 500, 630 mm².
+
+Always step up to the next standard size when the calculated area falls between standard sizes. For example, a calculated requirement of 42 mm² selects 50 mm² (not 35 mm²).
+
+## Protective device coordination
+
+The IEC 60364 method requires three conditions are all satisfied:
+
+| Condition | Rule | Meaning |
+|---|---|---|
+| Ib ≤ In | Overload | Device rating ≥ design current |
+| In ≤ Iz | Overload | Cable capacity ≥ device rating |
+| I₂ ≤ 1.45 × Iz | Overload protection | Device trips before cable overheats |
+
+The third condition (I₂ ≤ 1.45 Iz) is automatically satisfied by circuit breakers to IEC 60898, since their conventional tripping current I₂ = 1.45 In. For gG fuses, I₂ = 1.6 In, which may require upsizing the cable: a 100 A gG fuse needs Iz ≥ 160 / 1.45 = 110.3 A, not just 100 A.
+
+## More Q&As
+
+### How do I find IEC installation method (A, B, C, E, F) for my cable run?
+IEC 60364-5-52 Annex A defines installation methods by reference number (A1, A2, B1, B2, C, D1, D2, E, F, G). The method depends on how the cable is physically installed: in a thermally insulating wall (A), in conduit on a wall (B), clipped direct (C), in free air on a cable tray (E), or other. Each method has its own tabulated current column.
+
+### Can I apply more than two derating factors?
+Yes — multiply all applicable factors together. If the temperature factor is 0.87, the grouping factor is 0.70, and there is a soil thermal resistivity factor of 0.90 for a buried section, the combined factor is 0.87 × 0.70 × 0.90 = 0.548. Divide the device rating by this combined factor to get the required tabulated current.
+
+### What is the difference between Iz and It in IEC 60364?
+It is the tabulated current rating of the cable at standard reference conditions (usually 30°C ambient, no grouping, specific installation method). Iz is the actual current-carrying capacity in the installed conditions after all derating: Iz = It × k₁ × k₂ × … The cable design rule is that Iz must be at least equal to the protective device rating In.
+
 <script type="application/ld+json">{`{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a typical cable grouping derating factor?","acceptedAnswer":{"@type":"Answer","text":"It depends on the number of circuits grouped together and their arrangement. IEC 60364-5-52 gives grouping factors that fall as more loaded circuits are bundled. For example, two circuits together give about 0.8, and four circuits give about 0.65 — but read the actual table from the standard for your installation method."}},{"@type":"Question","name":"Why do I divide by the derating factors rather than multiply?","acceptedAnswer":{"@type":"Answer","text":"Derating factors reduce the cable's allowable current. To find the minimum tabulated rating needed, you divide the design current by the combined derating factor. This gives a larger value than the design current, which is the minimum cable rating before derating."}},{"@type":"Question","name":"Does the IEC cable size calculator work for NEC installations?","acceptedAnswer":{"@type":"Answer","text":"No. This calculator uses IEC 60364 methods. NEC installations use different ampacity tables and correction factors from the NEC. Use the wire size calculator or breaker size calculator for NEC work."}}]}`}</script>
 
 <Related items={[

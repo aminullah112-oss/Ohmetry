@@ -54,6 +54,65 @@ About 65 % higher at the same size, because aluminum resistivity is higher. A la
 ### Does the drop change with temperature?
 Yes. A hot conductor has higher resistance. The chart uses 75 °C. At 20 °C the drop is about 18 % lower.
 
+## Voltage drop limits by application
+
+| Application | Recommended limit | Standard |
+|---|---|---|
+| NEC branch circuit | 3 % | NEC informational note to 210.19(A) |
+| NEC feeder + branch combined | 5 % | NEC informational note to 215.2(A) |
+| NEC sensitive electronic equipment | 2.5 % | NEC 647.4 |
+| IEC 60364 (residential, lighting) | 3 % | IEC 60364-5-52 |
+| IEC 60364 (industrial, motor) | 5 % | IEC 60364-5-52 |
+| Solar PV DC wiring | 1–2 % | NEC 690.8 guidance |
+| Battery-to-inverter | 0.5–1 % | Manufacturer requirement |
+
+A motor that starts under voltage draw 50–60 % more starting current, so voltage drop matters more for motor circuits than for heaters. At 95 % of rated voltage a motor still starts; at 90 % it may not.
+
+## Worked example: subpanel feeder
+
+A workshop subpanel sits 200 ft from the main panel and is fed at 240 V with a 60 A continuous load.
+
+**Allowed drop:** 3 % of 240 V = 7.2 V. Combined feeder + branch limit is 5 %, so the feeder gets 2–3 %.
+
+**Formula:** Area (kcmil) = 2 × L × I × K / (V × %drop / 100), where K = 12.9 for copper at 75 °C.
+Area = 2 × 200 × 60 × 12.9 / (240 × 3) = 86 kcmil.
+
+**Closest AWG:** 2 AWG copper (66.4 kcmil) drops 4.0 %. 1 AWG (83.7 kcmil) drops 3.2 %. 1/0 AWG (105.6 kcmil) drops 2.5 %. For the 3 % limit, **1 AWG** is the minimum.
+
+**Check against ampacity:** 1 AWG THHN at 75 °C = 130 A, well above 60 A continuous × 1.25 = 75 A. The drop governs, not the ampacity.
+
+## Copper vs aluminum voltage drop
+
+Aluminum has 61 % of copper's conductivity, so the same wire size drops 1.64× more. To match copper's drop, choose aluminum two AWG sizes larger:
+
+| Copper | Aluminum equivalent | Voltage drop match |
+|---|---|---|
+| 12 AWG | 10 AWG Al | ±2 % |
+| 10 AWG | 8 AWG Al | ±2 % |
+| 8 AWG | 6 AWG Al | ±3 % |
+| 6 AWG | 4 AWG Al | ±2 % |
+| 4 AWG | 2 AWG Al | ±2 % |
+| 2 AWG | 1/0 AWG Al | ±2 % |
+
+Aluminum feeders of 100 A and above are common and cost-effective where the extra two AWG sizes fit the conduit. Aluminum is not permitted for 15 and 20 A branch circuits under NEC 310.106(B).
+
+## EV charger and motor circuit drop considerations
+
+**EV charger (Level 2, 7.6 kW, 240 V, 32 A):** At 100 ft on 10 AWG copper, drop = 0.243 × 32 × 1 = 7.8 V = 3.2 % of 240 V. Use 8 AWG for 100 ft or longer runs (4.9 V = 2.0 %).
+
+**Heat pump motor (5 hp, 240 V, 28 A, NEC table current):** At 150 ft on 10 AWG, drop = 0.243 × 28 × 1.5 = 10.2 V = 4.3 % — over the 3 % limit. Use 8 AWG: 0.096 × 28 × 1.5 = 4.0 V = 1.7 %.
+
+## More Q&As
+
+### Does the 3 % limit apply to 240 V and 120 V circuits the same way?
+The percentage is the same, but the allowable volts differ: 3 % of 240 V = 7.2 V, while 3 % of 120 V = 3.6 V. A 120 V circuit has half the voltage to spend, so for the same current and wire size it reaches the limit at half the distance.
+
+### How do I apply the chart to a three-phase circuit?
+Multiply the two-wire drop by 0.866 for a balanced three-phase circuit. 10 AWG at 20 A per phase over 100 ft drops 0.243 × 20 × 1 × 0.866 = 4.2 V on a 240 V three-phase system (1.75 %).
+
+### Does voltage drop affect energy bills?
+Yes, but the effect is small on a typical branch circuit. A 3 % drop means 3 % of the circuit's power is dissipated in the wire as heat rather than delivered to the load. On a 2,000 W circuit running 8 h/day, that is 60 W × 8 h = 480 Wh/day wasted. At $0.15/kWh that is $26/year — usually less than the cost of the larger wire.
+
 <Related items={[
   { href: '/voltage-drop-calculator/', label: 'Voltage drop calculator' },
   { href: '/nec-voltage-drop-guide/', label: 'NEC voltage drop guide' },

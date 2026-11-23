@@ -57,6 +57,63 @@ At 480 V three-phase and PF 0.9, 200 A. At 400 V it is 241 A, and at 208 V it is
 ### Which power factor should I use?
 Use the figure from the equipment data or measurements. Resistive heaters are 1.0, lightly loaded motors can be 0.6 or below, and 0.8 to 0.9 is a usual planning value.
 
+## Common load reference — kW and amps
+
+Typical running current for common loads at standard voltages:
+
+| Load | kW | 120 V single-phase | 240 V single-phase | 480 V three-phase |
+|---|---|---|---|---|
+| LED lighting circuit | 1.0 kW | 8.3 A | 4.2 A | — |
+| Microwave / small heater | 1.2 kW | 10.0 A | 5.0 A | — |
+| Level 1 EV charger | 1.44 kW | 12.0 A | 6.0 A | — |
+| Level 2 EV charger | 7.6 kW | — | 31.7 A | — |
+| Water heater element | 4.5 kW | — | 18.75 A | — |
+| 3-ton heat pump (running) | 3.5 kW | — | 14.6 A | — |
+| 5 hp motor | 3.73 kW | — | — | 4.5 A |
+| 10 hp motor | 7.46 kW | — | — | 9.0 A |
+| 25 hp motor | 18.65 kW | — | — | 22.5 A |
+| 50 hp motor | 37.3 kW | — | — | 45.1 A |
+
+Motor currents above are for typical 460 V motors at PF 0.90, efficiency 92%. For NEC sizing use Table 430.250 values, not these calculated figures.
+
+## Three-phase vs single-phase: why it matters for sizing
+
+The same 10 kW load draws very different currents depending on supply:
+
+| Supply | Voltage | Current | Cable cross-section |
+|---|---|---|---|
+| Single-phase | 120 V | 83.3 A | Very large |
+| Single-phase | 240 V | 41.7 A | Large |
+| Three-phase | 208 V | 27.6 A | Medium |
+| Three-phase | 480 V | 13.4 A | Small |
+| Three-phase | 600 V | 10.7 A | Smaller |
+
+Three-phase at high voltage reduces current by 5–8× compared to single-phase 120 V, which is why large industrial loads run at 480 V three-phase: smaller conductors, smaller conduit, lower voltage drop, and reduced I²R losses.
+
+## Continuous load rule and breaker sizing
+
+The amps from this chart are running currents, not breaker sizes. For a **continuous load** (operates for 3 hours or more), NEC 210.20(A) requires the breaker to be rated at least 125% of the load current:
+
+| Load | Running amps | Minimum breaker (125%) |
+|---|---|---|
+| 10 kW at 240 V single-phase | 41.7 A | 52.1 A → 60 A breaker |
+| 20 kW at 480 V three-phase | 26.8 A | 33.5 A → 40 A breaker |
+| 50 kW at 480 V three-phase | 67.1 A | 83.9 A → 90 A breaker |
+| 100 kW at 480 V three-phase | 134 A | 167.5 A → 175 A breaker |
+
+Standard breaker sizes (NEC 240.6(A)): 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175, 200 A.
+
+## More Q&As
+
+### How do I convert kVA to amps using this chart?
+If the load's power factor is known: kW = kVA × PF, then use the chart. Without knowing PF, divide by the system voltage and √3 for three-phase directly: I = kVA × 1000 / (√3 × V) for three-phase, I = kVA × 1000 / V for single-phase.
+
+### Why does current drop with higher voltage for the same kW?
+Power = Voltage × Current, so for fixed power, current and voltage are inversely proportional. This is why transmission lines run at 115–765 kV — the same megawatts require milliamps, not kiloamps, drastically reducing resistive losses and conductor size.
+
+### How many amps is a 400 kW generator at 400 V three-phase?
+I = 400,000 / (1.732 × 400 × 0.9) = 641 A. For a generator operating at 0.8 PF (generator nameplate convention): I = 400,000 / (1.732 × 400 × 0.8) = 722 A. Always check the generator's nameplate PF rating.
+
 <Related items={[
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
   { href: '/amps-to-kw-chart/', label: 'Amps to kW chart' },

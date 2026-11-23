@@ -68,6 +68,83 @@ The value from the utility, in MVA or as a current in kA at the connection point
 ### What is the peak factor?
 The ratio between the first-cycle peak and the steady RMS fault current. It depends on how resistive the path is, and it is smaller at the end of a cable than at the transformer.
 
+## Fault current reduction table — cable length vs. fault level
+
+Remaining fault current at the cable end for a 1,000 kVA, 11 kV/400 V transformer (Zcc 6%, source fault level 500 MVA at 11 kV):
+
+| Cable cross-section | Cable length | Fault current at end | Reduction from source |
+|---|---|---|---|
+| 25 mm² XLPE copper | 10 m | 20.3 kA | 10 % |
+| 25 mm² XLPE copper | 30 m | 14.1 kA | 37 % |
+| 25 mm² XLPE copper | 50 m | 10.8 kA | 52 % |
+| 50 mm² XLPE copper | 50 m | 15.9 kA | 29 % |
+| 95 mm² XLPE copper | 100 m | 17.4 kA | 22 % |
+| 185 mm² XLPE copper | 100 m | 19.5 kA | 13 % |
+
+Source fault level at 400 V bus ≈ 22.6 kA (1,000 kVA at 6% Zcc). Values indicative only; exact results depend on actual cable impedance data.
+
+## Worked example: board fault current 100 m from a 2,500 kVA transformer
+
+A main LV switchboard is fed from a 2,500 kVA 11 kV/400 V transformer (Zcc = 6%), via 100 m of 240 mm² XLPE copper cable (R = 0.0754 Ω/km, X = 0.082 Ω/km per IEC 60228).
+
+**Step 1 — transformer impedance:**
+Scc at transformer LV terminals = Sn / Zcc = 2,500 / 0.06 = 41,667 kVA.
+Transformer fault current = 41,667 × 1,000 / (√3 × 400) = 60.1 kA.
+Transformer impedance Ztr = 400² / (41,667 × 1,000) = 0.00384 Ω.
+
+**Step 2 — cable impedance:**
+R = 0.0754 × 0.1 = 0.00754 Ω.
+X = 0.082 × 0.1 = 0.0082 Ω.
+Z_cable = √(0.00754² + 0.0082²) = 0.01115 Ω.
+
+**Step 3 — total impedance and fault current:**
+Z_total = Ztr + Z_cable = 0.00384 + 0.01115 = 0.01499 Ω (approximate scalar addition).
+I_fault = 400 / (√3 × 0.01499) = **15.4 kA** symmetrical RMS.
+
+**Step 4 — peak factor (κ, IEC 60909):**
+R/X = (0.00384 + 0.00754) / (0.00384 + 0.0082) ≈ 0.94. κ ≈ 1.5 from IEC 60909 figure.
+Peak current = √2 × 1.5 × 15.4 = **32.7 kA**.
+
+The switchboard bus bars and circuit breakers must be rated for ≥ 15.4 kA RMS and ≥ 32.7 kA peak making capacity.
+
+## Cable thermal withstand check
+
+After calculating the fault current, check that the cable can carry it for the protection operating time without overheating. The IEC adiabatic equation:
+
+S ≥ I × √t / k
+
+Where S is the cable cross-section in mm², I is the fault current in A, t is the clearing time in seconds, and k is a material constant (k = 143 for copper XLPE, 115 for copper PVC, 94 for aluminium XLPE).
+
+**Example:** 25 mm² copper XLPE, 10 kA fault, 0.2 s clearing time.
+Required S = 10,000 × √0.2 / 143 = 10,000 × 0.447 / 143 = 31.3 mm².
+The 25 mm² cable **fails** the adiabatic check. Use 35 mm² (minimum 31.3 mm²).
+
+## Cable impedance data for common sizes (copper XLPE, 400 V)
+
+| Cross-section | R at 90°C (Ω/km) | X (Ω/km) | Z (Ω/km) |
+|---|---|---|---|
+| 16 mm² | 1.380 | 0.097 | 1.383 |
+| 25 mm² | 0.868 | 0.090 | 0.873 |
+| 35 mm² | 0.627 | 0.085 | 0.633 |
+| 50 mm² | 0.443 | 0.082 | 0.451 |
+| 70 mm² | 0.313 | 0.080 | 0.323 |
+| 95 mm² | 0.233 | 0.077 | 0.245 |
+| 150 mm² | 0.149 | 0.075 | 0.168 |
+| 240 mm² | 0.0754 | 0.082 | 0.112 |
+
+Values at maximum operating temperature (90°C). R increases with temperature; use 20°C values × 1.28 to convert. Source: typical IEC 60228 Class 2 copper conductors.
+
+## More Q&As
+
+### Does the fault current at the end of a cable affect what breaker I need at the start?
+No — the breaker at the start of the cable must interrupt the fault current at the source end (before the cable), which is the higher figure. The fault level at the cable end is what governs the ratings of the equipment connected there (switchgear, busbars, isolators).
+
+### My cable is 150 m — can I simply double the 75 m result?
+Not exactly. Fault current is inversely proportional to total impedance, and the transformer impedance is a fixed offset. Doubling the cable doubles the cable's contribution to total impedance, but the transformer's contribution stays the same. The result is not half: it is Ztr / (Ztr + 2×Zcable) × original current.
+
+### What is "minimum fault current" and why does it matter?
+Maximum fault current (three-phase symmetrical) governs equipment rupturing and making ratings. Minimum fault current (single-phase line-to-earth, or end-of-line two-phase) governs whether the protection actually operates within its clearing time for a bolted fault. If minimum fault current is too low, the IDMT relay or fuse may not clear the fault before the cable overheats.
+
 <Related items={[
   { href: '/earth-conductor-size-calculator/', label: 'Earth conductor size calculator' },
   { href: '/short-circuit-current-calculator/', label: 'Short-circuit current calculator' },
