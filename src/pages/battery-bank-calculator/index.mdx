@@ -62,6 +62,61 @@ At 12 V, 1.2 kWh nominal. At 24 V, 2.4 kWh. At 48 V, 4.8 kWh.
 ### How many days of autonomy should I choose?
 One to three days is common for homes. More days cost more, and a generator can be cheaper than the extra batteries.
 
+## Battery sizing reference table
+
+Minimum Ah at 48 V for common off-grid scenarios (LiFePO4, 80% DoD, 90% efficiency):
+
+| Daily energy | 1 day autonomy | 2 days autonomy | 3 days autonomy |
+|---|---|---|---|
+| 1,000 Wh | 29 Ah | 58 Ah | 87 Ah |
+| 2,500 Wh | 72 Ah | 145 Ah | 217 Ah |
+| 5,000 Wh | 145 Ah | 289 Ah | 434 Ah |
+| 10,000 Wh | 289 Ah | 578 Ah | 868 Ah |
+| 20,000 Wh | 578 Ah | 1,157 Ah | 1,736 Ah |
+
+For lead-acid at 50% DoD, multiply all values by 1.6. For 24 V, double all Ah values. For 12 V, multiply by 4.
+
+## Worked example: lead-acid vs LiFePO4
+
+A cabin with 5,000 Wh/day needs 2 days of backup at 48 V.
+
+**Lead-acid (50% DoD, 85% efficiency):**
+Ah = (5,000 × 2) / (0.5 × 48 × 0.85) = 490 Ah.
+Eight 6V, 250 Ah batteries in series-parallel (48 V, 500 Ah) → 24,000 Wh nominal, 12,000 Wh usable at 50% DoD.
+
+**LiFePO4 (80% DoD, 95% efficiency):**
+Ah = (5,000 × 2) / (0.8 × 48 × 0.95) = 275 Ah.
+Two 48 V, 150 Ah lithium packs in parallel = 48 V, 300 Ah → 11,520 Wh usable at 80% DoD.
+
+The lithium bank weighs roughly 60 kg vs ~180 kg for lead-acid, occupies half the space, and will outlast the lead-acid bank by 4–8× in cycle life.
+
+## Series vs parallel wiring
+
+| Wiring | Effect | Use when |
+|---|---|---|
+| Series | Doubles voltage, same Ah | Need higher battery voltage |
+| Parallel | Same voltage, doubles Ah | Need more capacity at same voltage |
+| Series-parallel | Increases both | Need both higher voltage and more Ah |
+
+For a 48 V system using 12 V batteries: wire 4 in series. For 300 Ah using 100 Ah batteries: wire 3 in parallel. For 48 V, 300 Ah: wire 4 strings of 3 × 12 V in series, the 3 strings in parallel (4S3P).
+
+## State of charge and battery health
+
+Depth of discharge is cumulative — a lead-acid bank cycled to 70% DoD every day degrades faster than one cycled to 50%. The 50% DoD limit for lead-acid is a lifetime cost optimisation, not a hard cutoff. LiFePO4 handles 80% DoD daily with minimal degradation because lithium intercalation chemistry does not cause sulfation.
+
+A battery management system (BMS) is essential for lithium banks. It prevents over-discharge, overcharge, cell imbalance, and over-temperature. For lead-acid, a temperature-compensated charge controller achieves the same goal.
+
+## More Q&As
+
+### Can I add more batteries to my existing bank later?
+For lead-acid: only add new batteries in a full set, all the same age and type. Mixing old and new batteries causes the old ones to drag down the new ones' capacity. For LiFePO4: check that the BMS supports the new capacity and that all batteries are the same cell chemistry and voltage.
+
+### What is C-rate, and why does it matter for battery sizing?
+C-rate is the discharge current as a multiple of the battery's capacity. A 100 Ah battery at 1C discharges at 100 A. Lead-acid batteries lose capacity at high discharge rates (Peukert effect) — a 100 Ah battery at 2C may deliver only 70 Ah. LiFePO4 is much less affected. If your load draws high current, size the bank for the C-rate, not just the Wh.
+
+### How do I wire a 48 V lithium pack from 3.2 V cells?
+LiFePO4 cells have a nominal voltage of 3.2 V. 48 V nominal = 15 cells in series (actual voltage: 15 × 3.2 = 48 V; fully charged 15 × 3.65 = 54.75 V). Wire multiple 15S modules in parallel for more amp-hours.
+
 <Related items={[
   { href: '/off-grid-solar-calculator/', label: 'Off-grid solar system calculator' },
   { href: '/solar-panel-calculator/', label: 'Solar panel system size calculator' },

@@ -59,6 +59,74 @@ There is less impedance limiting the current, so more flows. Lower %Z also means
 ### Does the answer include a phase-to-earth fault?
 No. The calculation covers the three-phase fault. Earth-fault levels depend on the winding connection and the earthing arrangement.
 
+## Fault current reference table — transformer secondary (infinite bus)
+
+Three-phase symmetrical fault current at the secondary terminals for common transformer ratings (IFL / %Z):
+
+| Transformer | Secondary voltage | %Z | Full-load current | Fault current (∞ bus) |
+|---|---|---|---|---|
+| 100 kVA | 400 V | 4 % | 144 A | 3.6 kA |
+| 250 kVA | 400 V | 4 % | 361 A | 9.0 kA |
+| 500 kVA | 400 V | 5 % | 722 A | 14.4 kA |
+| 1,000 kVA | 400 V | 5 % | 1,443 A | 28.9 kA |
+| 1,600 kVA | 400 V | 6 % | 2,309 A | 38.5 kA |
+| 2,000 kVA | 400 V | 6 % | 2,887 A | 48.1 kA |
+| 2,500 kVA | 11 kV | 6 % | 131 A | 2.2 kA |
+
+These are the maximum (infinite bus) values. For a finite source, Zₛ = transformer MVA / source MVA reduces the result. A 1,000 kVA transformer behind a 250 MVA grid: Zₜₒₜₐₗ = 0.05 + (1/250) = 0.054, Isc = 1,443 / 0.054 = 26.7 kA.
+
+## Worked example: selecting a busbar for a 1,600 kVA transformer
+
+A 1,600 kVA, 400 V transformer has %Z = 6 %. The source is 500 MVA.
+
+**Full-load current:** IFL = 1,600,000 / (√3 × 400) = 2,309 A.
+
+**Source impedance (per unit on transformer base):** Zₛ = 1.6 / 500 = 0.0032.
+
+**Total impedance:** Zₜₒₜₐₗ = 0.06 + 0.0032 = 0.0632.
+
+**Symmetrical fault current:** Isc = 2,309 / 0.0632 = **36.5 kA**.
+
+**Peak current (IEC 60909, X/R = 10):** κ = 1.02 + 0.98e^(−3/10) = 1.74. Ipeak = 1.74 × √2 × 36.5 = **89.7 kA peak**.
+
+Busbar must be rated for 36.5 kA symmetrical withstand for the protection clearance time, and breaker making capacity must exceed 89.7 kA peak.
+
+## Equipment ratings derived from fault current
+
+| Equipment | Parameter | Derived from |
+|---|---|---|
+| Circuit breaker | Breaking capacity (kA) | Symmetrical Isc at equipment terminals |
+| Circuit breaker | Making capacity (kA peak) | κ × √2 × Isc |
+| Busbar | Short-time current rating (kA) | Isc × √(clearance time / 1s) |
+| Cable screen | Short-circuit current | Isc at screen, for thermal rating S = I²t |
+| Current transformer | Accuracy limit factor | Isc / rated current |
+| Protection relay | Instantaneous pickup | Above maximum load, below minimum fault current |
+
+Clearance time is the time from fault inception to arc extinction. For a protection relay + breaker in series, it is typically relay operating time + breaker opening time, commonly 60–120 ms for a primary protection.
+
+## IEC 60909 voltage factor c
+
+IEC 60909 applies a voltage factor c to account for the worst-case pre-fault voltage:
+
+| System voltage | Maximum current (c) | Minimum current (c) |
+|---|---|---|
+| ≤ 1 kV, tolerance +6% | 1.05 | 0.95 |
+| ≤ 1 kV, tolerance +10% | 1.10 | 0.95 |
+| > 1 kV | 1.10 | 1.00 |
+
+Using c = 1.10 on a 400 V system raises the fault current by 10 % compared to the nominal-voltage calculation. This calculator uses nominal voltage (c = 1.0) as a screening value.
+
+## More Q&As
+
+### How does cable impedance between the transformer and the fault affect the result?
+Cable resistance and reactance appear in series with the transformer impedance, reducing the fault current at the far end of a cable run. The fault current at the end of a cable calculator handles this step. For MV cables, charging current is also relevant at higher frequencies.
+
+### Why is the first-cycle (asymmetrical) peak current higher than the symmetrical RMS value?
+At the moment of fault inception, DC offset is at its maximum. The DC component decays exponentially with the X/R time constant. The first-cycle peak, which governs the mechanical forces on busbars and the making capacity of breakers, can be 1.5–2.5 times the symmetrical RMS value. For a typical LV distribution transformer, X/R ≈ 5–10, giving κ ≈ 1.5–1.74.
+
+### What is the difference between breaking capacity and making capacity on a breaker?
+Breaking capacity is the symmetrical RMS fault current the breaker can interrupt. Making capacity is the peak current it can close into, which is higher because of the DC offset. IEC 62271-100 relates them: Imake = 2.5 × Ibreak for equipment tested at standard X/R.
+
 <Related items={[
   { href: '/transformer-full-load-current-calculator/', label: 'Transformer full-load current calculator' },
   { href: '/idmt-relay-calculator/', label: 'IDMT relay time calculator' },

@@ -59,6 +59,71 @@ Often, for the last few days a year. Compare the cost of the extra days of auton
 ### Does the calculator assume MPPT or PWM?
 The controller figure is a minimum output current. An MPPT controller is the common choice at these sizes.
 
+## Off-grid system component sizing table
+
+Typical sizing relationships for a 48 V lithium off-grid system at different daily load levels:
+
+| Daily load | Array (@ 5 PSH, PR 0.8) | Battery (2 days, 80% DoD) | Inverter | Charge controller |
+|---|---|---|---|---|
+| 1,000 Wh | 250 W | 65 Ah | 1,000 W | 10 A MPPT |
+| 3,000 Wh | 750 W | 196 Ah | 2,000 W | 20 A MPPT |
+| 5,000 Wh | 1,250 W | 326 Ah | 3,000 W | 30 A MPPT |
+| 10,000 Wh | 2,500 W | 651 Ah | 5,000 W | 60 A MPPT |
+| 20,000 Wh | 5,000 W | 1,302 Ah | 8,000 W | 100 A MPPT |
+
+MPPT current is array Wp / battery voltage. At 48 V: 1,250 W / 48 = 26 A, so the 30 A controller is correct.
+
+## Worked example: rural cabin
+
+A cabin wants to run 500 W of LED lighting (4 h/day), a 100 W laptop (6 h/day), a 150 W fridge (running 8 h/day), and a 750 W water pump (1 h/day). Location: 4.5 peak sun hours.
+
+**Daily energy:**
+- Lighting: 500 × 4 = 2,000 Wh
+- Laptop: 100 × 6 = 600 Wh
+- Fridge: 150 × 8 = 1,200 Wh
+- Pump: 750 × 1 = 750 Wh
+- **Total: 4,550 Wh/day**
+
+**Array at PR 0.8:** 4,550 / (4.5 × 0.8) = 1,264 W. Use 4 × 325 W panels = 1,300 W.
+
+**Battery at 2 days autonomy, 80% DoD, 48 V:** (4,550 × 2) / (0.8 × 48) = 237 Ah. Use a 48 V, 250 Ah LiFePO4 bank.
+
+**Inverter:** running load 1,500 W + pump start surge ~2,250 W = 3,750 W peak. Use a 4,000 W pure sine wave inverter.
+
+**Charge controller:** 1,300 W / 48 V = 27 A. Use a 40 A MPPT controller.
+
+## Battery chemistry comparison
+
+| Chemistry | Usable DoD | Cycle life | Weight | Cost per kWh |
+|---|---|---|---|---|
+| Flooded lead-acid | 50 % | 300–500 cycles | High | Low |
+| AGM | 50–60 % | 400–600 cycles | High | Medium |
+| Gel | 50–60 % | 500–800 cycles | High | Medium |
+| LiFePO4 | 80–90 % | 2,000–5,000 cycles | Low | High |
+
+LiFePO4 delivers roughly 3–4× more usable energy over its lifetime despite the higher upfront cost, and it handles partial state of charge without sulfation. For off-grid systems used daily, it typically has a lower total cost of ownership over 10 years.
+
+## Panel orientation and seasonal variation
+
+| Latitude | Optimal tilt | Summer PSH | Winter PSH | Annual ratio |
+|---|---|---|---|---|
+| 20° N | 15–20° | 6.0 | 5.0 | 0.83 |
+| 35° N | 30–35° | 6.5 | 3.5 | 0.54 |
+| 50° N | 45–50° | 6.0 | 2.0 | 0.33 |
+
+At 50° N, winter delivers only a third of summer output. A system sized on annual average will fall 50–60 % short in December. Options: size for winter (overproduces in summer), install a backup generator, or accept grid use in winter.
+
+## More Q&As
+
+### How do I account for seasonal variation in my off-grid system?
+Run the calculation using the worst-month PSH for your latitude, not the annual average. For the UK at 51° N that is about 1.5–2 PSH in December, which is roughly one-third of July. Sizing for the worst month means the array overproduces significantly in summer — plan to dump excess to a hot water element or accept it.
+
+### Can I mix panel brands or wattages in one array?
+In a single string, all panels should be matched in voltage. In parallel strings, all strings should have equal voltage. Mixing wattages works within those constraints, but mismatched panels lose the benefit of higher-rated units because the lower panel limits the string.
+
+### How do I calculate the charge controller size for a 24 V system?
+Divide total panel watts by system voltage: 1,000 W / 24 V = 41.7 A. Choose the next standard size up — a 50 A MPPT controller. Add 25 % for the array's short-circuit current headroom.
+
 <Related items={[
   { href: '/solar-panel-calculator/', label: 'Solar panel system size calculator' },
   { href: '/battery-bank-calculator/', label: 'Battery bank calculator' },

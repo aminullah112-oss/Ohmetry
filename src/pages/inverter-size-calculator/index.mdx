@@ -60,6 +60,76 @@ Only without a margin, and without any surge. Choose a larger inverter or reduce
 ### Does the inverter size depend on the battery?
 The battery must be able to deliver the DC current, and the battery voltage must match the inverter's input.
 
+## Inverter size reference table
+
+Minimum continuous inverter rating for common off-grid and backup applications:
+
+| Application | Running load | Motor start peak | Minimum inverter |
+|---|---|---|---|
+| Small cabin (lights, laptop, fan) | 300 W | 300 W | 500 W |
+| Cabin with water pump (1/2 hp) | 800 W | 2,100 W | 2,500 W |
+| Home essentials (fridge, lights, outlets) | 1,500 W | 3,500 W | 4,000 W |
+| Small workshop (tools + lighting) | 3,000 W | 6,000 W | 6,000 W |
+| Home with AC (1.5-ton) | 2,500 W | 7,000 W | 8,000 W |
+
+Starting peak = running load − motor running W + motor locked-rotor W. The inverter's surge rating must exceed the peak for the time the motor takes to start, typically 2–5 seconds.
+
+## Worked example: 48 V home backup system
+
+A home wants to run 1,200 W of lighting and outlets, a 150 W fridge (450 W start, multiplier 3), and a 750 W well pump (2,250 W start) on a 48 V lithium bank.
+
+**Running load:** 1,200 + 150 + 750 = 2,100 W.
+
+**Continuous rating (25 % margin):** 2,100 × 1.25 = 2,625 W. Next standard size: **3,000 W**.
+
+**Starting surge (pump starts while everything else runs):**
+2,100 − 750 + 2,250 = 3,600 W. The inverter's 3-second surge rating must exceed 3,600 W.
+
+**DC current at full load:** 2,625 / (48 × 0.9) = 60.8 A. Cable from battery to inverter must handle 61 A continuous, so 6 AWG copper at 60 °C is marginal — use 4 AWG.
+
+**Battery fuse:** rated just above 61 A continuous, with an interrupting rating adequate for the battery's short-circuit current (typically 300–500 A for lithium packs at 48 V).
+
+## Waveform and load compatibility
+
+| Load type | Modified sine wave | Pure sine wave |
+|---|---|---|
+| Resistive (heaters, incandescent bulbs) | Works | Works |
+| LED lighting | Usually works | Works |
+| Induction motors (pumps, fans) | May run hot, reduced life | Works |
+| Variable-speed drives | Avoid | Works |
+| Sensitive electronics (medical, audio) | Avoid | Works |
+| Battery chargers | Often works | Works |
+
+For any system with motors, variable-speed drives, or medical equipment, specify a pure sine wave inverter. The cost premium over modified sine wave units is typically 15–30 % and is worth it for the load compatibility.
+
+## DC cable sizing from battery to inverter
+
+The battery-to-inverter cable is the highest-current run in the system. At 48 V:
+
+| Inverter rating | DC current (@ 90% eff) | Minimum cable (copper) |
+|---|---|---|
+| 1,000 W | 23 A | 10 AWG |
+| 2,000 W | 46 A | 6 AWG |
+| 3,000 W | 69 A | 4 AWG |
+| 5,000 W | 116 A | 1 AWG |
+| 8,000 W | 185 A | 3/0 AWG |
+
+Keep cable runs short — every metre adds resistance and voltage drop. Under 1 m is ideal for the battery-inverter link; keep total voltage drop below 0.5 V at full load.
+
+## More Q&As
+
+### What is the difference between rated and surge power on an inverter?
+Rated (continuous) power is what the inverter can supply indefinitely. Surge power is what it can supply for a few seconds (typically 2–5 s) during motor start. Always check both: a 3,000 W inverter may have a 6,000 W surge rating, which is what lets it start a 1 hp pump.
+
+### Why does efficiency drop at light load?
+Inverters draw a constant standby current regardless of load. At very light loads this standby power is a large fraction of output, so efficiency falls. A 3,000 W inverter running a 100 W load may convert at 60–70 % rather than the 90–95 % quoted at full load.
+
+### Can I connect two inverters in parallel to get more power?
+Only if the inverters are specifically designed and listed for parallel operation. Standard inverters cannot be paralleled — the phase mismatch will damage both units.
+
+### How do I know if my inverter is big enough for an air conditioner?
+Take the AC unit's starting kW (usually 2.5–3× its rated kW) and check it against the inverter's surge rating. A 1.5 ton (5.3 kW thermal) AC may need 7–9 kW of surge capacity for the first 2 seconds of compressor start.
+
 <Related items={[
   { href: '/off-grid-solar-calculator/', label: 'Off-grid solar system calculator' },
   { href: '/battery-bank-calculator/', label: 'Battery bank calculator' },

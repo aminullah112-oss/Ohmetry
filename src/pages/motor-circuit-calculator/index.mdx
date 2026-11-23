@@ -71,6 +71,70 @@ At 230 V three-phase the table current is 9.6 A, so the inverse-time breaker max
 ### Does a motor need a separate overload device?
 Generally yes. The short-circuit device protects the circuit and the overload device protects the motor.
 
+## Motor circuit sizing reference table — NEC 430 (three-phase, 460 V)
+
+| Horsepower | Table FLC (460 V) | Min conductor (A) | Max inv-time breaker (A) | Max dual-element fuse (A) | Overload at 125% NP |
+|---|---|---|---|---|---|
+| 1 hp | 2.1 A | 2.6 A | 5.3 A (std: 6 A) | 3.7 A (std: 4 A) | 1.25 × NP |
+| 3 hp | 4.8 A | 6.0 A | 12 A (std: 15 A) | 8.4 A (std: 10 A) | 1.25 × NP |
+| 5 hp | 7.6 A | 9.5 A | 19 A (std: 20 A) | 13.3 A (std: 15 A) | 1.25 × NP |
+| 10 hp | 14 A | 17.5 A | 35 A (std: 35 A) | 24.5 A (std: 25 A) | 1.25 × NP |
+| 15 hp | 21 A | 26.3 A | 52.5 A (std: 60 A) | 36.75 A (std: 40 A) | 1.25 × NP |
+| 20 hp | 27 A | 33.8 A | 67.5 A (std: 70 A) | 47.3 A (std: 50 A) | 1.25 × NP |
+| 25 hp | 34 A | 42.5 A | 85 A (std: 90 A) | 59.5 A (std: 60 A) | 1.25 × NP |
+| 50 hp | 65 A | 81.3 A | 162.5 A (std: 175 A) | 113.75 A (std: 125 A) | 1.25 × NP |
+
+NP = nameplate current. Overload uses nameplate, not table value. Inverse-time breaker maximum = 250% × table FLC. Next standard breaker size up is used when calculation is not a standard size (NEC 240.6(A)).
+
+## Worked example: 25 hp, 460 V, three-phase motor
+
+Nameplate: 32 A, SF 1.15, 460 V, 3-phase, continuous duty.
+
+**Step 1 — table current (Table 430.250):** 34 A.
+
+**Step 2 — conductor minimum:** 1.25 × 34 = 42.5 A. Per Table 310.16, 8 AWG copper THHN at 75°C = 50 A, so 8 AWG minimum. If conduit run is long, check voltage drop with the voltage drop calculator.
+
+**Step 3 — overload protection (NEC 430.32):** SF ≥ 1.15 → use 125% of nameplate: 1.25 × 32 = 40 A. Maximum allowed: 1.40 × 32 = 44.8 A, so a 40 A heater or relay in the motor starter.
+
+**Step 4 — inverse-time circuit breaker:** 2.50 × 34 = 85 A. Next standard size = 90 A. Install a 90 A breaker.
+
+**Step 5 — dual-element time-delay fuse (alternative):** 1.75 × 34 = 59.5 A → 60 A fuse.
+
+**Step 6 — disconnect means (NEC 430.110):** rated not less than 115% of motor FLC: 1.15 × 34 = 39.1 A. A 60 A fusible disconnect or 60 A non-fused switch satisfies this.
+
+## NEC 430 motor circuit components
+
+| Component | NEC article | Sizing basis | Key rule |
+|---|---|---|---|
+| Branch circuit conductors | 430.22 | 125% × table FLC | Minimum ampacity |
+| Overload protection | 430.32 | 125% × nameplate (115% for other motors) | Protects motor from sustained overload |
+| Short-circuit device | 430.52 | ≤ 250% × table FLC (inv-time breaker) | Protects circuit on fault |
+| Disconnecting means | 430.102–110 | ≥ 115% × table FLC | Must be in sight of motor |
+| Controller | 430.83 | Rated for HP and voltage | Motor starter or contactor |
+| Ground fault protection | 430.96 | Per 430.96 or equipment listing | May be part of motor controller |
+
+## Motor starting methods and their effect on circuit sizing
+
+| Starting method | Starting current | Circuit impact |
+|---|---|---|
+| Across-the-line (DOL) | 600–700% FLC | Highest starting current, largest short-circuit device |
+| Star-delta | ~200% FLC | Reduced start, motor must be wired for star-delta |
+| Soft starter | Adjustable, typically 200–400% FLC | Reduces breaker and conductor stress |
+| Variable frequency drive (VFD) | ≤ 150% FLC | Lowest starting current; VFD input requires separate sizing |
+
+A VFD draws its input current from the supply at the VFD's rated input, not from the motor's starting characteristics. Size the branch circuit for the VFD's rated input current per the VFD manufacturer's data, not the motor table.
+
+## More Q&As
+
+### What if my breaker trips when the motor starts?
+First check the breaker is a standard inverse-time type, not an instantaneous one. If it still trips, the code allows increasing the breaker to the next higher standard size, up to the 250% maximum (NEC 430.52(C)(1) Exception). For a motor that still trips at the maximum, switch to a dual-element time-delay fuse, which handles starting surges better than a breaker.
+
+### How do I size the wire for a motor fed through a variable frequency drive?
+The VFD output wiring (VFD to motor) is sized from the motor's table FLC × 1.25, same as a direct-connected motor. The VFD input wiring (panel to VFD) is sized from the VFD manufacturer's rated input current, which may differ from the motor FLC because VFD efficiencies and input power factors vary.
+
+### Can a single circuit serve multiple motors?
+Under NEC 430.53, several motors of 1 hp or less may share a branch circuit if each has its own overload and the circuit is protected by a device not exceeding the value allowed for the smallest motor on the circuit. For larger motors, separate circuits are almost always required. See 430.24 for the total circuit ampacity when more than one motor is connected.
+
 <Related items={[
   { href: '/wire-size-calculator/', label: 'Wire size calculator' },
   { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },

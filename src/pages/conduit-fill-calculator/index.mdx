@@ -70,6 +70,79 @@ Over two conductors, the limit is 40 %, whatever the conduit type.
 ### Can I use this for PVC?
 Yes, for Schedule 40. Choose it in the raceway list. Eight 12 AWG fit in ½ inch PVC-40, where nine fit in EMT or RMC.
 
+## Conduit fill reference table — THHN conductors in EMT (NEC Table C.1)
+
+Maximum conductor count per EMT trade size at 40% fill (3+ conductors):
+
+| Trade size | ½ in | ¾ in | 1 in | 1¼ in | 1½ in | 2 in |
+|---|---|---|---|---|---|---|
+| 14 AWG THHN | 12 | 22 | 35 | 61 | 84 | 138 |
+| 12 AWG THHN | 9 | 16 | 26 | 45 | 61 | 101 |
+| 10 AWG THHN | 5 | 10 | 16 | 28 | 38 | 63 |
+| 8 AWG THHN | 2 | 5 | 8 | 14 | 19 | 32 |
+| 6 AWG THHN | 1 | 3 | 5 | 10 | 13 | 22 |
+| 4 AWG THHN | 1 | 2 | 4 | 7 | 9 | 15 |
+| 2 AWG THHN | 1 | 1 | 3 | 5 | 7 | 11 |
+
+Source: NEC Annex C, Table C.1 (40% fill limit, 3+ conductors). For 1 conductor use 53% limit; for 2 conductors use 31% limit — these tables show lower counts for those cases.
+
+## Worked example: residential branch circuit panel run
+
+A residential panel requires the following conductors in a single EMT conduit:
+- 3 × 12 AWG THHN (20A circuit 1)
+- 3 × 12 AWG THHN (20A circuit 2)
+- 3 × 14 AWG THHN (15A lighting circuit)
+- 1 × 12 AWG THHN (EGC)
+
+Total: 9 × 12 AWG (0.0133 in² each) + 3 × 14 AWG (0.0097 in² each) + 1 × 12 AWG EGC.
+
+**Area calculation:**
+- 10 × 12 AWG: 10 × 0.0133 = 0.133 in²
+- 3 × 14 AWG: 3 × 0.0097 = 0.0291 in²
+- Total: 0.1621 in²
+
+**Conduit selection (40% fill, 11+ conductors):**
+- ¾ in EMT: 0.213 in² at 40% → 0.1621 fits ✓
+- Check Annex C Table C.1: ¾ in EMT holds 16 × 12 AWG, but we have a mix.
+
+**Minimum trade size: ¾ inch EMT.**
+
+Note: with 11 current-carrying conductors (three 3-wire circuits = 9 conductors + EGC is not counted as current-carrying), the ampacity of 12 AWG must be derated by the Table 310.15(B)(3)(a) bundling factor. With 7–9 conductors, multiply by 0.70. This reduces the 90°C ampacity of 12 AWG THHN from 30 A to 21 A — still above the 20 A breaker, so the fill is acceptable. At 10–20 conductors use 0.50, reducing to 15 A, which is below 20 A. At that point use 10 AWG THHN or separate the circuits into two conduits.
+
+## Ampacity derating table (NEC 310.15(B)(3)(a))
+
+| Number of current-carrying conductors | Ampacity adjustment |
+|---|---|
+| 4–6 | 80 % |
+| 7–9 | 70 % |
+| 10–20 | 50 % |
+| 21–30 | 45 % |
+| 31–40 | 40 % |
+| 41+ | 35 % |
+
+Fill calculation and ampacity derating are two separate checks. A conduit can pass the fill limit and still require larger conductors because the bundled ampacity falls below the breaker rating.
+
+## Raceway comparison: EMT vs RMC vs PVC-40
+
+| Raceway | Internal area ½ in | 12 AWG capacity | Weight | Conduit bends |
+|---|---|---|---|---|
+| EMT | 0.304 in² | 9 | Lightest | Use conduit bender |
+| RMC | 0.314 in² | 9 | Heaviest | Threaded fittings |
+| PVC-40 | 0.285 in² | 8 | Light | Heat bending |
+
+PVC-40 has thicker walls than EMT, so its internal area is smaller and it holds one fewer conductor in some trade sizes. PVC-40 is listed for direct burial and wet locations; EMT is not suitable for direct burial or areas where severe physical damage is likely.
+
+## More Q&As
+
+### Does the neutral conductor count toward fill?
+Yes. Every conductor in the conduit counts for fill calculation, including the neutral and any EGC. Only the current-carrying conductor count affects the ampacity derating factor. A grounded neutral is counted as current-carrying unless it carries only the unbalanced current of a 3-wire or 4-wire circuit (NEC 310.15(E)).
+
+### Can I run two conduits side by side to split a large fill?
+Yes. Two conduits side by side is a common solution when a single conduit would exceed the fill limit or require heavy ampacity derating. Each conduit gets roughly half the conductors and both conduits pass the fill check.
+
+### What is a short nipple, and why does it allow more fill?
+A conduit nipple 24 inches or less can be filled to 60% (NEC Chapter 9, Note 4), compared to 40% for a full run. This applies to the short section connecting two enclosures, not to a full run through walls. A ½ inch EMT nipple at 60% holds about 15 × 14 AWG instead of 12.
+
 <Related items={[
   { href: '/wire-size-calculator/', label: 'Wire size calculator' },
   { href: '/breaker-size-calculator/', label: 'Breaker size calculator' },

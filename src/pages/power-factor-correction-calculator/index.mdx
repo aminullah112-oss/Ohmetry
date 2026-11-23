@@ -62,6 +62,68 @@ The kW stay the same. Only the reactive component, which does no work, is remove
 ### Can I correct at the main incomer instead of at each motor?
 Yes, and it is cheaper. It lowers the current in the supply and the transformer, but not in the cables between the incomer and each motor.
 
+## Power factor correction sizing table
+
+Required capacitor bank (kvar) to correct common power factor levels at given real power:
+
+| Real power | PF 0.75 → 0.90 | PF 0.75 → 0.95 | PF 0.80 → 0.90 | PF 0.80 → 0.95 | PF 0.85 → 0.95 |
+|---|---|---|---|---|---|
+| 50 kW | 29 kvar | 42 kvar | 23 kvar | 36 kvar | 21 kvar |
+| 100 kW | 58 kvar | 84 kvar | 46 kvar | 71 kvar | 42 kvar |
+| 200 kW | 115 kvar | 168 kvar | 92 kvar | 142 kvar | 84 kvar |
+| 500 kW | 288 kvar | 420 kvar | 230 kvar | 354 kvar | 210 kvar |
+| 1,000 kW | 576 kvar | 840 kvar | 460 kvar | 709 kvar | 420 kvar |
+
+Qc = P × (tan φ₁ − tan φ₂). At 100 kW, PF 0.80→0.95: tan(36.87°) − tan(18.19°) = 0.750 − 0.329 = 0.421 → 42.1 kvar (table above rounded).
+
+## Worked example: manufacturing plant
+
+A plant runs 350 kW of motor load at a measured power factor of 0.72. The utility tariff applies a penalty below PF 0.90, and the site wants to reach PF 0.95 for headroom.
+
+**Step 1 — calculate kvar needed:**
+tan φ₁ = tan(arccos 0.72) = 0.964
+tan φ₂ = tan(arccos 0.95) = 0.329
+Qc = 350 × (0.964 − 0.329) = 350 × 0.635 = **222 kvar**
+
+**Step 2 — check apparent power reduction:**
+Before: S = 350 / 0.72 = 486 kVA. After: S = 350 / 0.95 = 368 kVA.
+Reduction: 118 kVA. At a demand tariff of £8/kVA/month, annual saving = 118 × 8 × 12 = **£11,328/year**.
+
+**Step 3 — select bank:**
+Specify a 225 kvar bank in 3 × 75 kvar automatic steps. Allow at minimum 7% detuning filters if significant harmonic content is present.
+
+## Capacitor bank hardware
+
+| Component | Purpose | Sizing rule |
+|---|---|---|
+| Power capacitors | Supply reactive current | kvar × 1.1 (10% overrating for voltage tolerance) |
+| Detuning reactor | Prevent harmonic resonance | 7% detuned reactor for 5th harmonic sites |
+| Contactor | Switch steps | Rated for capacitive switching (AC-6b category) |
+| Fuses | Protect capacitors | Current-limiting HRC, 1.65 × capacitor rated current |
+| Controller | Auto-step selection | Reactive power relay, target PF setpoint |
+
+Standard capacitor steps are 5, 10, 25, 50 or 100 kvar. A 7% detuned reactor shifts the resonant frequency below the 5th harmonic (250 Hz on 50 Hz systems) and is the standard choice for sites with 6-pulse VFDs.
+
+## Harmonic distortion and de-tuned banks
+
+A plain capacitor bank resonates with the supply inductance at a frequency that may coincide with a harmonic. For a site with variable-speed drives or other rectifier loads, measure total harmonic voltage distortion (THDv) first. If THDv > 5%, specify a de-tuned (series reactor) or harmonic filter bank:
+
+- **7% detuned**: resonant frequency ~190 Hz — avoids 5th harmonic resonance
+- **14% detuned**: resonant frequency ~134 Hz — avoids both 3rd and 5th
+
+A de-tuned bank absorbs slightly fewer vars than a plain bank of the same rating (the reactor consumes some kvar). Factor in a 7–14% upsize.
+
+## More Q&As
+
+### What is the payback period for a power factor correction bank?
+Typically 1–3 years for industrial sites billed on kVA demand tariffs. The saving comes from reduced apparent power demand charges and reduced cable losses. Calculate P×(1/PF₁ − 1/PF₂) × demand charge rate × 12 months for the annual saving.
+
+### Where should the capacitor bank be installed?
+As close to the inductive load as practical. Central MV bus correction lowers upstream cable losses and utility demand charges. Load-level correction (a capacitor on each motor terminal) eliminates reactive current on the entire distribution network. For large sites, a mix is common: a central automatic bank for base load, with fixed capacitors at large motors.
+
+### Can I over-correct power factor?
+Yes. If the bank is too large, the site supplies reactive power to the grid (leading power factor). Most utilities permit a small leading PF (e.g. 0.95 leading), but during light-load periods the capacitors must be switched off in steps. An automatic controller with a reactive power relay handles this.
+
 <Related items={[
   { href: '/three-phase-power-calculator/', label: 'Three-phase power calculator' },
   { href: '/kw-to-amps-calculator/', label: 'kW to amps calculator' },
