@@ -645,14 +645,14 @@
  },
  {
   "date": "2026-11-27",
-  "pages": 72,
-  "indexable": 71,
+  "pages": 65,
+  "indexable": 64,
   "calculators": 32,
   "guides": 20,
   "tests": 279,
-  "commits": 280,
+  "commits": 282,
   "auditFailures": 0,
-  "auditWarnings": 5,
+  "auditWarnings": 4,
   "gscClicks28": 8,
   "gscImpressions28": 5415
  }

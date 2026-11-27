@@ -1,13 +1,12 @@
 {
-  "pages": 72,
-  "indexable": 71,
+  "pages": 65,
+  "indexable": 64,
   "noindex": 1,
   "failures": [],
   "warnings": [
-    "/contact/: only 193 words",
-    "/corrections/: only 208 words",
-    "/disclaimer/: only 189 words",
-    "/makerlab/projects/: only 260 words",
-    "/methodology/: only 267 words"
+    "/contact/: only 191 words",
+    "/corrections/: only 206 words",
+    "/disclaimer/: only 187 words",
+    "/methodology/: only 265 words"
   ]
 }
